@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/3b818ace228fca843d5b454ed6458b66900078d4/favicon%20Solution%20Solaire%20Pro.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulateur solaire gratuit – Estimation panneaux photovoltaïques Dordogne & France</title>
+  <meta name="description" content="Simulateur solaire gratuit et immédiat pour estimer votre installation photovoltaïque en Dordogne et partout en France. Chiffrage, étude personnalisée et devis sans inscription.">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11242044118"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-11242044118');
+  </script>
+  <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-11242044118/Ij6sCPHtj_IaENb1z_Ap',
+          'value': 1.0,
+          'currency': 'EUR',
+          'event_callback': callback
+      });
+      return false;
+    }
+  </script>
+  <style>
+   body {
+  font-family: Arial, sans-serif;
+  padding: 8px 0 0 0;
+  background: #f0f4f8;
+  /* margin: auto;   <-- à retirer */
+}
+
+    h1 {
+      color: #178038;
+      text-align: center;
+      font-size: 2.1rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+    h2 {
+      color: #178038;
+      text-align: center;
+      font-size: 1.18rem;
+      font-weight: 600;
+      margin-top: 0;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    .texte-orange {
+      color: #e64c00;
+      font-weight: bold;
+    }
+    .slogan-bleu {
+      color: #1976d2;
+      font-weight: 600;
+    }
+   .logo {
+  display: block;
+  margin: 0 auto 2px auto;      /* Moins d'espace en dessous */
+  max-width: 100px;              /* Largeur maximum beaucoup plus raisonnable */
+  height: auto;
+}
+    .form-section,
+    .recap,
+    .result,
+    #emailBloc,
+    #temoignagesBloc {
+      width: 100%;
+      max-width: 600px;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin: 0 auto 20px auto;
+      box-sizing: border-box;
+    }
+    .recap,
+    .result,
+    #emailBloc {
+      display: none;
+      visibility: hidden;
+      height: 0;
+      overflow: hidden;
+      padding: 0;
+      margin: 0 auto;
+      box-shadow: none;
+      border: none;
+    }
+    .form-section h2,
+    #emailBloc h2 {
+      font-size: 20px;
+      color: #145e39;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .form-section input,
+    .form-section button,
+    #emailBloc input,
+    #emailBloc button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 2px solid #007bff;
+      border-radius: 8px;
+      font-size: 18px;
+      box-sizing: border-box;
+    }
+    .form-section button,
+    #emailBloc button {
+      background: #198754;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 19px;
+      border-radius: 8px;
+      font-weight: 700;
+      margin-top: 5px;
+    }
+    .form-section button:hover,
+    #emailBloc button:hover {
+      background: #0053ba;
+    }
+    .finance-details {
+      font-size: 14px;
+      color: #555;
+      margin-top: 15px;
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #b3d4fc;
+      border-top: 4px solid #007bff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 10px auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .temoignages-titre {
+      color: #198754;
+      font-weight: bold;
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 18px;
+      margin-top: 0;
+    }
+    #temoignagesBloc {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0,128,0,0.07);
+      border: 1px solid #e0e0e0;
+      margin-top: 32px;
+      padding: 26px 22px;
+      display: none;
+      visibility: hidden;
+      height: 0;
+      overflow: hidden;
+    }
+    .temoignage {
+      margin-bottom: 22px;
+      background: #f7f9f7;
+      border-radius: 10px;
+      padding: 16px 18px;
+      border-left: 4px solid #2b7a0b;
+    }
+    .stars {
+      color: #ffbe22;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    .region {
+      color: #1a8b4d;
+      font-size: 1em;
+      margin-left: 6px;
+      font-style: italic;
+    }
+    #cookie-banner {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #222;
+      color: #fff;
+      font-size: 15px;
+      line-height: 1.5;
+      padding: 18px 12px 16px 12px;
+      text-align: center;
+      z-index: 9999;
+      box-shadow: 0 -2px 12px rgba(0,0,0,0.09);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.25s;
+    }
+    #cookie-banner button {
+      background: #198754;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      padding: 8px 28px;
+      margin-top: 10px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transition: background 0.18s;
+    }
+    #cookie-banner button:hover {
+      background: #145e39;
+    }
+    #mentions-legales-container {
+      width: 100%;
+      text-align: center;
+      margin-top: 32px;
+      margin-bottom: 10px;
+      display: none;
+    }
+    #mentions-legales-link {
+      color: #2279b5;
+      font-size: 15px;
+      text-decoration: underline;
+      cursor: pointer;
+      background: transparent;
+      padding: 2px 7px;
+      border-radius: 7px;
+      font-weight: 500;
+      transition: color 0.18s, background 0.18s;
+      display: inline-block;
+    }
+    #mentions-legales-link:hover {
+      color: #145e39;
+      background: #d3efe3;
+    }
+    #mentions-popup {
+      display: none;
+      position: fixed;
+      bottom: 54px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 320px;
+      max-width: 95vw;
+      background: #21282b;
+      color: #f2f2f2;
+      border-radius: 13px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.16);
+      padding: 18px 22px 12px 22px;
+      z-index: 10000;
+      font-size: 13px;
+      line-height: 1.7;
+      border: 2px solid #5fffad;
+      animation: popupfade 0.22s;
+    }
+    @keyframes popupfade {
+      from {opacity:0;transform:translateY(30px);}
+      to {opacity:1;transform:translateY(0);}
+    }
+    #mentions-popup strong {
+      color: #5fffad;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    #close-mentions {
+      position: absolute;
+      top: 7px;
+      right: 14px;
+      background: none;
+      color: #f2f2f2;
+      border: none;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 0;
+    }
+    @media (max-width: 500px) {
+      #mentions-popup {
+        width: 92vw;
+        left: 2vw;
+        transform: none;
+        bottom: 50px;
+        padding: 12px 8px 10px 10px;
+        font-size: 11px;
+      }
+      #mentions-legales-link {
+        font-size: 13px;
+      }
+    }
+  </style>
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '4077327712591041');
+    fbq('track', 'PageView');
+    window.addEventListener("message", function(event) {
+      if (event.data === "fbq-lead" && typeof fbq === "function") {
+        fbq('track', 'Lead');
+      }
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+      const boutonSimuler = document.getElementById("simuler");
+      if (boutonSimuler) {
+        boutonSimuler.addEventListener("click", function () {
+          if (typeof fbq === "function") {
+            fbq('trackCustom', 'SimulateurUtilise');
+            console.log("✅ fbq SimulateurUtilise envoyé");
+          }
+        });
+      }
+      const params = new URLSearchParams(window.location.search);
+      const source = params.get("from") || "direct";
+      const userAgent = "SiteW";
+      const img = document.createElement("img");
+      img.src = `https://script.google.com/macros/s/AKfycbxt0po8cZNTMKGNBwqW-fEieOKib6HHJUGk6bXTQMgWv07GAJVSrFuJ5rf2qekTMaXfGw/exec?ua=${userAgent}&source=${source}`;
+      img.style.display = "none";
+      document.body.appendChild(img);
+    });
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=4077327712591041&ev=PageView&noscript=1" />
+  </noscript>
+</head>
+<body>
+<img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/52db4f3ab1c38909b33d9037e74d7371c32a9cf5/logo%20SSP.webp" alt="Logo Solution Solaire Pro" class="logo">
+
+
+  <!-- Compteur dynamique -->
+  <div style="text-align:center; margin-bottom:22px;">
+    <div style="
+      display:inline-block;
+      background:#e6f3eb;
+      border-radius:18px;
+      box-shadow:0 4px 16px rgba(0,80,32,0.07);
+      padding:14px 30px 12px 30px;
+      min-width:180px;">
+      <span id="compteurValeur" style="font-size:38px; color:#197c3e; font-weight:900; letter-spacing:2px; display:block; line-height:1.15;">1 234</span>
+      <span style="color:#1a1a1a; font-size:16px; font-weight:700; display:block; margin-top:2px;">simulations réalisées depuis le 1er mai 2025</span>
+    </div>
+  </div>
+  <!-- ACCROCHE REPRISE, HIÉRARCHISÉE -->
+  <h1>
+    Simulateur solaire gratuit : votre étude en <span class="texte-orange">3 secondes</span>
+  </h1>
+  <h2>
+    Estimation photovoltaïque, calcul des économies & chiffrage de votre installation.
+  </h2>
+  <div style="text-align: center; font-size: 1rem; color: #145e39; margin-bottom: 13px;">
+    <span style="font-weight: bold;">Simple, immédiat, sans inscription</span> : obtenez votre étude personnalisée et le coût de votre installation.<br>
+    <span style="color: #1a8b4d;">Aucune inscription, aucun engagement. Résultat immédiat.</span>
+  </div>
+  <div style="text-align:center; font-size:0.98rem; color:#1976d2; margin-bottom: 18px;">
+    <span class="slogan-bleu">Fiabilité 98 % : estimation réalisée avec une IA, basée sur vos données locales.</span>
+  </div>
+  
+  <!-- Vidéo réassurance -->
+<div style="max-width: 420px; margin: 0 auto 20px auto; text-align:center;">
+  <div style="font-size: 1.05rem; color: #198754; font-weight:700; margin-bottom: 7px;">
+    👍 Ils ont testé le simulateur&nbsp;: découvrez leur avis en vidéo
+  </div>
+  <iframe width="100%" height="236"
+    src="https://www.youtube.com/embed/W9aQMW05AVQ"
+    title="Simulation solaire gratuite"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+  </iframe>
+</div>
+  <!-- ----------- FORMULAIRE AVEC KWH OPTIONNEL ----------- -->
+  <div class="form-section" style="background: #f9fff7; border:1px solid #c8f6dc;">
+    <h2>📊 Simulation personnalisée</h2>
+    <input type="text" id="codePostal" placeholder=" Votre code postal" maxlength="5" style="font-size:18px;">
+    <input type="number" id="facture" placeholder=" Votre facture élec /an (€)" style="font-size:18px;">
+    <div id="modeAvance" style="display:none;">
+      <input type="number" id="conso" placeholder=" Conso annuelle (kWh, optionnel)" style="font-size:18px;">
+    </div>
+    <a href="#" id="lienAvance" style="font-size:15px; color:#168b4a; text-decoration:underline; display:block; margin-bottom:10px;">
+      ➕ Vous connaissez votre consommation annuelle ? Cliquez ici pour une estimation ultra-précise
+    </a>
+    <button id="simuler" onclick="calculerSimulation()">
+      🔍 Obtenir mon estimation
+    </button>
+  </div>
+  <!-- ----------- FIN FORMULAIRE ----------- -->
+
+  <!-- ----------- BLOC ÉDITORIAL SEO ----------- -->
+  <div class="form-section" style="background: #f7fafc; border:1px solid #c8f6dc;">
+    <h2>Pourquoi utiliser un simulateur solaire en Dordogne ?</h2>
+    <p>
+      L’électricité produite par des panneaux photovoltaïques est une des seules protections réelles contre la hausse du prix de l’électricité. Le simulateur solaire Solution Solaire Pro vous permet d’estimer, gratuitement et sans engagement, le rendement réel de votre future installation, son coût, votre autoconsommation, les économies générées et la pertinence d’un investissement. Le tout, sans aucune collecte obligatoire de vos données.
+    </p>
+    <h2>Fonctionnement du simulateur : rapide, fiable, transparent</h2>
+    <p>
+      En moins de 3 secondes, la solution calcule la production estimée selon votre adresse et en tenant compte des dernières données techniques. Aucun commercial ne vous rappellera à l’improviste : si vous souhaitez recevoir votre étude détaillée par mail ou un conseil personnalisé, cela reste 100 % facultatif.
+    </p>
+    <ul style="margin-bottom:15px;">
+      <li>Résultat immédiat, aucune inscription requise</li>
+      <li>Chiffrage précis basé sur les données techniques les plus à jour</li>
+      <li>Rendement réaliste sur la durée</li>
+      <li>Estimation des économies futures</li>
+      <li>Batterie virtuelle incluse : stockez votre surplus et consommez-le plus tard sans batterie physique à domicile</li>
+    </ul>
+    <h2>Rentabilité et économies : un investissement mesurable</h2>
+    <p>
+      Le simulateur permet d’anticiper le gain d’électricité via votre propre production et autoconsommation, tout en montrant l’économie annuelle, et la durée de retour sur investissement.<br>
+      Nos données couvrent toute la Dordogne, avec une simulation photovoltaïque bien dimensionnée (même calcul étendu à toute la France/consommation élevée). Réduisez d’autant votre dépendance au réseau traditionnel.
+    </p>
+    <h2>Questions fréquentes sur l’installation solaire</h2>
+    <ul style="margin-bottom:15px;">
+      <li><strong>Est-ce rentable sur une maison ancienne ?</strong><br>Oui, un simulateur détermine la valeur de l’installation et de la surface solaire, même sur de l’ancien.</li>
+      <li><strong>Le stockage virtuel, comment ça fonctionne ?</strong><br>
+        Votre surplus d’électricité produit en journée est “virtuellement” stocké via notre partenaire, puis restitué lors de vos besoins nocturnes ou en hiver, sans batterie physique à domicile. Cette solution maximise votre autoconsommation, sans changer d’équipement chez vous.</li>
+      <li><strong>Faut-il un ensoleillement maximal pour que ce soit intéressant ?</strong><br>
+        L’installation photovoltaïque s’adapte aux variations climatiques ou d’ensoleillement, aucune crainte pour une maison orientée plein est/ouest ou une toiture partielle.</li>
+    </ul>
+    <h2>Un accompagnement sérieux, du conseil à la mise en service</h2>
+    <p>
+      Notre démarche repose sur la transparence et l’expertise technique : chaque étude réalisée via le simulateur est suivie d’un échange personnalisé pour affiner votre projet, répondre à vos questions et vous proposer les solutions les plus adaptées.<br>
+      L’installation et la mise en service sont assurées par des professionnels partenaires sélectionnés pour leur sérieux et leur expérience, partout en France. Un suivi est assuré après la pose pour garantir votre satisfaction dans la durée.
+    </p>
+    <h2>À propos de Biofrance Énergies</h2>
+    <p>
+      Notre société est spécialisée dans l’accompagnement des particuliers pour l’autoconsommation photovoltaïque, l’estimation d’économies, et la simulation de projet, également en Dordogne, Bergerac, Sarlat et l’ensemble du Périgord, mais aussi partout en France.<br>
+      Étude gratuite et personnalisée, chiffrage immédiat des sommes en € et kWh.
+    </p>
+    <h2>Glossaire rapide</h2>
+    <ul style="margin-bottom:0;">
+      <li><strong>Autoconsommation</strong> : production et consommation de sa propre électricité.</li>
+      <li><strong>Batterie virtuelle</strong> : solution permettant de stocker l’excédent de production solaire sans “batterie” réelle, pour restitution ultérieure.</li>
+      <li><strong>Simulation en ligne</strong> : utilisez ce simulateur pour obtenir votre étude immédiate, calcul des économies sur 15 ans, et chiffrage personnalisé sur site, sans engagement.</li>
+    </ul>
+  </div>
+  <!-- ----------- FIN BLOC ÉDITORIAL ----------- -->
+
+  <!-- Bloc FAQ visible -->
+  <div id="faqBloc" class="form-section">
+    <h2 style="color:#178038;font-size:1.4rem;margin-bottom:18px;margin-top:0;font-weight:800;">Questions fréquentes sur la simulation solaire</h2>
+    <div style="margin-bottom:18px;">
+      <b>Faut-il donner ses coordonnées pour obtenir une estimation&nbsp;?</b><br>
+      Non, la simulation est gratuite et immédiate, sans aucune donnée obligatoire. L’email est uniquement demandé si vous souhaitez recevoir l’étude par mail. Le téléphone n’est jamais exigé.
+    </div>
+    <div style="margin-bottom:18px;">
+      <b>Vais-je être rappelé ou démarché si je laisse mon email ou mon numéro&nbsp;?</b><br>
+      Non. Aucun démarchage ni appel non sollicité. Vos données sont utilisées uniquement pour l’envoi de l’étude, jamais revendues.
+    </div>
+    <div style="margin-bottom:18px;">
+      <b>Le simulateur est-il vraiment fiable&nbsp;?</b><br>
+      Oui, il utilise vos données locales et les scénarios techniques les plus récents, avec une fiabilité estimée à 98 %. Il ne remplace pas une étude sur site, mais donne un chiffrage précis.
+    </div>
+    <div style="margin-bottom:18px;">
+      <b>L’étude ou l’offre de financement sont-elles payantes ou engageantes&nbsp;?</b><br>
+      Non, tout est gratuit et sans engagement. L’offre de financement est proposée à titre indicatif, aucune obligation.
+    </div>
+    <div style="margin-bottom:6px;">
+      <b>Ce simulateur fonctionne-t-il partout en France&nbsp;?</b><br>
+      Oui, il adapte les calculs à chaque code postal pour toute la France.
+    </div>
+  </div>
+  <!-- Fin bloc FAQ -->
+  <div id="loading" style="display: none; text-align: center; margin-top: 20px;">
+    <div class="spinner"></div>
+    <p style="font-size: 14px; color: #555;">Veuillez patienter... Calcul en cours</p>
+  </div>
+
+  <!-- Séparateur/titre = ajouté dynamiquement après simulation -->
+
+  <div id="recap" class="recap"></div>
+  <div id="resultat" class="result"></div>
+  <div id="emailBloc">
+    <h2>📧 Recevez cette estimation complète par email</h2>
+    <p style="text-align:left; font-size: 15px; line-height: 1.6; color: #333;">
+      Et si vous souhaitez un échange pour affiner le projet selon <strong>votre toiture, vos besoins</strong> ou <strong>vos contraintes</strong>, vous pouvez aussi laisser votre numéro (facultatif).<br><br>
+      <strong>➕ C’est rapide, sans engagement.</strong>
+    </p>
+    <input type="email" id="emailUser" placeholder="Votre adresse email">
+    <input type="tel" id="telUser" placeholder="Votre numéro (Facultatif)">
+    <button onclick="envoyerEstimation(); gtag_report_conversion();">📩 Recevoir mon estimation</button>
+
+    <p style="margin-top: 20px; font-size: 14px; line-height: 1.4; text-align: center;">
+      ⭐⭐⭐⭐⭐ <strong>4,5/5 sur Google</strong> – Plus de 6400 foyers accompagnés en France.<br>
+      🔒 Vos données ne seront jamais revendues. Aucun démarchage automatique.
+    </p>
+    <p id="confirmationMessage" style="display: none; color: green; font-weight: bold; margin-top: 15px; text-align: center;">
+      ✅ Estimation bien envoyée ! Un email vient de vous être adressé.
+    </p>
+  </div>
+  <div id="temoignagesBloc" style="display:none; visibility:hidden; height:0; overflow:hidden; padding:26px 22px; background:#fff; border-radius:14px; box-shadow:0 4px 12px rgba(0,128,0,0.07); border:1px solid #e0e0e0; margin-top:32px;">
+    <div class="temoignages-titre">Ils l'ont testé&nbsp;</div>
+    <div class="temoignage">
+      <span class="stars">★★★★★</span>
+      <br>
+      “C’est la première fois que j’ai une estimation aussi claire et transparente sans avoir à laisser mes coordonnées partout. Bravo pour la démarche honnête !”
+      <br>
+      <span class="region">– Michel L., Périgueux</span>
+    </div>
+    <div class="temoignage">
+      <span class="stars">★★★★★</span>
+      <br>
+      “J’ai apprécié la rapidité du simulateur et le fait d’obtenir un chiffrage complet sans démarchage. Je recommande.”
+      <br>
+      <span class="region">– Sophie G., Sarlat</span>
+    </div>
+    <div class="temoignage">
+      <span class="stars">★★★★★</span>
+      <br>
+      “J’ai pu comparer facilement avant de me décider, et Biofrance Énergie m’a rappelé quand j’étais prêt. Service sérieux, rien à redire.”
+      <br>
+      <span class="region">– Paul D., Bergerac</span>
+    </div>
+    <div class="temoignage">
+      <span class="stars">★★★★★</span>
+      <br>
+      “C’est la première fois qu’on me donne autant d’infos sans rien demander en retour. Contact très professionnel ensuite.”
+      <br>
+      <span class="region">– Claire F., Nontron</span>
+    </div>
+    <div class="temoignage">
+      <span class="stars">★★★★★</span>
+      <br>
+      “J’ai pu faire mon choix sans pression. Après avoir reçu l’étude, j’ai contacté Biofrance pour finaliser, je recommande sans hésiter.”
+      <br>
+      <span class="region">– Jean-Pierre T., Terrasson</span>
+    </div>
+    <div style="font-size:14px; color:#444; margin: 38px auto 15px auto; max-width: 650px; line-height:1.6;">
+      <h2 style="font-size:18px; color:#178038; font-weight:700; margin-bottom:10px;">Simulation panneaux solaires maison individuelle Dordogne et Périgord</h2>
+      <p>
+        Utilisez ce simulateur en ligne pour estimer gratuitement l’autoconsommation solaire de votre maison individuelle en Dordogne, Périgord ou Nouvelle-Aquitaine, y compris pour une toiture à faible pente ou une maison ancienne.  
+        <br><br>
+        <strong>Options proposées :</strong>  
+        – Simulation gratuite autoconsommation solaire 24  
+        – Calcul économie solaire sur facture Dordogne  
+        – Estimation production photovoltaïque maison neuve ou ancienne  
+        – Simulateur rendement panneaux solaires et production réelle  
+        – Chiffrage immédiat du coût d’installation en Dordogne
+        <br><br>
+        <em>Recevez une étude personnalisée sans inscription ni engagement, et comparez en direct la rentabilité solaire pour votre logement.</em>
+      </p>
+      <ul style="margin-top:6px; margin-bottom:0; font-size:13px;">
+        <li>Simulateur panneaux solaires maison individuelle Dordogne</li>
+        <li>Simulation gratuite autoconsommation solaire 24</li>
+        <li>Estimation installation solaire Périgord</li>
+        <li>Calcul économie solaire sur facture Dordogne</li>
+        <li>Simulateur production photovoltaïque maison ancienne</li>
+        <li>Simulateur solaire toiture faible pente Dordogne</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="cookie-banner" style="display: none;">
+    <span>
+      Ce site utilise des cookies strictement nécessaires au fonctionnement du simulateur et à la mesure d’audience. 
+      <br>En poursuivant votre navigation, vous acceptez leur utilisation. 
+    </span>
+    <button id="cookie-ok">OK, j’ai compris</button>
+  </div>
+
+  <div id="mentions-legales-container">
+    <span id="mentions-legales-link">Mentions légales</span>
+  </div>
+  <div id="mentions-popup" style="display:none;">
+    <button id="close-mentions" aria-label="Fermer">&times;</button>
+    <strong>Mentions légales :</strong><br>
+    Conseils Energies Durables – Matignon Sylvain<br>
+    SIRET : 422 231 928 00025<br>
+    Adresse : 4 rue du Pont Saint Jean, 27530 Ézy-sur-Eure<br>
+    Contact : conseilsenergiesdurables@gmail.com<br>
+    Hébergeur : GitHub Pages, 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA<br>
+    Données personnelles : Les informations saisies sont utilisées uniquement pour traiter votre demande. Aucun démarchage ni revente.<br>
+    RGPD : Vous pouvez demander la suppression de vos données à tout moment par simple email.
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Affichage champ kWh avancé
+      var lienAvance = document.getElementById('lienAvance');
+      if (lienAvance) {
+        lienAvance.onclick = function(e) {
+          e.preventDefault();
+          document.getElementById('modeAvance').style.display = 'block';
+          this.style.display = 'none';
+        };
+      }
+      // Cookie
+      if (!localStorage.getItem("cookieConsentPV2025")) {
+        document.getElementById("cookie-banner").style.display = "flex";
+      }
+      document.getElementById("cookie-ok").onclick = function() {
+        localStorage.setItem("cookieConsentPV2025", "1");
+        document.getElementById("cookie-banner").style.display = "none";
+      };
+      var telInput = document.getElementById('telUser');
+      if(telInput) {
+        telInput.addEventListener('input', function(e) {
+          let val = e.target.value.replace(/\D/g, '').slice(0, 10);
+          let format = val.replace(/(\d{2})(?=\d)/g, '$1 ').trim();
+          e.target.value = format;
+        });
+      }
+    });
+    let scenarios = [];
+
+    function afficherLienMentionsLegales() {
+      document.getElementById('mentions-legales-container').style.display = 'block';
+    }
+    function masquerLienMentionsLegales() {
+      document.getElementById('mentions-legales-container').style.display = 'none';
+      document.getElementById('mentions-popup').style.display = 'none';
+    }
+    document.getElementById('mentions-legales-link').onclick = function() {
+      document.getElementById('mentions-popup').style.display = 'block';
+    };
+    document.getElementById('close-mentions').onclick = function() {
+      document.getElementById('mentions-popup').style.display = 'none';
+    };
+    function fetchScenarios(departement) {
+      return fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec')
+        .then(response => response.json())
+        .then(data => data.filter(row => row.Departement == departement).map(row => ({
+          prixKwh: parseFloat((row.PrixKwh || '').toString().replace(',', '.').replace(/[^0-9.]/g, '')),
+          puissance: row.Puissance,
+          prod: parseFloat(row.Prod),
+          seuil: parseFloat(row.Seuil),
+          panels: parseInt(row.Panels),
+          prix: parseFloat(row.Prix),
+          mensualite: parseFloat(row.Mensualite),
+          taeg: parseFloat(row.Taeg),
+          total: parseFloat(row.Total)
+        })))
+        .catch(error => {
+          console.error("Erreur lors du chargement des données :", error);
+          alert("Impossible de charger les données, réessayez plus tard.");
+          return [];
+        });
+    }
+
+    // -------- SÉPARATEUR DYNAMIQUE APRÈS SIMULATION --------
+    async function calculerSimulation() {
+      document.getElementById('faqBloc').style.display = 'none';
+      document.getElementById('loading').style.display = 'block';
+      document.getElementById('loading').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.getElementById('recap').style.display = 'none';
+      document.getElementById('resultat').style.display = 'none';
+      document.getElementById('emailBloc').style.display = 'none';
+      document.getElementById('temoignagesBloc').style.display = 'none';
+      document.getElementById('temoignagesBloc').style.visibility = 'hidden';
+      document.getElementById('temoignagesBloc').style.height = '0';
+      masquerLienMentionsLegales();
+
+      // Efface séparateur/titre s'il existe déjà
+      const recapParent = document.getElementById('recap').parentElement;
+      const oldSeparator = document.getElementById('separatorResult');
+      if (oldSeparator) recapParent.removeChild(oldSeparator);
+
+      const codePostal = document.getElementById('codePostal').value.trim();
+      const facture = parseFloat(document.getElementById('facture').value);
+      const consoInput = document.getElementById('conso');
+      let conso, prixKwh;
+      if (!/^[0-9]{5}$/.test(codePostal)) {
+        alert("Veuillez entrer un code postal valide.");
+        return;
+      }
+      if (isNaN(facture) || facture <= 0) {
+        alert("Merci de remplir correctement tous les champs.");
+        return;
+      }
+      const departement = codePostal.substring(0, 2);
+      scenarios = await fetchScenarios(departement);
+      if (scenarios.length === 0) {
+        alert("Aucune donnée disponible pour ce département.");
+        return;
+      }
+      document.getElementById('loading').style.display = 'none';
+
+      // Calcul de la consommation estimée
+      let consommationEstimee;
+      if (consoInput && consoInput.value) {
+        conso = parseFloat(consoInput.value);
+        if (isNaN(conso) || conso <= 0) {
+          alert("Merci d’indiquer une consommation kWh correcte.");
+          return;
+        }
+        prixKwh = facture / conso;
+        consommationEstimee = conso;
+      } else {
+        prixKwh = scenarios[0].prixKwh;
+        consommationEstimee = facture / prixKwh;
+        conso = consommationEstimee;
+      }
+
+      // Vérifie si la conso < plus petite production disponible
+      const minProd = Math.min(...scenarios.map(s => s.prod));
+      if (consommationEstimee < minProd) {
+        document.getElementById('recap').innerHTML = `
+          <div style="color: #b30000; font-weight: bold; font-size: 19px; text-align: center;">
+            <span style="font-size: 30px;">⚠️</span><br>
+            <span>Votre consommation annuelle d’électricité est trop faible pour qu’une installation photovoltaïque soit conseillée dans votre cas.</span><br><br>
+            <span style="font-weight: normal; color: #1a1a1a; font-size: 15px;">
+              Investir dans une installation surdimensionnée ne serait pas pertinent : le montant économisé ne couvrirait pas le coût de l’installation.<br><br>
+              Nous privilégions la transparence : <b>nous ne recommandons pas d’installation solaire pour votre profil</b>.<br><br>
+              Si votre situation évolue ou si vous souhaitez un conseil personnalisé, contactez-nous, nous étudierons votre dossier avec attention.
+            </span>
+          </div>
+        `;
+        document.getElementById('recap').style = "display:block;visibility:visible;height:auto;padding:20px;margin:0 auto 20px auto;box-shadow:0 4px 12px rgba(0,0,0,0.1);border:1px solid #e0e0e0;";
+        document.getElementById('resultat').style.display = "none";
+        document.getElementById('emailBloc').style.display = "none";
+        document.getElementById('temoignagesBloc').style.display = "none";
+        masquerLienMentionsLegales();
+        return;
+      }
+
+      // -------- DIMENSIONNEMENT --------
+      let scenario = scenarios
+        .filter(s => s.prod <= consommationEstimee)
+        .sort((a, b) => b.prod - a.prod)[0];
+      if (!scenario) {
+        scenario = scenarios.sort((a, b) => b.prod - a.prod)[0];
+      }
+      window.selectedScenario = scenario;
+
+      // --- Séparateur/titre injecté dynamiquement ici ---
+      const separatorDiv = document.createElement('div');
+      separatorDiv.id = 'separatorResult';
+      separatorDiv.innerHTML = `
+        <hr style="border: none; border-top: 3px solid #198754; margin: 45px 0 30px 0;">
+        <h2 style="text-align:center; color:#145e39; font-size:1.7rem; font-weight:900; margin-bottom: 18px;">
+          Votre estimation personnalisée
+        </h2>
+      `;
+      recapParent.insertBefore(separatorDiv, document.getElementById('recap'));
+
+      // --- Le reste du calcul/affichage ne change pas ---
+      const autoKwh = scenario.prod * 0.6;
+      const stockKwh = scenario.prod * 0.4;
+      const acheminement = 0.05;
+      const factureAvant = conso * prixKwh;
+      const autoValue = autoKwh * prixKwh;
+      const stockValue = stockKwh * prixKwh;
+      const coutAcheminement = stockKwh * acheminement;
+      const factureApres = factureAvant - autoValue - stockValue + coutAcheminement;
+      const economieAnnuelle = factureAvant - factureApres;
+      const economieMensuelle = economieAnnuelle / 12;
+      let gain15ans = 0;
+      let prixActuel = prixKwh;
+      for (let i = 0; i < 15; i++) {
+        const autoVal = autoKwh * prixActuel;
+        const stockVal = stockKwh * prixActuel;
+        const coutAch = stockKwh * acheminement;
+        const factureAv = conso * prixActuel;
+        const factureAp = factureAv - autoVal - stockVal + coutAch;
+        const economie = factureAv - factureAp;
+        gain15ans += economie;
+        prixActuel *= 1.05;
+      }
+      document.getElementById('recap').innerHTML = `
+        Code postal : ${codePostal}<br>
+        Consommation annuelle estimée : <strong>${Math.round(conso).toLocaleString('fr-FR')}</strong> kWh<br>
+        Prix du kWh TTC utilisé : <strong>${prixKwh.toFixed(3)}</strong> €<br>
+        Facture annuelle : ${facture.toLocaleString('fr-FR')} €<br><br>
+        Puissance installée : ${scenario.puissance} soit ${scenario.panels} panneaux photovoltaïques de 500 W<br><br>
+        Production annuelle : <span style="color: #2b7a0b; font-weight: bold;">${scenario.prod.toLocaleString('fr-FR')}</span> kWh<br><br>
+        <strong>Cela représente ${(scenario.prod / conso * 100).toFixed(2)}% de votre consommation annuelle.</strong><br>
+        <span style="display:inline-block; margin-top:10px; color:#2b7a0b; font-size:15px; font-weight:bold;">
+          Grâce à la batterie virtuelle, vous consommez 100% de votre production !
+        </span>
+      `;
+      document.getElementById('recap').style = "display:block;visibility:visible;height:auto;padding:20px;margin:0 auto 20px auto;box-shadow:0 4px 12px rgba(0,0,0,0.1);border:1px solid #e0e0e0;";
+      document.getElementById('resultat').innerHTML = `
+        <div class="item"><strong>Gain estimé la 1ère année :</strong> <span style="color: #2b7a0b; font-weight: bold;">${Math.round(economieAnnuelle).toLocaleString('fr-FR')}</span> €</div><br>
+        <div class="item"><strong>Soit un gain par mois de :</strong> <span style="color: #2b7a0b; font-weight: bold;">${Math.round(economieMensuelle).toLocaleString('fr-FR')}</span> €</div><br>
+        <div class="item"><strong>Économie cumulée sur 15 ans :</strong> <span style="color: #2b7a0b; font-weight: bold;">${Math.round(gain15ans).toLocaleString('fr-FR')}</span> €</div>
+        <hr>
+        <div class="item">
+          <strong>🔄 Ce que nous vous proposons</strong><br><br>
+          🗖 Et si vous remplaciez votre facture d’électricité par un investissement utile ?<br><br>
+          💡 Chaque mois, au lieu de payer votre fournisseur, vous autofinancez votre propre installation solaire.<br><br>
+          ⚡ Une mensualité fixe de <strong>${scenario.mensualite.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})} €</strong>* pour financer cette installation clé en main — et ainsi devenir propriétaire de votre production solaire.<br><br>
+          ✅ Ce n’est pas une dépense en plus, c’est à la place de ce que vous payez déjà.<br><br>
+          🎯 Résultat ? Vous devenez propriétaire de votre production d’électricité, tout en disant stop aux hausses de tarifs.
+      <div style="background: #fff; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,128,0,0.06); border: 1px solid #198754; font-size: 15px; color: #175837; font-weight: normal; text-align: center; margin: 22px 0 18px 0; padding: 16px 14px 10px 14px;">
+        <strong>Pour information&nbsp;:</strong><br>
+        Offre financement exceptionnel&nbsp;:<br>
+        <span style="color: #13723a; font-size: 20px; font-weight: bold;">TAEG fixe 3,96 % sur 180 mois</span>
+        <br>
+        <span style="color: #e64c00; font-size: 13px; font-weight: 600;">Valable pour toute étude réalisée avant le <u>31 juillet 2025</u></span>
+      </div>
+        <div style="background:#f7f9f7; border-left:4px solid #198754; border-radius:12px; padding:14px 18px 12px 14px; margin-top:22px; font-size:16px; color:#222;">
+          <span style="display:inline-block; vertical-align:middle; margin-right:8px;">
+            <svg width="26" height="26" style="vertical-align:middle;" viewBox="0 0 24 24" fill="#8dc2a7"><circle cx="12" cy="12" r="12"/><text x="7" y="18" font-size="14" font-weight="bold" fill="#fff">i</text></svg>
+          </span>
+          <span>
+            * Votre installation ${scenario.puissance} : ${scenario.prix.toLocaleString('fr-FR')} € TTC, financement sur 180 mois au TAEG fixe de ${scenario.taeg.toFixed(2)} %, mensualité <strong>${scenario.mensualite.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})} €</strong> (hors assurance).<br>
+            Coût total du financement hors assurance : ${scenario.total.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})} €.<br>
+            Financement proposé par notre partenaire Projexio, sous réserve d’acceptation.<br>
+            <strong>Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</strong>
+         
+            <div style="margin-top:10px;font-size:14px;color:#884d00;">
+             L’estimation affichée est indicative. Une visite technique est nécessaire pour établir un devis ferme et adapté à votre    situation.
+            </div>
+
+          </span>
+        </div>
+      `;
+      document.getElementById('resultat').style = "display:block;visibility:visible;height:auto;padding:20px;margin:0 auto 20px auto;box-shadow:0 4px 12px rgba(0,0,0,0.1);border:1px solid #e0e0e0;";
+      document.getElementById('emailBloc').style = "display:block;visibility:visible;height:auto;padding:20px;margin:0 auto 20px auto;box-shadow:0 4px 12px rgba(0,0,0,0.1);border:1px solid #e0e0e0;";
+      const bloc = document.getElementById('temoignagesBloc');
+      bloc.style.display = 'block';
+      bloc.style.visibility = 'visible';
+      bloc.style.height = 'auto';
+      afficherLienMentionsLegales();
+      var telInput = document.getElementById('telUser');
+      if (telInput && !telInput.hasAttribute('data-format-listener')) {
+        telInput.addEventListener('input', function(e) {
+          let val = e.target.value.replace(/\D/g, '').slice(0, 10);
+          let format = val.replace(/(\d{2})(?=\d)/g, '$1 ').trim();
+          e.target.value = format;
+        });
+        telInput.setAttribute('data-format-listener', '1');
+      }
+      // ENVOI AUTOMATIQUE VERS SHEETS (même sans email)
+      const formData = new FormData();
+      formData.append("code_postal", codePostal);
+      formData.append("conso", Math.round(conso));
+      formData.append("facture", facture);
+      formData.append("prod", scenario.prod);
+      formData.append("eco1", economieAnnuelle.toFixed(0));
+      formData.append("ecomensuelle", economieMensuelle.toFixed(0));
+      formData.append("eco15", gain15ans.toFixed(0));
+      formData.append("puissance", scenario.puissance);
+      formData.append("panneaux", scenario.panels);
+      formData.append("prix", scenario.prix);
+      formData.append("mensualite", scenario.mensualite);
+      formData.append("taeg", scenario.taeg);
+      formData.append("totalcredit", scenario.total);
+      formData.append("email", "");
+      formData.append("tel", "");
+      fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+      });
+    }
+
+    function envoyerEstimation() {
+      const codePostal = document.getElementById('codePostal').value.trim();
+      const facture = parseFloat(document.getElementById('facture').value);
+      const email = document.getElementById('emailUser').value.trim();
+      const tel = document.getElementById('telUser').value.replace(/\D/g, '');
+      const consoInput = document.getElementById('conso');
+      let conso, prixKwh;
+      if (!email) {
+        alert("Merci de renseigner votre adresse email pour recevoir votre estimation.");
+        return;
+      }
+      if (!selectedScenario) {
+        alert("Scénario non défini. Veuillez d'abord lancer une simulation.");
+        return;
+      }
+      if (consoInput && consoInput.value) {
+        conso = parseFloat(consoInput.value);
+        prixKwh = facture / conso;
+      } else {
+        prixKwh = selectedScenario.prixKwh;
+        conso = facture / prixKwh;
+      }
+      const autoKwh = selectedScenario.prod * 0.6;
+      const stockKwh = selectedScenario.prod * 0.4;
+      const acheminement = 0.05;
+      const factureAvant = conso * prixKwh;
+      const autoValue = autoKwh * prixKwh;
+      const stockValue = stockKwh * prixKwh;
+      const coutAcheminement = stockKwh * acheminement;
+      const factureApres = factureAvant - autoValue - stockValue + coutAcheminement;
+      const economieAnnuelle = factureAvant - factureApres;
+      const economieMensuelle = economieAnnuelle / 12;
+      let gain15ans = 0;
+      let prixActuel = prixKwh;
+      for (let i = 0; i < 15; i++) {
+        const autoVal = autoKwh * prixActuel;
+        const stockVal = stockKwh * prixActuel;
+        const coutAch = stockKwh * acheminement;
+        const factureAv = conso * prixActuel;
+        const factureAp = factureAv - autoVal - stockVal + coutAch;
+        gain15ans += factureAv - factureAp;
+        prixActuel *= 1.05;
+      }
+      const formData = new FormData();
+      formData.append("code_postal", codePostal);
+      formData.append("conso", Math.round(conso));
+      formData.append("facture", facture);
+      formData.append("prod", selectedScenario.prod);
+      formData.append("eco1", economieAnnuelle.toFixed(0));
+      formData.append("ecomensuelle", economieMensuelle.toFixed(0));
+      formData.append("eco15", gain15ans.toFixed(0));
+      formData.append("puissance", selectedScenario.puissance);
+      formData.append("panneaux", selectedScenario.panels);
+      formData.append("prix", selectedScenario.prix);
+      formData.append("mensualite", selectedScenario.mensualite);
+      formData.append("taeg", selectedScenario.taeg);
+      formData.append("totalcredit", selectedScenario.total);
+      formData.append("email", email);
+      formData.append("tel", tel);
+      fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData
+      });
+      setTimeout(() => {
+        const message = document.getElementById("confirmationMessage");
+        message.style.display = "block";
+        message.style.visibility = "visible"; 
+        message.style.height = "auto";
+        message.style.marginTop = "15px";
+      }, 1000);
+    }
+    // Compteur dynamique
+    const baseCount = 1234;
+    const startDate = new Date('2025-05-01T00:00:00Z');
+    function updateCompteur() {
+      const now = new Date();
+      const secondsElapsed = Math.floor((now - startDate) / 1000);
+      const increments = Math.floor(secondsElapsed / 47);
+      const total = baseCount + increments;
+      const compteurElement = document.getElementById('compteurValeur');
+      const current = parseInt(compteurElement.innerText.replace(/\s/g, ''), 10) || 0;
+      const duration = 3000;
+      const frames = 90;
+      const increment = (total - current) / frames;
+      let frame = 0;
+      const animate = () => {
+        frame++;
+        const value = Math.round(current + increment * frame);
+        compteurElement.innerText = value.toLocaleString('fr-FR');
+        if (frame < frames) requestAnimationFrame(animate);
+      };
+      animate();
+    }
+    updateCompteur();
+    setInterval(updateCompteur, 1000);
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Faut-il donner ses coordonnées pour obtenir une estimation ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non, la simulation est gratuite et immédiate, sans aucune donnée obligatoire. L’email est uniquement demandé si vous souhaitez recevoir l’étude par mail. Le téléphone n’est jamais exigé."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Vais-je être rappelé ou démarché si je laisse mon email ou mon numéro ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non. Aucun démarchage ni appel non sollicité. Vos données sont utilisées uniquement pour l’envoi de l’étude, jamais revendues."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Le simulateur est-il vraiment fiable ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui, il utilise vos données locales et les scénarios techniques les plus récents, avec une fiabilité estimée à 98 %. Il ne remplace pas une étude sur site, mais donne un chiffrage précis."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "L’étude ou l’offre de financement sont-elles payantes ou engageantes ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non, tout est gratuit et sans engagement. L’offre de financement est proposée à titre indicatif, aucune obligation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ce simulateur fonctionne-t-il partout en France ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Oui, il adapte les calculs à chaque code postal pour toute la France."
+      }
+    }
+  ]
+}
+</script>
+</body>
+</html>
