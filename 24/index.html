@@ -32,12 +32,10 @@
   </script>
   <style>
    body {
-  font-family: Arial, sans-serif;
-  padding: 8px 0 0 0;
-  background: #f0f4f8;
-  /* margin: auto;   <-- à retirer */
-}
-
+      font-family: Arial, sans-serif;
+      padding: 8px 0 0 0;
+      background: #f0f4f8;
+    }
     h1 {
       color: #178038;
       text-align: center;
@@ -63,12 +61,12 @@
       color: #1976d2;
       font-weight: 600;
     }
-   .logo {
-  display: block;
-  margin: 0 auto 2px auto;      /* Moins d'espace en dessous */
-  max-width: 100px;              /* Largeur maximum beaucoup plus raisonnable */
-  height: auto;
-}
+    .logo {
+      display: block;
+      margin: 0 auto 2px auto;
+      max-width: 100px;
+      height: auto;
+    }
     .form-section,
     .recap,
     .result,
@@ -295,51 +293,40 @@
         font-size: 13px;
       }
     }
+    /* Ajout pour bloc lead vidéo/form mobile/desktop */
+    .bloc-lead-video {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    @media (min-width: 701px) {
+      .bloc-lead-video {
+        flex-direction: column;
+      }
+      .bloc-video-avis {
+        order: 1;
+      }
+      .form-section.form-lead {
+        order: 2;
+      }
+    }
+    @media (max-width: 700px) {
+      .bloc-lead-video {
+        flex-direction: column;
+      }
+      .form-section.form-lead {
+        order: 1;
+        margin-bottom: 0 !important;
+      }
+      .bloc-video-avis {
+        order: 2;
+        margin-top: 12px !important;
+      }
+    }
   </style>
-  <!-- Meta Pixel Code -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '4077327712591041');
-    fbq('track', 'PageView');
-    window.addEventListener("message", function(event) {
-      if (event.data === "fbq-lead" && typeof fbq === "function") {
-        fbq('track', 'Lead');
-      }
-    });
-    document.addEventListener("DOMContentLoaded", function () {
-      const boutonSimuler = document.getElementById("simuler");
-      if (boutonSimuler) {
-        boutonSimuler.addEventListener("click", function () {
-          if (typeof fbq === "function") {
-            fbq('trackCustom', 'SimulateurUtilise');
-            console.log("✅ fbq SimulateurUtilise envoyé");
-          }
-        });
-      }
-      const params = new URLSearchParams(window.location.search);
-      const source = params.get("from") || "direct";
-      const userAgent = "SiteW";
-      const img = document.createElement("img");
-      img.src = `https://script.google.com/macros/s/AKfycbxt0po8cZNTMKGNBwqW-fEieOKib6HHJUGk6bXTQMgWv07GAJVSrFuJ5rf2qekTMaXfGw/exec?ua=${userAgent}&source=${source}`;
-      img.style.display = "none";
-      document.body.appendChild(img);
-    });
-  </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=4077327712591041&ev=PageView&noscript=1" />
-  </noscript>
 </head>
 <body>
 <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/52db4f3ab1c38909b33d9037e74d7371c32a9cf5/logo%20SSP.webp" alt="Logo Solution Solaire Pro" class="logo">
-
 
   <!-- Compteur dynamique -->
   <div style="text-align:center; margin-bottom:22px;">
@@ -354,7 +341,7 @@
       <span style="color:#1a1a1a; font-size:16px; font-weight:700; display:block; margin-top:2px;">simulations réalisées depuis le 1er mai 2025</span>
     </div>
   </div>
-  <!-- ACCROCHE REPRISE, HIÉRARCHISÉE -->
+  <!-- ACCROCHE HIÉRARCHISÉE -->
   <h1>
     Simulateur solaire gratuit : votre étude en <span class="texte-orange">3 secondes</span>
   </h1>
@@ -368,37 +355,39 @@
   <div style="text-align:center; font-size:0.98rem; color:#1976d2; margin-bottom: 18px;">
     <span class="slogan-bleu">Fiabilité 98 % : estimation réalisée avec une IA, basée sur vos données locales.</span>
   </div>
-  
-  <!-- Vidéo réassurance -->
-<div style="max-width: 420px; margin: 0 auto 20px auto; text-align:center;">
-  <div style="font-size: 1.05rem; color: #198754; font-weight:700; margin-bottom: 7px;">
-    👍 Ils ont testé le simulateur&nbsp;: découvrez leur avis en vidéo
-  </div>
-  <iframe width="100%" height="236"
-    src="https://www.youtube.com/embed/W9aQMW05AVQ"
-    title="Simulation solaire gratuite"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowfullscreen>
-  </iframe>
-</div>
-  <!-- ----------- FORMULAIRE AVEC KWH OPTIONNEL ----------- -->
-  <div class="form-section" style="background: #f9fff7; border:1px solid #c8f6dc;">
-    <h2>📊 Simulation personnalisée</h2>
-    <input type="text" id="codePostal" placeholder=" Votre code postal" maxlength="5" style="font-size:18px;">
-    <input type="number" id="facture" placeholder=" Votre facture élec /an (€)" style="font-size:18px;">
-    <div id="modeAvance" style="display:none;">
-      <input type="number" id="conso" placeholder=" Conso annuelle (kWh, optionnel)" style="font-size:18px;">
-    </div>
-    <a href="#" id="lienAvance" style="font-size:15px; color:#168b4a; text-decoration:underline; display:block; margin-bottom:10px;">
-      ➕ Vous connaissez votre consommation annuelle ? Cliquez ici pour une estimation ultra-précise
-    </a>
-    <button id="simuler" onclick="calculerSimulation()">
-      🔍 Obtenir mon estimation
-    </button>
-  </div>
-  <!-- ----------- FIN FORMULAIRE ----------- -->
 
+  <!-- ======= BLOC LEAD (FORMULAIRE + VIDÉO) ======= -->
+  <div class="bloc-lead-video">
+    <!-- Vidéo AVIS -->
+    <div class="bloc-video-avis" style="max-width: 420px; margin: 0 auto 20px auto; text-align:center;">
+      <div style="font-size: 1.05rem; color: #198754; font-weight:700; margin-bottom: 7px;">
+        👍 Ils ont testé le simulateur&nbsp;: découvrez leur avis en vidéo
+      </div>
+      <iframe width="100%" height="236"
+        src="https://www.youtube.com/embed/W9aQMW05AVQ"
+        title="Simulation solaire gratuite"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <!-- FORMULAIRE -->
+    <div class="form-section form-lead" style="background: #f9fff7; border:1px solid #c8f6dc;">
+      <h2>📊 Simulation personnalisée</h2>
+      <input type="text" id="codePostal" placeholder=" Votre code postal" maxlength="5" style="font-size:18px;">
+      <input type="number" id="facture" placeholder=" Votre facture élec /an (€)" style="font-size:18px;">
+      <div id="modeAvance" style="display:none;">
+        <input type="number" id="conso" placeholder=" Conso annuelle (kWh, optionnel)" style="font-size:18px;">
+      </div>
+      <a href="#" id="lienAvance" style="font-size:15px; color:#168b4a; text-decoration:underline; display:block; margin-bottom:10px;">
+        ➕ Vous connaissez votre consommation annuelle ? Cliquez ici pour une estimation ultra-précise
+      </a>
+      <button id="simuler" onclick="calculerSimulation()">
+        🔍 Obtenir mon estimation
+      </button>
+    </div>
+  </div>
+  <!-- ======= FIN BLOC LEAD ======= -->
   <!-- ----------- BLOC ÉDITORIAL SEO ----------- -->
   <div class="form-section" style="background: #f7fafc; border:1px solid #c8f6dc;">
     <h2>Pourquoi utiliser un simulateur solaire en Dordogne ?</h2>
@@ -584,7 +573,6 @@
     Données personnelles : Les informations saisies sont utilisées uniquement pour traiter votre demande. Aucun démarchage ni revente.<br>
     RGPD : Vous pouvez demander la suppression de vos données à tout moment par simple email.
   </div>
-
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       // Affichage champ kWh avancé
@@ -811,7 +799,7 @@
             <strong>Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</strong>
          
             <div style="margin-top:10px;font-size:14px;color:#884d00;">
-             L’estimation affichée est indicative. Une visite technique est nécessaire pour établir un devis ferme et adapté à votre    situation.
+             L’estimation affichée est indicative. Une visite technique est nécessaire pour établir un devis ferme et adapté à votre situation.
             </div>
 
           </span>
@@ -1004,3 +992,5 @@
 </script>
 </body>
 </html>
+
+
