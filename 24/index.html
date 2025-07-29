@@ -472,20 +472,28 @@
 
   <div id="recap" class="recap"></div>
   <div id="resultat" class="result"></div>
-  <div id="emailBloc">
-    <h2>📧 Recevez cette estimation complète par email</h2>
-    <p style="text-align:left; font-size: 15px; line-height: 1.6; color: #333;">
-      Et si vous souhaitez un échange pour affiner le projet selon <strong>votre toiture, vos besoins</strong> ou <strong>vos contraintes</strong>, vous pouvez aussi laisser votre numéro (facultatif).<br><br>
-      <strong>➕ C’est rapide, sans engagement.</strong>
-    </p>
-    <input type="email" id="emailUser" placeholder="Votre adresse email">
-    <input type="tel" id="telUser" placeholder="Votre numéro (Facultatif)">
-    <button onclick="envoyerEstimation(); gtag_report_conversion();">📩 Recevoir mon estimation</button>
-
-    <p style="margin-top: 20px; font-size: 14px; line-height: 1.4; text-align: center;">
-      ⭐⭐⭐⭐⭐ <strong>4,5/5 sur Google</strong> – Plus de 6400 foyers accompagnés en France.<br>
-      🔒 Vos données ne seront jamais revendues. Aucun démarchage automatique.
-    </p>
+  <div id="emailBloc" style="background: #e8fff1; border:2px solid #35b96f; border-radius:13px; margin-top: 30px; padding: 22px 20px 18px 20px; box-shadow:0 6px 32px rgba(0,128,64,0.09); display:none; visibility:hidden; height:0; overflow:hidden;">
+  <h2 style="color:#178038; font-size:1.45rem; margin-bottom: 10px; display: flex; align-items: center; gap: 9px;">
+    <span style="font-size:1.5em;">📩</span>
+    Recevez gratuitement votre rapport complet par email
+  </h2>
+  <p style="font-size: 16px; color: #1a6336; font-weight: 500; margin-bottom:12px;">
+    • <b>PDF ultra-détaillé</b> avec tous vos chiffres personnalisés <br>
+    • Simulation longue durée, mensualités, amortissement et <b>conseils d’expert</b><br>
+    • <b>Réponse sous 24h</b>, aucun engagement<br>
+    <span style="font-size: 14px; color: #188d44;">⭐ Déjà <b>6400+ foyers</b> ont reçu leur étude personnalisée !</span>
+  </p>
+  <input type="email" id="emailUser" placeholder="Votre adresse email" style="margin-bottom: 10px;">
+  <input type="tel" id="telUser" placeholder="Votre numéro (facultatif)" style="margin-bottom: 12px;">
+  <button onclick="envoyerEstimation(); gtag_report_conversion();" style="background:#198754; color:white; font-weight:700; font-size:18px; border-radius:8px; padding:13px 0; border:none; width:100%;">
+    📩 Recevoir mon étude PDF
+  </button>
+  <p id="confirmationMessage" style="display: none; color: green; font-weight: bold; margin-top: 15px; text-align: center;">
+    ✅ Estimation bien envoyée ! Un email vient de vous être adressé.
+  </p>
+  <p style="margin-top: 14px; font-size: 14px; line-height: 1.4; text-align: center; color:#444;">
+    🔒 Vos données ne seront jamais revendues. Aucun démarchage automatique.
+  </p>
     <p id="confirmationMessage" style="display: none; color: green; font-weight: bold; margin-top: 15px; text-align: center;">
       ✅ Estimation bien envoyée ! Un email vient de vous être adressé.
     </p>
@@ -808,6 +816,11 @@
       `;
       document.getElementById('resultat').style = "display:block;visibility:visible;height:auto;padding:20px;margin:0 auto 20px auto;box-shadow:0 4px 12px rgba(0,0,0,0.1);border:1px solid #e0e0e0;";
       document.getElementById('emailBloc').style = "display:block;visibility:visible;height:auto;padding:20px;margin:0 auto 20px auto;box-shadow:0 4px 12px rgba(0,0,0,0.1);border:1px solid #e0e0e0;";
+
+setTimeout(function() {
+  document.getElementById('emailBloc').scrollIntoView({ behavior: "smooth", block: "center" });
+}, 350);
+
       const bloc = document.getElementById('temoignagesBloc');
       bloc.style.display = 'block';
       bloc.style.visibility = 'visible';
@@ -993,5 +1006,3 @@
 </script>
 </body>
 </html>
-
-
