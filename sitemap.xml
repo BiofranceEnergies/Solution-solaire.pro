@@ -4,4 +4,10 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://www.solution-solaire.pro/16/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
 </urlset>
+
