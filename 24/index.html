@@ -324,6 +324,41 @@
         margin-top: 12px !important;
       }
     }
+      .remise-brillante {
+  position: relative;
+  color: #e64c00;
+  font-size: 2em;
+  font-weight: bold;
+  display: inline-block;
+  overflow: hidden;
+}
+.remise-brillante::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 60%, rgba(255,255,255,0) 100%);
+  animation: shine 1.7s linear infinite;
+  pointer-events: none;
+}
+@keyframes shine {
+  0% { left: -80%; }
+  100% { left: 120%; }
+}
+ .info-actuellement {
+  color: #e64c00;
+  font-size: 1.23em;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  margin-bottom: 2px;
+  text-transform: uppercase; /* <-- ajoute cette ligne */
+}
+
+}
+
   </style>
 </head>
 <body>
@@ -633,6 +668,7 @@
           seuil: parseFloat(row.Seuil),
           panels: parseInt(row.Panels),
           prix: parseFloat(row.Prix),
+          remiseChantier: parseFloat((row.RemiseChantier || '').toString().replace(',', '.').replace(/[^0-9.]/g, '')),
           mensualite: parseFloat(row.Mensualite),
           taeg: parseFloat(row.Taeg),
           total: parseFloat(row.Total)
@@ -788,13 +824,19 @@
           ⚡ Une mensualité fixe de <strong>${scenario.mensualite.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})} €</strong>* pour financer cette installation clé en main — et ainsi devenir propriétaire de votre production solaire.<br><br>
           ✅ Ce n’est pas une dépense en plus, c’est à la place de ce que vous payez déjà.<br><br>
           🎯 Résultat ? Vous devenez propriétaire de votre production d’électricité, tout en disant stop aux hausses de tarifs.
-      <div style="background: #fff; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,128,0,0.06); border: 1px solid #198754; font-size: 15px; color: #175837; font-weight: normal; text-align: center; margin: 22px 0 18px 0; padding: 16px 14px 10px 14px;">
-        <strong>Pour information&nbsp;:</strong><br>
-        Offre financement exceptionnel&nbsp;:<br>
-        <span style="color: #13723a; font-size: 20px; font-weight: bold;">TAEG fixe 3,96 % sur 180 mois</span>
-        <br>
-        <span style="color: #e64c00; font-size: 13px; font-weight: 600;">Valable pour toute étude réalisée avant le <u>31 juillet 2025</u></span>
-      </div>
+<div style="background: #fff; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,128,0,0.06); border: 1px solid #198754; font-size: 15px; color: #175837; font-weight: normal; text-align: center; margin: 22px 0 18px 0; padding: 16px 14px 10px 14px;">
+  <span class="info-actuellement">Pour info actuellement</span><br>
+  <strong>Remise spéciale “groupage chantiers” à déduire de votre installation :</strong><br>
+  <span class="remise-brillante">
+    ${scenario.remiseChantier.toLocaleString('fr-FR', {minimumFractionDigits: 0, maximumFractionDigits: 0})} €
+  </span>
+  <br>
+  <span style="color: #13723a; font-size: 14px; font-weight: 600;">
+    Pour toute installation groupée sur votre secteur<br>
+    <span style="color:#e64c00;">Offre valable jusqu’au <u>31 août 2025</u> — Places limitées</span>
+  </span>
+</div>
+
         <div style="background:#f7f9f7; border-left:4px solid #198754; border-radius:12px; padding:14px 18px 12px 14px; margin-top:22px; font-size:16px; color:#222;">
           <span style="display:inline-block; vertical-align:middle; margin-right:8px;">
             <svg width="26" height="26" style="vertical-align:middle;" viewBox="0 0 24 24" fill="#8dc2a7"><circle cx="12" cy="12" r="12"/><text x="7" y="18" font-size="14" font-weight="bold" fill="#fff">i</text></svg>
