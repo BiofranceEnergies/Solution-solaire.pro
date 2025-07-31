@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simulateur solaire Charente – Estimation & prix photovoltaïque</title>
 
+
   <meta name="description" content="Simulateur solaire gratuit et immédiat pour estimer votre installation photovoltaïque en Charente et partout en France. Chiffrage, étude personnalisée et devis sans inscription.">
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11242044118"></script>
   <script>
@@ -324,6 +326,40 @@
         margin-top: 12px !important;
       }
     }
+      .remise-brillante {
+  position: relative;
+  color: #e64c00;
+  font-size: 2em;
+  font-weight: bold;
+  display: inline-block;
+  overflow: hidden;
+}
+.remise-brillante::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 60%, rgba(255,255,255,0) 100%);
+  animation: shine 1.7s linear infinite;
+  pointer-events: none;
+}
+@keyframes shine {
+  0% { left: -80%; }
+  100% { left: 120%; }
+}
+ .info-actuellement {
+  color: #e64c00;
+  font-size: 1.23em;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  margin-bottom: 2px;
+  text-transform: uppercase; /* <-- ajoute cette ligne */
+}
+
+
   </style>
 </head>
 <body>
@@ -424,12 +460,14 @@
       Notre démarche repose sur la transparence et l’expertise technique : chaque étude réalisée via le simulateur est suivie d’un échange personnalisé pour affiner votre projet, répondre à vos questions et vous proposer les solutions les plus adaptées.<br>
       L’installation et la mise en service sont assurées par des professionnels partenaires sélectionnés pour leur sérieux et leur expérience, partout en France. Un suivi est assuré après la pose pour garantir votre satisfaction dans la durée.
     </p>
-<h2>À propos de Biofrance Énergies</h2>
-<p>
-  Notre société est spécialisée dans l’accompagnement des particuliers pour l’autoconsommation photovoltaïque, l’estimation d’économies, et la simulation de projet, également en Charente, Angoulême, Cognac et l’ensemble du 16, mais aussi partout en France.<br>
-  Étude gratuite et personnalisée, chiffrage immédiat des sommes en € et kWh.
-</p>
-<h2>Glossaire rapide</h2>
+    <h2>À propos de Biofrance Énergies</h2>
+    <p>
+      Notre société est spécialisée dans l’accompagnement des particuliers pour l’autoconsommation photovoltaïque, l’estimation d’économies, et la simulation de projet, également en Charente, Cognac, Angoulême et l’ensemble du département, mais aussi partout en France.<br>
+Étude gratuite et personnalisée, chiffrage immédiat des sommes en € et kWh.
+<br>
+      Étude gratuite et personnalisée, chiffrage immédiat des sommes en € et kWh.
+    </p>
+    <h2>Glossaire rapide</h2>
     <ul style="margin-bottom:0;">
       <li><strong>Autoconsommation</strong> : production et consommation de sa propre électricité.</li>
       <li><strong>Batterie virtuelle</strong> : solution permettant de stocker l’excédent de production solaire sans “batterie” réelle, pour restitution ultérieure.</li>
@@ -494,7 +532,7 @@
   <p style="margin-top: 14px; font-size: 14px; line-height: 1.4; text-align: center; color:#444;">
     🔒 Vos données ne seront jamais revendues. Aucun démarchage automatique.
   </p>
-    
+   
   </div>
   <div id="temoignagesBloc" style="display:none; visibility:hidden; height:0; overflow:hidden; padding:26px 22px; background:#fff; border-radius:14px; box-shadow:0 4px 12px rgba(0,128,0,0.07); border:1px solid #e0e0e0; margin-top:32px;">
     <div class="temoignages-titre">Ils l'ont testé&nbsp;</div>
@@ -517,14 +555,14 @@
       <br>
       “J’ai pu comparer facilement avant de me décider, et Biofrance Énergie m’a rappelé quand j’étais prêt. Service sérieux, rien à redire.”
       <br>
-      <span class="region">– Paul D., Barbezieux</span>
+      <span class="region">– Paul D., Soyaux</span>
     </div>
     <div class="temoignage">
       <span class="stars">★★★★★</span>
       <br>
       “C’est la première fois qu’on me donne autant d’infos sans rien demander en retour. Contact très professionnel ensuite.”
       <br>
-      <span class="region">– Claire F., Ruffec</span>
+      <span class="region">– Claire F., Ruelle-sur-Touvre</span>
     </div>
     <div class="temoignage">
       <span class="stars">★★★★★</span>
@@ -534,27 +572,28 @@
       <span class="region">– Jean-Pierre T., La Rochefoucauld</span>
     </div>
     <div style="font-size:14px; color:#444; margin: 38px auto 15px auto; max-width: 650px; line-height:1.6;">
-      <h2 style="font-size:18px; color:#178038; font-weight:700; margin-bottom:10px;">Simulation panneaux solaires maison individuelle Charente</h2>
-      <p>
-        Utilisez ce simulateur en ligne pour estimer gratuitement l’autoconsommation solaire de votre maison individuelle en Charente, Angoulême, Cognac, Barbezieux ou Nouvelle-Aquitaine, y compris pour une toiture à faible pente ou une maison ancienne.  
-        <br><br>
-        <strong>Options proposées :</strong>  
-        – Simulation gratuite autoconsommation solaire 16  
-        – Calcul économie solaire sur facture Charente  
-        – Estimation production photovoltaïque maison neuve ou ancienne  
-        – Simulateur rendement panneaux solaires et production réelle  
-        – Chiffrage immédiat du coût d’installation en Charente
-        <br><br>
-        <em>Recevez une étude personnalisée sans inscription ni engagement, et comparez en direct la rentabilité solaire pour votre logement.</em>
-      </p>
-      <ul style="margin-top:6px; margin-bottom:0; font-size:13px;">
-        <li>Simulateur panneaux solaires maison individuelle Charente</li>
-        <li>Simulation gratuite autoconsommation solaire 16</li>
-        <li>Estimation installation solaire Angoulême, Cognac</li>
-        <li>Calcul économie solaire sur facture Charente</li>
-        <li>Simulateur production photovoltaïque maison ancienne</li>
-        <li>Simulateur solaire toiture faible pente Charente</li>
-      </ul>
+    <h2 style="font-size:18px; color:#178038; font-weight:700; margin-bottom:10px;">Simulation panneaux solaires maison individuelle Charente</h2>
+<p>
+  Utilisez ce simulateur en ligne pour estimer gratuitement l’autoconsommation solaire de votre maison individuelle en Charente ou Nouvelle-Aquitaine, y compris pour une toiture à faible pente ou une maison ancienne.  
+  <br><br>
+  <strong>Options proposées :</strong>  
+  – Simulation gratuite autoconsommation solaire 16  
+  – Calcul économie solaire sur facture Charente  
+  – Estimation production photovoltaïque maison neuve ou ancienne  
+  – Simulateur rendement panneaux solaires et production réelle  
+  – Chiffrage immédiat du coût d’installation en Charente
+  <br><br>
+  <em>Recevez une étude personnalisée sans inscription ni engagement, et comparez en direct la rentabilité solaire pour votre logement.</em>
+</p>
+<ul style="margin-top:6px; margin-bottom:0; font-size:13px;">
+  <li>Simulateur panneaux solaires maison individuelle Charente</li>
+  <li>Simulation gratuite autoconsommation solaire 16</li>
+  <li>Estimation installation solaire Charente</li>
+  <li>Calcul économie solaire sur facture Charente</li>
+  <li>Simulateur production photovoltaïque maison ancienne</li>
+  <li>Simulateur solaire toiture faible pente Charente</li>
+</ul>
+
     </div>
   </div>
 
@@ -633,6 +672,7 @@
           seuil: parseFloat(row.Seuil),
           panels: parseInt(row.Panels),
           prix: parseFloat(row.Prix),
+          remiseChantier: parseFloat((row.RemiseChantier || '').toString().replace(',', '.').replace(/[^0-9.]/g, '')),
           mensualite: parseFloat(row.Mensualite),
           taeg: parseFloat(row.Taeg),
           total: parseFloat(row.Total)
@@ -788,13 +828,19 @@
           ⚡ Une mensualité fixe de <strong>${scenario.mensualite.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})} €</strong>* pour financer cette installation clé en main — et ainsi devenir propriétaire de votre production solaire.<br><br>
           ✅ Ce n’est pas une dépense en plus, c’est à la place de ce que vous payez déjà.<br><br>
           🎯 Résultat ? Vous devenez propriétaire de votre production d’électricité, tout en disant stop aux hausses de tarifs.
-      <div style="background: #fff; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,128,0,0.06); border: 1px solid #198754; font-size: 15px; color: #175837; font-weight: normal; text-align: center; margin: 22px 0 18px 0; padding: 16px 14px 10px 14px;">
-        <strong>Pour information&nbsp;:</strong><br>
-        Offre financement exceptionnel&nbsp;:<br>
-        <span style="color: #13723a; font-size: 20px; font-weight: bold;">TAEG fixe 3,96 % sur 180 mois</span>
-        <br>
-        <span style="color: #e64c00; font-size: 13px; font-weight: 600;">Valable pour toute étude réalisée avant le <u>31 juillet 2025</u></span>
-      </div>
+<div style="background: #fff; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,128,0,0.06); border: 1px solid #198754; font-size: 15px; color: #175837; font-weight: normal; text-align: center; margin: 22px 0 18px 0; padding: 16px 14px 10px 14px;">
+  <span class="info-actuellement">Pour info actuellement</span><br>
+  <strong>Remise spéciale “groupage chantiers” à déduire de votre installation :</strong><br>
+  <span class="remise-brillante">
+    ${scenario.remiseChantier.toLocaleString('fr-FR', {minimumFractionDigits: 0, maximumFractionDigits: 0})} €
+  </span>
+  <br>
+  <span style="color: #13723a; font-size: 14px; font-weight: 600;">
+    Pour toute installation groupée sur votre secteur<br>
+    <span style="color:#e64c00;">Offre valable jusqu’au <u>31 août 2025</u> — Places limitées</span>
+  </span>
+</div>
+
         <div style="background:#f7f9f7; border-left:4px solid #198754; border-radius:12px; padding:14px 18px 12px 14px; margin-top:22px; font-size:16px; color:#222;">
           <span style="display:inline-block; vertical-align:middle; margin-right:8px;">
             <svg width="26" height="26" style="vertical-align:middle;" viewBox="0 0 24 24" fill="#8dc2a7"><circle cx="12" cy="12" r="12"/><text x="7" y="18" font-size="14" font-weight="bold" fill="#fff">i</text></svg>
