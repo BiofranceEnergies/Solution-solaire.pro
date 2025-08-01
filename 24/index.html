@@ -519,6 +519,8 @@
   </p>
   <input type="email" id="emailUser" placeholder="Votre adresse email" style="margin-bottom: 10px;">
   <input type="tel" id="telUser" placeholder="Votre numéro (facultatif)" style="margin-bottom: 12px;">
+  <input type="hidden" id="motcle" name="motcle">
+
   <button onclick="envoyerEstimation(); gtag_report_conversion();" style="background:#198754; color:white; font-weight:700; font-size:18px; border-radius:8px; padding:13px 0; border:none; width:100%;">
     📩 Recevoir mon étude PDF
   </button>
@@ -891,6 +893,9 @@ setTimeout(function() {
       formData.append("totalcredit", scenario.total);
       formData.append("email", "");
       formData.append("tel", "");
+      const motcle = document.getElementById('motcle') ? document.getElementById('motcle').value : '';
+formData.append("motcle", motcle);
+
       fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec', {
         method: 'POST',
         mode: 'no-cors',
@@ -957,6 +962,9 @@ setTimeout(function() {
       formData.append("totalcredit", selectedScenario.total);
       formData.append("email", email);
       formData.append("tel", tel);
+      const motcle = document.getElementById('motcle') ? document.getElementById('motcle').value : '';
+formData.append("motcle", motcle);
+
       fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec', {
         method: 'POST',
         mode: 'no-cors',
@@ -1043,5 +1051,26 @@ setTimeout(function() {
   ]
 }
 </script>
+<script>
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0; i<vars.length; i++) {
+        var pair = vars[i].split("=");
+        if(pair[0] == variable){return decodeURIComponent(pair[1].replace(/\+/g, ' '));}
+    }
+    return "";
+}
+document.addEventListener("DOMContentLoaded", function() {
+    var keyword = getQueryVariable("keyword");
+    if(keyword){
+        var champ = document.getElementById("motcle");
+        if(champ) champ.value = keyword;
+    }
+});
+</script>
+</body>
+</html>
+
 </body>
 </html>
