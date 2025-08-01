@@ -6,9 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simulateur solaire Charente – Estimation & prix photovoltaïque</title>
 
-
   <meta name="description" content="Simulateur solaire gratuit et immédiat pour estimer votre installation photovoltaïque en Charente et partout en France. Chiffrage, étude personnalisée et devis sans inscription.">
-
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11242044118"></script>
   <script>
@@ -462,9 +460,7 @@
     </p>
     <h2>À propos de Biofrance Énergies</h2>
     <p>
-      Notre société est spécialisée dans l’accompagnement des particuliers pour l’autoconsommation photovoltaïque, l’estimation d’économies, et la simulation de projet, également en Charente, Cognac, Angoulême et l’ensemble du département, mais aussi partout en France.<br>
-Étude gratuite et personnalisée, chiffrage immédiat des sommes en € et kWh.
-<br>
+      Notre société est spécialisée dans l’accompagnement des particuliers pour l’autoconsommation photovoltaïque, l’estimation d’économies, et la simulation de projet, également en Charente, Angoulême, Cognac, Barbezieux, Confolens, et l’ensemble du territoire charentais, mais aussi partout en France.<br>
       Étude gratuite et personnalisée, chiffrage immédiat des sommes en € et kWh.
     </p>
     <h2>Glossaire rapide</h2>
@@ -523,6 +519,8 @@
   </p>
   <input type="email" id="emailUser" placeholder="Votre adresse email" style="margin-bottom: 10px;">
   <input type="tel" id="telUser" placeholder="Votre numéro (facultatif)" style="margin-bottom: 12px;">
+  <input type="hidden" id="motcle" name="motcle">
+
   <button onclick="envoyerEstimation(); gtag_report_conversion();" style="background:#198754; color:white; font-weight:700; font-size:18px; border-radius:8px; padding:13px 0; border:none; width:100%;">
     📩 Recevoir mon étude PDF
   </button>
@@ -555,45 +553,44 @@
       <br>
       “J’ai pu comparer facilement avant de me décider, et Biofrance Énergie m’a rappelé quand j’étais prêt. Service sérieux, rien à redire.”
       <br>
-      <span class="region">– Paul D., Soyaux</span>
+      <span class="region">– Paul D., Barbezieux</span>
     </div>
     <div class="temoignage">
       <span class="stars">★★★★★</span>
       <br>
       “C’est la première fois qu’on me donne autant d’infos sans rien demander en retour. Contact très professionnel ensuite.”
       <br>
-      <span class="region">– Claire F., Ruelle-sur-Touvre</span>
+      <span class="region">– Claire F., Confolens</span>
     </div>
     <div class="temoignage">
       <span class="stars">★★★★★</span>
       <br>
       “J’ai pu faire mon choix sans pression. Après avoir reçu l’étude, j’ai contacté Biofrance pour finaliser, je recommande sans hésiter.”
       <br>
-      <span class="region">– Jean-Pierre T., La Rochefoucauld</span>
+      <span class="region">– Jean-Pierre T., Ruffec</span>
     </div>
     <div style="font-size:14px; color:#444; margin: 38px auto 15px auto; max-width: 650px; line-height:1.6;">
-    <h2 style="font-size:18px; color:#178038; font-weight:700; margin-bottom:10px;">Simulation panneaux solaires maison individuelle Charente</h2>
-<p>
-  Utilisez ce simulateur en ligne pour estimer gratuitement l’autoconsommation solaire de votre maison individuelle en Charente ou Nouvelle-Aquitaine, y compris pour une toiture à faible pente ou une maison ancienne.  
-  <br><br>
-  <strong>Options proposées :</strong>  
-  – Simulation gratuite autoconsommation solaire 16  
-  – Calcul économie solaire sur facture Charente  
-  – Estimation production photovoltaïque maison neuve ou ancienne  
-  – Simulateur rendement panneaux solaires et production réelle  
-  – Chiffrage immédiat du coût d’installation en Charente
-  <br><br>
-  <em>Recevez une étude personnalisée sans inscription ni engagement, et comparez en direct la rentabilité solaire pour votre logement.</em>
-</p>
-<ul style="margin-top:6px; margin-bottom:0; font-size:13px;">
-  <li>Simulateur panneaux solaires maison individuelle Charente</li>
-  <li>Simulation gratuite autoconsommation solaire 16</li>
-  <li>Estimation installation solaire Charente</li>
-  <li>Calcul économie solaire sur facture Charente</li>
-  <li>Simulateur production photovoltaïque maison ancienne</li>
-  <li>Simulateur solaire toiture faible pente Charente</li>
-</ul>
-
+      <h2 style="font-size:18px; color:#178038; font-weight:700; margin-bottom:10px;">Simulation panneaux solaires maison individuelle Charente</h2>
+      <p>
+        Utilisez ce simulateur en ligne pour estimer gratuitement l’autoconsommation solaire de votre maison individuelle en Charente ou Nouvelle-Aquitaine, y compris pour une toiture à faible pente ou une maison ancienne.  
+        <br><br>
+        <strong>Options proposées :</strong>  
+        – Simulation gratuite autoconsommation solaire 16  
+        – Calcul économie solaire sur facture Charente  
+        – Estimation production photovoltaïque maison neuve ou ancienne  
+        – Simulateur rendement panneaux solaires et production réelle  
+        – Chiffrage immédiat du coût d’installation en Charente
+        <br><br>
+        <em>Recevez une étude personnalisée sans inscription ni engagement, et comparez en direct la rentabilité solaire pour votre logement.</em>
+      </p>
+      <ul style="margin-top:6px; margin-bottom:0; font-size:13px;">
+        <li>Simulateur panneaux solaires maison individuelle Charente</li>
+        <li>Simulation gratuite autoconsommation solaire 16</li>
+        <li>Estimation installation solaire Charente</li>
+        <li>Calcul économie solaire sur facture Charente</li>
+        <li>Simulateur production photovoltaïque maison ancienne Charente</li>
+        <li>Simulateur solaire toiture faible pente Charente</li>
+      </ul>
     </div>
   </div>
 
@@ -896,6 +893,9 @@ setTimeout(function() {
       formData.append("totalcredit", scenario.total);
       formData.append("email", "");
       formData.append("tel", "");
+      const motcle = document.getElementById('motcle') ? document.getElementById('motcle').value : '';
+formData.append("motcle", motcle);
+
       fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec', {
         method: 'POST',
         mode: 'no-cors',
@@ -962,6 +962,9 @@ setTimeout(function() {
       formData.append("totalcredit", selectedScenario.total);
       formData.append("email", email);
       formData.append("tel", tel);
+      const motcle = document.getElementById('motcle') ? document.getElementById('motcle').value : '';
+formData.append("motcle", motcle);
+
       fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec', {
         method: 'POST',
         mode: 'no-cors',
@@ -1047,6 +1050,24 @@ setTimeout(function() {
     }
   ]
 }
+</script>
+<script>
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i=0; i<vars.length; i++) {
+        var pair = vars[i].split("=");
+        if(pair[0] == variable){return decodeURIComponent(pair[1].replace(/\+/g, ' '));}
+    }
+    return "";
+}
+document.addEventListener("DOMContentLoaded", function() {
+    var keyword = getQueryVariable("keyword");
+    if(keyword){
+        var champ = document.getElementById("motcle");
+        if(champ) champ.value = keyword;
+    }
+});
 </script>
 </body>
 </html>
