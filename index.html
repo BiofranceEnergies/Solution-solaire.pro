@@ -1,106 +1,74 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/main/favicon-solution-solaire-pro.png">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulateur solaire – Choisissez votre département (24 ou 16)</title>
+  <meta name="description" content="Accédez au simulateur solaire par département : Dordogne (24) ou Charente (16). Estimation immédiate, sans inscription.">
+  <meta name="robots" content="index,follow">
 
-  <title>Simulateur solaire [[REGION]] – Estimation & prix photovoltaïque</title>
-
-  <meta name="description" content="Simulateur solaire gratuit et immédiat pour estimer votre installation photovoltaïque en [[REGION]] et partout en France. Chiffrage, étude personnalisée et devis sans inscription.">
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11242044118"></script>
+  <!-- (Optionnel) ton tag Google -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11242044118"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'AW-11242044118');
-  </script>
+  </script> -->
 
   <style>
-    body { font-family: Arial, sans-serif; max-width: 900px; margin: auto; padding: 20px; }
-    h1, h2 { color: #0077aa; }
-    section { margin-bottom: 40px; }
-    blockquote { font-style: italic; background: #f7f7f7; padding: 10px; border-left: 5px solid #0077aa; }
+    :root{--green:#178038;--blue:#1976d2;}
+    body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f7f9fb;color:#1a1a1a}
+    header{padding:28px 16px;text-align:center}
+    header img{max-width:110px;height:auto;display:block;margin:0 auto 8px}
+    h1{margin:10px 0 6px;font-size:1.9rem;color:var(--green)}
+    p.tagline{color:#444;margin:0}
+    .wrap{max-width:980px;margin:0 auto;padding:10px 16px 40px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:18px}
+    .card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:18px 16px;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+    .card h2{margin:0 0 8px;font-size:1.2rem;color:#0f5132}
+    .card p{margin:0 0 12px;color:#333}
+    .btn{display:inline-block;padding:12px 16px;border-radius:10px;border:2px solid var(--green);text-decoration:none;font-weight:700}
+    .btn:hover{background:var(--green);color:#fff}
+    .list-links{margin-top:22px;font-size:.98rem}
+    .list-links a{color:var(--blue);text-decoration:underline}
+    footer{margin-top:26px;text-align:center;color:#666;font-size:.9rem}
   </style>
 </head>
 <body>
-<header>
-  <h1>Simulation panneaux solaires maison individuelle [[REGION]]</h1>
-</header>
+  <header>
+    <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/52db4f3ab1c38909b33d9037e74d7371c32a9cf5/logo%20SSP.webp" alt="Solution Solaire Pro">
+    <h1>Simulateur solaire – choisissez votre département</h1>
+    <p class="tagline">Estimation immédiate, gratuite et sans inscription</p>
+  </header>
 
-<section id="intro">
-  <p>Notre société est spécialisée dans l’accompagnement des particuliers pour l’autoconsommation photovoltaïque, l’estimation d’économies, et la simulation de projet, également en [[REGION]], [[VILLE1]], [[VILLE2]] et l’ensemble du [[ZONE]], mais aussi partout en France.</p>
-</section>
+  <main class="wrap">
+    <section class="grid" aria-label="Accès rapides par département">
+      <article class="card">
+        <h2>Simulateur solaire Dordogne (24)</h2>
+        <p>Étude photovoltaïque en Dordogne : Périgueux, Bergerac, Sarlat…</p>
+        <a class="btn" href="/24/">Accéder au simulateur 24</a>
+      </article>
 
-<section id="simulateur">
-  <h2>Simulateur solaire [[REGION]]</h2>
-  <p>Estimez immédiatement le coût, la rentabilité et les économies possibles de votre installation photovoltaïque en [[REGION]].</p>
-  <!-- Simulateur HTML ici -->
-</section>
+      <article class="card">
+        <h2>Simulateur solaire Charente (16)</h2>
+        <p>Étude photovoltaïque en Charente : Angoulême, Cognac…</p>
+        <a class="btn" href="/16/">Accéder au simulateur 16</a>
+      </article>
+    </section>
 
-<section id="temoignages">
-  <h2>Témoignages clients [[REGION]]</h2>
-  <article>
-    <blockquote>
-      "Installation rapide et soignée. Nous habitons à [[VILLE1]] et sommes ravis de notre investissement."
-    </blockquote>
-      <cite>— Client à [[VILLE1]]</cite>
-  </article>
-  <article>
-    <blockquote>
-      "Très bon suivi de projet. Entreprise sérieuse basée dans le [[ZONE]]."
-    </blockquote>
-      <cite>— Client à [[VILLE2]]</cite>
-  </article>
-</section>
+    <!-- Liens texte pour le SEO (ancres internes claires) -->
+    <section class="list-links" aria-label="Liens utiles">
+      <p>
+        Accéder directement au 
+        <a href="/24/">simulateur solaire Dordogne (24)</a> et au 
+        <a href="/16/">simulateur solaire Charente (16)</a>.
+      </p>
+    </section>
 
-<section id="contact">
-  <h2>Demandez votre étude gratuite</h2>
-  <form>
-    <!-- Formulaire de contact -->
-  </form>
-</section>
-
-<script>
-// Base de données locales
-const dataLocal = {
-  "24": { REGION: "Dordogne", VILLE1: "Bergerac", VILLE2: "Sarlat", ZONE: "Périgord" },
-  "16": { REGION: "Charente", VILLE1: "Angoulême", VILLE2: "Cognac", ZONE: "Charente" }
-};
-
-// Récupère le code région depuis l'URL
-const urlParams = new URLSearchParams(window.location.search);
-let regionCode = urlParams.get("region");
-
-// Si pas trouvé, essaie depuis le chemin
-if (!regionCode) {
-  const pathParts = window.location.pathname.split("/").filter(Boolean);
-  regionCode = pathParts[0] || "24";
-}
-
-// Remplace les variables dans la page
-if (dataLocal[regionCode]) {
-  let html = document.body.innerHTML;
-  html = html.replace(/\[\[REGION\]\]/g, dataLocal[regionCode].REGION);
-  html = html.replace(/\[\[VILLE1\]\]/g, dataLocal[regionCode].VILLE1);
-  html = html.replace(/\[\[VILLE2\]\]/g, dataLocal[regionCode].VILLE2);
-  html = html.replace(/\[\[ZONE\]\]/g, dataLocal[regionCode].ZONE);
-  document.body.innerHTML = html;
-
-  // Mise à jour du <title>
-  document.title = document.title.replace(/\[\[REGION\]\]/g, dataLocal[regionCode].REGION);
-
-  // Mise à jour meta description
-  const metaDesc = document.querySelector("meta[name='description']");
-  if (metaDesc) {
-    metaDesc.setAttribute(
-      "content",
-      metaDesc.getAttribute("content").replace(/\[\[REGION\]\]/g, dataLocal[regionCode].REGION)
-    );
-  }
-}
-</script>
+    <footer>
+      © Solution Solaire Pro — Estimation photovoltaïque par département
+    </footer>
+  </main>
 </body>
 </html>
