@@ -6,8 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
  
   <title>Simulateur Installation Photovoltaïque – Prix, Production & Financement</title>
-<meta name="description" content="Obtenez en 3 secondes le prix, la production et la mensualité de votre installation solaire. Simulation gratuite, étude personnalisée et sans engagement.">
-
+  <meta name="description" content="Obtenez en 3 secondes le prix, la production et la mensualité de votre installation solaire. Simulation gratuite, étude personnalisée et sans engagement.">
 
   <!-- Google tag (gtag.js) – consentement différé -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11242044118"></script>
@@ -145,12 +144,11 @@
     </div>
 
     <!-- Accroche -->
-<h1>Simulateur solaire gratuit : votre étude en <span style="color:#60a5fa">3 secondes</span></h1>
-<div class="lead-sub"><b>Simple, immédiat, sans engagement</b> — obtenez votre estimation et le chiffrage de votre installation.</div>
+    <h1>Simulateur solaire gratuit : votre étude en <span style="color:#60a5fa">3 secondes</span></h1>
+    <div class="lead-sub"><b>Simple, immédiat, sans engagement</b> — obtenez votre estimation et le chiffrage de votre installation.</div>
 
-<!-- H2 optimisé pour Google Ads/Quality Score -->
-<h2 style="position:absolute;left:-9999px;">Simulation en ligne pour votre installation photovoltaïque</h2>
-
+    <!-- H2 optimisé pour Google Ads/Quality Score -->
+    <h2 style="position:absolute;left:-9999px;">Simulation en ligne pour votre installation photovoltaïque</h2>
 
     <!-- Formulaire -->
     <div class="card form-section">
@@ -166,12 +164,11 @@
         <a href="#" id="lienAvance" class="helper">➕ Vous connaissez votre consommation annuelle ? Cliquez ici pour une estimation ultra-précise</a>
         <div style="height:10px"></div>
         <button id="simuler" type="submit" class="primary">🔍 Obtenir mon estimation</button>
-<div style="margin-top:8px;font-size:14px;color:#93c5fd;text-align:center">
-⚡ <strong>Résultat instantané affiché à l’écran :</strong> production, prix TTC et option de financement.
-</div>
-
-
-
+        <div style="margin-top:8px;font-size:14px;color:#93c5fd;text-align:center">
+          ⚡ <strong>Résultat instantané affiché à l’écran :</strong> production, prix TTC et option de financement.
+        </div>
+      </form>
+    </div>
 
     <!-- Témoignages (toujours visibles, sous le simulateur) -->
     <div id="temoignagesBloc" class="card temoins">
@@ -220,7 +217,7 @@
             <input type="checkbox" id="rgpdUnlock">
             <span>J’autorise Solution Solaire Pro à me recontacter au sujet de mon projet.</span>
           </label>
-          <button class="primary" style="grid-column:1/-1" onclick="submitUnlock()">🔓 Débloquer maintenant</button>
+          <button type="button" class="primary" style="grid-column:1/-1" onclick="submitUnlock(event)">🔓 Débloquer maintenant</button>
         </div>
         <div class="lead-sub" style="font-size:12px;margin-top:6px">Vous pouvez retirer votre consentement à tout moment.</div>
       </div>
@@ -292,6 +289,16 @@
           e.target.value = val.replace(/(\d{2})(?=\d)/g,'$1 ').trim();
         });
       }
+
+      // Empêcher Enter de soumettre/relancer la simulation dans les champs de déblocage
+      ['emailUnlock','telUnlock'].forEach(id=>{
+        const el = document.getElementById(id);
+        if(el){
+          el.addEventListener('keydown', (ev)=>{
+            if(ev.key === 'Enter'){ ev.preventDefault(); ev.stopPropagation(); }
+          });
+        }
+      });
     });
 
     let scenarios = [];
@@ -526,7 +533,9 @@
       }
     }
 
-    function submitUnlock(){
+    function submitUnlock(e){
+      if(e){ e.preventDefault(); e.stopPropagation(); }
+
       const email=(document.getElementById('emailUnlock').value||'').trim();
       const tel=(document.getElementById('telUnlock').value||'').replace(/\D/g,'');
       const consent=document.getElementById('rgpdUnlock').checked;
