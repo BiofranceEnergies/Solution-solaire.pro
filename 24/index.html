@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <link rel="icon" href="data:,">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
   <title>Simulateur Installation Photovoltaïque – Prix, Production & Financement</title>
   <meta name="description" content="Obtenez en 3 secondes le prix, la production et la mensualité de votre installation solaire. Simulation gratuite, étude personnalisée et sans engagement.">
 
@@ -28,7 +27,7 @@
     html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
     img{max-width:100%;height:auto}
 
-    /* === Ajout : décalage pendant calcul === */
+    /* Décalage pendant calcul */
     .wrap{max-width:980px;margin:0 auto;padding:28px 14px;transition:transform .28s ease;will-change:transform}
     body.simulation-en-cours .wrap{transform:translateY(-350px)}
     @media (prefers-reduced-motion: reduce){ .wrap{transition:none} }
@@ -56,8 +55,17 @@
     @media(max-width:560px){.recap-grid{grid-template-columns:1fr}}
     .recap-item{background:#0a1326;border:1px dashed #1e3a5f;border-radius:12px;padding:12px 14px}
     .recap-item .label{color:#93c5fd;font-size:13px}
-    .recap-item .value{font-weight:900;font-size:20px;margin-top:2px}
-    .note{display:inline-block;margin-top:10px;color:#86efac;font-size:14px;font-weight:700}
+    .note {
+  display: block;
+  text-align: center;
+  margin: 14px 0;
+  color: #86efac;
+  font-weight: 700; /* plus léger qu'avant */
+  font-size: clamp(16px, 1.4vw, 20px);
+}
+
+
+
 
     .kpi{max-width:720px}
     .kpi-box{padding:10px 12px;border-radius:12px;background:#0a1326;border:1px dashed #1e3a5f;margin-bottom:10px}
@@ -100,24 +108,14 @@
     .hint{ color:#a7b6d6; font-size:.82em; margin-left:8px; opacity:.9 }
     .financement-warning{ color:#fde68a; font-size:0.95em; font-weight:700; margin-bottom:8px }
     .financement-note{ font-size:0.8em; color:#cbd5e1 }
-
-    /* — Remise (premium) — */
-    .offre-speciale{
-      background: linear-gradient(180deg, #10243e, #0e2038);
-      border: 1px solid #1e3a8a;
-      border-radius: 14px;
-      padding: 18px;
-      text-align: center;
-      margin: 16px 0;
-      box-shadow: 0 10px 26px rgba(2,6,23,.35);
-    }
+    .offre-speciale{ background: linear-gradient(180deg, #10243e, #0e2038); border: 1px solid #1e3a8a; border-radius: 14px; padding: 18px; text-align: center; margin: 16px 0; box-shadow: 0 10px 26px rgba(2,6,23,.35); }
     .offre-titre{ color:#fde047; font-weight:800; font-size:1.08rem; margin-bottom:10px; letter-spacing:.2px }
     .offre-montant{ display:flex; justify-content:center; align-items:center; gap:10px; font-size:1.35rem; font-weight:800; color:#fff; margin-bottom:4px; }
     .badge-offre{ display:inline-block; background:#2563eb; color:#fff; padding:8px 14px; border-radius:999px; font-weight:900; font-size:1.1rem; box-shadow: 0 6px 16px rgba(37,99,235,.35); }
     .offre-sous-titre{ font-size:.92rem; color:#cbd5e1; margin-bottom:10px }
     .offre-conditions{ font-size:.88rem; color:#a7b6d6 }
 
-    /* — Témoignages (toujours visibles) — */
+    /* — Témoignages — */
     .temoins{ background: linear-gradient(180deg,#0b1428,#0a1224); border:1px solid #1e3a5f; border-radius:14px; padding:18px; box-shadow:0 14px 36px rgba(2,6,23,.35); max-width:720px; margin:0 auto 18px auto;}
     .temoins h2{ color:#a5b4fc; margin:0 0 14px 0; font-weight:800 }
     .temoins-list{ display:grid; gap:12px }
@@ -147,7 +145,7 @@
     <h1>Simulateur solaire gratuit : votre étude en <span style="color:#60a5fa">3 secondes</span></h1>
     <div class="lead-sub"><b>Simple, immédiat, sans engagement</b> — obtenez votre estimation et le chiffrage de votre installation.</div>
 
-    <!-- H2 optimisé pour Google Ads/Quality Score -->
+    <!-- H2 SEO -->
     <h2 style="position:absolute;left:-9999px;">Simulation en ligne pour votre installation photovoltaïque</h2>
 
     <!-- Formulaire -->
@@ -170,7 +168,7 @@
       </form>
     </div>
 
-    <!-- Témoignages (toujours visibles, sous le simulateur) -->
+    <!-- Témoignages -->
     <div id="temoignagesBloc" class="card temoins">
       <h2>Ils l'ont testé</h2>
       <div class="temoins-list">
@@ -198,13 +196,13 @@
       <p style="font-size:14px;color:#cbd5e1">Veuillez patienter... Calcul en cours</p>
     </div>
 
-    <!-- RÉCAP DÉTAILLÉ (visible après calcul) -->
+    <!-- Récap -->
     <div id="recap" class="card recap" style="display:none;visibility:hidden;height:0;overflow:hidden;"></div>
 
-    <!-- KPI 1 (visible après calcul) -->
+    <!-- KPI 1 -->
     <div id="kpi1" class="card kpi" style="display:none;visibility:hidden;height:0;overflow:hidden;"></div>
 
-    <!-- SECTION VERROUILLÉE : tout après KPI 1 -->
+    <!-- SECTION VERROUILLÉE -->
     <div id="lockedSection" class="card" style="display:none;visibility:hidden;height:0;overflow:hidden;">
       <div id="lockedContent" class="lockedContent"></div>
       <div class="veil" id="veil">
@@ -227,14 +225,14 @@
     <div id="cookie-banner">
       Ce site utilise des cookies strictement nécessaires au fonctionnement du simulateur et à la mesure d’audience.
       <br>En poursuivant votre navigation, vous acceptez leur utilisation.
-      <button id="cookie-ok">OK, j’ai compris</button>
+      <button id="cookie-ok" type="button">OK, j’ai compris</button>
     </div>
 
     <div id="mentions-legales-container">
       <span id="mentions-legales-link">Mentions légales</span>
     </div>
     <div id="mentions-popup">
-      <button id="close-mentions" aria-label="Fermer">&times;</button>
+      <button id="close-mentions" type="button" aria-label="Fermer">&times;</button>
       <strong>Mentions légales :</strong><br>
       Conseils Energies Durables – Matignon Sylvain<br>
       SIRET : 422 231 928 00025<br>
@@ -267,7 +265,8 @@
       const ok = document.getElementById("cookie-ok");
       const consentGiven = localStorage.getItem("cookieConsentPV2025") === "1";
       if (!consentGiven) banner.style.display = "flex";
-      ok.onclick = function(){
+      ok.onclick = function(e){
+        e.preventDefault();
         localStorage.setItem("cookieConsentPV2025","1");
         banner.style.display="none";
         gtag('consent', 'update', { ad_storage: 'granted', analytics_storage: 'granted' });
@@ -278,8 +277,14 @@
         if (window.__initAds) window.__initAds();
       }
       // Mentions
-      document.getElementById('mentions-legales-link').onclick = function(){document.getElementById('mentions-popup').style.display='block';};
-      document.getElementById('close-mentions').onclick = function(){document.getElementById('mentions-popup').style.display='none';};
+      document.getElementById('mentions-legales-link').onclick = function(e){
+        e.preventDefault();
+        document.getElementById('mentions-popup').style.display='block';
+      };
+      document.getElementById('close-mentions').onclick = function(e){
+        e.preventDefault();
+        document.getElementById('mentions-popup').style.display='none';
+      };
 
       // Format téléphone FR
       const telUnlock = document.getElementById('telUnlock');
@@ -290,7 +295,7 @@
         });
       }
 
-      // Empêcher Enter de soumettre/relancer la simulation dans les champs de déblocage
+      // Bloquer Enter (déblocage)
       ['emailUnlock','telUnlock'].forEach(id=>{
         const el = document.getElementById(id);
         if(el){
@@ -346,15 +351,12 @@
     }
 
     async function calculerSimulation() {
-      // Ajout du décalage pendant le calcul
       document.body.classList.add('simulation-en-cours');
-
       const btn = document.getElementById('simuler');
       if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
       document.getElementById('loading').style.display='block';
 
       try {
-        // on ne masque PAS les témoignages
         ['recap','kpi1','lockedSection'].forEach(id=>{
           const el=document.getElementById(id);
           el.style.display='none'; el.style.visibility='hidden'; el.style.height='0';
@@ -412,13 +414,13 @@
           gain15ans += (factureAv - factureAp); prixActuel *= 1.05;
         }
 
-        // Formats sûrs
+        // Formats
         const taegTxt = Number.isFinite(scenario.taeg) ? scenario.taeg.toFixed(2) + " %" : "—";
         const mensualiteTxt = Number.isFinite(scenario.mensualite) ? scenario.mensualite.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2}) + " €" : "—";
         const totalTxt = Number.isFinite(scenario.total) ? scenario.total.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2}) + " €" : "—";
         const dureeTxt = Number.isFinite(scenario.dureeMois) ? scenario.dureeMois + " mois" : "—";
 
-        // RÉCAP — visible
+        // Récap
         const recapEl = document.getElementById('recap');
         recapEl.innerHTML = `
           <h2>Votre estimation personnalisée</h2>
@@ -436,16 +438,16 @@
               <div class="value">${((scenario.prod / conso) * 100).toFixed(2)} %</div>
             </div>
           </div>
-          <span class="note">Grâce à la batterie virtuelle, vous consommez 100 % de votre production.</span>
+          <span class="note">Vous êtes à 100% en autoconsommation grâce à la batterie virtuelle.</span>
         `;
         recapEl.style.display='block'; recapEl.style.visibility='visible'; recapEl.style.height='auto';
 
-        // KPI 1 — visible
+        // KPI
         const k1 = document.getElementById('kpi1');
         k1.innerHTML = `<div class="kpi-box"><strong>Gain estimé la 1ʳᵉ année :</strong> <b>${Math.round(economieAnnuelle).toLocaleString('fr-FR')} €</b></div>`;
         k1.style.display='block'; k1.style.visibility='visible'; k1.style.height='auto';
 
-        // CONTENU VERROUILLÉ
+        // Contenu verrouillé
         const locked = document.getElementById('lockedContent');
         locked.innerHTML = `
           <div class="kpi-box"><strong>Soit un gain par mois de :</strong> <b>${Math.round(economieMensuelle).toLocaleString('fr-FR')} €</b></div>
@@ -464,7 +466,6 @@
             </ul>
           </div>
 
-          <!-- Remise premium (dynamique) -->
           <div class="offre-speciale">
             <div class="offre-titre">Offre spéciale “Groupage chantiers”</div>
             <div class="offre-montant">
@@ -475,7 +476,6 @@
             <div class="offre-conditions">Offre valable jusqu’au <strong>31 août 2025</strong> — Places limitées</div>
           </div>
 
-          <!-- Prix TTC + Financement -->
           <div class="financement-bloc">
             <div class="financement-conditions">
               <div class="prix-install">
@@ -503,7 +503,7 @@
         afficherLienMentionsLegales();
         if (isUnlocked()) { unlockUI(); }
 
-        // ENVOI auto vers Sheets (lead anonyme)
+        // Envoi auto (lead anonyme)
         const fd = new FormData();
         fd.append("code_postal", codePostal);
         fd.append("conso", Math.round(conso));
@@ -520,12 +520,10 @@
         fd.append("totalcredit", Number.isFinite(scenario.total) ? scenario.total : "");
         fd.append("mois", Number.isFinite(scenario.dureeMois) ? scenario.dureeMois : "");
         fd.append("email", ""); fd.append("tel", "");
-        // alias compatibilité Apps Script
         fd.append("emailUser", ""); fd.append("telephone", "");
         fd.append("unlock", "0");
         fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec', {method:'POST', mode:'no-cors', body:fd});
       } finally {
-        // Fin du calcul : on remet en place
         document.getElementById('loading').style.display='none';
         document.body.classList.remove('simulation-en-cours');
         const btn2 = document.getElementById('simuler');
@@ -576,7 +574,6 @@
       fd.append("totalcredit", Number.isFinite(selectedScenario.total) ? selectedScenario.total : "");
       fd.append("mois", Number.isFinite(selectedScenario.dureeMois) ? selectedScenario.dureeMois : "");
       fd.append("email", email); fd.append("tel", tel);
-      // alias compatibilité Apps Script
       fd.append("emailUser", email); fd.append("telephone", tel);
       fd.append("unlock", "1");
       fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec',{method:'POST',mode:'no-cors',body:fd});
