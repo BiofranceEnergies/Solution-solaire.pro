@@ -1,1 +1,657 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="data:,">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulateur Installation Photovoltaïque – Prix, Production & Financement</title>
+  <meta name="description" content="Obtenez en 3 secondes le prix, la production et la mensualité de votre installation solaire. Simulation gratuite, étude personnalisée et sans engagement.">
 
+  <!-- Google tag (gtag.js) – consentement différé -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11242044118"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('consent', 'default', { ad_storage: 'denied', analytics_storage: 'denied' });
+    window.__initAds = function(){ gtag('js', new Date()); gtag('config', 'AW-11242044118'); };
+  </script>
+
+  <style>
+    :root{
+      --bg:#0f172a; --card:#0b1222; --paper:#0b1428;
+      --text:#e5e7eb; --muted:#9ca3af; --border:#1f2937;
+      --accent:#2563eb; --accent2:#3b82f6; --accent-hover:#1e40af;
+      --ok:#22c55e; --radius:14px; --shadow:0 14px 36px rgba(2,6,23,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+    img{max-width:100%;height:auto}
+
+    /* Décalage pendant calcul */
+.wrap {
+  max-width:980px;
+  margin:0 auto;
+  padding:28px 14px;
+  transition:transform .28s ease;
+  will-change:transform;
+}
+
+/* Déplacement par défaut (desktop) */
+body.simulation-en-cours .wrap {
+  transform: translateY(-350px);
+}
+
+/* Déplacement spécifique mobile */
+@media (max-width:640px){
+  body.simulation-en-cours .wrap {
+    transform: translateY(-900px); /* ajuste la valeur selon ton besoin */
+  }
+}
+
+/* Désactive la transition si l’utilisateur préfère réduire les animations */
+@media (prefers-reduced-motion: reduce){
+  .wrap { transition:none }
+}
+
+    .logo{display:block;margin:0 auto 6px;width:92px;height:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.35))}
+    h1{font-size:clamp(24px,3.2vw,36px);text-align:center;color:#c7d2fe;margin:6px 0 8px 0;font-weight:800}
+    h2{font-size:clamp(18px,2.2vw,22px);text-align:center;color:#a5b4fc;margin:0 0 10px 0;font-weight:700}
+    .lead-sub{color:var(--muted);text-align:center;margin:6px 0 18px 0}
+
+    .card{background:linear-gradient(180deg,var(--card),#0a1020);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin:0 auto 18px auto}
+    .form-section{max-width:720px}
+    .inputs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:640px){.inputs{grid-template-columns:1fr}}
+    input,button{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid #1e3a5f;background:#0a1326;color:#e5e7eb;font-size:17px}
+    input::placeholder{color:#8aa0c2}
+    a.helper{color:#93c5fd;text-decoration:underline;font-size:14px}
+    button.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));border:none;color:#fff;font-weight:800;cursor:pointer;letter-spacing:.2px}
+    button.primary:hover{background:var(--accent-hover)}
+
+    .counter-wrap{display:flex;justify-content:center;margin:8px 0 18px 0}
+    .counter-badge{display:inline-block;background:linear-gradient(180deg,#0b1324,#0b0f1a);color:#dbeafe;border:1px solid #1f2b4a;border-radius:999px;padding:10px 18px;font-weight:800;letter-spacing:.3px;box-shadow:var(--shadow)}
+
+    .recap{max-width:720px}
+    .recap-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media(max-width:560px){.recap-grid{grid-template-columns:1fr}}
+    .recap-item{background:#0a1326;border:1px dashed #1e3a5f;border-radius:12px;padding:12px 14px}
+    .recap-item .label{color:#93c5fd;font-size:13px}
+    .note {
+  display: block;
+  text-align: center;
+  margin: 14px 0;
+  color: #86efac;
+  font-weight: 700; /* plus léger qu'avant */
+  font-size: clamp(16px, 1.4vw, 20px);
+}
+
+
+
+
+    .kpi{max-width:720px}
+    .kpi-box{padding:10px 12px;border-radius:12px;background:#0a1326;border:1px dashed #1e3a5f;margin-bottom:10px}
+    .kpi-box b{color:var(--ok)}
+
+    #lockedSection{max-width:720px;position:relative}
+    .lockedContent{filter:blur(7px);user-select:none;pointer-events:none}
+    .veil{position:absolute;inset:0;border-radius:var(--radius);background:linear-gradient(180deg,rgba(15,23,42,.35),rgba(15,23,42,.86));backdrop-filter:blur(2px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:20px;border:1px solid #244a7d}
+    .unlock{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:560px;width:100%}
+    @media(max-width:580px){.unlock{grid-template-columns:1fr}}
+    .unlock input{background:#0c1730;border:1.5px solid #244a7d}
+    .consent{display:flex;gap:8px;align-items:flex-start;color:#cbd5e1;font-size:13px;text-align:left}
+    .consent input{width:auto;margin-top:3px}
+
+    #cookie-banner{position:fixed;left:0;right:0;bottom:0;background:#0b1222;color:#e5e7eb;font-size:14px;line-height:1.5;padding:14px 10px;text-align:center;z-index:9999;box-shadow:0 -6px 26px rgba(0,0,0,.35);display:none;flex-direction:column;align-items:center}
+    #cookie-banner button{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:8px 18px;margin-top:10px;font-size:14px;font-weight:700;cursor:pointer}
+    #mentions-legales-container{width:100%;text-align:center;margin:26px 0 8px 0;display:none}
+    #mentions-legales-link{color:#93c5fd;text-decoration:underline;cursor:pointer}
+    #mentions-popup{display:none;position:fixed;bottom:60px;left:50%;transform:translateX(-50%);width:340px;max-width:95vw;background:#0b1222;color:#e5e7eb;border-radius:13px;box-shadow:0 8px 32px rgba(0,0,0,.45);padding:18px 20px 12px 20px;z-index:10000;font-size:13px;line-height:1.7;border:1px solid #244a7d}
+    #close-mentions{position:absolute;top:6px;right:12px;background:none;color:#e5e7eb;border:none;font-size:18px;font-weight:bold;cursor:pointer;padding:0}
+
+    .sep{border:none;border-top:2px solid var(--border);margin:30px 0 16px 0}
+    @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+
+    /* — Ce que nous vous proposons (épuré) — */
+    .propo { margin: 8px 0 14px 0; }
+    .propo-title{ font-weight:800; color:#dbeafe; margin-bottom:10px; letter-spacing:.2px }
+    .propo-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px }
+    .propo-list li{ background:#0a1326; border:1px dashed #244a7d; border-radius:12px; padding:10px 12px; color:#e5e7eb }
+    .point-title{ font-weight:700; color:#dbeafe }
+    .badge{ display:inline-block; padding:2px 8px; border-radius:999px; background:linear-gradient(180deg,#0b1324,#0b0f1a); border:1px solid #1f2b4a; font-weight:900; color:#fde68a }
+
+    /* — Financement (premium) — */
+    .financement-bloc{ background:#0a1326; border-left:4px solid #2563eb; border-radius:12px; padding:14px; margin-top:12px; color:#e5e7eb }
+    .financement-conditions{ margin-bottom:10px; line-height:1.6 }
+    .badge-fin{ display:inline-block; background:#1e3a5f; color:#fff; padding:2px 8px; border-radius:999px; font-weight:700; font-size:0.9em }
+    .badge-fin--clair{ background:#0f213a }
+    .prix-install{ margin-bottom:14px; line-height:1.6 }
+    .option-fin{ margin:10px 0 8px 0; color:#93c5fd; font-weight:700; letter-spacing:.2px }
+    .hint{ color:#a7b6d6; font-size:.82em; margin-left:8px; opacity:.9 }
+    .financement-warning{ color:#fde68a; font-size:0.95em; font-weight:700; margin-bottom:8px }
+    .financement-note{ font-size:0.8em; color:#cbd5e1 }
+    .offre-speciale{ background: linear-gradient(180deg, #10243e, #0e2038); border: 1px solid #1e3a8a; border-radius: 14px; padding: 18px; text-align: center; margin: 16px 0; box-shadow: 0 10px 26px rgba(2,6,23,.35); }
+    .offre-titre{ color:#fde047; font-weight:800; font-size:1.08rem; margin-bottom:10px; letter-spacing:.2px }
+    .offre-montant{ display:flex; justify-content:center; align-items:center; gap:10px; font-size:1.35rem; font-weight:800; color:#fff; margin-bottom:4px; }
+    .badge-offre{ display:inline-block; background:#2563eb; color:#fff; padding:8px 14px; border-radius:999px; font-weight:900; font-size:1.1rem; box-shadow: 0 6px 16px rgba(37,99,235,.35); }
+    .offre-sous-titre{ font-size:.92rem; color:#cbd5e1; margin-bottom:10px }
+    .offre-conditions{ font-size:.88rem; color:#a7b6d6 }
+
+    /* — Témoignages — */
+    .temoins{ background: linear-gradient(180deg,#0b1428,#0a1224); border:1px solid #1e3a5f; border-radius:14px; padding:18px; box-shadow:0 14px 36px rgba(2,6,23,.35); max-width:720px; margin:0 auto 18px auto;}
+    .temoins h2{ color:#a5b4fc; margin:0 0 14px 0; font-weight:800 }
+    .temoins-list{ display:grid; gap:12px }
+    .temoin{ background:#0a1326; border:1px dashed #244a7d; border-radius:12px; padding:12px 14px 12px 44px; position:relative; transition:all .18s ease }
+    .temoin svg{ position:absolute; left:12px; top:12px; width:22px; height:22px; opacity:.9; filter:drop-shadow(0 2px 8px rgba(0,0,0,.25)) }
+    .temoin blockquote{ margin:0; color:#e5e7eb; font-size:15.5px; line-height:1.6 }
+    .temoin cite{ display:block; margin-top:6px; color:#9fb3d9; font-style:italic; font-size:14px }
+    .temoin strong{ color:#dbeafe; font-weight:700 }
+    .temoin:hover{ border-color:#2a5aa0; transform:translateY(-1px) }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- Logo -->
+    <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/52db4f3ab1c38909b33d9037e74d7371c32a9cf5/logo%20SSP.webp" alt="Logo Solution Solaire Pro" class="logo">
+
+    <!-- Compteur dynamique -->
+    <div class="counter-wrap">
+      <div class="counter-badge">
+        <span id="compteurValeur" style="font-weight:900;letter-spacing:.5px">1 234</span>
+        <span style="opacity:.85"> simulations depuis le 1ᵉʳ mai 2025</span>
+      </div>
+    </div>
+
+    <!-- Accroche -->
+    <h1>Simulateur solaire gratuit : votre étude en <span style="color:#60a5fa">3 secondes</span></h1>
+    <div class="lead-sub"><b>Simple, immédiat, sans engagement</b> — obtenez votre estimation et le chiffrage de votre installation.</div>
+
+    <!-- H2 SEO -->
+    <h2 style="position:absolute;left:-9999px;">Simulation en ligne pour votre installation photovoltaïque</h2>
+
+    <!-- Formulaire -->
+    <div class="card form-section">
+      <h2>Simulation personnalisée</h2>
+      <form onsubmit="calculerSimulation(); return false;">
+        <div class="inputs" style="margin-bottom:8px">
+          <input type="text" id="codePostal" placeholder="Votre code postal" maxlength="5" autofocus>
+          <input type="text" id="facture" placeholder="Votre facture élec /an (€)">
+        </div>
+        <div id="modeAvance" style="display:none;">
+          <input type="text" id="conso" placeholder="Conso annuelle (kWh, optionnel)">
+        </div>
+        <a href="#" id="lienAvance" class="helper">➕ Vous connaissez votre consommation annuelle ? Cliquez ici pour une estimation ultra-précise</a>
+        <div style="height:10px"></div>
+        <button id="simuler" type="submit" class="primary">🔍 Obtenir mon estimation</button>
+        <div style="margin-top:8px;font-size:14px;color:#93c5fd;text-align:center">
+  ⚡ <strong>Résultat instantané :</strong> production, prix TTC et option de financement calculés en temps réel.
+</div>
+
+      </form>
+    </div>
+
+    <!-- Témoignages -->
+  <div class="card temoins">
+  <h2>Ils l'ont testé</h2>
+  
+
+  <div class="temoins-list">
+    <!-- Témoignage 1 -->
+    <div class="temoin">
+      <svg viewBox="0 0 24 24" fill="#2563eb" aria-hidden="true"><path d="M7.2 5.5C4.9 7.1 3.5 9.5 3.5 12.3c0 3 2.1 5.2 4.9 5.2 2.3 0 4.1-1.8 4.1-4.2 0-2.4-1.8-4.2-4.1-4.2-.5 0-1 .1-1.5.3.3-1.5 1.1-2.7 2.4-3.6l-2.1-.3z"/></svg>
+      <blockquote>
+        “En moins de 2 minutes, j’ai obtenu un prix précis et le montant de mes économies.
+        L’étude complète s’est affichée immédiatement après déblocage.
+        Aucun démarchage, juste les infos utiles.”
+      </blockquote>
+      <cite>— <strong>Michel L.</strong>, Périgueux</cite>
+    </div>
+
+    <!-- Témoignage 2 -->
+    <div class="temoin">
+      <svg viewBox="0 0 24 24" fill="#2563eb" aria-hidden="true"><path d="M7.2 5.5C4.9 7.1 3.5 9.5 3.5 12.3c0 3 2.1 5.2 4.9 5.2 2.3 0 4.1-1.8 4.1-4.2 0-2.4-1.8-4.2-4.1-4.2-.5 0-1 .1-1.5.3.3-1.5 1.1-2.7 2.4-3.6l-2.1-.3z"/></svg>
+      <blockquote>
+        “Process simple et clair.
+        Les étapes sont rapides et l’étude personnalisée est limpide.
+        Je me suis sentie en confiance du début à la fin.”
+      </blockquote>
+      <cite>— <strong>Sophie G.</strong>, Sarlat</cite>
+    </div>
+
+    <!-- Témoignage 3 -->
+    <div class="temoin">
+      <svg viewBox="0 0 24 24" fill="#2563eb" aria-hidden="true"><path d="M7.2 5.5C4.9 7.1 3.5 9.5 3.5 12.3c0 3 2.1 5.2 4.9 5.2 2.3 0 4.1-1.8 4.1-4.2 0-2.4-1.8-4.2-4.1-4.2-.5 0-1 .1-1.5.3.3-1.5 1.1-2.7 2.4-3.6l-2.1-.3z"/></svg>
+      <blockquote>
+        “Chiffrage détaillé affiché instantanément, avec toutes les infos dont j’avais besoin.
+        Sérieux, rapide et transparent.”
+      </blockquote>
+      <cite>— <strong>Paul D.</strong>, Ribérac</cite>
+    </div>
+
+    <!-- Témoignage 4 -->
+    <div class="temoin">
+      <svg viewBox="0 0 24 24" fill="#2563eb" aria-hidden="true"><path d="M7.2 5.5C4.9 7.1 3.5 9.5 3.5 12.3c0 3 2.1 5.2 4.9 5.2 2.3 0 4.1-1.8 4.1-4.2 0-2.4-1.8-4.2-4.1-4.2-.5 0-1 .1-1.5.3.3-1.5 1.1-2.7 2.4-3.6l-2.1-.3z"/></svg>
+      <blockquote>
+        “Le simulateur m’a montré plus de 1 000 € d’économies possibles la 1ʳᵉ année.
+        Présentation claire, affichée à l’écran, et aucune sollicitation derrière.
+        Ça met en confiance.”
+      </blockquote>
+      <cite>— <strong>Claire M.</strong>, Nontron</cite>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- Loader -->
+    <div id="loading" style="display:none;text-align:center;margin-top:12px;">
+      <div style="width:38px;height:38px;border:4px solid #1f2b4a;border-top:4px solid var(--accent);border-radius:50%;animation:spin 1s linear infinite;margin:10px auto"></div>
+      <p style="font-size:14px;color:#cbd5e1">Veuillez patienter... Calcul en cours</p>
+    </div>
+
+    <!-- Récap -->
+    <div id="recap" class="card recap" style="display:none;visibility:hidden;height:0;overflow:hidden;"></div>
+
+    <!-- KPI 1 -->
+    <div id="kpi1" class="card kpi" style="display:none;visibility:hidden;height:0;overflow:hidden;"></div>
+
+    <!-- SECTION VERROUILLÉE -->
+    <div id="lockedSection" class="card" style="display:none;visibility:hidden;height:0;overflow:hidden;">
+      <div id="lockedContent" class="lockedContent"></div>
+      <div class="veil" id="veil">
+        <h2 style="margin:0;color:#bfdbfe">Débloquez le reste de votre étude</h2>
+        <div style="color:#a7b6d6;font-size:13px;margin-top:-4px">Gain mensuel • Économies 15 ans • Proposition & financement • Remise</div>
+        <div class="unlock" style="margin-top:10px">
+          <input type="email" id="emailUnlock" placeholder="Votre email">
+          <input type="tel" id="telUnlock" placeholder="Votre téléphone">
+          <label class="consent" style="grid-column:1/-1">
+            <input type="checkbox" id="rgpdUnlock">
+            <span>J’autorise Solution Solaire Pro à me recontacter au sujet de mon projet.</span>
+          </label>
+          <button type="button" class="primary" style="grid-column:1/-1" onclick="submitUnlock(event)">🔓 Débloquer maintenant</button>
+        </div>
+        <div class="lead-sub" style="font-size:12px;margin-top:6px">Vous pouvez retirer votre consentement à tout moment.</div>
+      </div>
+    </div>
+
+    <!-- Cookies / Mentions -->
+    <div id="cookie-banner">
+      Ce site utilise des cookies strictement nécessaires au fonctionnement du simulateur et à la mesure d’audience.
+      <br>En poursuivant votre navigation, vous acceptez leur utilisation.
+      <button id="cookie-ok" type="button">OK, j’ai compris</button>
+    </div>
+
+    <div id="mentions-legales-container">
+      <span id="mentions-legales-link">Mentions légales</span>
+    </div>
+    <div id="mentions-popup">
+      <button id="close-mentions" type="button" aria-label="Fermer">&times;</button>
+      <strong>Mentions légales :</strong><br>
+      Conseils Energies Durables – Matignon Sylvain<br>
+      SIRET : 422 231 928 00025<br>
+      Adresse : 4 rue du Pont Saint Jean, 27530 Ézy-sur-Eure<br>
+      Contact : conseilsenergiesdurables@gmail.com<br>
+      Hébergeur : GitHub Pages, 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA<br>
+      Données personnelles : Les informations saisies sont utilisées uniquement pour traiter votre demande. Aucun démarchage ni revente.<br>
+      RGPD : Vous pouvez demander la suppression de vos données à tout moment par simple email.
+    </div>
+
+    <hr class="sep">
+  </div>
+
+  <script>
+    /* --- MODE TEST & PERSISTANCE 24h --- */
+    const qs = new URLSearchParams(location.search);
+    const UNLOCK_KEY = 'pv_unlock_until_v3';
+    const FORCE_LOCK = qs.get('lock') === '1';
+
+    function esc(s){ return String(s).replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      // Conso avancée
+      const lienAvance = document.getElementById('lienAvance');
+      if (lienAvance) {
+        lienAvance.onclick = function(e){ e.preventDefault(); document.getElementById('modeAvance').style.display='block'; this.style.display='none'; };
+      }
+      // Cookies + gtag
+      const banner = document.getElementById("cookie-banner");
+      const ok = document.getElementById("cookie-ok");
+      const consentGiven = localStorage.getItem("cookieConsentPV2025") === "1";
+      if (!consentGiven) banner.style.display = "flex";
+      ok.onclick = function(e){
+        e.preventDefault();
+        localStorage.setItem("cookieConsentPV2025","1");
+        banner.style.display="none";
+        gtag('consent', 'update', { ad_storage: 'granted', analytics_storage: 'granted' });
+        if (window.__initAds) window.__initAds();
+      };
+      if (consentGiven) {
+        gtag('consent', 'update', { ad_storage: 'granted', analytics_storage: 'granted' });
+        if (window.__initAds) window.__initAds();
+      }
+      // Mentions
+      document.getElementById('mentions-legales-link').onclick = function(e){
+        e.preventDefault();
+        document.getElementById('mentions-popup').style.display='block';
+      };
+      document.getElementById('close-mentions').onclick = function(e){
+        e.preventDefault();
+        document.getElementById('mentions-popup').style.display='none';
+      };
+
+      // Format téléphone FR
+      const telUnlock = document.getElementById('telUnlock');
+      if(telUnlock){
+        telUnlock.addEventListener('input', function(e){
+          let val = e.target.value.replace(/\D/g,'').slice(0,10);
+          e.target.value = val.replace(/(\d{2})(?=\d)/g,'$1 ').trim();
+        });
+      }
+
+      // Bloquer Enter (déblocage)
+      ['emailUnlock','telUnlock'].forEach(id=>{
+        const el = document.getElementById(id);
+        if(el){
+          el.addEventListener('keydown', (ev)=>{
+            if(ev.key === 'Enter'){ ev.preventDefault(); ev.stopPropagation(); }
+          });
+        }
+      });
+    });
+
+    let scenarios = [];
+    let selectedScenario = null;
+
+    function afficherLienMentionsLegales(){ document.getElementById('mentions-legales-container').style.display='block'; }
+    function masquerLienMentionsLegales(){ document.getElementById('mentions-legales-container').style.display='none'; document.getElementById('mentions-popup').style.display='none'; }
+
+    function fetchScenarios(departement) {
+      return fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec')
+        .then(r => r.json())
+        .then(data => data
+          .filter(row => String(row.Departement||'') == String(departement))
+          .map(row => ({
+            prixKwh: parseFloat((row.PrixKwh || '').toString().replace(',', '.').replace(/[^0-9.]/g, '')),
+            puissance: row.Puissance,
+            prod: parseFloat(row.Prod),
+            seuil: parseFloat(row.Seuil),
+            panels: parseInt(row.Panels),
+            prix: parseFloat(row.Prix),
+            remiseChantier: parseFloat((row.RemiseChantier || '').toString().replace(',', '.').replace(/[^0-9.]/g, '')),
+            mensualite: parseFloat(row.Mensualite),
+            taeg: parseFloat(row.Taeg),
+            total: parseFloat(row.Total),
+            dureeMois: parseInt(row.Mois)
+          })))
+        .catch(_ => { alert("Impossible de charger les données, réessayez plus tard."); return []; });
+    }
+
+    function isUnlocked(){
+      if (FORCE_LOCK) return false;
+      try { return Date.now() < parseInt(localStorage.getItem(UNLOCK_KEY)||'0',10); }
+      catch(e){ return false; }
+    }
+    function setUnlocked(hours){
+      if (FORCE_LOCK) return;
+      const ms = (hours||24)*60*60*1000;
+      localStorage.setItem(UNLOCK_KEY, String(Date.now()+ms));
+    }
+    function unlockUI(){
+      document.getElementById('lockedContent').style.filter='none';
+      document.getElementById('lockedContent').style.userSelect='auto';
+      document.getElementById('lockedContent').style.pointerEvents='auto';
+      document.getElementById('veil').style.display='none';
+    }
+
+    async function calculerSimulation() {
+      document.body.classList.add('simulation-en-cours');
+      const btn = document.getElementById('simuler');
+      if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
+      document.getElementById('loading').style.display='block';
+
+      try {
+        ['recap','kpi1','lockedSection'].forEach(id=>{
+          const el=document.getElementById(id);
+          el.style.display='none'; el.style.visibility='hidden'; el.style.height='0';
+        });
+        masquerLienMentionsLegales();
+
+        const codePostal = document.getElementById('codePostal').value.trim();
+        const facture = parseFloat((document.getElementById('facture').value + '').replace(',', '.'));
+        const consoInput = document.getElementById('conso');
+
+        if (!/^[0-9]{5}$/.test(codePostal)) { alert("Veuillez entrer un code postal valide."); return; }
+        if (isNaN(facture) || facture <= 0) { alert("Merci de remplir correctement tous les champs."); return; }
+
+        const departement = codePostal.substring(0, 2);
+        const data = await fetchScenarios(departement);
+        if (data.length === 0) { alert("Aucune donnée disponible pour ce département."); return; }
+        scenarios = data;
+
+        // Conso / prix kWh
+        let conso, prixKwh, consommationEstimee;
+        if (consoInput && consoInput.value) {
+          const consoVal = (consoInput.value + '').replace(',', '.');
+          conso = parseFloat(consoVal);
+          if (isNaN(conso) || conso <= 0) { alert("Merci d’indiquer une consommation kWh correcte."); return; }
+          prixKwh = facture / conso;
+          consommationEstimee = conso;
+        } else {
+          prixKwh = scenarios[0].prixKwh;
+          consommationEstimee = facture / prixKwh;
+          conso = consommationEstimee;
+        }
+
+        // Dimensionnement
+        const minProd = Math.min(...scenarios.map(s => s.prod));
+        if (consommationEstimee < minProd) { alert("Consommation trop faible : installation non conseillée."); return; }
+        let scenario = scenarios.filter(s => s.prod <= consommationEstimee).sort((a,b) => b.prod - a.prod)[0];
+        if (!scenario) scenario = scenarios.sort((a,b) => b.prod - a.prod)[0];
+        selectedScenario = scenario;
+
+        // Calculs
+        const autoKwh = scenario.prod * 0.6;
+        const stockKwh = scenario.prod * 0.4;
+        const acheminement = 0.05;
+        const factureAvant = conso * prixKwh;
+        const autoValue = autoKwh * prixKwh;
+        const stockValue = stockKwh * prixKwh;
+        const coutAcheminement = stockKwh * acheminement;
+        const factureApres = factureAvant - autoValue - stockValue + coutAcheminement;
+        const economieAnnuelle = factureAvant - factureApres;
+        const economieMensuelle = economieAnnuelle / 12;
+        let gain15ans = 0, prixActuel = prixKwh;
+        for (let i=0;i<15;i++){
+          const autoVal = autoKwh * prixActuel, stockVal = stockKwh * prixActuel, coutAch = stockKwh * acheminement;
+          const factureAv = conso * prixActuel, factureAp = factureAv - autoVal - stockVal + coutAch;
+          gain15ans += (factureAv - factureAp); prixActuel *= 1.05;
+        }
+
+        // Formats
+        const taegTxt = Number.isFinite(scenario.taeg) ? scenario.taeg.toFixed(2) + " %" : "—";
+        const mensualiteTxt = Number.isFinite(scenario.mensualite) ? scenario.mensualite.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2}) + " €" : "—";
+        const totalTxt = Number.isFinite(scenario.total) ? scenario.total.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2}) + " €" : "—";
+        const dureeTxt = Number.isFinite(scenario.dureeMois) ? scenario.dureeMois + " mois" : "—";
+
+        // Récap
+        const recapEl = document.getElementById('recap');
+        recapEl.innerHTML = `
+          <h2>Votre estimation personnalisée</h2>
+          <div class="recap-grid">
+            <div class="recap-item"><div class="label">Code postal</div><div class="value">${esc(codePostal)}</div></div>
+            <div class="recap-item"><div class="label">Conso annuelle estimée</div><div class="value">${Math.round(conso).toLocaleString('fr-FR')} kWh</div></div>
+            <div class="recap-item"><div class="label">Prix kWh TTC utilisé</div><div class="value">${prixKwh.toFixed(3)} €</div></div>
+            <div class="recap-item"><div class="label">Facture annuelle</div><div class="value">${facture.toLocaleString('fr-FR')} €</div></div>
+            <div class="recap-item" style="grid-column:1/-1">
+              <div class="label">Puissance & production</div>
+              <div class="value" style="font-size:18px">${esc(scenario.puissance)} — ${scenario.panels} panneaux (500 W) • ${scenario.prod.toLocaleString('fr-FR')} kWh/an</div>
+            </div>
+            <div class="recap-item" style="grid-column:1/-1">
+              <div class="label">% de votre conso couverte</div>
+              <div class="value">${((scenario.prod / conso) * 100).toFixed(2)} %</div>
+            </div>
+          </div>
+          <span class="note">Vous êtes à 100% en autoconsommation grâce à la batterie virtuelle.</span>
+        `;
+        recapEl.style.display='block'; recapEl.style.visibility='visible'; recapEl.style.height='auto';
+
+        // KPI
+        const k1 = document.getElementById('kpi1');
+        k1.innerHTML = `<div class="kpi-box"><strong>Gain estimé la 1ʳᵉ année :</strong> <b>${Math.round(economieAnnuelle).toLocaleString('fr-FR')} €</b></div>`;
+        k1.style.display='block'; k1.style.visibility='visible'; k1.style.height='auto';
+
+        // Contenu verrouillé
+        const locked = document.getElementById('lockedContent');
+        locked.innerHTML = `
+          <div class="kpi-box"><strong>Soit un gain par mois de :</strong> <b>${Math.round(economieMensuelle).toLocaleString('fr-FR')} €</b></div>
+          <div class="kpi-box"><strong>Économie cumulée sur 15 ans :</strong> <b>${Math.round(gain15ans).toLocaleString('fr-FR')} €</b></div>
+
+          <div style="border-top:1px solid var(--border);margin:10px 0 12px 0"></div>
+
+          <div class="propo">
+            <div class="propo-title">Ce que nous vous proposons</div>
+            <ul class="propo-list">
+              <li><span class="point-title">Remplacer votre facture par un investissement</span><br>Une partie de votre budget électricité finance votre installation solaire.</li>
+              <li><span class="point-title">Autofinancement simple</span><br>Les économies générées couvrent votre mensualité.</li>
+              <li><span class="point-title">Mensualité fixe</span><br><span class="badge">${mensualiteTxt}</span> hors assurance.</li>
+              <li><span class="point-title">Aucune charge supplémentaire</span><br>Cette mensualité remplace ce que vous payez déjà, elle ne s’ajoute pas.</li>
+              <li><span class="point-title">Protégez-vous des hausses</span><br>Devenez propriétaire de votre production et sécurisez vos coûts.</li>
+            </ul>
+          </div>
+
+          <div class="offre-speciale">
+            <div class="offre-titre">Offre spéciale “Groupage chantiers”</div>
+            <div class="offre-montant">
+              <span class="badge-offre">${Number.isFinite(scenario.remiseChantier) ? scenario.remiseChantier.toLocaleString('fr-FR') : "—"} €</span>
+              <span>de remise immédiate</span>
+            </div>
+            <div class="offre-sous-titre">(à déduire du prix TTC affiché ci-dessous)</div>
+            <div class="offre-conditions">Offre valable jusqu’au <strong>31 août 2025</strong> — Places limitées</div>
+          </div>
+
+          <div class="financement-bloc">
+            <div class="financement-conditions">
+              <div class="prix-install">
+                <span class="point-title">Installation ${esc(scenario.puissance)} :</span>
+                <span class="badge-fin badge-fin--clair">${scenario.prix.toLocaleString('fr-FR')} € TTC</span>
+                <span class="hint">(prix indicatif hors options)</span>
+              </div>
+              <div class="option-fin">Option financement <span class="hint">(facultatif)</span></div>
+              <div>
+                <span class="badge-fin">${mensualiteTxt}</span> par mois (hors assurance)
+                • Durée : <span class="badge-fin">${dureeTxt}</span>
+                • TAEG fixe : <span class="badge-fin">${taegTxt}</span>
+              </div>
+              <div style="margin-top:6px">Prix total : <span class="badge-fin">${totalTxt}</span></div>
+              <div style="margin-top:6px">Financement proposé par notre partenaire Projexio, sous réserve d’acceptation.</div>
+            </div>
+            <div class="financement-warning">Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</div>
+            <div class="financement-note">L’estimation affichée est indicative. Une visite technique est nécessaire pour établir un devis ferme et adapté à votre situation.</div>
+          </div>
+        `;
+
+        const section = document.getElementById('lockedSection');
+        section.style.display='block'; section.style.visibility='visible'; section.style.height='auto';
+
+        afficherLienMentionsLegales();
+        if (isUnlocked()) { unlockUI(); }
+
+        // Envoi auto (lead anonyme)
+        const fd = new FormData();
+        fd.append("code_postal", codePostal);
+        fd.append("conso", Math.round(conso));
+        fd.append("facture", facture);
+        fd.append("prod", scenario.prod);
+        fd.append("eco1", Math.round(economieAnnuelle));
+        fd.append("ecomensuelle", Math.round(economieMensuelle));
+        fd.append("eco15", Math.round(gain15ans));
+        fd.append("puissance", scenario.puissance);
+        fd.append("panneaux", scenario.panels);
+        fd.append("prix", scenario.prix);
+        fd.append("mensualite", Number.isFinite(scenario.mensualite) ? scenario.mensualite : "");
+        fd.append("taeg", Number.isFinite(scenario.taeg) ? scenario.taeg : "");
+        fd.append("totalcredit", Number.isFinite(scenario.total) ? scenario.total : "");
+        fd.append("mois", Number.isFinite(scenario.dureeMois) ? scenario.dureeMois : "");
+        fd.append("email", ""); fd.append("tel", "");
+        fd.append("emailUser", ""); fd.append("telephone", "");
+        fd.append("unlock", "0");
+        fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec', {method:'POST', mode:'no-cors', body:fd});
+      } finally {
+        document.getElementById('loading').style.display='none';
+        document.body.classList.remove('simulation-en-cours');
+        const btn2 = document.getElementById('simuler');
+        if (btn2) { btn2.disabled = false; btn2.style.opacity = '1'; }
+      }
+    }
+
+    function submitUnlock(e){
+      if(e){ e.preventDefault(); e.stopPropagation(); }
+
+      const email=(document.getElementById('emailUnlock').value||'').trim();
+      const tel=(document.getElementById('telUnlock').value||'').replace(/\D/g,'');
+      const consent=document.getElementById('rgpdUnlock').checked;
+      if(!email || !/^\S+@\S+\.\S+$/.test(email)){ alert("Email invalide."); return; }
+      if(!tel || tel.length<10){ alert("Téléphone invalide (10 chiffres)."); return; }
+      if(!consent){ alert("Merci de cocher la case de consentement."); return; }
+      if(!selectedScenario){ alert("Veuillez d’abord lancer une simulation."); return; }
+
+      const codePostal=document.getElementById('codePostal').value.trim();
+      const facture=parseFloat((document.getElementById('facture').value + '').replace(',', '.'));
+      const prixKwh=selectedScenario.prixKwh;
+      const conso=facture/prixKwh;
+
+      const autoKwh=selectedScenario.prod*0.6, stockKwh=selectedScenario.prod*0.4, acheminement=0.05;
+      const factureAvant=conso*prixKwh;
+      const autoValue=autoKwh*prixKwh, stockValue=stockKwh*prixKwh, coutAcheminement=stockKwh*acheminement;
+      const economieAnnuelle=factureAvant-(factureAvant-autoValue-stockValue+coutAcheminement);
+      const economieMensuelle=economieAnnuelle/12;
+      let gain15ans=0, prixActuel=prixKwh;
+      for(let i=0;i<15;i++){
+        const autoVal=autoKwh*prixActuel, stockVal=stockKwh*prixActuel, coutAch=stockKwh*acheminement, factureAv=conso*prixActuel, factureAp=factureAv-autoVal-stockVal+coutAch;
+        gain15ans+= (factureAv-factureAp); prixActuel*=1.05;
+      }
+
+      const fd=new FormData();
+      fd.append("code_postal", codePostal);
+      fd.append("conso", Math.round(conso));
+      fd.append("facture", facture);
+      fd.append("prod", selectedScenario.prod);
+      fd.append("eco1", Math.round(economieAnnuelle));
+      fd.append("ecomensuelle", Math.round(economieMensuelle));
+      fd.append("eco15", Math.round(gain15ans));
+      fd.append("puissance", selectedScenario.puissance);
+      fd.append("panneaux", selectedScenario.panels);
+      fd.append("prix", selectedScenario.prix);
+      fd.append("mensualite", Number.isFinite(selectedScenario.mensualite) ? selectedScenario.mensualite : "");
+      fd.append("taeg", Number.isFinite(selectedScenario.taeg) ? selectedScenario.taeg : "");
+      fd.append("totalcredit", Number.isFinite(selectedScenario.total) ? selectedScenario.total : "");
+      fd.append("mois", Number.isFinite(selectedScenario.dureeMois) ? selectedScenario.dureeMois : "");
+      fd.append("email", email); fd.append("tel", tel);
+      fd.append("emailUser", email); fd.append("telephone", tel);
+      fd.append("unlock", "1");
+      fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec',{method:'POST',mode:'no-cors',body:fd});
+
+      try{ gtag('event','unlock_report',{method:'overlay'}); }catch(e){}
+      unlockUI(); setUnlocked(24);
+    }
+
+    /* Compteur dynamique */
+    const baseCount = 1234;
+    const startDate = new Date('2025-05-01T00:00:00Z');
+    function updateCompteur() {
+      const now = new Date();
+      const secondsElapsed = Math.floor((now - startDate) / 1000);
+      const increments = Math.floor(secondsElapsed / 47);
+      const total = baseCount + increments;
+      const el = document.getElementById('compteurValeur');
+      const current = parseInt(el.innerText.replace(/\s/g, ''), 10) || 0;
+      const frames = 90;
+      const increment = (total - current) / frames;
+      let frame = 0;
+      const animate = () => { frame++; const value = Math.round(current + increment * frame); el.innerText = value.toLocaleString('fr-FR'); if (frame < frames) requestAnimationFrame(animate); };
+      animate();
+    }
+    updateCompteur(); setInterval(updateCompteur, 1000);
+  </script>
+</body>
+</html>
