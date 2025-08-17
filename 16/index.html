@@ -27,10 +27,26 @@
     html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
     img{max-width:100%;height:auto}
 
-    /* Décalage pendant calcul */
-    .wrap{max-width:980px;margin:0 auto;padding:28px 14px;transition:transform .28s ease;will-change:transform}
-    body.simulation-en-cours .wrap{transform:translateY(-350px)}
-    @media (prefers-reduced-motion: reduce){ .wrap{transition:none} }
+        /* Décalage pendant calcul */
+.wrap {
+  max-width:980px;
+  margin:0 auto;
+  padding:28px 14px;
+  transition:transform .28s ease;
+  will-change:transform;
+}
+
+/* Déplacement par défaut (desktop) */
+body.simulation-en-cours .wrap {
+  transform: translateY(-350px);
+}
+
+/* Déplacement spécifique mobile */
+@media (max-width:640px){
+  body.simulation-en-cours .wrap {
+    transform: translateY(-900px); /* ajuste la valeur selon ton besoin */
+  }
+}
 
     .logo{display:block;margin:0 auto 6px;width:92px;height:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.35))}
     h1{font-size:clamp(24px,3.2vw,36px);text-align:center;color:#c7d2fe;margin:6px 0 8px 0;font-weight:800}
