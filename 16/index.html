@@ -626,8 +626,17 @@ body.simulation-en-cours .wrap {
       fd.append("unlock", "1");
       fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec',{method:'POST',mode:'no-cors',body:fd});
 
-      try{ gtag('event','unlock_report',{method:'overlay'}); }catch(e){}
-      unlockUI(); setUnlocked(24);
+      try {
+  gtag('event','unlock_report',{method:'overlay'}); // optionnel
+  gtag('event','conversion', {
+    send_to: 'AW-11242044118/QYNLCI6524kbENb1z_Ap',
+    value: 0.0,
+    currency: 'EUR'
+  });
+} catch(e) {}
+unlockUI();
+setUnlocked(24); // 24 heures, identique sur /24 /16 /87
+
     }
 
     /* Compteur dynamique */
