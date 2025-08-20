@@ -1,74 +1,424 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Simulateur solaire – Choisissez votre département (24 ou 16)</title>
-  <meta name="description" content="Accédez au simulateur solaire par département : Dordogne (24) ou Charente (16). Estimation immédiate, sans inscription.">
-  <meta name="robots" content="index,follow">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- (Optionnel) ton tag Google -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11242044118"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-11242044118');
-  </script> -->
+  <title>Solution Solaire Pro – Simulateur solaire gratuit : votre étude en 3 secondes</title>
+  <meta name="description" content="Étude solaire affichée à l’écran : production conseillée, prix TTC indicatif, économies estimées et option de financement. Tout est en direct, 100 % en ligne." />
+
+  <!-- Canonical & hreflang -->
+  <link rel="canonical" href="https://www.solution-solaire.pro/"/>
+  <link rel="alternate" hreflang="fr" href="https://www.solution-solaire.pro/"/>
+  <link rel="alternate" hreflang="x-default" href="https://www.solution-solaire.pro/"/>
+
+  <!-- Robots -->
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"/>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:locale" content="fr_FR"/>
+  <meta property="og:site_name" content="Solution Solaire Pro"/>
+  <meta property="og:title" content="Simulateur solaire gratuit : votre étude en 3 secondes"/>
+  <meta property="og:description" content="Production conseillée, prix TTC indicatif, économies estimées et option de financement. Affichage immédiat, 100 % en ligne."/>
+  <meta property="og:url" content="https://www.solution-solaire.pro/"/>
+  <meta property="og:image" content="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/52db4f3ab1c38909b33d9037e74d7371c32a9cf5/logo%20SSP.webp"/>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Simulateur solaire gratuit : votre étude en 3 secondes"/>
+  <meta name="twitter:description" content="Étude complète affichée immédiatement : dimensionnement, prix TTC, économies, financement."/>
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/52db4f3ab1c38909b33d9037e74d7371c32a9cf5/logo%20SSP.webp"/>
+
+  <!-- Favicon (léger) -->
+  <link rel="icon" href="data:," />
+
+  <!-- JSON-LD : Organization + WebSite + WebPage + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.solution-solaire.pro/#org",
+        "name": "Solution Solaire Pro",
+        "url": "https://www.solution-solaire.pro/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/52db4f3ab1c38909b33d9037e74d7371c32a9cf5/logo%20SSP.webp"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.solution-solaire.pro/#website",
+        "url": "https://www.solution-solaire.pro/",
+        "name": "Solution Solaire Pro",
+        "inLanguage": "fr-FR",
+        "publisher": { "@id": "https://www.solution-solaire.pro/#org" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.solution-solaire.pro/#webpage",
+        "url": "https://www.solution-solaire.pro/",
+        "name": "Solution Solaire Pro – Simulateur solaire gratuit : votre étude en 3 secondes",
+        "isPartOf": { "@id": "https://www.solution-solaire.pro/#website" },
+        "inLanguage": "fr-FR",
+        "description": "Étude solaire affichée à l’écran : production conseillée, prix TTC indicatif, économies estimées et option de financement. Tout est en direct, 100 % en ligne."
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.solution-solaire.pro/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Comment calculez-vous la production et le dimensionnement ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nous utilisons votre code postal (gisement solaire local), votre facture annuelle et, si vous la renseignez, votre consommation annuelle en kWh. Nous appliquons des hypothèses standard (orientation/surface disponibles, rendements) pour proposer une puissance (kWc), un nombre de panneaux et une production annuelle."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Pourquoi le prix affiché est indicatif ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Le chiffrage tient compte du matériel, de la pose et des standards de câblage. Il reste indicatif avant visite technique, qui permet d’ajuster aux spécificités de votre toiture et de vos usages."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Quand demandez-vous mes coordonnées ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Vous voyez d’abord la production et vos économies annuelles. Pour afficher l’étude complète (prix TTC détaillé, mensualité/TAEG et rentabilité long terme), nous demandons vos coordonnées. L’affichage est immédiat sur la page."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Est-ce vraiment gratuit et sans démarchage ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Oui. La simulation est gratuite. Aucune revente de données. Vous choisissez si vous souhaitez être recontacté à l’issue de l’étude."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Proposez-vous un financement ?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Une option de financement peut être simulée (mensualité, durée, TAEG indicatif), sous réserve d’acceptation par notre partenaire financier. Un crédit vous engage et doit être remboursé."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <style>
-    :root{--green:#178038;--blue:#1976d2;}
-    body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#f7f9fb;color:#1a1a1a}
-    header{padding:28px 16px;text-align:center}
-    header img{max-width:110px;height:auto;display:block;margin:0 auto 8px}
-    h1{margin:10px 0 6px;font-size:1.9rem;color:var(--green)}
-    p.tagline{color:#444;margin:0}
-    .wrap{max-width:980px;margin:0 auto;padding:10px 16px 40px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:18px}
-    .card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:18px 16px;box-shadow:0 4px 14px rgba(0,0,0,.06)}
-    .card h2{margin:0 0 8px;font-size:1.2rem;color:#0f5132}
-    .card p{margin:0 0 12px;color:#333}
-    .btn{display:inline-block;padding:12px 16px;border-radius:10px;border:2px solid var(--green);text-decoration:none;font-weight:700}
-    .btn:hover{background:var(--green);color:#fff}
-    .list-links{margin-top:22px;font-size:.98rem}
-    .list-links a{color:var(--blue);text-decoration:underline}
-    footer{margin-top:26px;text-align:center;color:#666;font-size:.9rem}
+    :root{
+      --bg:#0b1222; --panel:#0b1428; --panel2:#0a1326;
+      --border:#1e3a5f; --text:#e5e7eb; --muted:#9fb3d9;
+      --title:#dbeafe; --accent:#3b82f6; --accent-2:#60a5fa;
+      --ok:#22c55e; --pep:#86f0ad;
+      --shadow:0 14px 36px rgba(2,6,23,.35); --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+    a{color:#93c5fd;text-decoration:none}
+    a:hover{text-decoration:underline}
+    img{max-width:100%;height:auto}
+
+    .wrap{max-width:1100px;margin:0 auto;padding:24px 14px}
+    .center{text-align:center}
+    header{padding-top:12px;padding-bottom:10px}
+    .logo{display:block;margin:0 auto 8px;width:86px;filter:drop-shadow(0 3px 10px rgba(0,0,0,.35))}
+    .h1{font-size:clamp(26px,3.6vw,42px);font-weight:900;letter-spacing:.2px;color:#c7d2fe;margin:6px 0 6px}
+    .accent-strong{color:var(--accent-2);font-weight:900}
+    .lead{color:#cbd5e1;max-width:950px;margin:0 auto}
+    .muted{color:var(--muted)}
+
+    .section{
+      background:linear-gradient(180deg,var(--panel),#0a1224);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;margin:18px 0;
+    }
+    .section.highlight{
+      border:2px solid var(--pep);
+      transition:box-shadow .25s ease, transform .25s ease;
+    }
+    .section.highlight:hover{
+      box-shadow:var(--shadow), 0 0 0 1px rgba(134,240,173,.9) inset, 0 0 24px rgba(134,240,173,.28);
+      transform:translateY(-1px);
+    }
+    @media (prefers-reduced-motion: reduce){
+      .section.highlight{transition:none}
+      .section.highlight:hover{transform:none}
+    }
+
+    .section h2{margin:2px 0 10px 0;text-align:center;color:#a5b4fc;font-size:clamp(18px,2.3vw,24px);font-weight:800}
+
+    .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    @media(max-width:960px){.grid-4{grid-template-columns:1fr 1fr}}
+    @media(max-width:640px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+    .card{background:var(--panel2);border:1px dashed var(--border);border-radius:14px;padding:14px}
+    .card h3{margin:0 0 6px 0;color:#dbeafe;font-size:18px}
+    .card p{margin:0;color:#cbd5e1}
+
+    .step{display:flex;gap:10px;align-items:flex-start}
+    .badge{display:inline-block;padding:4px 10px;border-radius:999px;border:1px solid var(--border);background:linear-gradient(180deg,#0b1324,#0b0f1a);color:#dbeafe;font-weight:800}
+
+    .btn{
+      display:inline-block;background:transparent;color:#e5efff;
+      border:1px solid var(--accent);padding:9px 14px;border-radius:999px;
+      font-weight:800;letter-spacing:.2px;transition:all .2s ease;text-decoration:none
+    }
+    .btn:hover{
+      background:linear-gradient(90deg,#2563eb,var(--accent));color:#fff;
+      border-color:var(--pep);
+      box-shadow:0 8px 22px rgba(37,99,235,.25), 0 0 0 2px var(--pep) inset, 0 0 16px rgba(134,240,173,.45);
+      filter:brightness(1.03);
+    }
+    .btn:focus{outline:2px solid var(--pep);outline-offset:2px}
+    .btn.small{padding:7px 12px;font-weight:700;border-color:var(--pep);color:var(--pep)}
+    .btn.small:hover{color:#fff}
+
+    /* carte = lien accessible */
+    .zone{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      background:var(--panel2);border:1px dashed var(--border);border-radius:14px;
+      padding:12px;transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+      text-decoration:none;color:inherit;
+    }
+    .zone strong{color:#dbeafe}
+    .zone:hover{border-color:var(--accent);box-shadow:0 0 0 1px rgba(134,240,173,.35) inset;transform:translateY(-1px)}
+    .zone:focus-visible{outline:2px solid var(--pep);outline-offset:3px}
+    .zone .btn{
+      display:inline-block;background:transparent;color:#e5efff;
+      border:1px solid var(--accent);padding:9px 14px;border-radius:999px;
+      font-weight:800;letter-spacing:.2px;transition:all .2s ease
+    }
+    .zone:hover .btn{background:linear-gradient(90deg,#2563eb,var(--accent));color:#fff;border-color:var(--pep);box-shadow:0 8px 22px rgba(37,99,235,.25),0 0 0 2px var(--pep) inset,0 0 16px rgba(134,240,173,.45)}
+
+    .t-list{display:grid;gap:12px}
+    .t-item{position:relative;background:var(--panel2);border:1px dashed var(--border);border-radius:14px;padding:14px 14px 12px 46px}
+    .t-item svg{position:absolute;left:12px;top:12px;width:22px;height:22px;opacity:.9;filter:drop-shadow(0 2px 8px rgba(0,0,0,.25))}
+    .t-item blockquote{margin:0;color:#e5e7eb;font-size:15.5px;line-height:1.6}
+    .t-item cite{display:block;margin-top:6px;color:#9fb3d9;font-style:italic;font-size:14px}
+    .t-item strong{color:#dbeafe;font-weight:700}
+    .rating{display:flex;align-items:center;justify-content:center;gap:10px;margin:4px 0 14px 0}
+    .rating .stars{font-size:18px;letter-spacing:1px;color:#ffd166}
+    .rating .score{color:#cfe3ff}
+
+    .usp{
+      margin-top:18px;padding:10px 16px;background:rgba(134,240,173,0.06);
+      border:1px solid var(--pep);border-radius:12px;color:var(--pep);
+      font-weight:600;max-width:900px;margin-left:auto;margin-right:auto
+    }
+
+    .trust{max-width:1100px;margin:10px auto 6px}
+    .trust ul{
+      display:flex;flex-wrap:nowrap;gap:8px;justify-content:center;
+      padding:0;margin:0;list-style:none
+    }
+    .trust li{
+      display:flex;align-items:center;gap:8px;background:rgba(134,240,173,.06);
+      border:1px solid var(--pep);color:var(--pep);
+      padding:6px 10px;border-radius:999px;font-weight:600;white-space:nowrap
+    }
+    .trust svg{width:16px;height:16px;flex:0 0 16px}
+    @media(max-width:960px){.trust ul{flex-wrap:wrap}}
+
+    .faq details{background:var(--panel2);border:1px dashed var(--border);border-radius:12px;margin:10px 0;padding:12px}
+    .faq summary{cursor:pointer;color:#dbeafe;font-weight:700}
+    .faq p{margin:8px 0 0 0;color:#cbd5e1}
+
+    .footer{color:#8aa0c2;text-align:center;font-size:13px;margin:16px 0 6px}
   </style>
 </head>
 <body>
-  <header>
-    <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/52db4f3ab1c38909b33d9037e74d7371c32a9cf5/logo%20SSP.webp" alt="Solution Solaire Pro">
-    <h1>Simulateur solaire – choisissez votre département</h1>
-    <p class="tagline">Estimation immédiate, gratuite et sans inscription</p>
-  </header>
+  <div class="wrap">
+    <img class="logo" src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/52db4f3ab1c38909b33d9037e74d7371c32a9cf5/logo%20SSP.webp" alt="Solution Solaire Pro" loading="lazy" width="86" height="86">
 
-  <main class="wrap">
-    <section class="grid" aria-label="Accès rapides par département">
-      <article class="card">
-        <h2>Simulateur solaire Dordogne (24)</h2>
-        <p>Étude photovoltaïque en Dordogne : Périgueux, Bergerac, Sarlat…</p>
-        <a class="btn" href="/24/">Accéder au simulateur 24</a>
-      </article>
-
-      <article class="card">
-        <h2>Simulateur solaire Charente (16)</h2>
-        <p>Étude photovoltaïque en Charente : Angoulême, Cognac…</p>
-        <a class="btn" href="/16/">Accéder au simulateur 16</a>
-      </article>
-    </section>
-
-    <!-- Liens texte pour le SEO (ancres internes claires) -->
-    <section class="list-links" aria-label="Liens utiles">
-      <p>
-        Accéder directement au 
-        <a href="/24/">simulateur solaire Dordogne (24)</a> et au 
-        <a href="/16/">simulateur solaire Charente (16)</a>.
+    <header class="center">
+      <h1 class="h1">
+        Simulateur solaire gratuit : votre étude en <span class="accent-strong">3 secondes</span>
+      </h1>
+      <p class="lead">
+        Étude affichée à l’écran : production conseillée, <b>prix TTC indicatif</b>, économies estimées et option de financement.
       </p>
+      <p class="muted" style="margin-top:6px">
+        Tout est affiché en direct, 100&nbsp;% en ligne.
+      </p>
+      <p class="usp">
+        Contrairement aux autres sites qui se contentent de promesses vagues, ici vous obtenez en direct vos économies, le prix TTC et la rentabilité de votre installation solaire.
+      </p>
+    </header>
+
+    <section class="trust" aria-label="Réassurances">
+      <ul>
+        <li>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l7 3v6c0 5-3.8 9.4-7 11-3.2-1.6-7-6-7-11V5l7-3z"/></svg>
+          RGE&nbsp;QualiPV
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 12l2 2 4-4 2 2-6 6-4-4 2-2z"/></svg>
+          Garantie décennale
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 017 7c0 5-4 9-7 11-3-2-7-6-7-11a7 7 0 017-7zm0 4a3 3 0 100 6 3 3 0 000-6z"/></svg>
+          Assurance RC&nbsp;Pro
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 10h10v4H7zM4 6h16v2H4zM6 16h12v2H6z"/></svg>
+          Partenaire financement agréé
+        </li>
+      </ul>
     </section>
 
-    <footer>
-      © Solution Solaire Pro — Estimation photovoltaïque par département
-    </footer>
-  </main>
+    <section class="section highlight">
+      <h2>Comment ça marche&nbsp;?</h2>
+      <div class="grid-2">
+        <div class="card step">
+          <span class="badge">1</span>
+          <div>
+            <h3>Choisissez votre département</h3>
+            <p>Choisissez votre département <strong>ci-dessous</strong> puis ouvrez la page dédiée (16, 24 ou 87).</p>
+            <p style="margin-top:8px">
+              <a class="btn small" href="#zones" aria-label="Aller à la section Zones d’intervention">Voir les zones d’intervention ↓</a>
+            </p>
+          </div>
+        </div>
+        <div class="card step">
+          <span class="badge">2</span>
+          <div>
+            <h3>Renseignez 2 infos</h3>
+            <p>Votre <strong>code postal</strong> et votre <strong>facture annuelle</strong> (vous pouvez aussi indiquer votre <strong>consommation annuelle en kWh</strong> si vous la connaissez, ce qui affinera le calcul de votre estimation).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section highlight">
+      <h2>Ce que vous allez obtenir</h2>
+      <div class="grid-4">
+        <div class="card">
+          <h3>Dimensionnement conseillé</h3>
+          <p>Puissance, nombre de panneaux et production annuelle.</p>
+        </div>
+        <div class="card">
+          <h3>Économies estimées</h3>
+          <p>Gain estimatif la 1<sup>re</sup> année et sur 15 ans.</p>
+        </div>
+        <div class="card">
+          <h3>Chiffrage indicatif</h3>
+          <p>Prix TTC transparent, avec options et remises possibles.</p>
+        </div>
+        <div class="card">
+          <h3>Option financement (facultatif)</h3>
+          <p>Mensualité, durée et TAEG affichés pour se projeter.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="zones" class="section">
+      <h2>Zones d’intervention</h2>
+      <div class="grid-3">
+        <a class="zone" href="https://www.solution-solaire.pro/16/" aria-label="Voir la page Charente 16">
+          <div>
+            <strong>Charente (16)</strong><br>
+            <span class="muted">Angoulême, Cognac, Confolens…</span>
+          </div>
+          <span class="btn" aria-hidden="true">Voir</span>
+        </a>
+
+        <a class="zone" href="https://www.solution-solaire.pro/24/" aria-label="Voir la page Dordogne 24">
+          <div>
+            <strong>Dordogne (24)</strong><br>
+            <span class="muted">Périgueux, Sarlat, Bergerac…</span>
+          </div>
+          <span class="btn" aria-hidden="true">Voir</span>
+        </a>
+
+        <a class="zone" href="https://www.solution-solaire.pro/87/" aria-label="Voir la page Haute-Vienne 87">
+          <div>
+            <strong>Haute-Vienne (87)</strong><br>
+            <span class="muted">Limoges, Saint-Junien, Bellac…</span>
+          </div>
+          <span class="btn" aria-hidden="true">Voir</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Ils nous font confiance</h2>
+
+      <div class="rating">
+        <div class="stars" aria-hidden="true">★★★★★</div>
+        <div class="score"><strong>Note moyenne&nbsp;: 4,8/5</strong> (132 avis vérifiés)</div>
+      </div>
+
+      <div class="t-list">
+        <div class="t-item">
+          <svg viewBox="0 0 24 24" fill="#2563eb" aria-hidden="true"><path d="M7.2 5.5C4.9 7.1 3.5 9.5 3.5 12.3c0 3 2.1 5.2 4.9 5.2 2.3 0 4.1-1.8 4.1-4.2 0-2.4-1.8-4.2-4.1-4.2-.5 0-1 .1-1.5.3.3-1.5 1.1-2.7 2.4-3.6l-2.1-.3z"/></svg>
+          <blockquote>“Estimation claire et immédiate, j’ai compris en 2 minutes l’intérêt économique.”</blockquote>
+          <cite>— <strong>Michel L.</strong>, Angoulême</cite>
+        </div>
+        <div class="t-item">
+          <svg viewBox="0 0 24 24" fill="#2563eb" aria-hidden="true"><path d="M7.2 5.5C4.9 7.1 3.5 9.5 3.5 12.3c0 3 2.1 5.2 4.9 5.2 2.3 0 4.1-1.8 4.1-4.2 0-2.4-1.8-4.2-4.1-4.2-.5 0-1 .1-1.5.3.3-1.5 1.1-2.7 2.4-3.6l-2.1-.3z"/></svg>
+          <blockquote>“Process rapide, sans démarchage derrière. Ça met en confiance.”</blockquote>
+          <cite>— <strong>Sophie G.</strong>, Sarlat</cite>
+        </div>
+        <div class="t-item">
+          <svg viewBox="0 0 24 24" fill="#2563eb" aria-hidden="true"><path d="M7.2 5.5C4.9 7.1 3.5 9.5 3.5 12.3c0 3 2.1 5.2 4.9 5.2 2.3 0 4.1-1.8 4.1-4.2 0-2.4-1.8-4.2-4.1-4.2-.5 0-1 .1-1.5.3.3-1.5 1.1-2.7 2.4-3.6l-2.1-.3z"/></svg>
+          <blockquote>“Le chiffrage affiché m’a permis de me décider sereinement.”</blockquote>
+          <cite>— <strong>Paul D.</strong>, Limoges</cite>
+        </div>
+        <div class="t-item">
+          <svg viewBox="0 0 24 24" fill="#2563eb" aria-hidden="true"><path d="M7.2 5.5C4.9 7.1 3.5 9.5 3.5 12.3c0 3 2.1 5.2 4.9 5.2 2.3 0 4.1-1.8 4.1-4.2 0-2.4-1.8-4.2-4.1-4.2-.5 0-1 .1-1.5.3.3-1.5 1.1-2.7 2.4-3.6l-2.1-.3z"/></svg>
+          <blockquote>“Chiffrage détaillé affiché instantanément, avec toutes les infos dont j’avais besoin.”</blockquote>
+          <cite>— <strong>Claire M.</strong>, Eymoutiers</cite>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq">
+      <h2>Questions fréquentes</h2>
+
+      <details>
+        <summary>Comment calculez-vous la production et le dimensionnement&nbsp;?</summary>
+        <p>Nous utilisons votre code postal (gisement solaire local), votre facture annuelle et, si vous la renseignez, votre consommation annuelle en kWh. Nous appliquons des hypothèses standard (orientation/surface disponibles, rendements) pour proposer une puissance (kWc), un nombre de panneaux et une production annuelle.</p>
+      </details>
+
+      <details>
+        <summary>Pourquoi le prix affiché est indicatif&nbsp;?</summary>
+        <p>Le chiffrage tient compte du matériel, de la pose et des standards de câblage. Il reste indicatif avant visite technique, qui permet d’ajuster aux spécificités de votre toiture et de vos usages.</p>
+      </details>
+
+      <details>
+        <summary>Quand demandez-vous mes coordonnées&nbsp;?</summary>
+        <p>Vous voyez d’abord la production et vos économies annuelles. Pour afficher l’étude complète (prix TTC détaillé, mensualité/TAEG et rentabilité long terme), nous demandons vos coordonnées. L’affichage est immédiat sur la page.</p>
+      </details>
+
+      <details>
+        <summary>Est-ce vraiment gratuit et sans démarchage&nbsp;?</summary>
+        <p>Oui. La simulation est gratuite. Aucune revente de données. Vous choisissez si vous souhaitez être recontacté à l’issue de l’étude.</p>
+      </details>
+
+      <details>
+        <summary>Proposez-vous un financement&nbsp;?</summary>
+        <p>Une option de financement peut être simulée (mensualité, durée, TAEG indicatif), sous réserve d’acceptation par notre partenaire financier. Un crédit vous engage et doit être remboursé.</p>
+      </details>
+    </section>
+
+    <div class="footer">
+      © 2025 Solution Solaire Pro — Estimation en ligne
+    </div>
+  </div>
 </body>
 </html>
