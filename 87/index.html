@@ -5,8 +5,7 @@
   <link rel="icon" href="data:,">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simulateur solaire Haute-Vienne (87) – Estimation & prix photovoltaïque</title>
-<meta name="description" content="Obtenez votre estimation solaire en Haute-Vienne (Limoges, Bellac…). Étude gratuite, personnalisée et sans engagement.">
-
+  <meta name="description" content="Obtenez votre estimation solaire en Haute-Vienne (Limoges, Bellac…). Étude gratuite, personnalisée et sans engagement.">
 
   <!-- Google tag (gtag.js) – consentement différé -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11242044118"></script>
@@ -28,31 +27,12 @@
     html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
     img{max-width:100%;height:auto}
 
-    /* Décalage pendant calcul */
-.wrap {
-  max-width:980px;
-  margin:0 auto;
-  padding:28px 14px;
-  transition:transform .28s ease;
-  will-change:transform;
-}
-
-/* Déplacement par défaut (desktop) */
-body.simulation-en-cours .wrap {
-  transform: translateY(-350px);
-}
-
-/* Déplacement spécifique mobile */
-@media (max-width:640px){
-  body.simulation-en-cours .wrap {
-    transform: translateY(-900px); /* ajuste la valeur selon ton besoin */
-  }
-}
-
-/* Désactive la transition si l’utilisateur préfère réduire les animations */
-@media (prefers-reduced-motion: reduce){
-  .wrap { transition:none }
-}
+    /* Conteneur principal (pas de translation pendant calcul) */
+    .wrap {
+      max-width:980px;
+      margin:0 auto;
+      padding:28px 14px;
+    }
 
     .logo{display:block;margin:0 auto 6px;width:92px;height:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.35))}
     h1{font-size:clamp(24px,3.2vw,36px);text-align:center;color:#c7d2fe;margin:6px 0 8px 0;font-weight:800}
@@ -78,16 +58,13 @@ body.simulation-en-cours .wrap {
     .recap-item{background:#0a1326;border:1px dashed #1e3a5f;border-radius:12px;padding:12px 14px}
     .recap-item .label{color:#93c5fd;font-size:13px}
     .note {
-  display: block;
-  text-align: center;
-  margin: 14px 0;
-  color: #86efac;
-  font-weight: 700; /* plus léger qu'avant */
-  font-size: clamp(16px, 1.4vw, 20px);
-}
-
-
-
+      display: block;
+      text-align: center;
+      margin: 14px 0;
+      color: #86efac;
+      font-weight: 700;
+      font-size: clamp(16px, 1.4vw, 20px);
+    }
 
     .kpi{max-width:720px}
     .kpi-box{padding:10px 12px;border-radius:12px;background:#0a1326;border:1px dashed #1e3a5f;margin-bottom:10px}
@@ -147,6 +124,41 @@ body.simulation-en-cours .wrap {
     .temoin cite{ display:block; margin-top:6px; color:#9fb3d9; font-style:italic; font-size:14px }
     .temoin strong{ color:#dbeafe; font-weight:700 }
     .temoin:hover{ border-color:#2a5aa0; transform:translateY(-1px) }
+
+    /* ===== Overlay de calcul (plein écran) ===== */
+    body.no-scroll { overflow: hidden; }
+    #calc-overlay{
+      position: fixed; inset: 0;
+      background: rgba(2, 6, 23, 0.72);
+      backdrop-filter: blur(2px);
+      display: none;
+      z-index: 9998;
+      align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    #calc-overlay .panel{
+      width: 100%; max-width: 360px;
+      background: #0b1222;
+      border: 1px solid #244a7d;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+      text-align: center;
+      outline: none;
+    }
+    #calc-overlay .spinner{
+      width: 42px; height: 42px;
+      margin: 6px auto 12px auto;
+      border: 4px solid #1f2b4a;
+      border-top: 4px solid var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    #calc-overlay .title{ color:#bfdbfe; font-weight:800; margin: 0 0 6px 0; }
+    #calc-overlay .desc{ color:#cbd5e1; font-size: 14px; margin: 0; }
+    @media (prefers-reduced-motion: reduce){
+      #calc-overlay .spinner{ animation: none; }
+    }
   </style>
 </head>
 <body>
@@ -166,14 +178,14 @@ body.simulation-en-cours .wrap {
     <!-- Accroche -->
     <h1>Simulateur solaire gratuit : votre étude en <span style="color:#60a5fa">3 secondes</span></h1>
     <div class="lead-sub"><b>Simple, immédiat, sans engagement</b> — obtenez votre estimation et le chiffrage de votre installation.</div>
-  <p class="lead-sub">
-En Haute-Vienne, de Limoges à Bellac, de plus en plus de foyers investissent dans le solaire pour réduire leur facture d’électricité. Testez votre simulation gratuite.
-</p>
+    <p class="lead-sub">
+      En Haute-Vienne, de Limoges à Bellac, de plus en plus de foyers investissent dans le solaire pour réduire leur facture d’électricité. Testez votre simulation gratuite.
+    </p>
 
     <!-- H2 SEO -->
     <h2 style="position:absolute;left:-9999px;">
-Simulation photovoltaïque en Haute-Vienne (87) : prix, production et économies
-</h2>
+      Simulation photovoltaïque en Haute-Vienne (87) : prix, production et économies
+    </h2>
 
     <!-- Formulaire -->
     <div class="card form-section">
@@ -190,69 +202,51 @@ Simulation photovoltaïque en Haute-Vienne (87) : prix, production et économies
         <div style="height:10px"></div>
         <button id="simuler" type="submit" class="primary">🔍 Obtenir mon estimation</button>
         <div style="margin-top:8px;font-size:14px;color:#93c5fd;text-align:center">
-  ⚡ <strong>Résultat instantané :</strong> production, prix TTC et option de financement calculés en temps réel.
-</div>
-
+          ⚡ <strong>Résultat instantané :</strong> production, prix TTC et option de financement calculés en temps réel.
+        </div>
       </form>
     </div>
 
     <!-- Témoignages -->
-  <div class="card temoins">
-  <h2>Ils l'ont testé</h2>
-  
-
-  <div class="temoins-list">
-    <!-- Témoignage 1 -->
-    <div class="temoin">
-      <svg viewBox="0 0 24 24" fill="#2563eb" aria-hidden="true"><path d="M7.2 5.5C4.9 7.1 3.5 9.5 3.5 12.3c0 3 2.1 5.2 4.9 5.2 2.3 0 4.1-1.8 4.1-4.2 0-2.4-1.8-4.2-4.1-4.2-.5 0-1 .1-1.5.3.3-1.5 1.1-2.7 2.4-3.6l-2.1-.3z"/></svg>
-      <blockquote>
-        “En moins de 2 minutes, j’ai obtenu un prix précis et le montant de mes économies.
-        L’étude complète s’est affichée immédiatement après déblocage.
-        Aucun démarchage, juste les infos utiles.”
-      </blockquote>
-      <cite>— <strong>Michel L.</strong>, Bellac</cite>
-    </div>
-
-    <!-- Témoignage 2 -->
-    <div class="temoin">
-      <svg viewBox="0 0 24 24" fill="#2563eb" aria-hidden="true"><path d="M7.2 5.5C4.9 7.1 3.5 9.5 3.5 12.3c0 3 2.1 5.2 4.9 5.2 2.3 0 4.1-1.8 4.1-4.2 0-2.4-1.8-4.2-4.1-4.2-.5 0-1 .1-1.5.3.3-1.5 1.1-2.7 2.4-3.6l-2.1-.3z"/></svg>
-      <blockquote>
-        “Process simple et clair.
-        Les étapes sont rapides et l’étude personnalisée est limpide.
-        Je me suis sentie en confiance du début à la fin.”
-      </blockquote>
-      <cite>— <strong>Sophie G.</strong>, Saint-Yrieix-la-Perche</cite>
-    </div>
-
-    <!-- Témoignage 3 -->
-    <div class="temoin">
-      <svg viewBox="0 0 24 24" fill="#2563eb" aria-hidden="true"><path d="M7.2 5.5C4.9 7.1 3.5 9.5 3.5 12.3c0 3 2.1 5.2 4.9 5.2 2.3 0 4.1-1.8 4.1-4.2 0-2.4-1.8-4.2-4.1-4.2-.5 0-1 .1-1.5.3.3-1.5 1.1-2.7 2.4-3.6l-2.1-.3z"/></svg>
-      <blockquote>
-        “Chiffrage détaillé affiché instantanément, avec toutes les infos dont j’avais besoin.
-        Sérieux, rapide et transparent.”
-      </blockquote>
-      <cite>— <strong>Paul D.</strong>, Saint-Junien</cite>
-    </div>
-
-    <!-- Témoignage 4 -->
-    <div class="temoin">
-      <svg viewBox="0 0 24 24" fill="#2563eb" aria-hidden="true"><path d="M7.2 5.5C4.9 7.1 3.5 9.5 3.5 12.3c0 3 2.1 5.2 4.9 5.2 2.3 0 4.1-1.8 4.1-4.2 0-2.4-1.8-4.2-4.1-4.2-.5 0-1 .1-1.5.3.3-1.5 1.1-2.7 2.4-3.6l-2.1-.3z"/></svg>
-      <blockquote>
-        “Le simulateur m’a montré plus de 1 000 € d’économies possibles la 1ʳᵉ année.
-        Présentation claire, affichée à l’écran, et aucune sollicitation derrière.
-        Ça met en confiance.”
-      </blockquote>
-      <cite>— <strong>Claire M.</strong>, Eymoutiers</cite>
-    </div>
-  </div>
-</div>
-
-
-
-    <!-- Loader -->
-    <div id="loading" style="display:none;text-align:center;margin-top:12px;">
-      <div style="width:38px;height:38px;border:4px solid #1f2b4a;border-top:4px solid var(--accent);border-radius:50%;animation:spin 1s linear infinite;margin:10px auto"></div>
-      <p style="font-size:14px;color:#cbd5e1">Veuillez patienter... Calcul en cours</p>
+    <div class="card temoins">
+      <h2>Ils l'ont testé</h2>
+      <div class="temoins-list">
+        <div class="temoin">
+          <svg viewBox="0 0 24 24" fill="#2563eb" aria-hidden="true"><path d="M7.2 5.5C4.9 7.1 3.5 9.5 3.5 12.3c0 3 2.1 5.2 4.9 5.2 2.3 0 4.1-1.8 4.1-4.2 0-2.4-1.8-4.2-4.1-4.2-.5 0-1 .1-1.5.3.3-1.5 1.1-2.7 2.4-3.6l-2.1-.3z"/></svg>
+          <blockquote>
+            “En moins de 2 minutes, j’ai obtenu un prix précis et le montant de mes économies.
+            L’étude complète s’est affichée immédiatement après déblocage.
+            Aucun démarchage, juste les infos utiles.”
+          </blockquote>
+          <cite>— <strong>Michel L.</strong>, Bellac</cite>
+        </div>
+        <div class="temoin">
+          <svg viewBox="0 0 24 24" fill="#2563eb" aria-hidden="true"><path d="M7.2 5.5C4.9 7.1 3.5 9.5 3.5 12.3c0 3 2.1 5.2 4.9 5.2 2.3 0 4.1-1.8 4.1-4.2 0-2.4-1.8-4.2-4.1-4.2-.5 0-1 .1-1.5.3.3-1.5 1.1-2.7 2.4-3.6l-2.1-.3z"/></svg>
+          <blockquote>
+            “Process simple et clair.
+            Les étapes sont rapides et l’étude personnalisée est limpide.
+            Je me suis sentie en confiance du début à la fin.”
+          </blockquote>
+          <cite>— <strong>Sophie G.</strong>, Saint-Yrieix-la-Perche</cite>
+        </div>
+        <div class="temoin">
+          <svg viewBox="0 0 24 24" fill="#2563eb" aria-hidden="true"><path d="M7.2 5.5C4.9 7.1 3.5 9.5 3.5 12.3c0 3 2.1 5.2 4.9 5.2 2.3 0 4.1-1.8 4.1-4.2 0-2.4-1.8-4.2-4.1-4.2-.5 0-1 .1-1.5.3.3-1.5 1.1-2.7 2.4-3.6l-2.1-.3z"/></svg>
+          <blockquote>
+            “Chiffrage détaillé affiché instantanément, avec toutes les infos dont j’avais besoin.
+            Sérieux, rapide et transparent.”
+          </blockquote>
+          <cite>— <strong>Paul D.</strong>, Saint-Junien</cite>
+        </div>
+        <div class="temoin">
+          <svg viewBox="0 0 24 24" fill="#2563eb" aria-hidden="true"><path d="M7.2 5.5C4.9 7.1 3.5 9.5 3.5 12.3c0 3 2.1 5.2 4.9 5.2 2.3 0 4.1-1.8 4.1-4.2 0-2.4-1.8-4.2-4.1-4.2-.5 0-1 .1-1.5.3.3-1.5 1.1-2.7 2.4-3.6l-2.1-.3z"/></svg>
+          <blockquote>
+            “Le simulateur m’a montré plus de 1 000 € d’économies possibles la 1ʳᵉ année.
+            Présentation claire, affichée à l’écran, et aucune sollicitation derrière.
+            Ça met en confiance.”
+          </blockquote>
+          <cite>— <strong>Claire M.</strong>, Eymoutiers</cite>
+        </div>
+      </div>
     </div>
 
     <!-- Récap -->
@@ -305,13 +299,22 @@ Simulation photovoltaïque en Haute-Vienne (87) : prix, production et économies
     <hr class="sep">
   </div>
 
+  <!-- ===== Overlay de calcul (plein écran) en dehors de .wrap ===== -->
+  <div id="calc-overlay" role="alertdialog" aria-modal="true" aria-labelledby="calc-title" aria-describedby="calc-desc">
+    <div class="panel" tabindex="-1">
+      <div class="spinner" aria-hidden="true"></div>
+      <h3 id="calc-title" class="title">Calcul en cours…</h3>
+      <p id="calc-desc" class="desc">Nous générons votre estimation (quelques secondes).</p>
+    </div>
+  </div>
+
   <script>
     /* --- MODE TEST & PERSISTANCE 24h --- */
     const qs = new URLSearchParams(location.search);
     const UNLOCK_KEY = 'pv_unlock_until_v3';
     const FORCE_LOCK = qs.get('lock') === '1';
 
-    function esc(s){ return String(s).replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
+    function esc(s){ return String(s).replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&gt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
 
     document.addEventListener("DOMContentLoaded", function() {
       // Conso avancée
@@ -409,11 +412,30 @@ Simulation photovoltaïque en Haute-Vienne (87) : prix, production et économies
       document.getElementById('veil').style.display='none';
     }
 
+    // ===== Overlay helpers =====
+    function showCalcOverlay(message){
+      const ov = document.getElementById('calc-overlay');
+      if (!ov) return;
+      if (message) {
+        const t = ov.querySelector('#calc-title');
+        if (t) t.textContent = message;
+      }
+      ov.style.display = 'flex';
+      document.body.classList.add('no-scroll');
+      const panel = ov.querySelector('.panel');
+      if (panel) panel.focus();
+    }
+    function hideCalcOverlay(){
+      const ov = document.getElementById('calc-overlay');
+      if (!ov) return;
+      ov.style.display = 'none';
+      document.body.classList.remove('no-scroll');
+    }
+
     async function calculerSimulation() {
-      document.body.classList.add('simulation-en-cours');
       const btn = document.getElementById('simuler');
       if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
-      document.getElementById('loading').style.display='block';
+      showCalcOverlay('Calcul en cours…');
 
       try {
         ['recap','kpi1','lockedSection'].forEach(id=>{
@@ -583,10 +605,8 @@ Simulation photovoltaïque en Haute-Vienne (87) : prix, production et économies
         fd.append("unlock", "0");
         fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec', {method:'POST', mode:'no-cors', body:fd});
       } finally {
-        document.getElementById('loading').style.display='none';
-        document.body.classList.remove('simulation-en-cours');
-        const btn2 = document.getElementById('simuler');
-        if (btn2) { btn2.disabled = false; btn2.style.opacity = '1'; }
+        hideCalcOverlay();
+        if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
       }
     }
 
@@ -638,16 +658,15 @@ Simulation photovoltaïque en Haute-Vienne (87) : prix, production et économies
       fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec',{method:'POST',mode:'no-cors',body:fd});
 
       try {
-  gtag('event','unlock_report',{method:'overlay'}); // optionnel
-  gtag('event','conversion', {
-    send_to: 'AW-11242044118/QYNLCI6524kbENb1z_Ap',
-    value: 0.0,
-    currency: 'EUR'
-  });
-} catch(e) {}
-unlockUI();
-setUnlocked(24); // 24 heures, identique sur /24 /16 /87
-
+        gtag('event','unlock_report',{method:'overlay'});
+        gtag('event','conversion', {
+          send_to: 'AW-11242044118/QYNLCI6524kbENb1z_Ap',
+          value: 0.0,
+          currency: 'EUR'
+        });
+      } catch(e) {}
+      unlockUI();
+      setUnlocked(24);
     }
 
     /* Compteur dynamique */
