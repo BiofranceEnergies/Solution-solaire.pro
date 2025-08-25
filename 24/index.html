@@ -114,8 +114,9 @@
     .prix-install{ margin-bottom:14px; line-height:1.6 }
     .option-fin{ margin:10px 0 8px 0; color:#93c5fd; font-weight:700; letter-spacing:.2px }
     .hint{ color:#a7b6d6; font-size:.82em; margin-left:8px; opacity:.9 }
-    .financement-warning{ color:#fde68a; font-size:0.95em; font-weight:700; margin-bottom:8px }
+    .financement-warning{ color:#fde68a; font-size:0.95em; font-weight:700 }
     .financement-note{ font-size:0.8em; color:#cbd5e1 }
+
     .offre-speciale{ background: linear-gradient(180deg, #10243e, #0e2038); border: 1px solid #1e3a8a; border-radius: 14px; padding: 18px; text-align: center; margin: 16px 0; box-shadow: 0 10px 26px rgba(2,6,23,.35); }
     .offre-titre{ color:#fde047; font-weight:800; font-size:1.08rem; margin-bottom:10px; letter-spacing:.2px }
     .offre-montant{ display:flex; justify-content:center; align-items:center; gap:10px; font-size:1.35rem; font-weight:800; color:#fff; margin-bottom:4px; }
@@ -221,19 +222,16 @@
       <p>
         Le <strong>prix d’une installation photovoltaïque</strong> dépend de la puissance, du nombre de panneaux et des contraintes de pose.
         Notre outil calcule un <strong>coût installation panneaux solaires</strong> TTC indicatif et met en regard vos <strong>économies en autoconsommation</strong>.
-
-
         Vous obtenez aussi une estimation claire du <strong>prix panneaux solaires maison</strong>.
       </p>
 
-<h2 id="devis">Devis panneaux photovoltaïques</h2>
-<p>
-  Obtenez un <strong>devis panneaux photovoltaïques</strong> en ligne, immédiat et sans engagement.
-  Le chiffrage reprend matériel, pose et démarches, avec une option de financement affichée.
-  Lancez la <strong>simulation</strong> ci-dessus puis débloquez l’étude complète pour recevoir votre devis.
-  Vous pouvez aussi obtenir un <strong>devis panneaux solaires</strong> en ligne.
-</p>
-
+      <h2 id="devis">Devis panneaux photovoltaïques</h2>
+      <p>
+        Obtenez un <strong>devis panneaux photovoltaïques</strong> en ligne, immédiat et sans engagement.
+        Le chiffrage reprend matériel, pose et démarches, avec une option de financement affichée.
+        Lancez la <strong>simulation</strong> ci-dessus puis débloquez l’étude complète pour recevoir votre devis.
+        Vous pouvez aussi obtenir un <strong>devis panneaux solaires</strong> en ligne.
+      </p>
 
       <h2 id="simulateur">Simulateur solaire & autoconsommation</h2>
       <p>
@@ -714,6 +712,10 @@
           currency: 'EUR'
         });
       } catch(e) {}
+
+      // ✅ Déclenchement supplémentaire via l’événement “Clic” (eCPC / conversion clic)
+      try { gtag_report_conversion(); } catch(e) {}
+
       unlockUI();
       setUnlocked(24);
     }
@@ -736,5 +738,24 @@
     }
     updateCompteur(); setInterval(updateCompteur, 1000);
   </script>
+
+  <!-- ========= AJOUT : fonction de conversion Google Ads (Clic) ========= -->
+  <!-- Event snippet for Formulaire Simulateur PV conversion -->
+  <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-11242044118/MslOCKGZzo0bENb1z_Ap',
+          'event_callback': callback
+      });
+      return false;
+    }
+  </script>
+  <!-- ========= FIN AJOUT ========= -->
+
 </body>
 </html>
