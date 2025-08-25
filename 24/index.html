@@ -25,6 +25,18 @@
     window.__initAds = function(){ gtag('js', new Date()); gtag('config', 'AW-11242044118'); };
   </script>
 
+  <!-- Event snippet – Conversion "Formulaire Simulateur PV" (unique) -->
+  <script>
+    function gtag_report_conversion() {
+      try {
+        gtag('event', 'conversion', {
+          send_to: 'AW-11242044118/MslOCKGZzo0bENb1z_Ap'
+        });
+      } catch(e) {}
+      return true;
+    }
+  </script>
+
   <style>
     :root{
       --bg:#0f172a; --card:#0b1222; --paper:#0b1428;
@@ -114,15 +126,14 @@
     .prix-install{ margin-bottom:14px; line-height:1.6 }
     .option-fin{ margin:10px 0 8px 0; color:#93c5fd; font-weight:700; letter-spacing:.2px }
     .hint{ color:#a7b6d6; font-size:.82em; margin-left:8px; opacity:.9 }
-    .financement-warning{ color:#fde68a; font-size:0.95em; font-weight:700 }
+    .financement-warning{ color:#fde68a; font-size:0.95em; font-weight:700; margin-bottom:8px }
     .financement-note{ font-size:0.8em; color:#cbd5e1 }
-
     .offre-speciale{ background: linear-gradient(180deg, #10243e, #0e2038); border: 1px solid #1e3a8a; border-radius: 14px; padding: 18px; text-align: center; margin: 16px 0; box-shadow: 0 10px 26px rgba(2,6,23,.35); }
     .offre-titre{ color:#fde047; font-weight:800; font-size:1.08rem; margin-bottom:10px; letter-spacing:.2px }
     .offre-montant{ display:flex; justify-content:center; align-items:center; gap:10px; font-size:1.35rem; font-weight:800; color:#fff; margin-bottom:4px; }
     .badge-offre{ display:inline-block; background:#2563eb; color:#fff; padding:8px 14px; border-radius:999px; font-weight:900; font-size:1.1rem; box-shadow: 0 6px 16px rgba(37,99,235,.35); }
     .offre-sous-titre{ font-size:.92rem; color:#cbd5e1; margin-bottom:10px }
-    .offre-conditions{ font-size:.88rem; color:#a7b6d6 }
+    .offre-conditions{ font size:.88rem; color:#a7b6d6 }
 
     /* — Témoignages — */
     .temoins{ background: linear-gradient(180deg,#0b1428,#0a1224); border:1px solid #1e3a5f; border-radius:14px; padding:18px; box-shadow:0 14px 36px rgba(2,6,23,.35); max-width:720px; margin:0 auto 18px auto;}
@@ -194,7 +205,6 @@
 
     <!-- H2 SEO visible -->
     <h2 id="prix">Prix installation photovoltaïque : coûts, production et économies</h2>
-
 
     <!-- Formulaire -->
     <div class="card form-section">
@@ -706,16 +716,8 @@
 
       try {
         gtag('event','unlock_report',{method:'overlay'});
-        gtag('event','conversion', {
-          send_to: 'AW-11242044118/QYNLCI6524kbENb1z_Ap',
-          value: 0.0,
-          currency: 'EUR'
-        });
+        gtag_report_conversion(); // ← conversion unique
       } catch(e) {}
-
-      // ✅ Déclenchement supplémentaire via l’événement “Clic” (eCPC / conversion clic)
-      try { gtag_report_conversion(); } catch(e) {}
-
       unlockUI();
       setUnlocked(24);
     }
@@ -738,24 +740,5 @@
     }
     updateCompteur(); setInterval(updateCompteur, 1000);
   </script>
-
-  <!-- ========= AJOUT : fonction de conversion Google Ads (Clic) ========= -->
-  <!-- Event snippet for Formulaire Simulateur PV conversion -->
-  <script>
-    function gtag_report_conversion(url) {
-      var callback = function () {
-        if (typeof(url) != 'undefined') {
-          window.location = url;
-        }
-      };
-      gtag('event', 'conversion', {
-          'send_to': 'AW-11242044118/MslOCKGZzo0bENb1z_Ap',
-          'event_callback': callback
-      });
-      return false;
-    }
-  </script>
-  <!-- ========= FIN AJOUT ========= -->
-
 </body>
 </html>
