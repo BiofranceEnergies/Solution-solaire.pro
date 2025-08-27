@@ -5,7 +5,7 @@
   <link rel="icon" href="data:,">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- SEO principal : ciblage mots-clés -->
+  <!-- SEO principal -->
   <title>Installation photovoltaïque – Prix, devis & simulation gratuite</title>
   <meta name="description" content="Prix installation photovoltaïque : devis gratuit et simulation en 30 s. Coût TTC indicatif, production estimée, économies en autoconsommation.">
   <link rel="canonical" href="https://www.solution-solaire.pro/24/">
@@ -16,22 +16,37 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.solution-solaire.pro/24/">
 
-  <!-- Google tag (gtag.js) – consentement différé -->
+  <!-- Google tag (gtag.js) – Consent Mode V2 + init différée -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11242044118"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
-    gtag('consent', 'default', { ad_storage: 'denied', analytics_storage: 'denied' });
-    window.__initAds = function(){ gtag('js', new Date()); gtag('config', 'AW-11242044118'); };
+
+    // Consent Mode V2 — état par défaut AVANT choix
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      analytics_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      wait_for_update: 500
+    });
+
+    // Recommandations Google
+    gtag('set', 'ads_data_redaction', true);
+    gtag('set', 'url_passthrough', true);
+
+    // Initialisation différée des tags Google (appelée après consentement)
+    window.__initAds = function(){
+      gtag('js', new Date());
+      gtag('config', 'AW-11242044118'); // Ajouter GA4 ici si besoin
+    };
   </script>
 
-  <!-- Event snippet – Conversion "Formulaire Simulateur PV" (unique) -->
+  <!-- Conversion Google Ads -->
   <script>
     function gtag_report_conversion() {
       try {
-        gtag('event', 'conversion', {
-          send_to: 'AW-11242044118/MslOCKGZzo0bENb1z_Ap'
-        });
+        gtag('event', 'conversion', { send_to: 'AW-11242044118/MslOCKGZzo0bENb1z_Ap' });
       } catch(e) {}
       return true;
     }
@@ -49,11 +64,7 @@
     img{max-width:100%;height:auto}
 
     /* Conteneur principal */
-    .wrap {
-      max-width:980px;
-      margin:0 auto;
-      padding:28px 14px;
-    }
+    .wrap { max-width:980px; margin:0 auto; padding:28px 14px; }
 
     .logo{display:block;margin:0 auto 6px;width:92px;height:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.35))}
     h1{font-size:clamp(24px,3.2vw,36px);text-align:center;color:#c7d2fe;margin:6px 0 8px 0;font-weight:800}
@@ -78,14 +89,7 @@
     @media(max-width:560px){.recap-grid{grid-template-columns:1fr}}
     .recap-item{background:#0a1326;border:1px dashed #1e3a5f;border-radius:12px;padding:12px 14px}
     .recap-item .label{color:#93c5fd;font-size:13px}
-    .note {
-      display: block;
-      text-align: center;
-      margin: 14px 0;
-      color: #86efac;
-      font-weight: 700;
-      font-size: clamp(16px, 1.4vw, 20px);
-    }
+    .note { display: block; text-align: center; margin: 14px 0; color: #86efac; font-weight: 700; font-size: clamp(16px, 1.4vw, 20px); }
 
     .kpi{max-width:720px}
     .kpi-box{padding:10px 12px;border-radius:12px;background:#0a1326;border:1px dashed #1e3a5f;margin-bottom:10px}
@@ -100,8 +104,7 @@
     .consent{display:flex;gap:8px;align-items:flex-start;color:#cbd5e1;font-size:13px;text-align:left}
     .consent input{width:auto;margin-top:3px}
 
-    #cookie-banner{position:fixed;left:0;right:0;bottom:0;background:#0b1222;color:#e5e7eb;font-size:14px;line-height:1.5;padding:14px 10px;text-align:center;z-index:9999;box-shadow:0 -6px 26px rgba(0,0,0,.35);display:none;flex-direction:column;align-items:center}
-    #cookie-banner button{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:8px 18px;margin-top:10px;font-size:14px;font-weight:700;cursor:pointer}
+    /* Mentions légales (masquées par défaut) */
     #mentions-legales-container{width:100%;text-align:center;margin:26px 0 8px 0;display:none}
     #mentions-legales-link{color:#93c5fd;text-decoration:underline;cursor:pointer}
     #mentions-popup{display:none;position:fixed;bottom:60px;left:50%;transform:translateX(-50%);width:340px;max-width:95vw;background:#0b1222;color:#e5e7eb;border-radius:13px;box-shadow:0 8px 32px rgba(0,0,0,.45);padding:18px 20px 12px 20px;z-index:10000;font-size:13px;line-height:1.7;border:1px solid #244a7d}
@@ -110,7 +113,7 @@
     .sep{border:none;border-top:2px solid var(--border);margin:30px 0 16px 0}
     @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
 
-    /* — Ce que nous vous proposons (épuré) — */
+    /* — Ce que nous vous proposons — */
     .propo { margin: 8px 0 14px 0; }
     .propo-title{ font-weight:800; color:#dbeafe; margin-bottom:10px; letter-spacing:.2px }
     .propo-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px }
@@ -118,7 +121,7 @@
     .point-title{ font-weight:700; color:#dbeafe }
     .badge{ display:inline-block; padding:2px 8px; border-radius:999px; background:linear-gradient(180deg,#0b1324,#0b0f1a); border:1px solid #1f2b4a; font-weight:900; color:#fde68a }
 
-    /* — Financement (premium) — */
+    /* — Financement — */
     .financement-bloc{ background:#0a1326; border-left:4px solid #2563eb; border-radius:12px; padding:14px; margin-top:12px; color:#e5e7eb }
     .financement-conditions{ margin-bottom:10px; line-height:1.6 }
     .badge-fin{ display:inline-block; background:#1e3a5f; color:#fff; padding:2px 8px; border-radius:999px; font-weight:700; font-size:0.9em }
@@ -146,7 +149,7 @@
     .temoin strong{ color:#dbeafe; font-weight:700 }
     .temoin:hover{ border-color:#2a5aa0; transform:translateY(-1px) }
 
-    /* ===== Overlay de calcul (plein écran) ===== */
+    /* Overlay calcul */
     body.no-scroll { overflow: hidden; }
     #calc-overlay{
       position: fixed; inset: 0;
@@ -177,14 +180,23 @@
     }
     #calc-overlay .title{ color:#bfdbfe; font-weight:800; margin: 0 0 6px 0; }
     #calc-overlay .desc{ color:#cbd5e1; font-size: 14px; margin: 0; }
-    @media (prefers-reduced-motion: reduce){
-      #calc-overlay .spinner{ animation: none; }
-    }
+    @media (prefers-reduced-motion: reduce){ #calc-overlay .spinner{ animation: none; } }
   </style>
 </head>
 <body>
-  <div class="wrap">
 
+  <!-- Bandeau Consent Mode V2 (minimal) -->
+  <div id="consent-banner" style="position:fixed;left:0;right:0;bottom:0;background:#0b1222;color:#e5e7eb;padding:14px 10px;z-index:9999;display:none;box-shadow:0 -6px 26px rgba(0,0,0,.35);font:14px/1.5 system-ui,Segoe UI,Roboto">
+    <div style="max-width:980px;margin:0 auto;display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+      <div style="flex:1 1 520px">Nous utilisons des technologies pour la mesure et la publicité. Vous pouvez refuser.</div>
+      <div style="display:flex;gap:8px">
+        <button id="consent-reject" style="background:#fff;color:#111;border:0;border-radius:8px;padding:8px 12px;cursor:pointer;font-weight:700">Tout refuser</button>
+        <button id="consent-accept" style="background:#22c55e;color:#051b33;border:0;border-radius:8px;padding:8px 12px;cursor:pointer;font-weight:800">Tout accepter</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
     <!-- Logo -->
     <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/52db4f3ab1c38909b33d9037e74d7371c32a9cf5/logo%20SSP.webp" alt="Logo Solution Solaire Pro" class="logo">
 
@@ -196,10 +208,9 @@
       </div>
     </div>
 
-    <!-- Accroche principale optimisée mots-clés -->
+    <!-- Accroche principale -->
     <h1>Installation photovoltaïque – prix, devis et simulation immédiate</h1>
     <div class="lead-sub"><b>Simple, immédiat, sans engagement.</b> Obtenez le <strong>prix d’une installation photovoltaïque</strong>, un <strong>devis panneaux photovoltaïques</strong> et une <strong>simulation</strong> en 30&nbsp;s.</div>
-   
 
     <!-- H2 SEO visible -->
     <h2 id="prix">Prix installation photovoltaïque : coûts, production et économies</h2>
@@ -224,7 +235,7 @@
       </form>
     </div>
 
-    <!-- ===== Sections SEO ciblées (mots-clés principaux) ===== -->
+    <!-- ===== Sections SEO ciblées ===== -->
     <div class="card" style="max-width:720px">
       <h2>Prix installation photovoltaïque</h2>
       <p>
@@ -242,17 +253,16 @@
       </p>
 
       <h2 id="simulateur">Simulateur solaire & autoconsommation</h2>
-<p>
-  Notre <strong>simulateur solaire</strong>, parfois appelé <strong>simulateur photovoltaïque</strong>, estime la puissance conseillée, le nombre de panneaux et la production annuelle.
-  Il intègre l’<strong>autoconsommation photovoltaïque</strong> et affiche vos économies.
-  Idéal pour une recherche “<strong>simulateur autoconsommation photovoltaïque</strong>”.
-</p>
-
+      <p>
+        Notre <strong>simulateur solaire</strong>, parfois appelé <strong>simulateur photovoltaïque</strong>, estime la puissance conseillée, le nombre de panneaux et la production annuelle.
+        Il intègre l’<strong>autoconsommation photovoltaïque</strong> et affiche vos économies.
+        Idéal pour une recherche “<strong>simulateur autoconsommation photovoltaïque</strong>”.
+      </p>
 
       <h2>Simulation production photovoltaïque</h2>
       <p>
         La <strong>simulation de production photovoltaïque</strong> tient compte d’une production réaliste et d’un taux d’utilisation.
-        Elle couvre aussi “<strong>simulateur production solaire</strong>” et “<strong>simulation production photovoltaïque</strong>” afin d’anticiper vos kWh produits et consommés.
+        Elle couvre aussi “<strong>simulateur production solaire</strong>” et “<strong>simulation production photovoltaïque</strong>”.
       </p>
 
       <h2 id="rentabilite">Calcul rentabilité & rendement</h2>
@@ -330,19 +340,13 @@
       </div>
     </div>
 
-    <!-- Cookies / Mentions -->
-    <div id="cookie-banner">
-      Ce site utilise des cookies strictement nécessaires au fonctionnement du simulateur et à la mesure d’audience.
-      <br>En poursuivant votre navigation, vous acceptez leur utilisation.
-      <button id="cookie-ok" type="button">OK, j’ai compris</button>
-    </div>
-
+    <!-- Mentions (masquées au chargement) -->
     <div id="mentions-legales-container">
       <span id="mentions-legales-link">Mentions légales</span>
     </div>
-    <div id="mentions-popup">
+    <div id="mentions-popup" role="dialog" aria-modal="true" aria-labelledby="mentions-title">
       <button id="close-mentions" type="button" aria-label="Fermer">&times;</button>
-      <strong>Mentions légales :</strong><br>
+      <strong id="mentions-title">Mentions légales :</strong><br>
       Conseils Energies Durables – Matignon Sylvain<br>
       SIRET : 422 231 928 00025<br>
       Adresse : 4 rue du Pont Saint Jean, 27530 Ézy-sur-Eure<br>
@@ -370,7 +374,9 @@
     const UNLOCK_KEY = 'pv_unlock_until_v3';
     const FORCE_LOCK = qs.get('lock') === '1';
 
-    function esc(s){ return String(s).replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
+    function esc(s){
+      return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;', "'":'&#39;'}[m]));
+    }
 
     document.addEventListener("DOMContentLoaded", function() {
       // Conso avancée
@@ -378,31 +384,15 @@
       if (lienAvance) {
         lienAvance.onclick = function(e){ e.preventDefault(); document.getElementById('modeAvance').style.display='block'; this.style.display='none'; };
       }
-      // Cookies + gtag
-      const banner = document.getElementById("cookie-banner");
-      const ok = document.getElementById("cookie-ok");
-      const consentGiven = localStorage.getItem("cookieConsentPV2025") === "1";
-      if (!consentGiven) banner.style.display = "flex";
-      ok.onclick = function(e){
-        e.preventDefault();
-        localStorage.setItem("cookieConsentPV2025","1");
-        banner.style.display="none";
-        gtag('consent', 'update', { ad_storage: 'granted', analytics_storage: 'granted' });
-        if (window.__initAds) window.__initAds();
-      };
-      if (consentGiven) {
-        gtag('consent', 'update', { ad_storage: 'granted', analytics_storage: 'granted' });
-        if (window.__initAds) window.__initAds();
+
+      // Mentions légales (popup)
+      const link = document.getElementById('mentions-legales-link');
+      const popup = document.getElementById('mentions-popup');
+      const closeBtn = document.getElementById('close-mentions');
+      if (link && popup && closeBtn) {
+        link.onclick = function(e){ e.preventDefault(); popup.style.display='block'; };
+        closeBtn.onclick = function(e){ e.preventDefault(); popup.style.display='none'; };
       }
-      // Mentions
-      document.getElementById('mentions-legales-link').onclick = function(e){
-        e.preventDefault();
-        document.getElementById('mentions-popup').style.display='block';
-      };
-      document.getElementById('close-mentions').onclick = function(e){
-        e.preventDefault();
-        document.getElementById('mentions-popup').style.display='none';
-      };
 
       // Format téléphone FR
       const telUnlock = document.getElementById('telUnlock');
@@ -715,7 +705,7 @@
 
       try {
         gtag('event','unlock_report',{method:'overlay'});
-        gtag_report_conversion(); // ← conversion unique
+        gtag_report_conversion(); // conversion unique
       } catch(e) {}
       unlockUI();
       setUnlocked(24);
@@ -738,6 +728,51 @@
       animate();
     }
     updateCompteur(); setInterval(updateCompteur, 1000);
+  </script>
+
+  <!-- Script Consent Mode V2 : logique Accepter/Refuser -->
+  <script>
+    (function(){
+      const KEY = 'consent_v2';
+      const banner = document.getElementById('consent-banner');
+      const btnAccept = document.getElementById('consent-accept');
+      const btnReject = document.getElementById('consent-reject');
+
+      function updateConsent(state, init=true){
+        gtag('consent', 'update', {
+          analytics_storage:   state.analytics ? 'granted' : 'denied',
+          ad_storage:          state.ads ? 'granted' : 'denied',
+          ad_user_data:        state.adUserData ? 'granted' : 'denied',
+          ad_personalization:  state.adPersonal ? 'granted' : 'denied'
+        });
+        if (init && (state.analytics || state.ads || state.adUserData || state.adPersonal)) {
+          window.__initAds && window.__initAds();
+        }
+      }
+      function save(state){ try{ localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+      function load(){ try{ return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch(e){ return null; } }
+
+      // Chargement initial
+      const saved = load();
+      if (saved) { updateConsent(saved, /*init=*/true); banner.style.display = 'none'; }
+      else { banner.style.display = 'block'; }
+
+      // Acceptation globale
+      btnAccept.addEventListener('click', function(){
+        const state = { analytics:true, ads:true, adUserData:true, adPersonal:true };
+        updateConsent(state);
+        save(state);
+        banner.style.display = 'none';
+      });
+
+      // Refus global
+      btnReject.addEventListener('click', function(){
+        const state = { analytics:false, ads:false, adUserData:false, adPersonal:false };
+        updateConsent(state);
+        save(state);
+        banner.style.display = 'none';
+      });
+    })();
   </script>
 </body>
 </html>
