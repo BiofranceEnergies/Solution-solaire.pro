@@ -183,61 +183,15 @@
     @media (prefers-reduced-motion: reduce){ #calc-overlay .spinner{ animation: none; } }
 
     /* --- Bandeau cookies (restyle) --- */
-    .consent-banner {
-      position: fixed;
-      left: 0; right: 0; bottom: 0;
-      background: #0a1326;
-      border-top: 1px solid #1f2b4a;
-      color: #e5e7eb;
-      padding: 12px;
-      z-index: 9999;
-      display: none;
-      box-shadow: 0 -6px 26px rgba(0,0,0,.35);
-      font: 14px/1.5 system-ui,Segoe UI,Roboto;
-    }
-    .consent-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      display: flex;
-      gap: 14px;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-    .consent-text {
-      flex: 1 1 520px;
-      font-size: 14px;
-      color: #cbd5e1;
-    }
-    .consent-buttons {
-      display: flex;
-      gap: 10px;
-    }
-    .consent-btn {
-      padding: 8px 16px;
-      border-radius: 999px;
-      font-weight: 700;
-      cursor: pointer;
-      border: none;
-      font-size: 14px;
-      transition: all 0.2s ease;
-    }
-    .consent-btn.reject {
-      background: #1e293b;
-      color: #e2e8f0;
-    }
-    .consent-btn.reject:hover {
-      background: #334155;
-    }
-    .consent-btn.accept {
-      background: linear-gradient(90deg,#22c55e,#16a34a);
-      color: #fff;
-      font-weight: 800;
-      box-shadow: 0 4px 12px rgba(34,197,94,.35);
-    }
-    .consent-btn.accept:hover {
-      background: #15803d;
-    }
+    .consent-banner { position: fixed; left: 0; right: 0; bottom: 0; background: #0a1326; border-top: 1px solid #1f2b4a; color: #e2e8f0; padding: 12px; z-index: 9999; display: none; box-shadow: 0 -6px 26px rgba(0,0,0,.35); font: 14px/1.5 system-ui,Segoe UI,Roboto; }
+    .consent-inner { max-width: 900px; margin: 0 auto; display: flex; gap: 14px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+    .consent-text { flex: 1 1 520px; font-size: 14px; color: #cbd5e1; }
+    .consent-buttons { display: flex; gap: 10px; }
+    .consent-btn { padding: 8px 16px; border-radius: 999px; font-weight: 700; cursor: pointer; border: none; font-size: 14px; transition: all 0.2s ease; }
+    .consent-btn.reject { background: #1e293b; color: #e2e8f0; }
+    .consent-btn.reject:hover { background: #334155; }
+    .consent-btn.accept { background: linear-gradient(90deg,#22c55e,#16a34a); color: #fff; font-weight: 800; box-shadow: 0 4px 12px rgba(34,197,94,.35); }
+    .consent-btn.accept:hover { background: #15803d; }
   </style>
 </head>
 <body>
@@ -270,14 +224,14 @@
 
     <!-- Accroche principale -->
     <h1>Devis, prix et simulateur photovoltaïque en Dordogne</h1>
-    <div class="lead-sub">
-      <p>
-        Obtenez un <strong>devis panneaux solaires en Dordogne</strong>,
-        découvrez le <strong>prix de votre installation photovoltaïque</strong>
-        et utilisez notre <strong>simulateur solaire</strong> gratuit et immédiat.
-        Simple, fiable, sans engagement.
-      </p>
-    </div>
+<div class="lead-sub" style="text-align:center; margin:14px auto 22px auto;">
+  <span style="display:inline-block; background:linear-gradient(90deg,#2563eb,#3b82f6); color:#fff; padding:8px 14px; border-radius:999px; font-weight:700; font-size:15px; box-shadow:0 4px 12px rgba(37,99,235,.35);">
+    Simulateur rare sur le web • 100% en ligne • Résultat immédiat
+  </span>
+</div>
+
+
+
 
     <!-- H2 SEO visible -->
     <h2 id="prix">Prix installation photovoltaïque : coûts, production et économies</h2>
@@ -302,8 +256,8 @@
       </form>
     </div>
 
-    <!-- ===== Sections SEO ciblées ===== -->
-    <div class="card" style="max-width:720px">
+    <!-- ===== Sections SEO ciblées (à masquer après simulation) ===== -->
+    <div class="card" style="max-width:720px" data-hide-after-sim="1" id="bloc-seo">
       <h2>Prix installation photovoltaïque</h2>
       <p>
         Le <strong>prix d’une installation photovoltaïque</strong> dépend de la puissance, du nombre de panneaux et des contraintes de pose.
@@ -340,8 +294,8 @@
     </div>
     <!-- ===== Fin sections SEO ===== -->
 
-    <!-- Témoignages -->
-    <div class="card temoins">
+    <!-- Témoignages (à masquer après simulation) -->
+    <div class="card temoins" data-hide-after-sim="1" id="bloc-temoins">
       <h2>Ils l'ont testé</h2>
       <div class="temoins-list">
         <div class="temoin">
@@ -436,6 +390,16 @@
   </div>
 
   <script>
+    /* --- HELPERS MASQUAGE APRÈS SIMULATION --- */
+    function hideAfterSimulationBlocks() {
+      document.querySelectorAll('[data-hide-after-sim]')
+        .forEach(el => { el.style.display = 'none'; });
+    }
+    function showAfterSimulationBlocks() {
+      document.querySelectorAll('[data-hide-after-sim]')
+        .forEach(el => { el.style.display = ''; });
+    }
+
     /* --- MODE TEST & PERSISTANCE 24h --- */
     const qs = new URLSearchParams(location.search);
     const UNLOCK_KEY = 'pv_unlock_until_v3';
@@ -620,29 +584,28 @@ async function calculerSimulation() {
     const totalTxt = Number.isFinite(scenario.total) ? scenario.total.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2}) + " €" : "—";
     const dureeTxt = Number.isFinite(scenario.dureeMois) ? scenario.dureeMois + " mois" : "—";
 
-// Récap
-const recapEl = document.getElementById('recap');
-const libConso = (sourceConso === "reelle") ? "Conso annuelle (réelle)" : "Conso annuelle estimée";
-recapEl.innerHTML = `
-  <h2>Votre estimation personnalisée</h2>
-  <div class="recap-grid">
-    <div class="recap-item"><div class="label">Code postal</div><div class="value">${esc(codePostal)}</div></div>
-    <div class="recap-item"><div class="label">${libConso}</div><div class="value">${Math.round(conso).toLocaleString('fr-FR')} kWh</div></div>
-    <div class="recap-item"><div class="label">Prix kWh TTC utilisé</div><div class="value">${prixKwh.toFixed(3)} €</div></div>
-    <div class="recap-item"><div class="label">Facture annuelle</div><div class="value">${facture.toLocaleString('fr-FR')} €</div></div>
-    <div class="recap-item" style="grid-column:1/-1">
-      <div class="label">Puissance & production</div>
-      <div class="value" style="font-size:18px">${esc(scenario.puissance)} — ${scenario.panels} panneaux (500 W) • ${scenario.prod.toLocaleString('fr-FR')} kWh/an</div>
-    </div>
-    <div class="recap-item" style="grid-column:1/-1">
-      <div class="label">% de votre conso couverte</div>
-      <div class="value">${((scenario.prod / conso) * 100).toFixed(2)} %</div>
-    </div>
-  </div>
-  <span class="note">Vous êtes à 100% en autoconsommation grâce à la batterie virtuelle.</span>
-`;
-recapEl.style.display='block'; recapEl.style.visibility='visible'; recapEl.style.height='auto';
-
+    // Récap
+    const recapEl = document.getElementById('recap');
+    const libConso = (sourceConso === "reelle") ? "Conso annuelle (réelle)" : "Conso annuelle estimée";
+    recapEl.innerHTML = `
+      <h2>Votre estimation personnalisée</h2>
+      <div class="recap-grid">
+        <div class="recap-item"><div class="label">Code postal</div><div class="value">${esc(codePostal)}</div></div>
+        <div class="recap-item"><div class="label">${libConso}</div><div class="value">${Math.round(conso).toLocaleString('fr-FR')} kWh</div></div>
+        <div class="recap-item"><div class="label">Prix kWh TTC utilisé</div><div class="value">${prixKwh.toFixed(3)} €</div></div>
+        <div class="recap-item"><div class="label">Facture annuelle</div><div class="value">${facture.toLocaleString('fr-FR')} €</div></div>
+        <div class="recap-item" style="grid-column:1/-1">
+          <div class="label">Puissance & production</div>
+          <div class="value" style="font-size:18px">${esc(scenario.puissance)} — ${scenario.panels} panneaux (500 W) • ${scenario.prod.toLocaleString('fr-FR')} kWh/an</div>
+        </div>
+        <div class="recap-item" style="grid-column:1/-1">
+          <div class="label">% de votre conso couverte</div>
+          <div class="value">${((scenario.prod / conso) * 100).toFixed(2)} %</div>
+        </div>
+      </div>
+      <span class="note">Vous êtes à 100% en autoconsommation grâce à la batterie virtuelle.</span>
+    `;
+    recapEl.style.display='block'; recapEl.style.visibility='visible'; recapEl.style.height='auto';
 
     // KPI
     const k1 = document.getElementById('kpi1');
@@ -701,6 +664,9 @@ recapEl.style.display='block'; recapEl.style.visibility='visible'; recapEl.style
 
     const section = document.getElementById('lockedSection');
     section.style.display='block'; section.style.visibility='visible'; section.style.height='auto';
+
+    /* >>> Masquer les pavés texte + témoignages après simulation <<< */
+    hideAfterSimulationBlocks();
 
     afficherLienMentionsLegales();
     if (isUnlocked()) { unlockUI(); }
@@ -828,72 +794,69 @@ function submitUnlock(e){
 }
 </script>
 
-
-
 <script>
+  /* Compteur dynamique */
+  const baseCount = 1234;
+  const startDate = new Date('2025-05-01T00:00:00Z');
+  function updateCompteur() {
+    const now = new Date();
+    const secondsElapsed = Math.floor((now - startDate) / 1000);
+    const increments = Math.floor(secondsElapsed / 47);
+    const total = baseCount + increments;
+    const el = document.getElementById('compteurValeur');
+    const current = parseInt(el.innerText.replace(/\s/g, ''), 10) || 0;
+    const frames = 90;
+    const increment = (total - current) / frames;
+    let frame = 0;
+    const animate = () => { frame++; const value = Math.round(current + increment * frame); el.innerText = value.toLocaleString('fr-FR'); if (frame < frames) requestAnimationFrame(animate); };
+    animate();
+  }
+  updateCompteur(); setInterval(updateCompteur, 1000);
+</script>
 
-    /* Compteur dynamique */
-    const baseCount = 1234;
-    const startDate = new Date('2025-05-01T00:00:00Z');
-    function updateCompteur() {
-      const now = new Date();
-      const secondsElapsed = Math.floor((now - startDate) / 1000);
-      const increments = Math.floor(secondsElapsed / 47);
-      const total = baseCount + increments;
-      const el = document.getElementById('compteurValeur');
-      const current = parseInt(el.innerText.replace(/\s/g, ''), 10) || 0;
-      const frames = 90;
-      const increment = (total - current) / frames;
-      let frame = 0;
-      const animate = () => { frame++; const value = Math.round(current + increment * frame); el.innerText = value.toLocaleString('fr-FR'); if (frame < frames) requestAnimationFrame(animate); };
-      animate();
-    }
-    updateCompteur(); setInterval(updateCompteur, 1000);
-  </script>
+<!-- Script Consent Mode V2 : logique Accepter/Refuser -->
+<script>
+  (function(){
+    const KEY = 'consent_v2';
+    const banner = document.getElementById('consent-banner');
+    const btnAccept = document.getElementById('consent-accept');
+    const btnReject = document.getElementById('consent-reject');
 
-  <!-- Script Consent Mode V2 : logique Accepter/Refuser -->
-  <script>
-    (function(){
-      const KEY = 'consent_v2';
-      const banner = document.getElementById('consent-banner');
-      const btnAccept = document.getElementById('consent-accept');
-      const btnReject = document.getElementById('consent-reject');
-
-      function updateConsent(state, init=true){
-        gtag('consent', 'update', {
-          analytics_storage:   state.analytics ? 'granted' : 'denied',
-          ad_storage:          state.ads ? 'granted' : 'denied',
-          ad_user_data:        state.adUserData ? 'granted' : 'denied',
-          ad_personalization:  state.adPersonal ? 'granted' : 'denied'
-        });
-        if (init && (state.analytics || state.ads || state.adUserData || state.adPersonal)) {
-          window.__initAds && window.__initAds();
-        }
+    function updateConsent(state, init=true){
+      gtag('consent', 'update', {
+        analytics_storage:   state.analytics ? 'granted' : 'denied',
+        ad_storage:          state.ads ? 'granted' : 'denied',
+        ad_user_data:        state.adUserData ? 'granted' : 'denied',
+        ad_personalization:  state.adPersonal ? 'granted' : 'denied'
+      });
+      if (init && (state.analytics || state.ads || state.adUserData || state.adPersonal)) {
+        window.__initAds && window.__initAds();
       }
-      function save(state){ try{ localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
-      function load(){ try{ return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch(e){ return null; } }
+    }
+    function save(state){ try{ localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+    function load(){ try{ return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch(e){ return null; } }
 
-      // Chargement initial
-      const saved = load();
-      if (saved) { updateConsent(saved, /*init=*/true); banner.style.display = 'none'; }
-      else { banner.style.display = 'block'; }
+    // Chargement initial
+    const saved = load();
+    if (saved) { updateConsent(saved, /*init=*/true); banner.style.display = 'none'; }
+    else { banner.style.display = 'block'; }
 
-      // Acceptation globale
-      btnAccept.addEventListener('click', function(){
-        const state = { analytics:true, ads:true, adUserData:true, adPersonal:true };
-        updateConsent(state);
-        save(state);
-        banner.style.display = 'none';
-      });
+    // Acceptation globale
+    btnAccept.addEventListener('click', function(){
+      const state = { analytics:true, ads:true, adUserData:true, adPersonal:true };
+      updateConsent(state);
+      save(state);
+      banner.style.display = 'none';
+    });
 
-      // Refus global
-      btnReject.addEventListener('click', function(){
-        const state = { analytics:false, ads:false, adUserData:false, adPersonal:false };
-        updateConsent(state);
-        save(state);
-        banner.style.display = 'none';
-      });
-    })();
-  </script>
+    // Refus global
+    btnReject.addEventListener('click', function(){
+      const state = { analytics:false, ads:false, adUserData:false, adPersonal:false };
+      updateConsent(state);
+      save(state);
+      banner.style.display = 'none';
+    });
+  })();
+</script>
 </body>
 </html>
