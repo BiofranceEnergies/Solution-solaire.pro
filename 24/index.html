@@ -136,7 +136,7 @@
     .offre-montant{ display:flex; justify-content:center; align-items:center; gap:10px; font-size:1.35rem; font-weight:800; color:#fff; margin-bottom:4px; }
     .badge-offre{ display:inline-block; background:#2563eb; color:#fff; padding:8px 14px; border-radius:999px; font-weight:900; font-size:1.1rem; box-shadow: 0 6px 16px rgba(37,99,235,.35); }
     .offre-sous-titre{ font-size:.92rem; color:#cbd5e1; margin-bottom:10px }
-    .offre-conditions{ font size:.88rem; color:#a7b6d6 }
+    .offre-conditions{ font-size:.88rem; color:#a7b6d6 }
 
     /* — Témoignages — */
     .temoins{ background: linear-gradient(180deg,#0b1428,#0a1224); border:1px solid #1e3a5f; border-radius:14px; padding:18px; box-shadow:0 14px 36px rgba(2,6,23,.35); max-width:720px; margin:0 auto 18px auto;}
@@ -545,238 +545,292 @@
       document.body.classList.remove('no-scroll');
     }
 
-    async function calculerSimulation() {
-      const btn = document.getElementById('simuler');
-      if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
-      showCalcOverlay('Calcul en cours…');
+async function calculerSimulation() {
+  const btn = document.getElementById('simuler');
+  if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
+  showCalcOverlay('Calcul en cours…');
 
-      try {
-        ['recap','kpi1','lockedSection'].forEach(id=>{
-          const el=document.getElementById(id);
-          el.style.display='none'; el.style.visibility='hidden'; el.style.height='0';
-        });
-        masquerLienMentionsLegales();
+  try {
+    ['recap','kpi1','lockedSection'].forEach(id=>{
+      const el=document.getElementById(id);
+      el.style.display='none'; el.style.visibility='hidden'; el.style.height='0';
+    });
+    masquerLienMentionsLegales();
 
-        const codePostal = document.getElementById('codePostal').value.trim();
-        const facture = parseFloat((document.getElementById('facture').value + '').replace(',', '.'));
-        const consoInput = document.getElementById('conso');
+    const codePostal = document.getElementById('codePostal').value.trim();
+    const facture = parseFloat((document.getElementById('facture').value + '').replace(',', '.'));
+    const consoInput = document.getElementById('conso');
 
-        if (!/^[0-9]{5}$/.test(codePostal)) { alert("Veuillez entrer un code postal valide."); return; }
-        if (isNaN(facture) || facture <= 0) { alert("Merci de remplir correctement tous les champs."); return; }
+    if (!/^[0-9]{5}$/.test(codePostal)) { alert("Veuillez entrer un code postal valide."); return; }
+    if (isNaN(facture) || facture <= 0) { alert("Merci de remplir correctement tous les champs."); return; }
 
-        const departement = codePostal.substring(0, 2);
-        const data = await fetchScenarios(departement);
-        if (data.length === 0) { alert("Aucune donnée disponible pour ce département."); return; }
-        scenarios = data;
+    const departement = codePostal.substring(0, 2);
+    const data = await fetchScenarios(departement);
+    if (data.length === 0) { alert("Aucune donnée disponible pour ce département."); return; }
+    scenarios = data;
 
-        // Conso / prix kWh
-        let conso, prixKwh, consommationEstimee;
-        if (consoInput && consoInput.value) {
-          const consoVal = (consoInput.value + '').replace(',', '.');
-          conso = parseFloat(consoVal);
-          if (isNaN(conso) || conso <= 0) { alert("Merci d’indiquer une consommation kWh correcte."); return; }
-          prixKwh = facture / conso;
-          consommationEstimee = conso;
-        } else {
-          prixKwh = scenarios[0].prixKwh;
-          consommationEstimee = facture / prixKwh;
-          conso = consommationEstimee;
-        }
+    // Conso / prix kWh
+    let conso, prixKwh, consommationEstimee;
+    let consoReelleVal = "";
+    let sourceConso = "estimee";
 
-        // Dimensionnement
-        const minProd = Math.min(...scenarios.map(s => s.prod));
-        if (consommationEstimee < minProd) { alert("Consommation trop faible : installation non conseillée."); return; }
-        let scenario = scenarios.filter(s => s.prod <= consommationEstimee).sort((a,b) => b.prod - a.prod)[0];
-        if (!scenario) scenario = scenarios.sort((a,b) => b.prod - a.prod)[0];
-        selectedScenario = scenario;
-
-        // Calculs
-        const autoKwh = scenario.prod * 0.6;
-        const stockKwh = scenario.prod * 0.4;
-        const acheminement = 0.05;
-        const factureAvant = conso * prixKwh;
-        const autoValue = autoKwh * prixKwh;
-        const stockValue = stockKwh * prixKwh;
-        const coutAcheminement = stockKwh * acheminement;
-        const factureApres = factureAvant - autoValue - stockValue + coutAcheminement;
-        const economieAnnuelle = factureAvant - factureApres;
-        const economieMensuelle = economieAnnuelle / 12;
-        let gain15ans = 0, prixActuel = prixKwh;
-        for (let i=0;i<15;i++){
-          const autoVal = autoKwh * prixActuel, stockVal = stockKwh * prixActuel, coutAch = stockKwh * acheminement;
-          const factureAv = conso * prixActuel, factureAp = factureAv - autoVal - stockVal + coutAch;
-          gain15ans += (factureAv - factureAp); prixActuel *= 1.05;
-        }
-
-        // Formats
-        const taegTxt = Number.isFinite(scenario.taeg) ? scenario.taeg.toFixed(2) + " %" : "—";
-        const mensualiteTxt = Number.isFinite(scenario.mensualite) ? scenario.mensualite.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2}) + " €" : "—";
-        const totalTxt = Number.isFinite(scenario.total) ? scenario.total.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2}) + " €" : "—";
-        const dureeTxt = Number.isFinite(scenario.dureeMois) ? scenario.dureeMois + " mois" : "—";
-
-        // Récap
-        const recapEl = document.getElementById('recap');
-        recapEl.innerHTML = `
-          <h2>Votre estimation personnalisée</h2>
-          <div class="recap-grid">
-            <div class="recap-item"><div class="label">Code postal</div><div class="value">${esc(codePostal)}</div></div>
-            <div class="recap-item"><div class="label">Conso annuelle estimée</div><div class="value">${Math.round(conso).toLocaleString('fr-FR')} kWh</div></div>
-            <div class="recap-item"><div class="label">Prix kWh TTC utilisé</div><div class="value">${prixKwh.toFixed(3)} €</div></div>
-            <div class="recap-item"><div class="label">Facture annuelle</div><div class="value">${facture.toLocaleString('fr-FR')} €</div></div>
-            <div class="recap-item" style="grid-column:1/-1">
-              <div class="label">Puissance & production</div>
-              <div class="value" style="font-size:18px">${esc(scenario.puissance)} — ${scenario.panels} panneaux (500 W) • ${scenario.prod.toLocaleString('fr-FR')} kWh/an</div>
-            </div>
-            <div class="recap-item" style="grid-column:1/-1">
-              <div class="label">% de votre conso couverte</div>
-              <div class="value">${((scenario.prod / conso) * 100).toFixed(2)} %</div>
-            </div>
-          </div>
-          <span class="note">Vous êtes à 100% en autoconsommation grâce à la batterie virtuelle.</span>
-        `;
-        recapEl.style.display='block'; recapEl.style.visibility='visible'; recapEl.style.height='auto';
-
-        // KPI
-        const k1 = document.getElementById('kpi1');
-        k1.innerHTML = `<div class="kpi-box"><strong>Gain estimé la 1ʳᵉ année :</strong> <b>${Math.round(economieAnnuelle).toLocaleString('fr-FR')} €</b></div>`;
-        k1.style.display='block'; k1.style.visibility='visible'; k1.style.height='auto';
-
-        // Contenu verrouillé
-        const locked = document.getElementById('lockedContent');
-        locked.innerHTML = `
-          <div class="kpi-box"><strong>Soit un gain par mois de :</strong> <b>${Math.round(economieMensuelle).toLocaleString('fr-FR')} €</b></div>
-          <div class="kpi-box"><strong>Économie cumulée sur 15 ans :</strong> <b>${Math.round(gain15ans).toLocaleString('fr-FR')} €</b></div>
-
-          <div style="border-top:1px solid var(--border);margin:10px 0 12px 0"></div>
-
-          <div class="propo">
-            <div class="propo-title">Ce que nous vous proposons</div>
-            <ul class="propo-list">
-              <li><span class="point-title">Remplacer votre facture par un investissement</span><br>Une partie de votre budget électricité finance votre installation solaire.</li>
-              <li><span class="point-title">Autofinancement simple</span><br>Les économies générées couvrent votre mensualité.</li>
-              <li><span class="point-title">Mensualité fixe</span><br><span class="badge">${mensualiteTxt}</span> hors assurance.</li>
-              <li><span class="point-title">Aucune charge supplémentaire</span><br>Cette mensualité remplace ce que vous payez déjà, elle ne s’ajoute pas.</li>
-              <li><span class="point-title">Protégez-vous des hausses</span><br>Devenez propriétaire de votre production et sécurisez vos coûts.</li>
-            </ul>
-          </div>
-
-          <div class="offre-speciale">
-            <div class="offre-titre">Offre spéciale “Groupage chantiers”</div>
-            <div class="offre-montant">
-              <span class="badge-offre">${Number.isFinite(scenario.remiseChantier) ? scenario.remiseChantier.toLocaleString('fr-FR') : "—"} €</span>
-              <span>de remise immédiate</span>
-            </div>
-            <div class="offre-sous-titre">(à déduire du prix TTC affiché ci-dessous)</div>
-            <div class="offre-conditions">Offre valable jusqu’au <strong>31 août 2025</strong> — Places limitées</div>
-          </div>
-
-          <div class="financement-bloc">
-            <div class="financement-conditions">
-              <div class="prix-install">
-                <span class="point-title">Installation ${esc(scenario.puissance)} :</span>
-                <span class="badge-fin badge-fin--clair">${scenario.prix.toLocaleString('fr-FR')} € TTC</span>
-                <span class="hint">(prix indicatif hors options)</span>
-              </div>
-              <div class="option-fin">Option financement <span class="hint">(facultatif)</span></div>
-              <div>
-                <span class="badge-fin">${mensualiteTxt}</span> par mois (hors assurance)
-                • Durée : <span class="badge-fin">${dureeTxt}</span>
-                • TAEG fixe : <span class="badge-fin">${taegTxt}</span>
-              </div>
-              <div style="margin-top:6px">Prix total : <span class="badge-fin">${totalTxt}</span></div>
-              <div style="margin-top:6px">Financement proposé par notre partenaire Projexio, sous réserve d’acceptation.</div>
-            </div>
-            <div class="financement-warning">Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</div>
-            <div class="financement-note">L’estimation affichée est indicative. Une visite technique est nécessaire pour établir un devis ferme et adapté à votre situation.</div>
-          </div>
-        `;
-
-        const section = document.getElementById('lockedSection');
-        section.style.display='block'; section.style.visibility='visible'; section.style.height='auto';
-
-        afficherLienMentionsLegales();
-        if (isUnlocked()) { unlockUI(); }
-
-        // Envoi auto (lead anonyme)
-        const fd = new FormData();
-        fd.append("code_postal", codePostal);
-        fd.append("conso", Math.round(conso));
-        fd.append("facture", facture);
-        fd.append("prod", scenario.prod);
-        fd.append("eco1", Math.round(economieAnnuelle));
-        fd.append("ecomensuelle", Math.round(economieMensuelle));
-        fd.append("eco15", Math.round(gain15ans));
-        fd.append("puissance", scenario.puissance);
-        fd.append("panneaux", scenario.panels);
-        fd.append("prix", scenario.prix);
-        fd.append("mensualite", Number.isFinite(scenario.mensualite) ? scenario.mensualite : "");
-        fd.append("taeg", Number.isFinite(scenario.taeg) ? scenario.taeg : "");
-        fd.append("totalcredit", Number.isFinite(scenario.total) ? scenario.total : "");
-        fd.append("mois", Number.isFinite(scenario.dureeMois) ? scenario.dureeMois : "");
-        fd.append("email", ""); fd.append("tel", "");
-        fd.append("emailUser", ""); fd.append("telephone", "");
-        fd.append("unlock", "0");
-        fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec', {method:'POST', mode:'no-cors', body:fd});
-      } finally {
-        hideCalcOverlay();
-        if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
-      }
+    if (consoInput && consoInput.value) {
+      const consoVal = (consoInput.value + '').replace(',', '.');
+      const consoParsed = parseFloat(consoVal);
+      if (isNaN(consoParsed) || consoParsed <= 0) { alert("Merci d’indiquer une consommation kWh correcte."); return; }
+      conso = consoParsed;
+      prixKwh = facture / conso;
+      consommationEstimee = conso;
+      consoReelleVal = Math.round(consoParsed);
+      sourceConso = "reelle";
+    } else {
+      prixKwh = scenarios[0].prixKwh;
+      consommationEstimee = facture / prixKwh;
+      conso = consommationEstimee;
     }
 
-    function submitUnlock(e){
-      if(e){ e.preventDefault(); e.stopPropagation(); }
+    // Dimensionnement
+    const minProd = Math.min(...scenarios.map(s => s.prod));
+    if (consommationEstimee < minProd) { alert("Consommation trop faible : installation non conseillée."); return; }
+    let scenario = scenarios.filter(s => s.prod <= consommationEstimee).sort((a,b) => b.prod - a.prod)[0];
+    if (!scenario) scenario = scenarios.sort((a,b) => b.prod - a.prod)[0];
+    selectedScenario = scenario;
 
-      const email=(document.getElementById('emailUnlock').value||'').trim();
-      const tel=(document.getElementById('telUnlock').value||'').replace(/\D/g,'');
-      const consent=document.getElementById('rgpdUnlock').checked;
-      if(!email || !/^\S+@\S+\.\S+$/.test(email)){ alert("Email invalide."); return; }
-      if(!tel || tel.length<10){ alert("Téléphone invalide (10 chiffres)."); return; }
-      if(!consent){ alert("Merci de cocher la case de consentement."); return; }
-      if(!selectedScenario){ alert("Veuillez d’abord lancer une simulation."); return; }
-
-      const codePostal=document.getElementById('codePostal').value.trim();
-      const facture=parseFloat((document.getElementById('facture').value + '').replace(',', '.'));
-      const prixKwh=selectedScenario.prixKwh;
-      const conso=facture/prixKwh;
-
-      const autoKwh=selectedScenario.prod*0.6, stockKwh=selectedScenario.prod*0.4, acheminement=0.05;
-      const factureAvant=conso*prixKwh;
-      const autoValue=autoKwh*prixKwh, stockValue=stockKwh*prixKwh, coutAcheminement=stockKwh*acheminement;
-      const economieAnnuelle=factureAvant-(factureAvant-autoValue-stockValue+coutAcheminement);
-      const economieMensuelle=economieAnnuelle/12;
-      let gain15ans=0, prixActuel=prixKwh;
-      for(let i=0;i<15;i++){
-        const autoVal=autoKwh*prixActuel, stockVal=stockKwh*prixActuel, coutAch=stockKwh*acheminement, factureAv=conso*prixActuel, factureAp=factureAv-autoVal-stockVal+coutAch;
-        gain15ans+= (factureAv-factureAp); prixActuel*=1.05;
-      }
-
-      const fd=new FormData();
-      fd.append("code_postal", codePostal);
-      fd.append("conso", Math.round(conso));
-      fd.append("facture", facture);
-      fd.append("prod", selectedScenario.prod);
-      fd.append("eco1", Math.round(economieAnnuelle));
-      fd.append("ecomensuelle", Math.round(economieMensuelle));
-      fd.append("eco15", Math.round(gain15ans));
-      fd.append("puissance", selectedScenario.puissance);
-      fd.append("panneaux", selectedScenario.panels);
-      fd.append("prix", selectedScenario.prix);
-      fd.append("mensualite", Number.isFinite(selectedScenario.mensualite) ? selectedScenario.mensualite : "");
-      fd.append("taeg", Number.isFinite(selectedScenario.taeg) ? selectedScenario.taeg : "");
-      fd.append("totalcredit", Number.isFinite(selectedScenario.total) ? selectedScenario.total : "");
-      fd.append("mois", Number.isFinite(selectedScenario.dureeMois) ? selectedScenario.dureeMois : "");
-      fd.append("email", email); fd.append("tel", tel);
-      fd.append("emailUser", email); fd.append("telephone", tel);
-      fd.append("unlock", "1");
-      fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec',{method:'POST',mode:'no-cors',body:fd});
-
-      try {
-        gtag('event','unlock_report',{method:'overlay'});
-        gtag_report_conversion(); // conversion unique
-      } catch(e) {}
-      unlockUI();
-      setUnlocked(24);
+    // Calculs
+    const autoKwh = scenario.prod * 0.6;
+    const stockKwh = scenario.prod * 0.4;
+    const acheminement = 0.05;
+    const factureAvant = conso * prixKwh;
+    const autoValue = autoKwh * prixKwh;
+    const stockValue = stockKwh * prixKwh;
+    const coutAcheminement = stockKwh * acheminement;
+    const factureApres = factureAvant - autoValue - stockValue + coutAcheminement;
+    const economieAnnuelle = factureAvant - factureApres;
+    const economieMensuelle = economieAnnuelle / 12;
+    let gain15ans = 0, prixActuel = prixKwh;
+    for (let i=0;i<15;i++){
+      const autoVal = autoKwh * prixActuel, stockVal = stockKwh * prixActuel, coutAch = stockKwh * acheminement;
+      const factureAv = conso * prixActuel, factureAp = factureAv - autoVal - stockVal + coutAch;
+      gain15ans += (factureAv - factureAp); prixActuel *= 1.05;
     }
+
+    // Formats
+    const taegTxt = Number.isFinite(scenario.taeg) ? scenario.taeg.toFixed(2) + " %" : "—";
+    const mensualiteTxt = Number.isFinite(scenario.mensualite) ? scenario.mensualite.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2}) + " €" : "—";
+    const totalTxt = Number.isFinite(scenario.total) ? scenario.total.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2}) + " €" : "—";
+    const dureeTxt = Number.isFinite(scenario.dureeMois) ? scenario.dureeMois + " mois" : "—";
+
+// Récap
+const recapEl = document.getElementById('recap');
+const libConso = (sourceConso === "reelle") ? "Conso annuelle (réelle)" : "Conso annuelle estimée";
+recapEl.innerHTML = `
+  <h2>Votre estimation personnalisée</h2>
+  <div class="recap-grid">
+    <div class="recap-item"><div class="label">Code postal</div><div class="value">${esc(codePostal)}</div></div>
+    <div class="recap-item"><div class="label">${libConso}</div><div class="value">${Math.round(conso).toLocaleString('fr-FR')} kWh</div></div>
+    <div class="recap-item"><div class="label">Prix kWh TTC utilisé</div><div class="value">${prixKwh.toFixed(3)} €</div></div>
+    <div class="recap-item"><div class="label">Facture annuelle</div><div class="value">${facture.toLocaleString('fr-FR')} €</div></div>
+    <div class="recap-item" style="grid-column:1/-1">
+      <div class="label">Puissance & production</div>
+      <div class="value" style="font-size:18px">${esc(scenario.puissance)} — ${scenario.panels} panneaux (500 W) • ${scenario.prod.toLocaleString('fr-FR')} kWh/an</div>
+    </div>
+    <div class="recap-item" style="grid-column:1/-1">
+      <div class="label">% de votre conso couverte</div>
+      <div class="value">${((scenario.prod / conso) * 100).toFixed(2)} %</div>
+    </div>
+  </div>
+  <span class="note">Vous êtes à 100% en autoconsommation grâce à la batterie virtuelle.</span>
+`;
+recapEl.style.display='block'; recapEl.style.visibility='visible'; recapEl.style.height='auto';
+
+
+    // KPI
+    const k1 = document.getElementById('kpi1');
+    k1.innerHTML = `<div class="kpi-box"><strong>Gain estimé la 1ʳᵉ année :</strong> <b>${Math.round(economieAnnuelle).toLocaleString('fr-FR')} €</b></div>`;
+    k1.style.display='block'; k1.style.visibility='visible'; k1.style.height='auto';
+
+    // Contenu verrouillé
+    const locked = document.getElementById('lockedContent');
+    locked.innerHTML = `
+      <div class="kpi-box"><strong>Soit un gain par mois de :</strong> <b>${Math.round(economieMensuelle).toLocaleString('fr-FR')} €</b></div>
+      <div class="kpi-box"><strong>Économie cumulée sur 15 ans :</strong> <b>${Math.round(gain15ans).toLocaleString('fr-FR')} €</b></div>
+
+      <div style="border-top:1px solid var(--border);margin:10px 0 12px 0"></div>
+
+      <div class="propo">
+        <div class="propo-title">Ce que nous vous proposons</div>
+        <ul class="propo-list">
+          <li><span class="point-title">Remplacer votre facture par un investissement</span><br>Une partie de votre budget électricité finance votre installation solaire.</li>
+          <li><span class="point-title">Autofinancement simple</span><br>Les économies générées couvrent votre mensualité.</li>
+          <li><span class="point-title">Mensualité fixe</span><br><span class="badge">${mensualiteTxt}</span> hors assurance.</li>
+          <li><span class="point-title">Aucune charge supplémentaire</span><br>Cette mensualité remplace ce que vous payez déjà, elle ne s’ajoute pas.</li>
+          <li><span class="point-title">Protégez-vous des hausses</span><br>Devenez propriétaire de votre production et sécurisez vos coûts.</li>
+        </ul>
+      </div>
+
+      <div class="offre-speciale">
+        <div class="offre-titre">Offre spéciale “Groupage chantiers”</div>
+        <div class="offre-montant">
+          <span class="badge-offre">${Number.isFinite(scenario.remiseChantier) ? scenario.remiseChantier.toLocaleString('fr-FR') : "—"} €</span>
+          <span>de remise immédiate</span>
+        </div>
+        <div class="offre-sous-titre">(à déduire du prix TTC affiché ci-dessous)</div>
+        <div class="offre-conditions">Offre valable jusqu’au <strong>31 août 2025</strong> — Places limitées</div>
+      </div>
+
+      <div class="financement-bloc">
+        <div class="financement-conditions">
+          <div class="prix-install">
+            <span class="point-title">Installation ${esc(scenario.puissance)} :</span>
+            <span class="badge-fin badge-fin--clair">${scenario.prix.toLocaleString('fr-FR')} € TTC</span>
+            <span class="hint">(prix indicatif hors options)</span>
+          </div>
+          <div class="option-fin">Option financement <span class="hint">(facultatif)</span></div>
+          <div>
+            <span class="badge-fin">${mensualiteTxt}</span> par mois (hors assurance)
+            • Durée : <span class="badge-fin">${dureeTxt}</span>
+            • TAEG fixe : <span class="badge-fin">${taegTxt}</span>
+          </div>
+          <div style="margin-top:6px">Prix total : <span class="badge-fin">${totalTxt}</span></div>
+          <div style="margin-top:6px">Financement proposé par notre partenaire Projexio, sous réserve d’acceptation.</div>
+        </div>
+        <div class="financement-warning">Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</div>
+        <div class="financement-note">L’estimation affichée est indicative. Une visite technique est nécessaire pour établir un devis ferme et adapté à votre situation.</div>
+      </div>
+    `;
+
+    const section = document.getElementById('lockedSection');
+    section.style.display='block'; section.style.visibility='visible'; section.style.height='auto';
+
+    afficherLienMentionsLegales();
+    if (isUnlocked()) { unlockUI(); }
+
+    // Envoi auto (lead anonyme)
+    const fd = new FormData();
+    fd.append("code_postal", codePostal);
+    fd.append("conso", Math.round(conso));          // valeur utilisée
+    fd.append("conso_reelle", consoReelleVal);      // si saisie
+    fd.append("source_conso", sourceConso);         // "reelle" | "estimee"
+    fd.append("facture", facture);
+    fd.append("prod", scenario.prod);
+    fd.append("eco1", Math.round(economieAnnuelle));
+    fd.append("ecomensuelle", Math.round(economieMensuelle));
+    fd.append("eco15", Math.round(gain15ans));
+    fd.append("puissance", scenario.puissance);
+    fd.append("panneaux", scenario.panels);
+    fd.append("prix", scenario.prix);
+    fd.append("mensualite", Number.isFinite(scenario.mensualite) ? scenario.mensualite : "");
+    fd.append("taeg", Number.isFinite(scenario.taeg) ? scenario.taeg : "");
+    fd.append("totalcredit", Number.isFinite(scenario.total) ? scenario.total : "");
+    fd.append("mois", Number.isFinite(scenario.dureeMois) ? scenario.dureeMois : "");
+    fd.append("email", ""); fd.append("tel", "");
+    fd.append("emailUser", ""); fd.append("telephone", "");
+    fd.append("unlock", "0");
+    fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec', {method:'POST', mode:'no-cors', body:fd});
+
+   } finally {
+    hideCalcOverlay();
+    if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+  }
+}
+</script>
+
+<script>
+function submitUnlock(e){
+  if(e){ e.preventDefault(); e.stopPropagation(); }
+
+  const email = (document.getElementById('emailUnlock').value||'').trim();
+  const tel = (document.getElementById('telUnlock').value||'').replace(/\D/g,'');
+  const consent = document.getElementById('rgpdUnlock').checked;
+
+  if(!email || !/^\S+@\S+\.\S+$/.test(email)){ alert("Email invalide."); return; }
+  if(!tel || tel.length<10){ alert("Téléphone invalide (10 chiffres)."); return; }
+  if(!consent){ alert("Merci de cocher la case de consentement."); return; }
+  if(!selectedScenario){ alert("Veuillez d’abord lancer une simulation."); return; }
+
+  const codePostal = document.getElementById('codePostal').value.trim();
+  const facture = parseFloat((document.getElementById('facture').value + '').replace(',', '.'));
+
+  // === Recalcule PRÉCIS comme dans calculerSimulation() ===
+  const consoInput = document.getElementById('conso');
+  let conso, prixKwh, consoReelleVal = "", sourceConso = "estimee";
+
+  if (consoInput && consoInput.value) {
+    const v = parseFloat((consoInput.value + '').replace(',', '.'));
+    if (!isNaN(v) && v > 0) {
+      conso = v;
+      prixKwh = facture / conso;     // ⚡ identique à calculerSimulation()
+      consoReelleVal = Math.round(v);
+      sourceConso = "reelle";
+    }
+  }
+  if (!conso) {
+    prixKwh = selectedScenario.prixKwh;
+    conso = facture / prixKwh;       // fallback estimé comme dans la simu
+  }
+
+  // === Calculs identiques ===
+  const autoKwh = selectedScenario.prod * 0.6;
+  const stockKwh = selectedScenario.prod * 0.4;
+  const acheminement = 0.05;
+
+  const factureAvant = conso * prixKwh;
+  const autoValue = autoKwh * prixKwh;
+  const stockValue = stockKwh * prixKwh;
+  const coutAcheminement = stockKwh * acheminement;
+
+  const factureApres = factureAvant - autoValue - stockValue + coutAcheminement;
+  const economieAnnuelle = factureAvant - factureApres;
+  const economieMensuelle = economieAnnuelle / 12;
+
+  let gain15ans = 0, prixActuel = prixKwh;
+  for (let i=0;i<15;i++){
+    const autoVal = autoKwh * prixActuel;
+    const stockVal = stockKwh * prixActuel;
+    const coutAch = stockKwh * acheminement;
+    const factureAv = conso * prixActuel;
+    const factureAp = factureAv - autoVal - stockVal + coutAch;
+    gain15ans += (factureAv - factureAp);
+    prixActuel *= 1.05;
+  }
+
+  // === Envoi (mêmes champs/ordre) ===
+  const fd = new FormData();
+  fd.append("code_postal", codePostal);
+  fd.append("conso", Math.round(conso));        // valeur utilisée
+  fd.append("conso_reelle", consoReelleVal);    // si saisie
+  fd.append("source_conso", sourceConso);       // "reelle" | "estimee"
+  fd.append("facture", facture);
+  fd.append("prod", selectedScenario.prod);
+  fd.append("eco1", Math.round(economieAnnuelle));
+  fd.append("ecomensuelle", Math.round(economieMensuelle));
+  fd.append("eco15", Math.round(gain15ans));
+  fd.append("puissance", selectedScenario.puissance);
+  fd.append("panneaux", selectedScenario.panels);
+  fd.append("prix", selectedScenario.prix);
+  fd.append("mensualite", Number.isFinite(selectedScenario.mensualite) ? selectedScenario.mensualite : "");
+  fd.append("taeg", Number.isFinite(selectedScenario.taeg) ? selectedScenario.taeg : "");
+  fd.append("totalcredit", Number.isFinite(selectedScenario.total) ? selectedScenario.total : "");
+  fd.append("mois", Number.isFinite(selectedScenario.dureeMois) ? selectedScenario.dureeMois : "");
+  fd.append("email", email); fd.append("tel", tel);
+  fd.append("emailUser", email); fd.append("telephone", tel);
+  fd.append("unlock", "1");
+
+  fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec',{method:'POST',mode:'no-cors',body:fd});
+
+  try{
+    gtag('event','unlock_report',{method:'overlay'});
+    gtag_report_conversion();
+  }catch(e){}
+
+  unlockUI();
+  setUnlocked(24);
+}
+</script>
+
+
+
+<script>
 
     /* Compteur dynamique */
     const baseCount = 1234;
