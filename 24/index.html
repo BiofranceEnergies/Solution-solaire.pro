@@ -76,9 +76,9 @@
     .wrap { max-width:980px; margin:0 auto; padding:28px 14px; }
 
     .logo{display:block;margin:0 auto 6px;width:92px;height:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.35))}
-    h1{font-size:clamp(24px,3.2vw,36px);text-align:center;color:#c7d2fe;margin:6px 0 8px 0;font-weight:800}
+    h1{font-size:clamp(24px,3.2vw,36px);text-align:center;color:#c7d2fe;margin:6px 0 8px 0;font-weight:800;line-height:1.18} /* resserré */
     h2{font-size:clamp(18px,2.2vw,22px);text-align:center;color:#a5b4fc;margin:0 0 10px 0;font-weight:700}
-    .lead-sub{color:var(--muted);text-align:center;margin:6px 0 18px 0}
+    .lead-sub{color:var(--muted);text-align:center;margin:8px auto 14px auto} /* plus compact */
 
     .card{background:linear-gradient(180deg,var(--card),#0a1020);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin:0 auto 18px auto}
     .form-section{max-width:720px}
@@ -87,8 +87,18 @@
     input,button{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid #1e3a5f;background:#0a1326;color:#e5e7eb;font-size:17px}
     input::placeholder{color:#8aa0c2}
     a.helper{color:#93c5fd;text-decoration:underline;font-size:14px}
-    button.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));border:none;color:#fff;font-weight:800;cursor:pointer;letter-spacing:.2px}
-    button.primary:hover{background:var(--accent-hover)}
+
+    /* CTA plus contrastée */
+    button.primary{
+  background: linear-gradient(90deg,#60a5fa,#3b82f6);
+  color:#fff;
+  border:0;
+  font-weight:900; letter-spacing:.2px; cursor:pointer;
+  box-shadow:0 8px 22px rgba(59,130,246,.35);
+}
+button.primary:hover{ filter:brightness(1.05); }
+button.primary:focus{ outline:2px solid #bfdbfe; outline-offset:2px; }
+
 
     .counter-wrap{display:flex;justify-content:center;margin:8px 0 18px 0}
     .counter-badge{display:inline-block;background:linear-gradient(180deg,#0b1324,#0b0f1a);color:#dbeafe;border:1px solid #1f2b4a;border-radius:999px;padding:10px 18px;font-weight:800;letter-spacing:.3px;box-shadow:var(--shadow)}
@@ -202,6 +212,46 @@
     .consent-btn.reject:hover { background: #334155; }
     .consent-btn.accept { background: linear-gradient(90deg,#22c55e,#16a34a); color: #fff; font-weight: 800; box-shadow: 0 4px 12px rgba(34,197,94,.35); }
     .consent-btn.accept:hover { background: #15803d; }
+
+    /* --- Accordéon SEO --- */
+    #bloc-seo { max-width:720px; }
+    #bloc-seo details {
+      border: 1px solid #1f2b4a;
+      border-radius: 12px;
+      margin: 10px 0;
+      background: #0a1326;
+      overflow: hidden;
+    }
+    #bloc-seo summary {
+      cursor: pointer;
+      padding: 12px 14px;
+      font-weight: 700;
+      color: #a5b4fc;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      list-style: none;
+    }
+    #bloc-seo summary::-webkit-details-marker { display: none; }
+    #bloc-seo details[open] summary {
+      background: #0b1428;
+      border-bottom: 1px solid #1f2b4a;
+    }
+    #bloc-seo details p {
+      margin: 0;
+      padding: 12px 14px;
+      color: #e5e7eb;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    #bloc-seo summary::after {
+      content: "▸";
+      font-size: 16px;
+      transition: transform 0.2s ease;
+      color: #93c5fd;
+    }
+    #bloc-seo details[open] summary::after { transform: rotate(90deg); }
+    #bloc-seo summary h2{display:inline;margin:0;color:#a5b4fc;font-size:clamp(18px,2.2vw,22px);font-weight:700;text-align:left}
   </style>
 </head>
 <body>
@@ -239,9 +289,9 @@
 
     <!-- Accroche principale -->
     <h1>Devis, prix &amp; simulateur panneaux solaires en Dordogne (24)</h1>
-    <div class="lead-sub" style="text-align:center; margin:14px auto 22px auto;">
+    <div class="lead-sub" style="text-align:center; margin:8px auto 14px auto;">
       <span style="display:inline-block; background:linear-gradient(90deg,#2563eb,#3b82f6); color:#fff; padding:8px 14px; border-radius:999px; font-weight:700; font-size:15px; box-shadow:0 4px 12px rgba(37,99,235,.35);">
-        Simulateur rare sur le web • 100% en ligne • Résultat immédiat
+        Prix, production et économies en 30 s • Estimation en temps réel
       </span>
     </div>
 
@@ -255,53 +305,72 @@
         <div class="inputs" style="margin-bottom:8px">
           <input type="text" id="codePostal" placeholder="Votre code postal" maxlength="5"
                  inputmode="numeric" pattern="[0-9]{5}" autocomplete="postal-code" autofocus>
-          <input type="text" id="facture" placeholder="Votre facture élec /an (€)"
+          <input type="text" id="facture" placeholder="Votre facture élec /an (ex : 1800 €)"
                  inputmode="decimal" autocomplete="off">
         </div>
         <div id="modeAvance" style="display:none;">
           <input type="text" id="conso" placeholder="Conso annuelle (kWh, optionnel)" inputmode="decimal" autocomplete="off">
         </div>
         <a href="#" id="lienAvance" class="helper">➕ Vous connaissez votre consommation annuelle ? Cliquez ici pour une estimation ultra-précise</a>
+        <div style="margin-top:6px;font-size:13px;color:#a7b6d6;text-align:center">Pas votre conso ? La facture suffit.</div>
         <div style="height:10px"></div>
-        <button id="simuler" type="submit" class="primary" aria-label="Obtenir mon estimation">🔍 Obtenir mon estimation</button>
+        <button id="simuler" type="submit" class="primary" aria-label="Obtenir mon estimation photovoltaïque">🔍 Obtenir mon estimation</button>
         <div style="margin-top:8px;font-size:14px;color:#93c5fd;text-align:center">
           ⚡ <strong>Résultat instantané :</strong> production, prix TTC et option de financement calculés en temps réel.
         </div>
       </form>
     </div>
 
-    <!-- ===== Sections SEO ciblées (à masquer après simulation) ===== -->
-<div class="card" style="max-width:720px" data-hide-after-sim="1" id="bloc-seo">
+    <!-- ===== Sections SEO ciblées (version accordéon) ===== -->
+    <div class="card" data-hide-after-sim="1" id="bloc-seo">
 
-  <h2 id="devis">Devis panneaux photovoltaïques</h2>
-  <p>
-    Obtenez un <strong>devis panneaux photovoltaïques</strong> en ligne, immédiat et sans engagement.
-    Le chiffrage reprend matériel, pose et démarches, avec une option de financement affichée.
-    Lancez la <strong>simulation</strong> ci-dessus puis débloquez l’étude complète pour recevoir votre devis.
-    Vous pouvez aussi obtenir un <strong>devis panneaux solaires</strong> en ligne.
-  </p>
+      <details>
+        <summary><h2>Devis panneaux photovoltaïques</h2></summary>
+        <p>
+          Obtenez un <strong>devis panneaux photovoltaïques</strong> en ligne, immédiat et sans engagement.
+          Le chiffrage reprend matériel, pose et démarches, avec une option de financement affichée.
+          Lancez la <strong>simulation</strong> ci-dessus puis débloquez l’étude complète pour recevoir votre devis.
+          Vous pouvez aussi obtenir un <strong>devis panneaux solaires</strong> en ligne.
+        </p>
+      </details>
 
-  <h2 id="simulateur">Simulateur solaire & autoconsommation</h2>
-  <p>
-    Notre <strong>simulateur solaire</strong>, parfois appelé <strong>simulateur photovoltaïque</strong>, estime la puissance conseillée, le nombre de panneaux et la production annuelle.
-    Il intègre l’<strong>autoconsommation photovoltaïque</strong> et affiche vos économies.
-    Idéal pour une recherche “<strong>simulateur autoconsommation photovoltaïque</strong>”.
-  </p>
+      <details>
+        <summary><h2>Simulateur solaire &amp; autoconsommation</h2></summary>
+        <p>
+          Notre <strong>simulateur solaire</strong>, parfois appelé <strong>simulateur photovoltaïque</strong>, estime la puissance conseillée, le nombre de panneaux et la production annuelle.
+          Il intègre l’<strong>autoconsommation photovoltaïque</strong> et affiche vos économies.
+          Idéal pour une recherche “<strong>simulateur autoconsommation photovoltaïque</strong>”.
+        </p>
+      </details>
 
-  <h2>Simulation production photovoltaïque</h2>
-  <p>
-    La <strong>simulation de production photovoltaïque</strong> tient compte d’une production réaliste et d’un taux d’utilisation.
-    Elle couvre aussi “<strong>simulateur production solaire</strong>” et “<strong>simulation production photovoltaïque</strong>”.
-  </p>
+      <details>
+        <summary><h2>Simulation production photovoltaïque</h2></summary>
+        <p>
+          La <strong>simulation de production photovoltaïque</strong> tient compte d’une production réaliste et d’un taux d’utilisation.
+          Elle couvre aussi “<strong>simulateur production solaire</strong>” et “<strong>simulation production photovoltaïque</strong>”.
+        </p>
+      </details>
 
-  <h2 id="rentabilite">Calcul rentabilité & rendement</h2>
-  <p>
-    Le module calcule le <strong>rendement d’une installation photovoltaïque</strong>, vos économies annuelles et sur 15 ans, ainsi que le <strong>calcul de rentabilité des panneaux solaires</strong>.
-    Vous visualisez l’impact sur la facture et l’intérêt d’un éventuel financement.
-  </p>
-</div>
-<!-- ===== Fin sections SEO ===== -->
+      <details>
+        <summary><h2>Calcul rentabilité &amp; rendement</h2></summary>
+        <p>
+          Le module calcule le <strong>rendement d’une installation photovoltaïque</strong>, vos économies annuelles et sur 15 ans, ainsi que le <strong>calcul de rentabilité des panneaux solaires</strong>.
+          Vous visualisez l’impact sur la facture et l’intérêt d’un éventuel financement.
+        </p>
+      </details>
 
+      <!-- Capte "maison 120/150 m²" sans promettre un prix au m² -->
+      <details>
+        <summary><h2>Prix panneaux solaires pour une maison de 120 ou 150 m²</h2></summary>
+        <p>
+          Beaucoup recherchent un <strong>prix d’installation solaire</strong> en fonction de la surface (120 m², 150 m²).
+          En réalité, ce n’est pas la taille du logement qui détermine le nombre de panneaux, mais votre <strong>consommation annuelle (kWh)</strong> et votre facture.
+          👉 Utilisez le simulateur ci-dessus pour un chiffrage fiable et personnalisé.
+        </p>
+      </details>
+
+    </div>
+    <!-- ===== Fin sections SEO ===== -->
 
     <!-- Témoignages (à masquer après simulation) -->
     <div class="card temoins" data-hide-after-sim="1" id="bloc-temoins">
@@ -326,7 +395,7 @@
           <cite>— <strong>Sophie G.</strong>, Sarlat</cite>
         </div>
         <div class="temoin">
-          <svg viewBox="0 0 24 24" fill="#2563eb" aria-hidden="true"><path d="M7.2 5.5C4.9 7.1 3.5 9.5 3.5 12.3c0 3 2.1 5.2 4.9 5.2 2.3 0 4.1-1.8 4.1-4.2 0-2.4-1.8-4.2-4.1-4.2-.5 0-1 .1-1.5.3.3-1.5 1.1-2.7 2.4-3.6l-2.1-.3z"/></svg>
+          <svg viewBox="0 0 24 24" fill="#2563eb" aria-hidden="true"><path d="M7.2 5.5C4.9 7.1 3.5 9.5 3.5 12.3c0 3 2.1 5.2 4.9 5.2 2.3 0 4.1-1.8 4.1-4.2 0-2.4-1.8-4.2-4.1-4.2-.5 0-1 .1-1.5.3.3-1.5 1.1-2.7 2.4-3.6l-2-0.3z"/></svg>
           <blockquote>
             “Chiffrage détaillé affiché instantanément, avec toutes les infos dont j’avais besoin.
             Sérieux, rapide et transparent.”
@@ -610,7 +679,7 @@
               <div class="value">${((scenario.prod / conso) * 100).toFixed(2)} %</div>
             </div>
           </div>
-          <span class="note">Vous êtes à 100% en autoconsommation grâce à la batterie virtuelle.</span>
+          <span class="note">Objectif : couvrir jusqu’à 100&nbsp;% de votre consommation grâce à la batterie virtuelle (selon profil).</span>
         `;
         recapEl.style.display='block'; recapEl.style.visibility='visible'; recapEl.style.height='auto';
 
@@ -702,6 +771,7 @@
 
       } finally {
         hideCalcOverlay();
+        const btn = document.getElementById('simuler');
         if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
       }
     }
@@ -857,6 +927,8 @@
   <script>
     const baseCount = 1234;
     const startDate = new Date('2025-05-01T00:00:00Z');
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     function updateCompteur() {
       const now = new Date();
       const secondsElapsed = Math.floor((now - startDate) / 1000);
@@ -864,13 +936,18 @@
       const total = baseCount + increments;
       const el = document.getElementById('compteurValeur');
       const current = parseInt(el.innerText.replace(/\s/g, ''), 10) || 0;
-      const frames = 90;
+      const frames = reduceMotion ? 1 : 90;
       const increment = (total - current) / frames;
       let frame = 0;
-      const animate = () => { frame++; const value = Math.round(current + increment * frame); el.innerText = value.toLocaleString('fr-FR'); if (frame < frames) requestAnimationFrame(animate); };
+      const animate = () => {
+        frame++;
+        const value = Math.round(current + increment * frame);
+        el.innerText = value.toLocaleString('fr-FR');
+        if (frame < frames && !reduceMotion) requestAnimationFrame(animate);
+      };
       animate();
     }
-    updateCompteur(); setInterval(updateCompteur, 1000);
+    updateCompteur(); setInterval(updateCompteur, 5000); /* 5 s */
   </script>
 </body>
 </html>
