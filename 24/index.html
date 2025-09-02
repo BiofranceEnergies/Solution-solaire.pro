@@ -446,7 +446,36 @@
         }
         .rtable-pv td.surface { font-weight:800; color:#dbeafe; padding-bottom:2px; }
       }
-    </style>
+      .rtable-pv td.surface { font-weight:800; color:#dbeafe; padding-bottom:2px; }
+
+
+/* === Styles pour le nouveau .veil === */
+
+/* Titre + sous-titre */
+.pw-head{text-align:center;margin:2px 0 10px}
+.pw-title{margin:0;color:#f1f5ff;font-weight:900;letter-spacing:.25px}
+.pw-title::after{
+  content:"";display:block;width:140px;height:2px;margin:10px auto 2px;
+  background:linear-gradient(90deg,transparent,#93c5fd 35%,#3b82f6 65%,transparent);opacity:.65;
+}
+.pw-sub{color:#cbd5e1;font-size:13.5px;margin:4px auto 0;max-width:65ch}
+
+/* Badges de réassurance */
+.trust-list{
+  display:flex;justify-content:center;gap:8px 12px;flex-wrap:wrap;
+  list-style:none;padding:0;margin:10px 0 16px;
+}
+.trust-badge{
+  display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
+  background:#0b162e;border:1px solid #1f2b4a;border-radius:999px;
+  padding:6px 12px;font-size:12.5px;color:#cfe1ff;font-weight:700;line-height:1;
+}
+
+/* Champs du formulaire */
+.field{display:flex;flex-direction:column;gap:6px}
+.label{font-size:13px;color:#cbd5e1;font-weight:700;line-height:1.2}
+.help{color:#9ca3af;font-size:12px;margin-top:2px;max-width:36ch}
+</style>
 
     <table class="rtable-pv">
       <thead>
@@ -557,21 +586,58 @@
     <!-- SECTION VERROUILLÉE -->
     <div id="lockedSection" class="card" style="display:none;visibility:hidden;height:0;overflow:hidden;">
       <div id="lockedContent" class="lockedContent"></div>
-      <div class="veil" id="veil">
-        <h2 style="margin:0;color:#bfdbfe">Débloquez le reste de votre étude</h2>
-        <div style="color:#a7b6d6;font-size:13px;margin-top:-4px">Gain mensuel • Économies 15 ans • Proposition & financement • Remise</div>
-        <div class="unlock" style="margin-top:10px">
-          <input type="email" id="emailUnlock" placeholder="Votre email" autocomplete="email">
-          <input type="tel" id="telUnlock" placeholder="Votre téléphone" autocomplete="tel">
-          <label class="consent" style="grid-column:1/-1">
-            <input type="checkbox" id="rgpdUnlock">
-            <span>J’autorise Solution Solaire Pro à me recontacter au sujet de mon projet.</span>
-          </label>
-          <button type="button" class="primary" style="grid-column:1/-1" onclick="submitUnlock(event)">🔓 Débloquer maintenant</button>
-        </div>
-        <div class="lead-sub" style="font-size:12px;margin-top:6px">Vous pouvez retirer votre consentement à tout moment.</div>
+<div class="veil" id="veil">
+  <div class="pw-head">
+    <h2 class="pw-title"><span aria-hidden="true">📊</span> Affichez votre étude complète personnalisée</h2>
+    <p class="pw-sub">
+      Accédez au détail de vos économies (jusqu’à <b id="teaserEco">1 126 €</b>/an),
+      à la projection 15 ans et à votre offre personnalisée.
+    </p>
+  </div>
+
+  <ul class="trust-list" aria-label="Réassurances">
+    <li class="trust-badge">🔒 Données protégées</li>
+    <li class="trust-badge">💬 SMS unique (pas de démarchage massif)</li>
+    <li class="trust-badge">🏠 Visite réelle indispensable pour confirmer votre étude</li>
+  </ul>
+
+  <div class="unlock" style="margin-top:10px">
+    <!-- Email optionnel -->
+    <div class="field">
+      <label for="emailUnlock" class="label">Email <span style="color:#9ca3af;font-weight:600">(optionnel)</span></label>
+      <input type="email" id="emailUnlock" placeholder="votre@email.fr" autocomplete="email">
+      <div class="help">Facultatif : pour recevoir un récapitulatif ultérieurement.</div>
+    </div>
+
+    <!-- Téléphone obligatoire -->
+    <div class="field">
+      <label for="telUnlock" class="label">Téléphone <span>(obligatoire)</span></label>
+      <input type="tel" id="telUnlock" placeholder="06 12 34 56 78" autocomplete="tel" required>
+      <div class="help">
+        Un SMS unique confirmera la prise en compte de votre étude.<br>
+        Un conseiller pourra ensuite vous appeler, <strong>si vous le souhaitez</strong>,
+        pour échanger sur votre projet ou convenir d’une visite technique — <strong>sans engagement</strong>.
       </div>
     </div>
+
+    <!-- Consentement -->
+    <label class="consent" style="grid-column:1/-1">
+      <input type="checkbox" id="rgpdUnlock" required>
+      <span>J’autorise Solution Solaire Pro à me recontacter <strong>au sujet de mon étude</strong>. (requis)</span>
+    </label>
+
+    <!-- CTA -->
+    <button type="button" class="primary" style="grid-column:1/-1" onclick="submitUnlock(event)">
+      <span aria-hidden="true">📊</span> Voir mon étude complète et mes économies
+    </button>
+
+    <div class="foot" style="grid-column:1/-1;text-align:center;color:#9ca3af;font-size:12px;margin-top:8px">
+      Affichage immédiat à l’écran — aucun démarchage massif.
+    </div>
+  </div>
+</div>
+</div> 
+
 
     <!-- Mentions (visibles au chargement) -->
     <div id="mentions-legales-container">
@@ -926,7 +992,11 @@
       const tel = (document.getElementById('telUnlock').value||'').replace(/\D/g,'');
       const consent = document.getElementById('rgpdUnlock').checked;
 
-      if(!email || !/^\S+@\S+\.\S+$/.test(email)){ alert("Email invalide."); return; }
+      if (email && !/^\S+@\S+\.\S+$/.test(email)) { 
+  alert("Email invalide."); 
+  return; 
+}
+
       if(!tel || tel.length<10){ alert("Téléphone invalide (10 chiffres)."); return; }
       if(!consent){ alert("Merci de cocher la case de consentement."); return; }
       if(!selectedScenario){ alert("Veuillez d’abord lancer une simulation."); return; }
