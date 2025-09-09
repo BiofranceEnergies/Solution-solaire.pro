@@ -416,56 +416,56 @@
     <div id="recap" class="card recap" style="display:none;visibility:hidden;height:0;overflow:hidden;"></div>
 
     <!-- SECTION VERROUILLÉE (floue) : contient dès le début le KPI puis le reste) -->
-    <div id="lockedSection" class="card" style="display:none;visibility:hidden;height:0;overflow:hidden;">
-      <div id="lockedContent" class="lockedContent"></div>
-      <div class="veil" id="veil">
-        <div class="pw-head">
-          <h2 class="pw-title"><span aria-hidden="true">📊</span> Affichez votre étude complète personnalisée</h2>
-          <p class="pw-sub">
-            Accédez au détail de vos économies,
-            à la projection sur 15 ans et à votre offre personnalisée.
-          </p>
-        </div>
+  <div id="lockedSection" class="card" style="display:none;visibility:hidden;height:0;overflow:hidden;">
+  <div id="lockedContent" class="lockedContent"></div>
+  <div class="veil" id="veil">
+    <div class="pw-head">
+      <h2 class="pw-title"><span aria-hidden="true">📊</span> Affichez votre étude complète personnalisée</h2>
+      <p class="pw-sub">
+        Accédez au détail de vos économies,
+        à la projection sur 15 ans et à votre offre personnalisée.
+      </p>
+    </div>
 
-        <ul class="trust-list" aria-label="Réassurances" style="list-style:none;padding:0;margin:6px 0 0 0">
-          <li class="trust-badge">🔒 Données protégées</li>
-          <li class="trust-badge">⚡ Étude affichée immédiatement à l’écran</li>
-        </ul>
+    <ul class="trust-list" aria-label="Réassurances" style="list-style:none;padding:0;margin:6px 0 0 0">
+      <li class="trust-badge">🔒 Données protégées</li>
+      <li class="trust-badge">⚡ Étude affichée immédiatement à l’écran</li>
+    </ul>
 
-        <div class="unlock" style="margin-top:10px">
-          <!-- Email optionnel -->
-          <div class="field">
-            <label for="emailUnlock" class="label">Email <span style="color:#9ca3af;font-weight:600">(facultatif)</span></label>
-            <input type="email" id="emailUnlock" placeholder="Votre email (facultatif)" autocomplete="email">
-          </div>
+    <div class="unlock" style="margin-top:10px">
+      <!-- Email optionnel -->
+      <div class="field">
+        <label for="emailUnlock" class="label">Email <span style="color:#9ca3af;font-weight:600">(facultatif)</span></label>
+        <input type="email" id="emailUnlock" placeholder="Votre email (facultatif)" autocomplete="email">
+      </div>
 
-          <!-- Téléphone obligatoire -->
-          <div class="field">
-            <label for="telUnlock" class="label">Téléphone <span>(obligatoire)</span></label>
-            <input type="tel" id="telUnlock" placeholder="06 12 34 56 78" autocomplete="tel" required>
-            <div class="help">
-              Vous recevrez un SMS de confirmation. Vous choisissez si vous souhaitez échanger ensuite.
-            </div>
-          </div>
-
-          <!-- Consentement -->
-          <label class="consent" style="grid-column:1/-1">
-            <input type="checkbox" id="rgpdUnlock" required>
-            <span>J’autorise Solution Solaire Pro à me recontacter <strong>au sujet de mon étude</strong>. (requis)</span>
-          </label>
-
-          <!-- CTA -->
-          <button type="button" class="primary" style="grid-column:1/-1" onclick="submitUnlock(event)">
-            <span aria-hidden="true">📊</span> Voir mon étude complète et mes économies
-          </button>
-
-          <!-- Footer simplifié -->
-          <div class="foot" style="grid-column:1/-1;text-align:center;color:#9ca3af;font-size:12px;margin-top:8px">
-            Vos données ne seront jamais revendues ni utilisées à d’autres fins.
-          </div>
+      <!-- Téléphone obligatoire -->
+      <div class="field">
+        <label for="telUnlock" class="label">Téléphone <span>(obligatoire)</span></label>
+        <input type="tel" id="telUnlock" placeholder="06 12 34 56 78" autocomplete="tel" required>
+        <div class="help">
+          Vous recevrez un SMS de confirmation. Vous choisissez si vous souhaitez échanger ensuite.
         </div>
       </div>
+
+      <!-- Consentement -->
+      <label class="consent" style="grid-column:1/-1">
+        <input type="checkbox" id="rgpdUnlock" required aria-required="true">
+        <span>Je consens à être contacté <strong>par SMS uniquement</strong> (confirmation de l’étude, sans prospection).</span>
+      </label>
+
+      <!-- CTA -->
+      <button type="button" class="primary" style="grid-column:1/-1" onclick="submitUnlock(event)">
+        <span aria-hidden="true">📊</span> Voir mon étude complète et mes économies
+      </button>
+
+      <!-- Footer simplifié -->
+      <div class="foot" style="grid-column:1/-1;text-align:center;color:#9ca3af;font-size:12px;margin-top:8px">
+        Vos données ne seront jamais revendues ni utilisées à d’autres fins.
+      </div>
     </div>
+  </div>
+</div>
 
     <!-- Mentions (visibles au chargement) -->
     <div id="mentions-legales-container">
