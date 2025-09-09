@@ -14,13 +14,11 @@
   <!-- Open Graph -->
   <meta property="og:title" content="Prix installation photovoltaïque en Dordogne (24)">
   <meta property="og:description" content="Estimez rapidement le prix d’une installation photovoltaïque en Dordogne (24). Produisez votre propre électricité, calculez le coût et les économies en toute transparence.">
-
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.solution-solaire.pro/24/prix.html">
   <meta property="og:image" content="https://www.solution-solaire.pro/24/og-image-24.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-
 
   <!-- Préconnexions -->
   <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
@@ -116,6 +114,7 @@
     .kpi-box{padding:10px 12px;border-radius:12px;background:#0a1326;border:1px dashed #1e3a5f;margin-bottom:10px}
     .kpi-box b{color:var(--ok)}
 
+    /* SECTION VERROUILLÉE (tout ce qui est après la note) */
     #lockedSection{max-width:720px;position:relative}
     .lockedContent{filter:blur(7px);user-select:none;pointer-events:none}
     .veil{position:absolute;inset:0;border-radius:var(--radius);background:linear-gradient(180deg,rgba(15,23,42,.35),rgba(15,23,42,.86));backdrop-filter:blur(2px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:20px;border:1px solid #244a7d}
@@ -413,22 +412,22 @@
       </div>
     </div>
 
-    <!-- Récap (visible) -->
+    <!-- Récap (VISIBLE) -->
     <div id="recap" class="card recap" style="display:none;visibility:hidden;height:0;overflow:hidden;"></div>
 
-    <!-- SECTION VERROUILLÉE (désormais placée AVANT le bloc KPI) -->
+    <!-- SECTION VERROUILLÉE (floue) : contient dès le début le KPI puis le reste -->
     <div id="lockedSection" class="card" style="display:none;visibility:hidden;height:0;overflow:hidden;">
       <div id="lockedContent" class="lockedContent"></div>
       <div class="veil" id="veil">
         <div class="pw-head">
           <h2 class="pw-title"><span aria-hidden="true">📊</span> Affichez votre étude complète personnalisée</h2>
           <p class="pw-sub">
-            Accédez au détail de vos économies ,
+            Accédez au détail de vos économies,
             à la projection sur 15 ans et à votre offre personnalisée.
           </p>
         </div>
 
-        <ul class="trust-list" aria-label="Réassurances">
+        <ul class="trust-list" aria-label="Réassurances" style="list-style:none;padding:0;margin:6px 0 0 0">
           <li class="trust-badge">🔒 Données protégées</li>
           <li class="trust-badge">💬 SMS unique (pas de démarchage massif)</li>
           <li class="trust-badge">🏠 Visite réelle indispensable pour confirmer votre étude</li>
@@ -471,9 +470,6 @@
       </div>
     </div>
 
-    <!-- KPI 1 (supprimé – contenu déplacé dans la zone verrouillée) -->
-    <!-- <div id="kpi1" class="card kpi" style="display:none;visibility:hidden;height:0;overflow:hidden;"></div> -->
-
     <!-- Mentions (visibles au chargement) -->
     <div id="mentions-legales-container">
       <span id="mentions-legales-link">Mentions légales</span>
@@ -481,10 +477,10 @@
     <div id="mentions-popup" role="dialog" aria-modal="true" aria-labelledby="mentions-title">
       <button id="close-mentions" type="button" aria-label="Fermer">&times;</button>
       <strong id="mentions-title">Mentions légales :</strong><br>
-     Solution Solaire Pro partenaire de Biofrance Energies<br>
+      Solution Solaire Pro partenaire de Biofrance Energies<br>
       SIRET : 422 231 928 00025<br>
       Adresse : 4 rue du Pont Saint Jean, 27530 Ézy-sur-Eure<br>
-      Contact : solutionsolairepro@gmail.com br>
+      Contact : solutionsolairepro@gmail.com<br>
       Hébergeur : GitHub Pages, 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA<br>
       Données personnelles : Les informations saisies sont utilisées uniquement pour traiter votre demande. Aucun démarchage ni revente.<br>
       RGPD : Vous pouvez demander la suppression de vos données à tout moment par simple email.
@@ -520,7 +516,7 @@
 
     function esc(s){
       return String(s).replace(/[&<>"']/g, function(m){
-        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
+        return {'&':'&amp;','<':'&gt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
       });
     }
 
@@ -578,10 +574,14 @@
       localStorage.setItem(UNLOCK_KEY, String(Date.now()+ms));
     }
     function unlockUI(){
-      document.getElementById('lockedContent').style.filter='none';
-      document.getElementById('lockedContent').style.userSelect='auto';
-      document.getElementById('lockedContent').style.pointerEvents='auto';
-      document.getElementById('veil').style.display='none';
+      const lc = document.getElementById('lockedContent');
+      if (lc){
+        lc.style.filter='none';
+        lc.style.userSelect='auto';
+        lc.style.pointerEvents='auto';
+      }
+      const veil = document.getElementById('veil');
+      if (veil){ veil.style.display='none'; }
     }
 
     // ===== Overlay helpers =====
@@ -631,13 +631,17 @@
       showCalcOverlay('Calcul en cours…');
 
       try {
-        // Masquer/vider avant nouvel affichage
+        // Reset des sections de résultat
         ['recap','lockedSection'].forEach(id=>{
           const el=document.getElementById(id);
           el.style.display='none'; el.style.visibility='hidden'; el.style.height='0';
+          if (id==='lockedSection'){
+            const lc = document.getElementById('lockedContent');
+            if (lc) lc.innerHTML = '';
+            const veil = document.getElementById('veil');
+            if (veil) veil.style.display = '';
+          }
         });
-        const locked = document.getElementById('lockedContent');
-        locked.innerHTML = '';
 
         const codePostal = document.getElementById('codePostal').value.trim();
         const facture = parseFloat((document.getElementById('facture').value + '').replace(',', '.'));
@@ -702,7 +706,7 @@
         const totalTxt = Number.isFinite(scenario.total) ? scenario.total.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2}) + " €" : "—";
         const dureeTxt = Number.isFinite(scenario.dureeMois) ? scenario.dureeMois + " mois" : "—";
 
-        // Récap (VISIBLES)
+        // --------- RÉCAP (VISIBLE, y compris la phrase de note) ---------
         const recapEl = document.getElementById('recap');
         const libConso = (sourceConso === "reelle") ? "Conso annuelle (réelle)" : "Conso annuelle estimée";
         recapEl.innerHTML = `
@@ -721,15 +725,19 @@
               <div class="value">${((scenario.prod / conso) * 100).toFixed(2)} %</div>
             </div>
           </div>
-          <span class="note">“Votre production est valorisée à 100 % grâce à la batterie virtuelle, même si elle ne couvre pas 100 % de votre consommation.”.</span>
+          <span class="note">“Votre production est valorisée à 100 % grâce à la batterie virtuelle, même si elle ne couvre pas 100 % de votre consommation.”</span>
         `;
         recapEl.style.display='block'; recapEl.style.visibility='visible'; recapEl.style.height='auto';
 
-        /* === CONTENU VERROUILLÉ (flouté) — commence ici, juste après la note === */
-        const lockedHTML = `
-          <div class="kpi-box">
-            <strong>Gain estimé la 1ʳᵉ année :</strong>
-            <b>${Math.round(economieAnnuelle).toLocaleString('fr-FR')} €</b>
+        // --------- PARTIE FLOUTÉE (KPI + détails + financement) ---------
+        const locked = document.getElementById('lockedContent');
+        locked.innerHTML = `
+          <!-- KPI déplacé ici pour qu'il soit flouté -->
+          <div class="kpi">
+            <div class="kpi-box">
+              <strong>Gain estimé la 1ʳᵉ année :</strong>
+              <b>${Math.round(economieAnnuelle).toLocaleString('fr-FR')} €</b>
+            </div>
           </div>
 
           <div class="kpi-box"><strong>Soit un gain par mois de :</strong> <b>${Math.round(economieMensuelle).toLocaleString('fr-FR')} €</b></div>
@@ -778,12 +786,11 @@
             <div class="financement-note">L’estimation affichée est indicative. Une visite technique est nécessaire pour établir un devis ferme et adapté à votre situation.</div>
           </div>
         `;
-        locked.innerHTML = lockedHTML;
 
         const section = document.getElementById('lockedSection');
         section.style.display='block'; section.style.visibility='visible'; section.style.height='auto';
 
-        /* >>> Masquer les pavés texte + témoignages après simulation <<< */
+        /* Masquer les pavés texte + témoignages après simulation */
         hideAfterSimulationBlocks();
 
         if (isUnlocked()) { unlockUI(); }
