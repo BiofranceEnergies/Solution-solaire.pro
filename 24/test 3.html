@@ -416,7 +416,7 @@
     <div id="recap" class="card recap" style="display:none;visibility:hidden;height:0;overflow:hidden;"></div>
 
     <!-- SECTION VERROUILLÉE (floue) : contient dès le début le KPI puis le reste) -->
-  <div id="lockedSection" class="card" style="display:none;visibility:hidden;height:0;overflow:hidden;">
+ <div id="lockedSection" class="card" style="display:none;visibility:hidden;height:0;overflow:hidden;">
   <div id="lockedContent" class="lockedContent"></div>
   <div class="veil" id="veil">
     <div class="pw-head">
@@ -443,7 +443,7 @@
       <div class="field">
         <label for="telUnlock" class="label">Téléphone <span>(obligatoire)</span></label>
         <input type="tel" id="telUnlock" placeholder="06 12 34 56 78" autocomplete="tel" required>
-        <div class="help">
+        <div class="help" style="font-size:13px;color:#a7b6d6;margin-top:4px">
           Vous recevrez un SMS de confirmation. Vous choisissez si vous souhaitez échanger ensuite.
         </div>
       </div>
@@ -451,7 +451,7 @@
       <!-- Consentement -->
       <label class="consent" style="grid-column:1/-1">
         <input type="checkbox" id="rgpdUnlock" required aria-required="true">
-        <span>Je consens à être contacté <strong>par SMS uniquement</strong> (confirmation de l’étude, sans prospection).</span>
+        <span>Je consens à être contacté <strong>par SMS uniquement</strong>.</span>
       </label>
 
       <!-- CTA -->
