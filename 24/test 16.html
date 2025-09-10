@@ -301,7 +301,7 @@
     <!-- Récap (VISIBLE) -->
     <div id="recap" class="card recap" style="display:none;visibility:hidden;height:0;overflow:hidden;"></div>
 
-    <!-- SECTION VERROUILLÉE (floue) -->
+  <!-- SECTION VERROUILLÉE (floue) -->
 <div id="lockedSection" class="card" style="display:none;visibility:hidden;height:0;overflow:hidden;">
   <div id="lockedContent" class="lockedContent"></div>
   <div class="veil" id="veil">
@@ -338,6 +338,49 @@
           L’étude complète s’affiche immédiatement après validation. Aucun contact sans votre accord.
         </div>
       </div>
+
+      <!-- Consentement -->
+      <label class="consent" style="grid-column:1/-1">
+        <input type="checkbox" id="rgpdUnlock" required aria-required="true">
+        <span>J’autorise l’affichage immédiat de mon étude complète à l’écran. Aucun e-mail ni appel automatique.</span>
+      </label>
+
+      <!-- CTA -->
+      <button type="button" class="primary" style="grid-column:1/-1" onclick="submitUnlock(event)">
+        <span aria-hidden="true">⚡</span> Débloquer mon étude complète maintenant
+      </button>
+
+      <div class="foot" style="grid-column:1/-1;text-align:center;color:#6b7280;font-size:12px;margin-top:6px">
+        Vos données ne seront jamais revendues ni utilisées à d’autres fins.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Correctifs CSS -->
+<style>
+.unlock .field input {
+  width:100%;
+  height:48px;
+  padding:12px 14px;
+  font-size:16px;
+  line-height:24px;
+  box-sizing:border-box;
+}
+.unlock .field input::placeholder {
+  opacity:.6;
+  font-weight:400;
+}
+.unlock {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:12px;
+}
+.unlock .consent,
+.unlock .primary,
+.unlock .foot { grid-column:1/-1; }
+</style>
+
 
       <!-- Consentement -->
       <label class="consent" style="grid-column:1/-1">
