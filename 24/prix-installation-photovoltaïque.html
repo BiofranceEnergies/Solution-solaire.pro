@@ -281,11 +281,12 @@
 
     <!-- Formulaire -->
     <div class="card form-section">
-      <div style="display:flex;gap:8px;justify-content:center;margin-top:-4px;margin-bottom:8px">
-        <span style="display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-weight:700"><span>🔒</span>Données protégées</span>
-        <span style="display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-weight:700"><span>⏱️</span>1 minute</span>
-        <span style="display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-weight:700"><span>🚫</span>Aucun démarchage</span>
-      </div>
+      <div class="bullets">
+  <span class="bullet"><span class="icon">🔒</span><span class="label">Données protégées</span></span>
+  <span class="bullet"><span class="icon">⏱️</span><span class="label">1 minute</span></span>
+  <span class="bullet"><span class="icon">🚫</span><span class="label">Aucun démarchage</span></span>
+</div>
+
 
       <h2 style="margin-top:2px">Simulation personnalisée</h2>
       <form onsubmit="calculerSimulation(); return false;" novalidate>
