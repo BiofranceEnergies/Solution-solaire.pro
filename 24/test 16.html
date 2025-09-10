@@ -302,80 +302,53 @@
     <div id="recap" class="card recap" style="display:none;visibility:hidden;height:0;overflow:hidden;"></div>
 
   <!-- SECTION VERROUILLÉE (floue) -->
-<div id="lockedSection" class="card" style="display:none;visibility:hidden;height:0;overflow:hidden;">
-  <div id="lockedContent" class="lockedContent"></div>
-  <div class="veil" id="veil">
-    <div class="pw-head">
-      <h2 class="pw-title" style="margin:0 0 4px 0">
-        <span aria-hidden="true">📊</span> Recevez immédiatement votre étude complète personnalisée
-      </h2>
-      <p class="pw-sub" style="margin:0;color:#374151">
-        Accédez instantanément à :<br>
-        ✅ Le prix final TTC de votre installation<br>
-        ✅ Votre mensualité fixe et vos économies sur 15 ans<br>
-        ✅ 800&nbsp;€ de remise immédiate (offre valable jusqu’au 30/09/2025)
-      </p>
-    </div>
+ <div id="lockedSection" class="card" style="display:none;visibility:hidden;height:0;overflow:hidden;">
+      <div id="lockedContent" class="lockedContent"></div>
+      <div class="veil" id="veil">
+        <div class="pw-head">
+          <h2 class="pw-title" style="margin:0 0 4px 0"><span aria-hidden="true">📊</span> Affichez votre étude complète personnalisée</h2>
+          <p class="pw-sub" style="margin:0;color:#374151">
+            Accédez au détail de vos économies, à la projection sur 15 ans et à votre offre personnalisée.
+          </p>
+        </div>
 
-    <ul class="trust-list" aria-label="Réassurances" style="list-style:none;padding:0;margin:10px 0 0 0;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
-      <li style="background:#fff;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-weight:700">🔒 Données protégées</li>
-      <li style="background:#fff;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-weight:700">⚡ Étude affichée immédiatement à l’écran</li>
-      <li style="background:#fff;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-weight:700">🚫 Aucun appel, aucun e-mail automatique</li>
-    </ul>
+        <ul class="trust-list" aria-label="Réassurances" style="list-style:none;padding:0;margin:10px 0 0 0;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+          <li style="background:#fff;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-weight:700">🔒 Données protégées</li>
+          <li style="background:#fff;border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-weight:700">⚡ Étude affichée immédiatement à l’écran</li>
+        </ul>
 
-    <div class="unlock" style="margin-top:10px">
-      <!-- Email optionnel -->
-      <div class="field">
-        <label for="emailUnlock" class="label">Email <span style="color:#6b7280;font-weight:600">(facultatif)</span></label>
-        <input type="email" id="emailUnlock" placeholder="Votre email (facultatif)" autocomplete="email">
-      </div>
+        <div class="unlock" style="margin-top:10px">
+          <!-- Email optionnel -->
+          <div class="field">
+            <label for="emailUnlock" class="label">Email <span style="color:#6b7280;font-weight:600">(facultatif)</span></label>
+            <input type="email" id="emailUnlock" placeholder="Votre email (facultatif)" autocomplete="email">
+          </div>
 
-      <!-- Téléphone obligatoire -->
-      <div class="field">
-        <label for="telUnlock" class="label">Téléphone <span>(obligatoire pour débloquer l’étude)</span></label>
-        <input type="tel" id="telUnlock" placeholder="06 12 34 56 78" autocomplete="tel" required>
-        <div class="help" style="font-size:13px;color:#6b7280;margin-top:4px">
-          L’étude complète s’affiche immédiatement après validation. Aucun contact sans votre accord.
+          <!-- Téléphone obligatoire -->
+          <div class="field">
+            <label for="telUnlock" class="label">Téléphone <span>(obligatoire)</span></label>
+            <input type="tel" id="telUnlock" placeholder="06 12 34 56 78" autocomplete="tel" required>
+            <div class="help" style="font-size:13px;color:#6b7280;margin-top:4px">
+              Un SMS de confirmation vous sera envoyé. Libre à vous d’échanger ensuite.
+            </div>
+          </div>
+
+          <!-- Consentement -->
+          <label class="consent" style="grid-column:1/-1">
+            <input type="checkbox" id="rgpdUnlock" required aria-required="true">
+            <span>Je consens à être contacté <strong>par SMS uniquement</strong>.</span>
+          </label>
+
+          <!-- CTA -->
+          <button type="button" class="primary" style="grid-column:1/-1" onclick="submitUnlock(event)">
+            <span aria-hidden="true">📊</span> Voir mon étude complète et mes économies
+          </button>
+
+          <div class="foot" style="grid-column:1/-1;text-align:center;color:#6b7280;font-size:12px;margin-top:6px">
+            Vos données ne seront jamais revendues ni utilisées à d’autres fins.
+          </div>
         </div>
       </div>
-
-      <!-- Consentement -->
-      <label class="consent" style="grid-column:1/-1">
-        <input type="checkbox" id="rgpdUnlock" required aria-required="true">
-        <span>J’autorise l’affichage immédiat de mon étude complète à l’écran. Aucun e-mail ni appel automatique.</span>
-      </label>
-
-      <!-- CTA -->
-      <button type="button" class="primary" style="grid-column:1/-1" onclick="submitUnlock(event)">
-        <span aria-hidden="true">⚡</span> Débloquer mon étude complète maintenant
-      </button>
-
-      <div class="foot" style="grid-column:1/-1;text-align:center;color:#6b7280;font-size:12px;margin-top:6px">
-        Vos données ne seront jamais revendues ni utilisées à d’autres fins.
-      </div>
-    </div>
-  </div>
-</div>
-
-
-      <!-- Consentement -->
-      <label class="consent" style="grid-column:1/-1">
-        <input type="checkbox" id="rgpdUnlock" required aria-required="true">
-        <span>Je consens à <strong>débloquer mon étude</strong> et comprends qu’aucun envoi ne sera effectué automatiquement.</span>
-      </label>
-
-      <!-- CTA -->
-      <button type="button" class="primary" style="grid-column:1/-1" onclick="submitUnlock(event)">
-        <span aria-hidden="true">⚡</span> Débloquer mon étude complète maintenant
-      </button>
-
-      <div class="foot" style="grid-column:1/-1;text-align:center;color:#6b7280;font-size:12px;margin-top:6px">
-        Vos données ne seront jamais revendues ni utilisées à d’autres fins.
-      </div>
-    </div>
-  </div>
-</div>
-
     <!-- Mentions (visibles au chargement) -->
     <div id="mentions-legales-container">
       <span id="mentions-legales-link">Mentions légales</span>
