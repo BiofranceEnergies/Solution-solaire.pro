@@ -133,7 +133,28 @@
     /* SECTION VERROUILLÉE (tout ce qui est après la note) */
     #lockedSection{max-width:720px;position:relative}
     .lockedContent{filter:blur(7px);user-select:none;pointer-events:none}
-    .veil{position:absolute;inset:0;border-radius:var(--radius);background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(255,255,255,.98));backdrop-filter:blur(2px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:20px;border:1px solid var(--border)}
+    .veil{
+  position:absolute;
+  inset:0;
+  border-radius:var(--radius);
+  background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(255,255,255,.98));
+  backdrop-filter:blur(2px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  gap:12px;
+  text-align:center;
+  padding:60px 20px 20px;   /* 👈 plus haut sur desktop */
+  border:1px solid var(--border);
+}
+
+/* Sur mobile (écrans ≤ 640px), on colle encore plus haut */
+@media(max-width:640px){
+  .veil{
+    padding-top:30px;       /* 👈 moins d’espace au-dessus sur mobile */
+  }
+}
     .unlock{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:560px;width:100%}
     @media(max-width:580px){.unlock{grid-template-columns:1fr}}
     .unlock input{background:#fff;border:1.5px solid var(--border)}
