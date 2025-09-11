@@ -1095,36 +1095,37 @@ recapEl.style.height='auto';
 
 <script>
 /* ================== ÉTATS ================== */
-let shownPre = false;   // popup pré-simu déjà montré ?
-let shownPost = false;  // popup post-simu déjà montré ?
+let shownPre = false;
+let shownPost = false;
 
 /* ================== HELPERS (TES IDs) ================== */
 function el(s){ return document.querySelector(s); }
-function telField(){ return el('#telUnlock'); }   // champ téléphone principal
-function cpField(){ return el('#codePostal'); }   // champ code postal
-function factureField(){ return el('#facture'); } // champ facture
+function telField(){ return el('#telUnlock'); }
+function cpField(){ return el('#codePostal'); }
+function factureField(){ return el('#facture'); }
 
 /* ================== Normalisation + Validation téléphone FR ================== */
-function normalizeTel(s){ return (s||'').replace(/[^\d]/g,''); } // garde uniquement les chiffres
+function normalizeTel(s){ return (s||'').replace(/[^\d]/g,''); }
 function isValidFrTel(s){
   const n = normalizeTel(s);
-  // 10 chiffres, commence par 0 puis 1-9 → 01..09 (fixes + mobiles)
-  return /^0[1-9]\d{8}$/.test(n);
+  return /^0[1-9]\d{8}$/.test(n); // 10 chiffres FR (fixes + mobiles)
 }
 
-/* ================== Auto-formatage par paires de 2 chiffres ================== */
-function formatTelInput(inputId){
+/* ================== Auto-formatage téléphone ================== */
+function formatTelInput(inputId, consentId){
   const input = document.getElementById(inputId);
   if (!input) return;
   input.addEventListener('input', function(){
-    let digits = this.value.replace(/\D/g,'').slice(0,10);           // max 10 chiffres
-    this.value = digits.replace(/(\d{2})(?=\d)/g, '$1 ').trim();      // groupes de 2
+    let digits = this.value.replace(/\D/g,'').slice(0,10);
+    this.value = digits.replace(/(\d{2})(?=\d)/g, '$1 ').trim();
+    // coche automatiquement le consentement si fourni
+    const consent = document.getElementById(consentId);
+    if (consent && this.value.trim().length >= 5) consent.checked = true;
   });
 }
-// activer sur les 2 champs téléphone
 document.addEventListener('DOMContentLoaded', function(){
-  formatTelInput('telUnlock'); // champ principal
-  formatTelInput('exitTel');   // popup
+  formatTelInput('telUnlock','rgpdUnlock'); // champ principal
+  formatTelInput('exitTel','rgpdUnlock');   // popup
 });
 
 /* ================== CONDITIONS ================== */
@@ -1134,7 +1135,6 @@ function hasStartedSimu(){
 }
 function phoneNeeded(){
   const tel = telField();
-  // champ tel visible (après simu) ET vide
   return tel && tel.offsetParent !== null && !tel.value.trim();
 }
 
@@ -1154,89 +1154,51 @@ function closeExit(which){
 
 /* ================== LOGIQUE D’AFFICHAGE ================== */
 function maybeShowExit(){
-  // si le tel principal est déjà rempli → rien
   const tel = telField();
   if (tel && tel.value.trim()) return;
-
-  // priorité au post-simu (simu faite + tel manquant)
-  if (!shownPost && phoneNeeded() && hasStartedSimu()){
-    showExit('Post');
-    return;
-  }
-  // sinon, si la simu n’a pas commencé → pré-simu
-  if (!shownPre && !hasStartedSimu()){
-    showExit('Pre');
-  }
+  if (!shownPost && phoneNeeded() && hasStartedSimu()){ showExit('Post'); return; }
+  if (!shownPre && !hasStartedSimu()){ showExit('Pre'); }
 }
 
 /* ================== DÉCLENCHEURS ================== */
-// Desktop/Laptop : intention de sortie (souris vers le haut)
 document.addEventListener('mouseleave', e => { if (e.clientY < 0) maybeShowExit(); });
-
-// Mobile : bouton retour une fois
-window.addEventListener('popstate', () => { 
-  maybeShowExit();
-  history.pushState(null, null, location.href);
-});
-
-// Inactivité : 30s
+window.addEventListener('popstate', () => { maybeShowExit(); history.pushState(null, null, location.href); });
 let inactivityTimer;
 function resetInactivity(){ clearTimeout(inactivityTimer); inactivityTimer = setTimeout(maybeShowExit, 30000); }
 ['mousemove','keydown','scroll','touchstart'].forEach(evt => document.addEventListener(evt, resetInactivity));
 resetInactivity();
 
 /* ================== ACTIONS POPUPS ================== */
-// A : pré-simu → scroll/focus sur le CP
 document.getElementById('btnStartSimu').addEventListener('click', () => {
   closeExit('Pre');
   const cp = cpField();
-  if (cp){
-    cp.scrollIntoView({behavior:'smooth', block:'center'});
-    setTimeout(()=>cp.focus(), 250);
-  }
+  if (cp){ cp.scrollIntoView({behavior:'smooth', block:'center'}); setTimeout(()=>cp.focus(), 250); }
 });
-
-// B : post-simu → valider tél, recopier, cocher consentement, lancer TON flux
 document.getElementById('exitFormPost').addEventListener('submit', function(e){
   e.preventDefault();
   const telInput = document.getElementById('exitTel');
   const telRaw = telInput.value.trim();
-
   if(!isValidFrTel(telRaw)){
     alert("Merci d’entrer un numéro français valide (ex : 06 12 34 56 78).");
     telInput.focus();
     return;
   }
-
-  // Recopie dans le champ principal (on garde le format avec espaces)
   const mainTel = telField();
   if (mainTel) mainTel.value = telRaw;
-
-  // Coche consentement si présent
-  const consent = el('#rgpdUnlock');
+  const consent = document.getElementById('rgpdUnlock');
   if (consent && !consent.checked) consent.checked = true;
-
-  // Ferme le popup
   closeExit('Post');
-
-  // Lance ton flux existant
-  if (typeof submitUnlock === 'function'){
-    try { submitUnlock(new Event('submit')); } catch(err){ console.error(err); }
-  }
+  if (typeof submitUnlock === 'function'){ try { submitUnlock(new Event('submit')); } catch(err){ console.error(err); } }
 });
 
 /* ================== VALIDATION du champ principal (telUnlock) ================== */
-// Améliore l'UX du champ principal (placeholder + title)
 (function enhanceMainPhoneField(){
   const mainTel = telField();
   if (mainTel){
     mainTel.setAttribute('placeholder','06 12 34 56 78');
     mainTel.setAttribute('title','Entrez un numéro français valide (ex : 06 12 34 56 78)');
-    // pattern HTML optionnel si tu veux : mainTel.setAttribute('pattern','^0[1-9](?:[ .-]?[0-9]{2}){4}$');
   }
 })();
-
-// Valide AVANT envoi via submitUnlock sans toucher à ton code interne
 (function wrapSubmitUnlock(){
   if (typeof window.submitUnlock !== 'function') return;
   const _orig = window.submitUnlock;
@@ -1248,10 +1210,14 @@ document.getElementById('exitFormPost').addEventListener('submit', function(e){
       if (mainTel) mainTel.focus();
       return false;
     }
+    // coche automatiquement consentement si pas déjà fait
+    const consent = document.getElementById('rgpdUnlock');
+    if (consent && !consent.checked) consent.checked = true;
     return _orig.apply(this, arguments);
   };
 })();
 </script>
+
 
 
 
