@@ -1057,5 +1057,132 @@ recapEl.style.height='auto';
   </script>
   <!-- === FIN QS Booster === -->
 
+ <!-- ================== EXIT POPUP ================== -->
+<div id="exitPopup" class="exit-popup">
+  <div class="exit-content">
+    <h2>Vous partez déjà ?</h2>
+    <p>Avant de quitter, recevez <strong>votre étude photovoltaïque complète</strong> immédiatement par SMS.</p>
+    <form id="exitForm">
+      <input id="exitTel" type="tel" placeholder="Votre téléphone" required>
+      <button type="submit">Recevoir mon étude</button>
+    </form>
+    <span class="close-exit" onclick="closeExitPopup()">✖</span>
+  </div>
+</div>
+
+<style>
+.exit-popup {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+.exit-content {
+  background: #fff;
+  padding: 20px;
+  max-width: 400px;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  position: relative;
+}
+.exit-content h2 { margin-top: 0; }
+.exit-content form { margin-top: 15px; }
+.exit-content input {
+  padding: 8px;
+  width: 90%;
+  margin-bottom: 10px;
+}
+.exit-content button {
+  background: #f9a825;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.close-exit {
+  position: absolute;
+  top: 8px; right: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #666;
+}
+</style>
+
+<script>
+let popupShown = false;
+
+// Vérifie si le champ principal est déjà rempli
+function canShowPopup() {
+  const mainTel = document.querySelector('#telUnlock');
+  return mainTel && !mainTel.value.trim();
+}
+
+// --- Détection sortie souris (desktop) ---
+document.addEventListener("mouseleave", function(e) {
+  if (e.clientY < 0 && !popupShown && canShowPopup()) {
+    showExitPopup();
+  }
+});
+
+// --- Détection retour arrière (mobile) ---
+window.addEventListener("popstate", function() {
+  if (!popupShown && canShowPopup()) {
+    showExitPopup();
+    history.pushState(null, null, location.href); 
+  }
+});
+
+// --- Détection inactivité (mobile & desktop) ---
+let inactivityTimer;
+function resetInactivityTimer() {
+  clearTimeout(inactivityTimer);
+  inactivityTimer = setTimeout(function() {
+    if (!popupShown && canShowPopup()) showExitPopup();
+  }, 30000); // 30 sec
+}
+["mousemove","keydown","scroll","touchstart"].forEach(evt => {
+  document.addEventListener(evt, resetInactivityTimer);
+});
+resetInactivityTimer();
+
+// --- Afficher / Fermer ---
+function showExitPopup() {
+  document.getElementById("exitPopup").style.display = "flex";
+  popupShown = true;
+}
+function closeExitPopup() {
+  document.getElementById("exitPopup").style.display = "none";
+}
+
+// --- Formulaire Exit relié à TON flux principal ---
+document.getElementById('exitForm').addEventListener('submit', function(e){
+  e.preventDefault();
+
+  const tel = document.getElementById('exitTel').value.trim();
+  if(!tel) return;
+
+  // 1) Reporter le téléphone dans ton champ principal
+  const mainTel = document.querySelector('#telUnlock');
+  if (mainTel) mainTel.value = tel;
+
+  // 2) Cocher le consentement SMS (obligatoire)
+  const consent = document.querySelector('#rgpdUnlock');
+  if (consent && !consent.checked) consent.checked = true;
+
+  // 3) Fermer le popup
+  closeExitPopup();
+
+  // 4) Déclencher ton flux normal
+  if (typeof submitUnlock === 'function') {
+    try { submitUnlock(new Event('submit')); return; } catch(e){}
+  }
+});
+</script>
+ 
 </body>
 </html>
