@@ -1098,7 +1098,7 @@ recapEl.style.height='auto';
 let shownPre = false;   // popup pré-simu déjà montré ?
 let shownPost = false;  // popup post-simu déjà montré ?
 
-/* ================== HELPERS (utilise TES IDs) ================== */
+/* ================== HELPERS (TES IDs) ================== */
 function el(s){ return document.querySelector(s); }
 function telField(){ return el('#telUnlock'); }   // champ téléphone principal
 function cpField(){ return el('#codePostal'); }   // champ code postal
@@ -1108,9 +1108,24 @@ function factureField(){ return el('#facture'); } // champ facture
 function normalizeTel(s){ return (s||'').replace(/[^\d]/g,''); } // garde uniquement les chiffres
 function isValidFrTel(s){
   const n = normalizeTel(s);
-  // 10 chiffres, commence par 0 puis 1-9 → 01..09 (inclut 06/07)
+  // 10 chiffres, commence par 0 puis 1-9 → 01..09 (fixes + mobiles)
   return /^0[1-9]\d{8}$/.test(n);
 }
+
+/* ================== Auto-formatage par paires de 2 chiffres ================== */
+function formatTelInput(inputId){
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  input.addEventListener('input', function(){
+    let digits = this.value.replace(/\D/g,'').slice(0,10);           // max 10 chiffres
+    this.value = digits.replace(/(\d{2})(?=\d)/g, '$1 ').trim();      // groupes de 2
+  });
+}
+// activer sur les 2 champs téléphone
+document.addEventListener('DOMContentLoaded', function(){
+  formatTelInput('telUnlock'); // champ principal
+  formatTelInput('exitTel');   // popup
+});
 
 /* ================== CONDITIONS ================== */
 function hasStartedSimu(){
@@ -1193,7 +1208,7 @@ document.getElementById('exitFormPost').addEventListener('submit', function(e){
     return;
   }
 
-  // Recopie (on laisse le format tapé par l’utilisateur)
+  // Recopie dans le champ principal (on garde le format avec espaces)
   const mainTel = telField();
   if (mainTel) mainTel.value = telRaw;
 
@@ -1211,13 +1226,13 @@ document.getElementById('exitFormPost').addEventListener('submit', function(e){
 });
 
 /* ================== VALIDATION du champ principal (telUnlock) ================== */
-// Ajoute placeholder + titre (HTML) pour guider l’utilisateur
+// Améliore l'UX du champ principal (placeholder + title)
 (function enhanceMainPhoneField(){
   const mainTel = telField();
   if (mainTel){
     mainTel.setAttribute('placeholder','06 12 34 56 78');
     mainTel.setAttribute('title','Entrez un numéro français valide (ex : 06 12 34 56 78)');
-    // (on laisse ton "required" géré par ton flux)
+    // pattern HTML optionnel si tu veux : mainTel.setAttribute('pattern','^0[1-9](?:[ .-]?[0-9]{2}){4}$');
   }
 })();
 
@@ -1237,6 +1252,7 @@ document.getElementById('exitFormPost').addEventListener('submit', function(e){
   };
 })();
 </script>
+
 
 
 
