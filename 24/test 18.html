@@ -1090,60 +1090,82 @@ recapEl.style.height='auto';
 </style>
 
 <script>
-let popupShown = false;
+// ====== États (un par popup) ======
+let shownPre = false;
+let shownPost = false;
 
-// ----- helpers (sélecteurs basés sur TES IDs) -----
+// ====== Helpers - s'appuient sur TES IDs ======
 function el(s){ return document.querySelector(s); }
 function telField(){ return el('#telUnlock'); }
 function cpField(){ return el('#codePostal'); }
 function factureField(){ return el('#facture'); }
 
-// conditions d'état
+// ====== Conditions ======
 function hasStartedSimu(){
   const cp = cpField(), fac = factureField();
   return cp && fac && cp.value.trim() !== "" && fac.value.trim() !== "";
 }
 function phoneNeeded(){
   const tel = telField();
-  // champ tel visible (affiché après simu) ET vide
+  // champ tel visible (après simu) ET vide
   return tel && tel.offsetParent !== null && !tel.value.trim();
 }
 
-// affichage/fermeture
-function showExit(which){ document.getElementById('exitPopup'+which).style.display='flex'; popupShown = true; }
-function closeExit(which){ document.getElementById('exitPopup'+which).style.display='none'; }
+// ====== Affichage / Fermeture ======
+function showExit(which){
+  const box = document.getElementById('exitPopup'+which);
+  if (!box) return;
+  box.style.display = 'flex';
+  if (which === 'Pre') shownPre = true;
+  if (which === 'Post') shownPost = true;
+}
+function closeExit(which){
+  const box = document.getElementById('exitPopup'+which);
+  if (!box) return;
+  box.style.display = 'none';
+}
 
-// logique de décision
+// ====== Logique de décision ======
 function maybeShowExit(){
-  if (popupShown) return;
-
   // si le téléphone est déjà rempli, ne rien montrer
   const tel = telField();
   if (tel && tel.value.trim()) return;
 
-  if (phoneNeeded() && hasStartedSimu()){
-    showExit('Post'); // simu ok mais tél manquant → demander le tél
-  } else if (!hasStartedSimu()){
-    showExit('Pre');  // pas encore de simu → inciter à commencer
+  // priorité au post-simu si simu faite & tel manquant
+  if (!shownPost && phoneNeeded() && hasStartedSimu()){
+    showExit('Post');
+    return;
+  }
+  // sinon, si aucune simu démarrée, proposer le pré-simu
+  if (!shownPre && !hasStartedSimu()){
+    showExit('Pre');
   }
 }
 
-// déclencheurs (sortie souris / retour mobile / inactivité)
+// ====== Déclencheurs ======
 document.addEventListener('mouseleave', e => { if (e.clientY < 0) maybeShowExit(); });
 
-window.addEventListener('popstate', () => { maybeShowExit(); history.pushState(null, null, location.href); });
+// Mobile : interception du retour arrière (affiche une fois)
+window.addEventListener('popstate', () => { 
+  maybeShowExit(); 
+  history.pushState(null, null, location.href); 
+});
 
+// Inactivité 30s (PC & mobile)
 let inactivityTimer;
 function resetInactivity(){ clearTimeout(inactivityTimer); inactivityTimer = setTimeout(maybeShowExit, 30000); }
 ['mousemove','keydown','scroll','touchstart'].forEach(evt => document.addEventListener(evt, resetInactivity));
 resetInactivity();
 
-// actions popups
-// A: pré-simu → focus sur le champ code postal
+// ====== Actions des popups ======
+// A: pré-simu → scroller/focus sur le champ code postal
 document.getElementById('btnStartSimu').addEventListener('click', () => {
   closeExit('Pre');
   const cp = cpField();
-  if (cp){ cp.scrollIntoView({behavior:'smooth', block:'center'}); setTimeout(()=>cp.focus(), 250); }
+  if (cp){ 
+    cp.scrollIntoView({behavior:'smooth', block:'center'}); 
+    setTimeout(()=>cp.focus(), 250); 
+  }
 });
 
 // B: post-simu → copier tél, cocher consentement, lancer TON flux
@@ -1152,19 +1174,24 @@ document.getElementById('exitFormPost').addEventListener('submit', function(e){
   const tel = document.getElementById('exitTel').value.trim();
   if(!tel) return;
 
+  // 1) Recopie dans ton champ principal
   const mainTel = telField();
   if (mainTel) mainTel.value = tel;
 
+  // 2) Cocher la case consentement si présente
   const consent = el('#rgpdUnlock');
   if (consent && !consent.checked) consent.checked = true;
 
+  // 3) Fermer le popup
   closeExit('Post');
 
+  // 4) Appeler ton flux d’unlock existant
   if (typeof submitUnlock === 'function'){
     try { submitUnlock(new Event('submit')); } catch(err){ console.error(err); }
   }
 });
 </script>
+
 
  
 </body>
