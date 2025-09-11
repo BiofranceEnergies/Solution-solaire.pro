@@ -297,27 +297,27 @@
 
 
     <!-- Formulaire -->
-    <div class="card form-section">
-
-
-      <h2 style="margin-top:2px">Simulation personnalisée</h2>
-      <form onsubmit="calculerSimulation(); return false;" novalidate>
-        <div class="inputs" style="margin-bottom:8px">
-          <input type="text" id="codePostal" placeholder="Votre code postal" maxlength="5" inputmode="numeric" pattern="[0-9]{5}" autocomplete="postal-code" autofocus>
-          <input type="text" id="facture" placeholder="Votre facture élec /an (ex : 1800 €)" inputmode="decimal" autocomplete="off">
-        </div>
-        <div id="modeAvance" style="display:none;">
-          <input type="text" id="conso" placeholder="Conso annuelle (kWh, optionnel)" inputmode="decimal" autocomplete="off">
-        </div>
-        <a href="#" id="lienAvance" class="helper">➕ Vous connaissez votre consommation annuelle ? Cliquez ici pour une estimation ultra-précise</a>
-        <div style="margin-top:6px;font-size:13px;color:#6b7280;text-align:center">Pas votre conso ? La facture suffit.</div>
-        <div style="height:10px"></div>
-        <button id="simuler" type="submit" class="primary" aria-label="Obtenir mon estimation photovoltaïque">🔍 Obtenir mon estimation</button>
-        <div style="margin-top:8px;font-size:13px;color:#374151;text-align:center">
-          <strong>Résultat instantané :</strong> production, prix TTC et option de financement calculés en temps réel.
-        </div>
-      </form>
+<!-- Formulaire -->
+<div class="card form-section" style="border:2px solid var(--accent);max-width:720px">
+  <h2 style="margin-top:2px">Simulation personnalisée</h2>
+  <form onsubmit="calculerSimulation(); return false;" novalidate>
+    <div class="inputs" style="margin-bottom:8px">
+      <input type="text" id="codePostal" placeholder="Votre code postal" maxlength="5" inputmode="numeric" pattern="[0-9]{5}" autocomplete="postal-code" autofocus>
+      <input type="text" id="facture" placeholder="Votre facture élec /an (ex : 1800 €)" inputmode="decimal" autocomplete="off">
     </div>
+    <div id="modeAvance" style="display:none;">
+      <input type="text" id="conso" placeholder="Conso annuelle (kWh, optionnel)" inputmode="decimal" autocomplete="off">
+    </div>
+    <a href="#" id="lienAvance" class="helper">➕ Vous connaissez votre consommation annuelle ? Cliquez ici pour une estimation ultra-précise</a>
+    <div style="margin-top:6px;font-size:13px;color:#6b7280;text-align:center">Pas votre conso ? La facture suffit.</div>
+    <div style="height:10px"></div>
+    <button id="simuler" type="submit" class="primary" aria-label="Obtenir mon estimation photovoltaïque">🔍 Obtenir mon estimation</button>
+    <div style="margin-top:8px;font-size:13px;color:#374151;text-align:center">
+      <strong>Résultat instantané :</strong> production, prix TTC et option de financement calculés en temps réel.
+    </div>
+  </form>
+</div>
+
 
     <!-- Témoignages (visibles avant simulation) -->
     <div class="card temoins" data-hide-after-sim="1" id="bloc-temoins">
