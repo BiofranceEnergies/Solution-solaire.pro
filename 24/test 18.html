@@ -1070,14 +1070,14 @@ recapEl.style.height='auto';
 <div id="exitPopupPost" class="exit-popup">
   <div class="exit-content">
     <h2>Quitter sans vos économies, c’est un peu dommage, non ? 😉</h2>
-    <p>Mettez juste votre numéro et affichez votre étude complète ainsi que le coût de votre installation.</p>
+    <p>Mettez juste votre numéro et affichez votre étude complète ainsi que le coût de votre installation (par SMS).</p>
     <form id="exitFormPost">
       <input id="exitTel" type="tel"
              placeholder="06 12 34 56 78"
              required
              pattern="^0[1-9](?:[ .-]?[0-9]{2}){4}$"
              title="Entrez un numéro français valide (ex : 06 12 34 56 78)">
-      <button type="submit">Afficher mon étude maintenant</button>
+      <button type="submit">Recevoir mon étude maintenant</button>
     </form>
     <span class="close-exit" onclick="closeExit('Post')">✖</span>
   </div>
@@ -1108,7 +1108,7 @@ function factureField(){ return el('#facture'); }
 function normalizeTel(s){ return (s||'').replace(/[^\d]/g,''); }
 function isValidFrTel(s){
   const n = normalizeTel(s);
-  return /^0[1-9]\d{8}$/.test(n); // 10 chiffres FR (fixes + mobiles)
+  return /^0[1-9]\d{8}$/.test(n); // 10 chiffres FR
 }
 
 /* ================== Auto-formatage téléphone ================== */
@@ -1138,6 +1138,10 @@ function phoneNeeded(){
   return tel && tel.offsetParent !== null && !tel.value.trim();
 }
 
+/* ================== SCROLL LOCK ================== */
+function lockBodyScroll(){ document.documentElement.style.overflow='hidden'; }
+function unlockBodyScroll(){ document.documentElement.style.overflow=''; }
+
 /* ================== AFFICHAGE / FERMETURE ================== */
 function showExit(which){
   const box = document.getElementById('exitPopup'+which);
@@ -1145,26 +1149,57 @@ function showExit(which){
   box.style.display = 'flex';
   if (which === 'Pre') shownPre = true;
   if (which === 'Post') shownPost = true;
+  lockBodyScroll();
+  // fermer au tap sur le fond
+  box.addEventListener('click', backdropCloseOnce);
+  function backdropCloseOnce(e){
+    if (e.target === box){ closeExit(which); box.removeEventListener('click', backdropCloseOnce); }
+  }
 }
 function closeExit(which){
   const box = document.getElementById('exitPopup'+which);
   if (!box) return;
   box.style.display = 'none';
+  unlockBodyScroll();
 }
 
 /* ================== LOGIQUE D’AFFICHAGE ================== */
 function maybeShowExit(){
   const tel = telField();
-  if (tel && tel.value.trim()) return;
-  if (!shownPost && phoneNeeded() && hasStartedSimu()){ showExit('Post'); return; }
-  if (!shownPre && !hasStartedSimu()){ showExit('Pre'); }
+  if (tel && tel.value.trim()) return false;
+  if (!shownPost && phoneNeeded() && hasStartedSimu()){ showExit('Post'); return true; }
+  if (!shownPre && !hasStartedSimu()){ showExit('Pre'); return true; }
+  return false;
 }
 
 /* ================== DÉCLENCHEURS ================== */
+// Desktop : sortie souris
 document.addEventListener('mouseleave', e => { if (e.clientY < 0) maybeShowExit(); });
-window.addEventListener('popstate', () => { maybeShowExit(); history.pushState(null, null, location.href); });
+
+// Mobile + Desktop : bouton retour
+(function primeHistory(){
+  try {
+    history.replaceState({layer:'base'}, '');
+    history.pushState({layer:'guard'}, '');
+  } catch(e){}
+})();
+window.addEventListener('popstate', () => {
+  const shown = maybeShowExit();
+  if (shown) {
+    try { history.pushState({layer:'guard'}, ''); } catch(e){}
+  } else {
+    try { history.back(); } catch(e){}
+  }
+});
+
+// Inactivité : 15s mobile / 30s desktop
 let inactivityTimer;
-function resetInactivity(){ clearTimeout(inactivityTimer); inactivityTimer = setTimeout(maybeShowExit, 30000); }
+function mobileLike(){ return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent); }
+function resetInactivity(){
+  clearTimeout(inactivityTimer);
+  const delay = mobileLike() ? 15000 : 30000;
+  inactivityTimer = setTimeout(() => { maybeShowExit(); }, delay);
+}
 ['mousemove','keydown','scroll','touchstart'].forEach(evt => document.addEventListener(evt, resetInactivity));
 resetInactivity();
 
@@ -1191,7 +1226,7 @@ document.getElementById('exitFormPost').addEventListener('submit', function(e){
   if (typeof submitUnlock === 'function'){ try { submitUnlock(new Event('submit')); } catch(err){ console.error(err); } }
 });
 
-/* ================== VALIDATION du champ principal (telUnlock) ================== */
+/* ================== VALIDATION du champ principal ================== */
 (function enhanceMainPhoneField(){
   const mainTel = telField();
   if (mainTel){
@@ -1210,7 +1245,6 @@ document.getElementById('exitFormPost').addEventListener('submit', function(e){
       if (mainTel) mainTel.focus();
       return false;
     }
-    // coche automatiquement consentement si pas déjà fait
     const consent = document.getElementById('rgpdUnlock');
     if (consent && !consent.checked) consent.checked = true;
     return _orig.apply(this, arguments);
