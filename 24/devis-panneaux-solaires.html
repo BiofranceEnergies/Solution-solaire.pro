@@ -348,59 +348,58 @@
     <!-- Récap (VISIBLE) -->
     <div id="recap" class="card recap" style="display:none;visibility:hidden;height:0;overflow:hidden;"></div>
 
-    <!-- SECTION VERROUILLÉE (floue) -->
-    <div id="lockedSection" class="card" style="display:none;visibility:hidden;height:0;overflow:hidden;">
-      <div id="lockedContent" class="lockedContent"></div>
-       <div class="veil" id="veil">
-        <div class="pw-head">
-          <h2 class="pw-title" style="margin:0 0 4px 0"><span aria-hidden="true">📊</span> Affichez votre étude complète personnalisée</h2>
-          <ul class="pw-sub" style="margin:10px 0;color:#374151;list-style:none;padding:0">
-  <li>✅ Le prix final TTC de votre installation</li>
-  <li>✅ Votre mensualité fixe et vos économies sur 15 ans</li>
-  <li>✅ 800 € de remise immédiate (offre valable jusqu’au 30/09/2025)</li>
-</ul>
+   <!-- SECTION VERROUILLÉE (floue) -->
+<div id="lockedSection" class="card" style="display:none;visibility:hidden;height:0;overflow:hidden; border:3px solid var(--accent); border-radius:16px; padding:20px;">
+  <div id="lockedContent" class="lockedContent"></div>
+   <div class="veil" id="veil">
+    <div class="pw-head">
+      <h2 class="pw-title" style="margin:0 0 4px 0"><span aria-hidden="true">📊</span> Affichez votre étude complète personnalisée</h2>
+      <ul class="pw-sub" style="margin:10px 0;color:#374151;list-style:none;padding:0">
+        <li>✅ Le prix final TTC de votre installation</li>
+        <li>✅ Votre mensualité fixe et vos économies sur 15 ans</li>
+        <li>✅ 800 € de remise immédiate (offre valable jusqu’au 30/09/2025)</li>
+      </ul>
+    </div>
 
-        </div>
+    <div class="bullets" style="margin:10px 0 0 0">
+      <span class="bullet"><span class="icon">🔒</span><span class="label">Données protégées</span></span>
+      <span class="bullet"><span class="icon">⚡</span><span class="label">Étude affichée immédiatement à l’écran</span></span>
+    </div>
 
-        <div class="bullets" style="margin:10px 0 0 0">
-  <span class="bullet"><span class="icon">🔒</span><span class="label">Données protégées</span></span>
-  <span class="bullet"><span class="icon">⚡</span><span class="label">Étude affichée immédiatement à l’écran</span></span>
-</div>
+    <div class="unlock" style="margin-top:10px">
+      <!-- Email optionnel -->
+      <div class="field">
+        <label for="emailUnlock" class="label">Email <span style="color:#6b7280;font-weight:600">(facultatif)</span></label>
+        <input type="email" id="emailUnlock" placeholder="Votre email (facultatif)" autocomplete="email">
+      </div>
 
-
-        <div class="unlock" style="margin-top:10px">
-          <!-- Email optionnel -->
-          <div class="field">
-            <label for="emailUnlock" class="label">Email <span style="color:#6b7280;font-weight:600">(facultatif)</span></label>
-            <input type="email" id="emailUnlock" placeholder="Votre email (facultatif)" autocomplete="email">
-          </div>
-
-          <!-- Téléphone obligatoire -->
-          <div class="field">
-            <label for="telUnlock" class="label">Téléphone <span>(obligatoire)</span></label>
-            <input type="tel" id="telUnlock" placeholder="06 12 34 56 78" autocomplete="tel" required>
-            <div class="help" style="font-size:13px;color:#6b7280;margin-top:4px">
-              Un SMS de confirmation vous sera envoyé. Libre à vous d’échanger ensuite.
-            </div>
-          </div>
-
-          <!-- Consentement -->
-          <label class="consent" style="grid-column:1/-1">
-            <input type="checkbox" id="rgpdUnlock" required aria-required="true">
-            <span>Je consens à être contacté <strong>par SMS uniquement</strong>.</span>
-          </label>
-
-          <!-- CTA -->
-          <button type="button" class="primary" style="grid-column:1/-1" onclick="submitUnlock(event)">
-            <span aria-hidden="true">📊</span> Voir mon étude complète et mes économies
-          </button>
-
-          <div class="foot" style="grid-column:1/-1;text-align:center;color:#6b7280;font-size:12px;margin-top:6px">
-            Vos données ne seront jamais revendues ni utilisées à d’autres fins.
-          </div>
+      <!-- Téléphone obligatoire -->
+      <div class="field">
+        <label for="telUnlock" class="label">Téléphone <span>(obligatoire)</span></label>
+        <input type="tel" id="telUnlock" placeholder="06 12 34 56 78" autocomplete="tel" required>
+        <div class="help" style="font-size:13px;color:#6b7280;margin-top:4px">
+          Un SMS de confirmation vous sera envoyé. Libre à vous d’échanger ensuite.
         </div>
       </div>
+
+      <!-- Consentement -->
+      <label class="consent" style="grid-column:1/-1">
+        <input type="checkbox" id="rgpdUnlock" required aria-required="true">
+        <span>Je consens à être contacté <strong>par SMS uniquement</strong>.</span>
+      </label>
+
+      <!-- CTA -->
+      <button type="button" class="primary" style="grid-column:1/-1">
+        <span aria-hidden="true">📊</span> Voir mon étude complète et mes économies
+      </button>
+
+      <div class="foot" style="grid-column:1/-1;text-align:center;color:#6b7280;font-size:12px;margin-top:6px">
+        Vos données ne seront jamais revendues ni utilisées à d’autres fins.
+      </div>
     </div>
+  </div>
+</div>
+
 
     <!-- Mentions (visibles au chargement) -->
     <div id="mentions-legales-container">
