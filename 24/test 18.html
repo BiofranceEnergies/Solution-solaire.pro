@@ -1070,14 +1070,14 @@ recapEl.style.height='auto';
 <div id="exitPopupPost" class="exit-popup">
   <div class="exit-content">
     <h2>Quitter sans vos économies, c’est un peu dommage, non ? 😉</h2>
-    <p>Mettez juste votre numéro et affichez votre étude complète et rentable.</p>
+    <p>Donnez juste votre numéro et repartez avec votre étude complète dans la poche (par SMS).</p>
     <form id="exitFormPost">
       <input id="exitTel" type="tel"
-             placeholder="Votre téléphone"
+             placeholder="06 12 34 56 78"
              required
-             pattern="^0[1-9][0-9]{8}$"
-             title="Entrez un numéro français valide (ex : 0612345678)">
-      <button type="submit">Afficher mon étude maintenant</button>
+             pattern="^0[1-9](?:[ .-]?[0-9]{2}){4}$"
+             title="Entrez un numéro français valide (ex : 06 12 34 56 78)">
+      <button type="submit">Recevoir mon étude maintenant</button>
     </form>
     <span class="close-exit" onclick="closeExit('Post')">✖</span>
   </div>
@@ -1177,14 +1177,14 @@ document.getElementById('btnStartSimu').addEventListener('click', () => {
 document.getElementById('exitFormPost').addEventListener('submit', function(e){
   e.preventDefault();
   const tel = document.getElementById('exitTel').value.trim();
-  const telRegex = /^0[1-9][0-9]{8}$/;
+  const telRegex = /^0[1-9](?:[ .-]?[0-9]{2}){4}$/;
 
   if(!telRegex.test(tel)){
-    alert("Merci d’entrer un numéro de téléphone valide (ex : 0612345678).");
+    alert("Merci d’entrer un numéro de téléphone valide (ex : 06 12 34 56 78).");
     return;
   }
 
-  // 1) recopie dans le champ principal
+  // 1) recopie dans le champ principal (telUnlock)
   const mainTel = telField();
   if (mainTel) mainTel.value = tel;
 
@@ -1202,33 +1202,34 @@ document.getElementById('exitFormPost').addEventListener('submit', function(e){
 });
 
 /* ================== VALIDATION DU CHAMP PRINCIPAL (telUnlock) ================== */
-/* Ajout des attributs HTML de validation */
+/* Ajout des attributs HTML de validation compatibles "06 12 34 56 78" etc. */
 (function enhanceMainPhoneField(){
   const mainTel = telField();
   if (mainTel){
-    mainTel.setAttribute('pattern','^0[1-9][0-9]{8}$');
-    mainTel.setAttribute('title','Entrez un numéro français valide (ex : 0612345678)');
-    // pas "required" ici : c'est déjà géré par ton flux et le contexte
+    mainTel.setAttribute('placeholder','06 12 34 56 78');
+    mainTel.setAttribute('pattern','^0[1-9](?:[ .-]?[0-9]{2}){4}$');
+    mainTel.setAttribute('title','Entrez un numéro français valide (ex : 06 12 34 56 78)');
   }
 })();
 
-/* Monkey-patch de submitUnlock pour valider le tél principal AVANT envoi,
-   sans toucher à ton code existant ni à l’onclick du bouton. */
+/* Validation côté JS avant submitUnlock, sans toucher à ton implémentation */
 (function wrapSubmitUnlock(){
   if (typeof window.submitUnlock !== 'function') return;
   const _orig = window.submitUnlock;
   window.submitUnlock = function(ev){
-    const tel = (telField() && telField().value || '').trim();
-    const telRegex = /^0[1-9][0-9]{8}$/;
-    if(!telRegex.test(tel)){
-      alert("Merci d’entrer un numéro de téléphone valide (ex : 0612345678).");
-      if (telField()) telField().focus();
+    const mainTel = telField();
+    const val = mainTel ? (mainTel.value || '').trim() : '';
+    const telRegex = /^0[1-9](?:[ .-]?[0-9]{2}){4}$/;
+    if(!telRegex.test(val)){
+      alert("Merci d’entrer un numéro de téléphone valide (ex : 06 12 34 56 78).");
+      if (mainTel) mainTel.focus();
       return false;
     }
     return _orig.apply(this, arguments);
   };
 })();
 </script>
+
 
 
  
