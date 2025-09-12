@@ -103,6 +103,19 @@
     input,button{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--border);background:#fff;color:#111827;font-size:17px}
     input::placeholder{color:#9ca3af}
     a.helper{color:#0b61d8;text-decoration:underline;font-size:14px}
+    /* Spécifique aux champs Email et Téléphone dans le bloc déverrouillé */
+#lockedSection input[type="email"],
+#lockedSection input[type="tel"] {
+  border: 2px solid var(--accent);
+}
+
+#lockedSection input[type="email"]:focus,
+#lockedSection input[type="tel"]:focus {
+  outline: none;
+  border-color: var(--accent-dark);
+  box-shadow: 0 0 0 3px rgba(245,158,11,0.3);
+}
+
 
     /* CTA marque */
     button.primary{
