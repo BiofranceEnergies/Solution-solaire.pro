@@ -232,43 +232,38 @@
   margin: 0 0 14px 0;
 }
 
-/* Bloc "Comment ça marche" : cadre pédagogique discret */
-#bloc-info .bi-steps{
-  border: 1px solid var(--bi-sep);
-  border-radius: 12px;
-  padding: 12px 14px;
-  background: #fff;
-  box-shadow: var(--shadow);
-  margin-bottom: 14px;
+/* Étapes numérotées dans bloc-info */
+#bloc-info .bi-steps-num{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
 }
-
-/* Par lignes, avec séparateurs fins */
-#bloc-info .bi-steps p{
-  margin: 0;
-  padding: 8px 0;
-  line-height: 1.6;
-  color: var(--bi-muted);
-  font-size: 15.5px;
-  position: relative;
+#bloc-info .bi-steps-num li{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px 14px;
+  box-shadow:var(--shadow);
+  font-size:15.5px;
+  line-height:1.55;
+  color:#1f2937;
 }
-#bloc-info .bi-steps p + p{
-  border-top: 1px dashed var(--bi-sep);
-}
-
-/* Appel visuel pour la phrase clé */
-#bloc-info .bi-callout{
-  background: #fffbeb;               /* jaune très léger */
-  border: 1px solid #fde68a;         /* bord doux */
-  border-radius: 10px;
-  padding: 10px 12px;
-  margin-top: 10px;
-  box-shadow: 0 6px 16px rgba(245,158,11,.12);
-}
-
-/* Harmonisation mobile */
-@media (max-width:560px){
-  #bloc-info .bi-text, #bloc-info .bi-steps p{ font-size: 15px; }
-  #bloc-info .bi-steps{ padding: 10px 12px; }
+#bloc-info .bi-steps-num .num{
+  flex:0 0 28px;
+  height:28px;
+  display:inline-grid;
+  place-items:center;
+  border-radius:50%;
+  background:var(--accent-soft);
+  border:1px solid #fed7aa;
+  font-weight:900;
+  color:#111827;
 }
 
 
@@ -341,23 +336,29 @@
 
   <h2 class="bi-title">Un simulateur qui va à l’essentiel</h2>
   <p class="bi-text">
-    Pas de blabla, pas de formulaires interminables. Ici, vous obtenez immédiatement une estimation claire de votre projet solaire : production, panneaux et couverture de votre consommation. L’étude complète s’affiche directement à l’écran, <strong>100% en ligne</strong>, sans attente ni relance. Un SMS vous est envoyé, libre à vous d’échanger ensuite.
+    Pas de blabla, pas de formulaires interminables. Ici, vous obtenez immédiatement une estimation claire de votre projet solaire :
+    production, panneaux et couverture de votre consommation. L’étude complète s’affiche directement à l’écran, <strong>100% en ligne</strong>,
+    sans attente ni relance. Un SMS vous est envoyé, libre à vous d’échanger ensuite.
   </p>
 
   <h2 class="bi-title">Comment ça marche</h2>
-  <div class="bi-steps">
-    <p>Entrez votre code postal et votre facture annuelle.</p>
-    <p>Notre outil calcule le type d’installation adapté (puissance, panneaux, couverture).</p>
-    <p>Débloquez l’étude complète avec vos économies et le coût précis de l’installation.</p>
-    <p class="bi-callout">👉 Tout le processus se fait <strong>en direct, sur votre écran</strong>.</p>
-  </div>
+  <ul class="bi-steps-num">
+    <li><span class="num">1</span> Entrez votre code postal et votre facture annuelle.</li>
+    <li><span class="num">2</span> Notre outil calcule le type d’installation adapté (puissance, panneaux, couverture).</li>
+    <li><span class="num">3</span> Débloquez l’étude complète avec vos économies et le coût précis de l’installation.<br>
+      👉 Tout le processus se fait <strong>en direct, sur votre écran</strong>.
+    </li>
+  </ul>
 
   <h2 class="bi-title">Une démarche transparente</h2>
   <p class="bi-text">
-    Nous préférons être clairs : <strong>l’État ne finance pas votre installation solaire</strong>. Contrairement à beaucoup de sites qui promettent des aides ou génèrent des appels indésirables, nous vous donnons une estimation fiable, immédiate et <strong>100% en ligne</strong>, sans démarchage téléphonique.
+    Nous préférons être clairs : <strong>l’État ne finance pas votre installation solaire</strong>. Contrairement à beaucoup de sites
+    qui promettent des aides ou génèrent des appels indésirables, nous vous donnons une estimation fiable, immédiate et
+    <strong>100% en ligne</strong>, sans démarchage téléphonique.
   </p>
 
 </div>
+
 
 
 
