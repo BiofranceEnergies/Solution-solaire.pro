@@ -271,6 +271,180 @@
   font-weight:600;
 }
 
+/* ============================== */
+/* css - bloc info (modernisé) */
+/* ============================== */
+
+/* Variables locales */
+#bloc-info{
+  --bi-muted:#1f2937;
+  --bi-rail:#e9eef9;
+  --bi-card:#ffffff;
+  --bi-shadow:0 10px 26px rgba(2,6,23,.10);
+  --bi-ring:rgba(245,158,11,.25);
+}
+
+/* Conteneur principal */
+#bloc-info {
+  border: 2px solid var(--accent);
+  border-radius: 14px;
+  padding: 18px;
+  max-width: 720px;
+  margin: 18px auto;
+  background: #fff;
+}
+
+/* Titres */
+#bloc-info .bi-title{
+  margin:8px 0 14px 0;
+  text-align:center;
+  font-weight:900;
+  letter-spacing:.2px;
+  font-size: 1.2rem;
+}
+
+/* Texte standard */
+#bloc-info .bi-text{
+  color:var(--bi-muted);
+  font-size:15.5px;
+  line-height:1.7;
+  margin:0 0 16px 0;
+}
+
+/* ===== Timeline moderne ===== */
+#bloc-info .bi-steps-num{
+  list-style:none;
+  margin:0;
+  padding:0 0 0 56px; /* espace pour rail + icônes */
+  position:relative;
+  display:flex; flex-direction:column; gap:18px;
+}
+
+/* Rail vertical */
+#bloc-info .bi-steps-num::before{
+  content:"";
+  position:absolute; left:28px; top:6px; bottom:6px;
+  width:2px; background:linear-gradient(180deg,var(--bi-rail),transparent);
+  border-radius:2px;
+}
+
+/* Cartes étapes */
+#bloc-info .bi-steps-num li{
+  position:relative;
+  background:var(--bi-card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  box-shadow:var(--bi-shadow);
+  padding:16px 18px;
+  color:#111827; font-size:15.5px; line-height:1.6;
+  display:flex; flex-wrap:wrap; gap:10px;
+  transition:box-shadow .18s ease, transform .18s ease, border-color .18s ease;
+}
+@media (hover:hover){
+  #bloc-info .bi-steps-num li:hover{
+    box-shadow:0 14px 34px rgba(2,6,23,.14);
+    transform:translateY(-1px);
+  }
+}
+
+/* Icônes étapes */
+#bloc-info .bi-steps-num li::before{
+  content:"";
+  position:absolute; left:-56px; top:50%; transform:translateY(-50%);
+  width:40px; height:40px; border-radius:50%;
+  display:grid; place-items:center;
+  font-size:20px; font-weight:900;
+  background:linear-gradient(180deg,#fff7ed,#ffedd5);
+  border:1px solid #fdba74; color:#7c2d12; box-shadow:0 6px 16px var(--bi-ring);
+}
+#bloc-info .bi-steps-num li:nth-child(1)::before{ content:"📍"; }
+#bloc-info .bi-steps-num li:nth-child(2)::before{ content:"⚙️"; }
+#bloc-info .bi-steps-num li:nth-child(3)::before{ content:"🔓"; }
+
+/* Num caché pour accessibilité */
+#bloc-info .bi-steps-num .num{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+
+/* Bandeau incitatif */
+#bloc-info .bi-steps-num .hint{
+  flex:1 1 100%;
+  display:block;
+  margin-top:10px;
+  background:linear-gradient(180deg,#fffbeb,#fff7e6);
+  border:1px solid #fde68a;
+  border-radius:12px;
+  padding:10px 12px;
+  font-weight:800;
+  box-shadow:0 10px 22px rgba(245,158,11,.12);
+}
+
+/* Accent étape 3 */
+#bloc-info .bi-steps-num li:nth-child(3){
+  border-color:#fed7aa;
+  box-shadow:0 16px 36px rgba(245,158,11,.12), var(--bi-shadow);
+}
+
+/* ===== Encadré note importante ===== */
+#bloc-info .note-important {
+  margin-top: 14px;
+  background: #fff7ed;
+  border: 2px solid var(--accent);
+  border-left: 6px solid var(--accent-dark);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 15.5px;
+  line-height: 1.6;
+  font-weight: 700;
+  color: #1b1202;
+  box-shadow: 0 8px 18px rgba(245, 158, 11, 0.12);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+#bloc-info .note-important .ico {
+  font-size: 20px;
+  line-height: 1;
+  margin-top: 2px;
+}
+#bloc-info .note-important strong {
+  color: var(--accent-dark);
+}
+#bloc-info .note-important .sms {
+  color: #065f46;
+  font-weight: 800;
+}
+
+/* ===== Carte “preuve” Transparence ===== */
+#bloc-info .bi-transp{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-left:4px solid var(--accent);
+  border-radius:12px;
+  padding:14px 16px;
+  box-shadow:0 10px 22px rgba(2,6,23,.08);
+  font-size:15.5px;
+  line-height:1.7;
+  margin-top:10px;
+}
+#bloc-info .bi-transp .ico {
+  font-size: 18px;
+  margin-top: 2px;
+}
+
+/* Mobile */
+@media (max-width:560px){
+  #bloc-info .bi-text{ font-size:15px; }
+  #bloc-info .bi-steps-num{ padding-left:52px; gap:16px; }
+  #bloc-info .bi-steps-num::before{ left:26px; }
+  #bloc-info .bi-steps-num li::before{ left:-52px; width:36px; height:36px; }
+  #bloc-info .bi-transp{ font-size:15px; padding:12px 14px; }
+}
+
 
   </style>
 </head>
@@ -340,6 +514,52 @@
       <strong>Résultat instantané :</strong> production, prix TTC et option de financement calculés en temps réel.
     </div>
   </form>
+</div>
+
+<!-- ⚡ Bloc d'information modernisé sous le formulaire -->
+<div class="card" id="bloc-info" data-hide-after-sim="1">
+  <h2 class="bi-title">Un simulateur qui va à l’essentiel</h2>
+  <p class="bi-text">
+    Nous savons que vous avez déjà parcouru de nombreuses pages expliquant pourquoi le solaire est rentable.
+    Inutile de répéter les mêmes arguments : <strong>oui, l’électricité augmente et oui, produire sa propre énergie est un choix intelligent</strong>.  
+    Ici, nous allons à l’essentiel : une estimation claire et immédiate de votre projet — production, panneaux, couverture de votre consommation.
+  </p>
+
+  <div class="note-important">
+    <span class="ico">📌</span>
+    <div>
+      <strong>L’étude complète s’affiche directement à l’écran, 100 % en ligne, sans attente ni relance.</strong><br>
+      <span class="sms">Un SMS de confirmation vous est envoyé.</span>
+    </div>
+  </div>
+
+  <h2 class="bi-title">Comment ça marche</h2>
+  <ul class="bi-steps-num">
+    <li>
+      <span class="num">1</span>
+      Entrez votre <strong>code postal</strong> et votre <strong>facture annuelle</strong>.
+    </li>
+    <li>
+      <span class="num">2</span>
+      L’outil calcule l’<strong>installation adaptée</strong> (puissance, panneaux, couverture).
+    </li>
+    <li>
+      <span class="num">3</span>
+      Débloquez l’<strong>étude complète</strong> : économies et <strong>coût précis</strong> de l’installation.
+      <span class="hint">👉 Tout le processus se fait <strong>en direct, sur votre écran</strong>.</span>
+    </li>
+  </ul>
+
+  <h2 class="bi-title">Une démarche transparente</h2>
+  <div class="bi-transp">
+    <span class="ico">⚠️</span>
+    <p class="bi-text" style="margin:0">
+      Nous préférons être clairs : <strong>l’État ne finance pas votre installation solaire</strong>.
+      Contrairement à de nombreux sites qui promettent des “aides” ou génèrent des appels indésirables,
+      ici vous obtenez une estimation <strong>fiable</strong>, <strong>immédiate</strong> et <strong>100 % en ligne</strong>,
+      <u>sans démarchage téléphonique</u>.
+    </p>
+  </div>
 </div>
 
     <!-- 🔶 Bloc Confiance : Image + garanties + réalisations -->
