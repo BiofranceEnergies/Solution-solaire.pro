@@ -544,40 +544,27 @@
         <button id="simuler" type="submit" class="primary" aria-label="Obtenir mon estimation photovoltaïque">🔍 Obtenir mon estimation</button>
       
 <!-- ========================= -->
-<!-- BLOC REASSURANCE (SOUS CTA) -->
+<!-- BLOC REASSURANCE MINIMALISTE (SOUS CTA) -->
 <!-- ========================= -->
-<ul class="fold-benefits" style="list-style:none;margin:12px 0 0 0;padding:0;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;font-size:14px;color:#111827;text-align:center">
-  <li>✅ Estimation immédiate à l’écran</li>
-  <li>✅ Aucune relance téléphonique</li>
-  <li>✅ Prix TTC clair et détaillé</li>
+<ul class="fold-benefits-min" style="list-style:none;margin:10px 0 0 0;padding:0;font-size:14px;color:#111827;text-align:center">
+  <li style="margin:4px 0">✅ Estimation immédiate à l’écran</li>
+  <li style="margin:4px 0">✅ Aucune relance téléphonique</li>
+  <li style="margin:4px 0">✅ Prix TTC clair et détaillé</li>
 </ul>
 
 <style>
   /* ========================= */
-  /* CSS BLOC REASSURANCE      */
+  /* CSS BLOC REASSURANCE MIN  */
   /* ========================= */
-  .fold-benefits li {
-    display:flex;
-    align-items:center;
-    gap:6px;
-    background:#f3f4f6; /* gris clair */
-    border:1px solid #e5e7eb;
-    border-radius:999px;
-    padding:4px 8px; /* compact */
+  .fold-benefits-min li {
     font-size:14px;
+    line-height:1.4;
   }
 
   @media(max-width:560px){
-    .fold-benefits{
-      flex-direction:column;
-      align-items:center;
-      gap:6px !important;
-      margin-top:6px; /* rapproche du CTA */
-    }
-    .fold-benefits li{
-      width:100%;
-      max-width:280px;
-      justify-content:center;
+    .fold-benefits-min{
+      font-size:14px;
+      margin-top:6px; /* rapproché du CTA */
     }
   }
 </style>
