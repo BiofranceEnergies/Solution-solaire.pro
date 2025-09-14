@@ -214,7 +214,7 @@
 }
 
 /* ============================== */
-/* css - bloc info (modernisé complet) */
+/* css - bloc info (modernisé condensé) */
 /* ============================== */
 
 /* Variables locales */
@@ -261,16 +261,12 @@
   position:relative;
   display:flex; flex-direction:column; gap:18px;
 }
-
-/* Rail vertical */
 #bloc-info .bi-steps-num::before{
   content:"";
   position:absolute; left:28px; top:6px; bottom:6px;
   width:2px; background:linear-gradient(180deg,var(--bi-rail),transparent);
   border-radius:2px;
 }
-
-/* Cartes étapes */
 #bloc-info .bi-steps-num li{
   position:relative;
   background:var(--bi-card);
@@ -288,8 +284,6 @@
     transform:translateY(-1px);
   }
 }
-
-/* Icônes étapes */
 #bloc-info .bi-steps-num li::before{
   content:"";
   position:absolute; left:-56px; top:50%; transform:translateY(-50%);
@@ -302,14 +296,10 @@
 #bloc-info .bi-steps-num li:nth-child(1)::before{ content:"📍"; }
 #bloc-info .bi-steps-num li:nth-child(2)::before{ content:"⚙️"; }
 #bloc-info .bi-steps-num li:nth-child(3)::before{ content:"🔓"; }
-
-/* Num caché pour accessibilité */
 #bloc-info .bi-steps-num .num{
   position:absolute; width:1px; height:1px; padding:0; margin:-1px;
   overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
 }
-
-/* Bandeau incitatif */
 #bloc-info .bi-steps-num .hint{
   flex:1 1 100%;
   display:block;
@@ -321,8 +311,6 @@
   font-weight:800;
   box-shadow:0 10px 22px rgba(245,158,11,.12);
 }
-
-/* Accent étape 3 */
 #bloc-info .bi-steps-num li:nth-child(3){
   border-color:#fed7aa;
   box-shadow:0 16px 36px rgba(245,158,11,.12), var(--bi-shadow);
@@ -358,7 +346,7 @@
   font-weight: 800;
 }
 
-/* ===== Encadré pédagogique simulateur ===== */
+/* ===== Encadré pédagogique (version condensée) ===== */
 #bloc-info .bi-method {
   margin-top: 16px;
   background: #ecfdf5;
@@ -379,7 +367,7 @@
   color: #047857;
 }
 
-/* ===== Carte “preuve” Transparence ===== */
+/* ===== Carte Transparence ===== */
 #bloc-info .bi-transp{
   display:flex;
   align-items:flex-start;
@@ -474,7 +462,7 @@
       </form>
     </div>
 
-<!-- ⚡ Bloc d'information modernisé sous le formulaire -->
+<!-- ⚡ Bloc d'information modernisé condensé -->
 <div class="card" id="bloc-info" data-hide-after-sim="1">
   <h2 class="bi-title">Un simulateur qui va à l’essentiel</h2>
   <p class="bi-text">
@@ -508,14 +496,12 @@
     </li>
   </ul>
 
-  <!-- Encadré pédagogique simulateur -->
+  <!-- Encadré pédagogique condensé -->
   <div class="bi-method">
     <p style="margin:0">
       <span class="ico">🔋</span>
       <strong>Comment fonctionne notre simulateur&nbsp;?</strong><br>
-      Il est basé uniquement sur <strong>l’autoconsommation</strong> et le <strong>stockage virtuel</strong>.  
-      Cela signifie que <u>100 % de votre production est valorisée</u> : vous consommez directement votre énergie,
-      et l’excédent est stocké virtuellement pour vos besoins futurs.  
+      Il repose sur <strong>l’autoconsommation</strong> et le <strong>stockage virtuel</strong>, ce qui permet de <u>valoriser 100 % de votre production</u>.  
       Contrairement à la revente à EDF (seulement <strong>0,04 €/kWh</strong>), cette méthode maximise vos économies.
     </p>
   </div>
