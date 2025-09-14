@@ -189,21 +189,96 @@
     .sep{border:none;border-top:2px solid var(--border);margin:30px 0 16px 0}
     @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
 
-    /* — Témoignages — */
-    .temoins{ background:#fff; border:1px solid var(--border); border-radius:14px; padding:18px; box-shadow:var(--shadow); max-width:720px; margin:0 auto 18px auto;}
-    .temoins h2{ color:#111827; margin:0 0 12px 0; font-weight:800 }
-    .temoins-list{ display:grid; gap:12px }
-    .temoin {
+   /* Témoignages - CSS */
+.temoins{
   background:#fff;
-  border:2px solid var(--accent); /* 👈 contour orange marqué */
-  border-radius:12px;
-  padding:14px;
-  position:relative;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px;
+  box-shadow:var(--shadow);
+  max-width:720px;
+  margin:0 auto 18px auto;
+  text-align:left;
+}
+.temoins h2{
+  color:#111827;
+  margin:0 0 8px 0;
+  font-weight:800;
+  text-align:center;
 }
 
-    .temoin blockquote{ margin:0; color:#111827; font-size:15.5px; line-height:1.55 }
-    .temoin cite{ display:block; margin-top:6px; color:#6b7280; font-style:italic; font-size:14px }
-    .tick{ color:#16a34a; font-weight:900; margin-right:6px }
+/* Ligne “note + étoiles” */
+.temoins .rating-global{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:14px;
+  font-weight:700;
+}
+.temoins .rating-text{
+  color:#111827;
+  font-size:15px;
+}
+.temoins .rating-text strong{ color:#111827; }
+
+/* Étoiles 4,7/5 (remplissage partiel) */
+.stars{
+  --rating:4.7;                 /* valeur de 0 à 5 */
+  position:relative;
+  display:inline-block;
+  font-size:18px;
+  line-height:1;
+  letter-spacing:1px;
+}
+.stars::before{
+  content:"★★★★★";              /* base grise */
+  color:#e5e7eb;
+}
+.stars::after{
+  content:"★★★★★";              /* couche orange, largeur variable */
+  position:absolute; left:0; top:0;
+  width:calc(var(--rating) / 5 * 100%);
+  color:#f59e0b;
+  overflow:hidden; white-space:nowrap;
+}
+
+/* Liste des témoignages */
+.temoins-list{ display:grid; gap:14px; }
+
+.temoin{
+  background:#fff;
+  border:1px solid var(--border);
+  border-left:4px solid var(--accent);
+  border-radius:10px;
+  padding:14px 16px;
+  box-shadow:0 4px 12px rgba(2,6,23,.06);
+  position:relative;
+}
+.temoin blockquote{
+  margin:0;
+  color:#111827;
+  font-size:15.5px;
+  line-height:1.55;
+}
+.temoin cite{
+  display:block;
+  margin-top:8px;
+  color:#6b7280;
+  font-style:normal;
+  font-size:14px;
+}
+
+/* Variante mobile (≤ 560px) */
+@media(max-width:560px){
+  .temoins{ padding:14px; }
+  .temoins .rating-global{ gap:8px; margin-bottom:10px; }
+  .stars{ font-size:17px; }
+  .temoins .rating-text{ font-size:14px; }
+  .temoin{ padding:10px 12px; border-left-width:3px; }
+  .temoin blockquote{ font-size:14.5px; line-height:1.5; }
+  .temoin cite{ font-size:13px; margin-top:6px; }
+}
 
     /* Overlay calcul */
     body.no-scroll { overflow: hidden; }
@@ -610,24 +685,42 @@
 </div>
 
 
-    <!-- Témoignages (visibles avant simulation) -->
-    <div class="card temoins" data-hide-after-sim="1" id="bloc-temoins">
-      <h2>Ils l'ont testé</h2>
-      <div class="temoins-list">
-        <div class="temoin">
-          <blockquote><span class="tick">✓</span>“En moins de 2 minutes, j’ai obtenu un prix précis et le montant de mes économies. L’étude complète s’est affichée immédiatement après déblocage. Aucun démarchage, juste les infos utiles.”</blockquote>
-          <cite>— <strong>Michel L.</strong>, Périgueux</cite>
-        </div>
-        <div class="temoin">
-          <blockquote><span class="tick">✓</span>“Process simple et clair. Les étapes sont rapides et l’étude personnalisée est limpide. Je me suis sentie en confiance du début à la fin.”</blockquote>
-          <cite>— <strong>Sophie G.</strong>, Sarlat</cite>
-        </div>
-        <div class="temoin">
-          <blockquote><span class="tick">✓</span>“Le simulateur m’a montré plus de 1 000 € d’économies possibles la 1ʳᵉ année. Présentation claire, affichée à l’écran, et aucune sollicitation derrière. Ça met en confiance.”</blockquote>
-          <cite>— <strong>Claire M.</strong>, Nontron</cite>
-        </div>
-      </div>
+   <!-- Témoignages - html -->
+<div class="card temoins" data-hide-after-sim="1" id="bloc-temoins">
+  <h2>Ils l'ont testé</h2>
+
+  <div class="rating-global" aria-label="Note moyenne clients">
+    <span class="stars" style="--rating:4.7" aria-label="Note moyenne 4,7 sur 5"></span>
+    <span class="rating-text"><strong>4,7 / 5</strong> – Nos clients satisfaits</span>
+  </div>
+
+  <div class="temoins-list">
+    <div class="temoin">
+      <blockquote>
+        “Estimation claire en 2 minutes, économies affichées tout de suite.
+        Pas de démarchage, juste les infos utiles.”
+      </blockquote>
+      <cite>— <strong>Michel L.</strong>, Périgueux · 05/2025</cite>
     </div>
+
+    <div class="temoin">
+      <blockquote>
+        “Simulation rapide et limpide.
+        J’ai eu confiance dès la première étape.”
+      </blockquote>
+      <cite>— <strong>Sophie G.</strong>, Sarlat · 06/2025</cite>
+    </div>
+
+    <div class="temoin">
+      <blockquote>
+        “Plus de 1 000 € d’économies dès la 1ʳᵉ année.
+        Tout est affiché directement à l’écran.”
+      </blockquote>
+      <cite>— <strong>Claire M.</strong>, Nontron · 06/2025</cite>
+    </div>
+  </div>
+</div>
+
 
     <!-- Récap (VISIBLE) -->
     <div id="recap" class="card recap" style="display:none;visibility:hidden;height:0;overflow:hidden;"></div>
