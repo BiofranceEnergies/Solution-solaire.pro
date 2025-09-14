@@ -543,29 +543,28 @@
         <div style="height:10px"></div>
         <button id="simuler" type="submit" class="primary" aria-label="Obtenir mon estimation photovoltaïque">🔍 Obtenir mon estimation</button>
       
-<ul class="fold-benefits" style="list-style:none;margin:12px 0 0 0;padding:0;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;font-size:13px;color:#111827;text-align:center">
-  <li style="display:flex;align-items:center;gap:6px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:999px;padding:6px 12px">
-    ✅ Estimation immédiate à l’écran
-  </li>
-  <li style="display:flex;align-items:center;gap:6px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:999px;padding:6px 12px">
-    ✅ Aucune relance téléphonique
-  </li>
-  <li style="display:flex;align-items:center;gap:6px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:999px;padding:6px 12px">
-    ✅ Prix TTC clair et détaillé
-  </li>
+<!-- ========================= -->
+<!-- BLOC REASSURANCE (SOUS CTA) -->
+<!-- ========================= -->
+<ul class="fold-benefits" style="list-style:none;margin:12px 0 0 0;padding:0;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;font-size:14px;color:#111827;text-align:center">
+  <li>✅ Estimation immédiate à l’écran</li>
+  <li>✅ Aucune relance téléphonique</li>
+  <li>✅ Prix TTC clair et détaillé</li>
 </ul>
 
-
 <style>
+  /* ========================= */
+  /* CSS BLOC REASSURANCE      */
+  /* ========================= */
   .fold-benefits li {
     display:flex;
     align-items:center;
     gap:6px;
-    background:#f3f4f6; /* gris plus marqué */
+    background:#f3f4f6; /* gris clair */
     border:1px solid #e5e7eb;
     border-radius:999px;
     padding:4px 8px; /* compact */
-    font-size:14px; /* + lisible sur mobile */
+    font-size:14px;
   }
 
   @media(max-width:560px){
@@ -573,11 +572,11 @@
       flex-direction:column;
       align-items:center;
       gap:6px !important;
-      margin-top:6px; /* rapproche les capsules du CTA */
+      margin-top:6px; /* rapproche du CTA */
     }
     .fold-benefits li{
       width:100%;
-      max-width:280px; /* un peu plus large pour mobile étroit */
+      max-width:280px;
       justify-content:center;
     }
   }
