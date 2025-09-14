@@ -284,9 +284,10 @@
   box-shadow:var(--bi-shadow);
   padding:16px 18px;
   color:#111827; font-size:15.5px; line-height:1.6;
-  display:flex; flex-wrap:wrap; gap:10px;
+  display:block;                /* ✅ au lieu de flex */
   transition:box-shadow .18s ease, transform .18s ease, border-color .18s ease;
 }
+
 @media (hover:hover){
   #bloc-info .bi-steps-num li:hover{
     box-shadow:0 14px 34px rgba(2,6,23,.14);
