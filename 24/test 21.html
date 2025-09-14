@@ -557,6 +557,16 @@
 
 
 <style>
+  .fold-benefits li {
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:#f3f4f6; /* gris plus marqué que #f9fafb */
+    border:1px solid #e5e7eb;
+    border-radius:999px;
+    padding:4px 8px; /* plus compact */
+  }
+
   @media(max-width:560px){
     .fold-benefits{
       flex-direction:column;
@@ -565,11 +575,12 @@
     }
     .fold-benefits li{
       width:100%;
-      max-width:280px;
+      max-width:260px; /* un peu réduit pour mobile */
       justify-content:center;
     }
   }
 </style>
+
 
       </form>
     </div>
