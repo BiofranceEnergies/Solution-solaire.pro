@@ -217,13 +217,19 @@
 /* css - bloc info (friendly+ + méthode + transparence) */
 /* ============================== */
 
-/* Variables locales */
+/* Conteneur */
 #bloc-info{
   --bi-muted:#1f2937;
   --bi-rail:#e9eef9;
   --bi-card:#ffffff;
   --bi-shadow:0 10px 26px rgba(2,6,23,.10);
   --bi-ring:rgba(245,158,11,.25);
+
+  max-width:720px;
+  margin:18px auto;
+  padding:18px;
+  border:2px solid var(--accent);
+  border-radius:14px;
 }
 
 /* Titres & paragraphes */
@@ -258,19 +264,16 @@
 #bloc-info .bi-steps-num{
   list-style:none;
   margin:0;
-  padding:0 0 0 56px;                 /* espace pour rail + icônes */
+  padding:0 0 0 56px;
   position:relative;
   display:flex; flex-direction:column; gap:18px;
 }
-/* Rail dégradé */
 #bloc-info .bi-steps-num::before{
   content:"";
   position:absolute; left:28px; top:6px; bottom:6px;
   width:2px; background:linear-gradient(180deg,var(--bi-rail),transparent);
   border-radius:2px;
 }
-
-/* Cartes “soft” */
 #bloc-info .bi-steps-num li{
   position:relative;
   background:var(--bi-card);
@@ -288,8 +291,6 @@
     transform:translateY(-1px);
   }
 }
-
-/* Icônes amicales */
 #bloc-info .bi-steps-num li::before{
   content:"";
   position:absolute; left:-56px; top:50%; transform:translateY(-50%);
@@ -302,14 +303,10 @@
 #bloc-info .bi-steps-num li:nth-child(1)::before{ content:"📍"; }
 #bloc-info .bi-steps-num li:nth-child(2)::before{ content:"⚙️"; }
 #bloc-info .bi-steps-num li:nth-child(3)::before{ content:"🔓"; }
-
-/* Cache la pastille numérique .num */
 #bloc-info .bi-steps-num .num{
   position:absolute; width:1px; height:1px; padding:0; margin:-1px;
   overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
 }
-
-/* Hint incitatif */
 #bloc-info .bi-steps-num .hint{
   flex:1 1 100%;
   display:block;
@@ -321,8 +318,6 @@
   font-weight:800;
   box-shadow:0 10px 22px rgba(245,158,11,.12);
 }
-
-/* Accent visuel sur l’étape 3 */
 #bloc-info .bi-steps-num li:nth-child(3){
   border-color:#fed7aa;
   box-shadow:0 16px 36px rgba(245,158,11,.12), var(--bi-shadow);
@@ -360,29 +355,23 @@
 /* Mobile (≤ 560px) */
 /* ============================== */
 @media (max-width:560px){
-
-  /* Conteneur + titres + texte */
   #bloc-info{ padding:14px; border-radius:12px; }
   #bloc-info .bi-title{ font-size:1.05rem; margin:6px 0 10px; }
   #bloc-info .bi-text{ font-size:15px; line-height:1.6; margin:0 0 12px; }
-
-  /* Timeline compacte */
   #bloc-info .bi-steps-num{ padding-left:44px; gap:12px; }
   #bloc-info .bi-steps-num::before{ left:22px; top:4px; bottom:4px; }
   #bloc-info .bi-steps-num li{
     padding:12px 14px; border-radius:12px;
-    box-shadow:none; /* allégé sur mobile */
+    box-shadow:none;
   }
   #bloc-info .bi-steps-num li::before{
     left:-44px; width:30px; height:30px; font-size:16px;
     box-shadow:none;
   }
   #bloc-info .bi-steps-num .hint{
-    padding:8px 10px; font-weight:800; font-size:14px;
+    padding:8px 10px; font-size:14px;
     border-radius:10px; box-shadow:none;
   }
-
-  /* Encadrés allégés */
   #bloc-info .note-important,
   #bloc-info .bi-method,
   #bloc-info .bi-transp{
@@ -390,9 +379,6 @@
     border-width:1.5px; border-left-width:4px;
     box-shadow:none; font-size:15px; line-height:1.55;
   }
-  #bloc-info .note-important .ico,
-  #bloc-info .bi-method .ico,
-  #bloc-info .bi-transp .ico{ font-size:18px; }
 }
 
 
@@ -461,21 +447,29 @@
       </form>
     </div>
 
-<!-- ⚡ Bloc d'information modernisé condensé -->
+<!-- ============================== -->
+<!-- BLOC INFO - SIMULATEUR SOLAIRE -->
+<!-- ============================== -->
+
 <div class="card" id="bloc-info" data-hide-after-sim="1">
+
+  <!-- Repère interne -->
+  <h1 style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+    Bloc Info - Simulateur Solaire
+  </h1>
+
   <h2 class="bi-title">Un simulateur qui va à l’essentiel</h2>
   <p class="bi-text">
     Nous savons que vous avez déjà parcouru de nombreuses pages expliquant pourquoi le solaire est rentable.
-    Inutile de répéter les mêmes arguments : <strong>oui, l’électricité augmente et oui, produire sa propre énergie est un choix intelligent</strong>.  
-    Ici, nous allons à l’essentiel : une estimation claire et immédiate de votre projet — production, panneaux, couverture de votre consommation.
+    Inutile de répéter les mêmes arguments : <strong>oui, l’électricité augmente</strong> et
+    <strong>oui, produire sa propre énergie est un choix intelligent</strong>. Ici, nous allons à l’essentiel :
+    une estimation claire et immédiate de votre projet — production, panneaux, couverture de votre consommation.
   </p>
 
   <div class="note-important">
     <span class="ico">📌</span>
-    <div>
-      <strong>L’étude complète s’affiche directement à l’écran, 100 % en ligne, sans attente ni relance.</strong><br>
-      <span class="sms">Un SMS de confirmation vous est envoyé.</span>
-    </div>
+    L’étude complète s’affiche directement à l’écran, <strong>100 % en ligne, sans attente ni relance</strong>.
+    <br><span style="color:#15803d;font-weight:700">Un SMS de confirmation vous est envoyé.</span>
   </div>
 
   <h2 class="bi-title">Comment ça marche</h2>
@@ -486,7 +480,7 @@
     </li>
     <li>
       <span class="num">2</span>
-      L’outil calcule l’<strong>installation adaptée</strong> (puissance, panneaux, couverture).
+      Notre outil calcule l’<strong>installation adaptée</strong> (puissance, panneaux, couverture).
     </li>
     <li>
       <span class="num">3</span>
@@ -495,26 +489,23 @@
     </li>
   </ul>
 
-  <!-- Encadré pédagogique condensé -->
   <div class="bi-method">
-    <p style="margin:0">
-      <span class="ico">🔋</span>
-      <strong>Comment fonctionne notre simulateur&nbsp;?</strong><br>
-      Il repose sur <strong>l’autoconsommation</strong> et le <strong>stockage virtuel</strong>, ce qui permet de <u>valoriser 100 % de votre production</u>.  
-      Contrairement à la revente à EDF (seulement <strong>0,04 €/kWh</strong>), cette méthode maximise vos économies.
-    </p>
+    <span class="ico">💡</span>
+    <strong>Comment fonctionne notre simulateur ?</strong><br>
+    Il repose sur <strong>l’autoconsommation</strong> et le <strong>stockage virtuel</strong>, ce qui permet de
+    <a href="#" style="color:#0b61d8;font-weight:600;text-decoration:underline">valoriser 100 % de votre production</a>.
+    Contrairement à la revente à EDF (seulement <strong>0,04 €/kWh</strong>), cette méthode maximise vos économies.
   </div>
 
   <h2 class="bi-title">Une démarche transparente</h2>
   <div class="bi-transp">
     <span class="ico">⚠️</span>
-    <p class="bi-text" style="margin:0">
-      Nous préférons être clairs : <strong>l’État ne finance pas votre installation solaire</strong>.
-      Contrairement à de nombreux sites qui promettent des “aides” ou génèrent des appels indésirables,
-      ici vous obtenez une estimation <strong>fiable</strong>, <strong>immédiate</strong> et <strong>100 % en ligne</strong>,
-      <u>sans démarchage téléphonique</u>.
-    </p>
+    Nous préférons être clairs : <strong>l’État ne finance pas votre installation solaire</strong>.
+    Contrairement à de nombreux sites qui promettent des “aides” ou génèrent des appels indésirables,
+    ici vous obtenez une estimation <strong>fiable, immédiate et 100 % en ligne</strong>,
+    <a href="#" style="color:#0b61d8;font-weight:600;text-decoration:underline">sans démarchage téléphonique</a>.
   </div>
+
 </div>
 
 
