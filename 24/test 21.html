@@ -1381,6 +1381,32 @@
       };
     })();
   </script>
+</script>
+
+<!-- Patch nettoyage des espaces parasites -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const scope = document.querySelector('#bloc-info');
+  if (!scope) return;
+  const nodes = scope.querySelectorAll(
+    'h2, p, li, .note-important, .bi-method, .bi-transp, .hint'
+  );
+  nodes.forEach(n => {
+    n.childNodes.forEach(ch => {
+      if (ch.nodeType === Node.TEXT_NODE) {
+        ch.nodeValue = ch.nodeValue
+          .replace(/\u00A0/g, ' ')     // supprime NBSP
+          .replace(/[ \t]{2,}/g, ' ')  // supprime doubles espaces
+          .replace(/ ?\n+ ?/g, '\n');  // nettoie retours ligne parasites
+      }
+    });
+  });
+});
+</script>
+
+</body>
+</html>
+
 
 </body>
 </html>
