@@ -214,7 +214,7 @@
 }
 
 /* ============================== */
-/* css - bloc info (LIFTING v2)   */
+/* css - bloc info (LIFTING v3)   */
 /* ============================== */
 
 /* Variables locales */
@@ -245,6 +245,23 @@
   font-size:15.5px;
   line-height:1.7;
   margin:0 0 14px 0;
+}
+
+/* Mise en avant dans le texte */
+#bloc-info .highlight {
+  color: var(--accent-dark);
+  font-weight: 900;
+  background: linear-gradient(180deg, #fff7ed, #ffedd5);
+  padding: 2px 6px;
+  border-radius: 6px;
+  box-decoration-break: clone;
+}
+#bloc-info .sms {
+  color: #065f46;
+  font-weight: 800;
+  background: #d1fae5;
+  border-radius: 6px;
+  padding: 2px 6px;
 }
 
 /* ===== Timeline moderne ===== */
@@ -320,7 +337,7 @@
   box-shadow:0 16px 36px rgba(245,158,11,.12), var(--bi-shadow);
 }
 
-/* ===== Carte “Transparence” très lisible ===== */
+/* ===== Carte “Transparence” ===== */
 #bloc-info .bi-transp{
   display:flex; gap:12px; align-items:flex-start;
   background:#fff; border:1px solid var(--border);
@@ -413,9 +430,12 @@
 <div class="card" id="bloc-info" data-hide-after-sim="1" style="max-width:720px;margin:18px auto;padding:18px">
   <h2 class="bi-title">Un simulateur qui va à l’essentiel</h2>
   <p class="bi-text">
-    Pas de blabla, pas de formulaires interminables. Vous obtenez immédiatement une estimation claire :
-    production, nombre de panneaux et couverture de votre consommation. L’étude complète s’affiche
-    <strong>directement à l’écran</strong>, 100 % en ligne, sans attente ni relance. Un SMS de confirmation vous est envoyé.
+    Nous savons que vous avez déjà parcouru de nombreuses pages expliquant pourquoi le solaire est rentable.
+    Inutile de répéter les mêmes arguments : <strong>oui, l’électricité augmente et oui, produire sa propre énergie est un choix intelligent</strong>.  
+    Ici, nous allons à l’essentiel : une estimation claire et immédiate de votre projet — production, panneaux, couverture de votre consommation.  
+    <br><br>
+    <span class="highlight">L’étude complète s’affiche directement à l’écran, 100 % en ligne, sans attente ni relance.</span>  
+    <span class="sms">Un SMS de confirmation vous est envoyé.</span>
   </p>
 
   <h2 class="bi-title">Comment ça marche</h2>
