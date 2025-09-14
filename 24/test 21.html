@@ -1397,12 +1397,16 @@ document.addEventListener('DOMContentLoaded', () => {
         ch.nodeValue = ch.nodeValue
           .replace(/\u00A0/g, ' ')     // supprime NBSP
           .replace(/[ \t]{2,}/g, ' ')  // supprime doubles espaces
-          .replace(/ ?\n+ ?/g, '\n');  // nettoie retours ligne parasites
+          .replace(/ ?\n+ ?/g, '\n')   // nettoie retours ligne parasites
+          .replace(/ \./g, '.')        // supprime espace avant un point
+          .replace(/\( /g, '(')        // supprime espace après parenthèse ouvrante
+          .replace(/ \)/g, ')');       // supprime espace avant parenthèse fermante
       }
     });
   });
 });
 </script>
+
 
 </body>
 </html>
