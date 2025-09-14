@@ -532,34 +532,43 @@
 }
 
 /* === Header logos (nouveau) === */
-.header-logos {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  margin: 0 auto 12px auto;
-  max-width: 720px;
+.header-logos{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:20px;
+  margin:0 auto 12px;
+  max-width:720px;
 }
 
-.logo-main {
-  width: 130px;   /* logo central mis en avant */
-  height: auto;
-  filter: drop-shadow(0 2px 8px rgba(0,0,0,.08));
+.logo-main{
+  width:130px;           /* dominance du logo central */
+  height:auto;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.08));
 }
 
-.logo-side {
-  width: 70px;    /* logos RGE/QualiPV légèrement réduits */
-  height: auto;
-  opacity: 0.95;  /* adoucissement subtil */
+.logo-side{
+  width:70px;            /* RGE / QualiPV plus discrets */
+  height:auto;
+  opacity:.95;
 }
 
+/* Mobile : rester sur une seule ligne, tailles fluides */
 @media (max-width:640px){
-  .header-logos {
-    flex-direction: column;
-    gap: 10px;
+  .header-logos{
+    flex-direction:row;  /* on reste en ligne */
+    flex-wrap:nowrap;
+    gap:12px;
   }
-  .logo-main { width: 110px; }
-  .logo-side { width: 65px; }
+  .logo-main{ width:min(34vw,110px); }
+  .logo-side{ width:min(22vw,64px); }
+}
+
+/* Très petits écrans */
+@media (max-width:360px){
+  .header-logos{ gap:8px; }
+  .logo-main{ width:32vw; }
+  .logo-side{ width:20vw; }
 }
 
 
