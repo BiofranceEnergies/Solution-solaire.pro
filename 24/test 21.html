@@ -214,7 +214,7 @@
 }
 
 /* ============================== */
-/* css - bloc info (friendly+ + méthode + transparence) */
+/* BLOC INFO – friendly+ + méthode + transparence */
 /* ============================== */
 
 /* Conteneur */
@@ -230,11 +230,12 @@
   padding:18px;
   border:2px solid var(--accent);
   border-radius:14px;
+  background:#fff;
 }
 
 /* Titres & paragraphes */
 #bloc-info .bi-title{
-  margin:8px 0 14px 0;
+  margin:8px 0 14px;
   text-align:center;
   font-weight:900;
   letter-spacing:.2px;
@@ -243,7 +244,7 @@
   color:var(--bi-muted);
   font-size:15.5px;
   line-height:1.7;
-  margin:0 0 16px 0;
+  margin:0 0 16px;
 }
 
 /* ===== Note importante (orange) ===== */
@@ -257,14 +258,15 @@
   font-size:15.5px;
   line-height:1.6;
   box-shadow:0 6px 16px rgba(249,115,22,.15);
+  display:block;
 }
 #bloc-info .note-important .ico{ font-size:20px; margin-right:6px }
 
-/* ===== Timeline moderne ===== */
+/* ===== Timeline ===== */
 #bloc-info .bi-steps-num{
   list-style:none;
   margin:0;
-  padding:0 0 0 56px;
+  padding:0 0 0 56px;       /* place pour rail + icônes */
   position:relative;
   display:flex; flex-direction:column; gap:18px;
 }
@@ -323,7 +325,7 @@
   box-shadow:0 16px 36px rgba(245,158,11,.12), var(--bi-shadow);
 }
 
-/* ===== Bloc méthode (vert) ===== */
+/* ===== Méthode (vert) ===== */
 #bloc-info .bi-method{
   border:2px solid #16a34a;
   background:#f0fdf4;
@@ -337,7 +339,7 @@
 }
 #bloc-info .bi-method .ico{ font-size:20px; margin-right:6px }
 
-/* ===== Bloc transparence ===== */
+/* ===== Transparence (orange clair) ===== */
 #bloc-info .bi-transp{
   border:2px solid #fbbf24;
   background:#fffbeb;
@@ -352,32 +354,45 @@
 #bloc-info .bi-transp .ico{ font-size:18px; margin-right:6px }
 
 /* ============================== */
-/* Mobile (≤ 560px) */
+/* Mobile (≤ 560px) – version compacte */
 /* ============================== */
 @media (max-width:560px){
+
+  /* Conteneur + titres + texte */
   #bloc-info{ padding:14px; border-radius:12px; }
-  #bloc-info .bi-title{ font-size:1.05rem; margin:6px 0 10px; }
+  #bloc-info .bi-title{ font-size:1rem; margin:6px 0 8px; }
   #bloc-info .bi-text{ font-size:15px; line-height:1.6; margin:0 0 12px; }
-  #bloc-info .bi-steps-num{ padding-left:44px; gap:12px; }
-  #bloc-info .bi-steps-num::before{ left:22px; top:4px; bottom:4px; }
-  #bloc-info .bi-steps-num li{
-    padding:12px 14px; border-radius:12px;
-    box-shadow:none;
-  }
-  #bloc-info .bi-steps-num li::before{
-    left:-44px; width:30px; height:30px; font-size:16px;
-    box-shadow:none;
-  }
-  #bloc-info .bi-steps-num .hint{
-    padding:8px 10px; font-size:14px;
-    border-radius:10px; box-shadow:none;
-  }
+
+  /* Encadrés plus légers */
   #bloc-info .note-important,
   #bloc-info .bi-method,
   #bloc-info .bi-transp{
-    padding:10px 12px; border-radius:10px;
-    border-width:1.5px; border-left-width:4px;
-    box-shadow:none; font-size:15px; line-height:1.55;
+    padding:8px 10px;
+    margin:10px 0;
+    font-size:14.5px;
+    line-height:1.55;
+    border-radius:10px;
+    border-width:1.5px;
+    border-left-width:4px;
+    box-shadow:none;
+  }
+  #bloc-info .note-important .ico,
+  #bloc-info .bi-method .ico,
+  #bloc-info .bi-transp .ico{ font-size:18px; }
+
+  /* Timeline compacte */
+  #bloc-info .bi-steps-num{ padding-left:36px; gap:10px; }
+  #bloc-info .bi-steps-num::before{ left:20px; top:4px; bottom:4px; }
+  #bloc-info .bi-steps-num li{
+    padding:10px 12px;
+    border-radius:10px;
+    box-shadow:none;
+  }
+  #bloc-info .bi-steps-num li::before{
+    left:-36px; width:26px; height:26px; font-size:14px; box-shadow:none;
+  }
+  #bloc-info .bi-steps-num .hint{
+    padding:6px 8px; font-size:13.5px; border-radius:8px; box-shadow:none;
   }
 }
 
