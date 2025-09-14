@@ -531,6 +531,33 @@
   }
 }
 
+/* === Header logos (nouveau) === */
+.header-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 0 auto 12px auto;
+  max-width: 720px;
+}
+.logo-main {
+  width: 120px;
+  height: auto;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.08));
+}
+.logo-side {
+  width: 80px;
+  height: auto;
+}
+@media (max-width:640px){
+  .header-logos {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .logo-main { width: 100px; }
+  .logo-side { width: 70px; }
+}
+
 
   </style>
 </head>
@@ -550,17 +577,23 @@
   </div>
 
   <div class="wrap">
-    <!-- Logo -->
-    <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/52db4f3ab1c38909b33d9037e74d7371c32a9cf5/logo%20SSP.webp"
-         alt="Logo Solution Solaire Pro"
-         class="logo"
-         width="184" height="92"
-         fetchpriority="high"
-         decoding="async">
+ <!-- Header logos -->
+<div class="header-logos">
+  <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/4de4689a7d69beffb9cfb7f1c9233bccc7a7d171/rge.webp"
+       alt="Certification RGE"
+       class="logo-side">
 
-<div class="logo-caption">
-  ✅ Certifié <strong>RGE</strong> • ✅ <strong>QualiPV</strong>
+  <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/52db4f3ab1c38909b33d9037e74d7371c32a9cf5/logo%20SSP.webp"
+       alt="Logo Solution Solaire Pro"
+       class="logo-main"
+       fetchpriority="high"
+       decoding="async">
+
+  <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/4de4689a7d69beffb9cfb7f1c9233bccc7a7d171/qualipv.webp"
+       alt="Certification QualiPV"
+       class="logo-side">
 </div>
+
 
 
     <!-- Compteur dynamique -->
