@@ -540,23 +540,28 @@
   margin: 0 auto 12px auto;
   max-width: 720px;
 }
+
 .logo-main {
-  width: 120px;
+  width: 130px;   /* logo central mis en avant */
   height: auto;
   filter: drop-shadow(0 2px 8px rgba(0,0,0,.08));
 }
+
 .logo-side {
-  width: 80px;
+  width: 70px;    /* logos RGE/QualiPV légèrement réduits */
   height: auto;
+  opacity: 0.95;  /* adoucissement subtil */
 }
+
 @media (max-width:640px){
   .header-logos {
     flex-direction: column;
     gap: 10px;
   }
-  .logo-main { width: 100px; }
-  .logo-side { width: 70px; }
+  .logo-main { width: 110px; }
+  .logo-side { width: 65px; }
 }
+
 
 
   </style>
