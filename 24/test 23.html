@@ -84,17 +84,17 @@
     }
 
     *{box-sizing:border-box}
-/* === [DEBUT FOND IMAGE + OVERLAY ORANGE] === */
+/* === [DEBUT FOND IMAGE + OVERLAY SOMBRE] === */
 html,body{
   margin:0;
   padding:0;
   color:var(--text);
   font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
-  background: transparent;   /* fond neutre uniquement */
+  background: transparent;
   min-height:100%;
 }
 
-/* Image de fond : occupe toujours le viewport */
+/* Image de fond */
 body::before{
   content:"";
   position: fixed;
@@ -105,12 +105,12 @@ body::before{
   background-image: url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: 50% 35%; /* focale ajustable */
+  background-position: 50% 35%;
   will-change: transform;
   transform: translateZ(0);
 }
 
-/* Overlay orange */
+/* Overlay sombre */
 body::after{
   content:"";
   position: fixed;
@@ -120,9 +120,9 @@ body::after{
   z-index: 1;
   background: linear-gradient(
     180deg,
-    rgba(245,158,11,0.70),    /* orange principal semi-transparent */
-    rgba(217,119,6,0.55) 45%, /* orange foncé */
-    rgba(255,255,255,0.15) 100% /* éclaircissement bas */
+    rgba(17,24,39,0.85),   /* bleu nuit très sombre */
+    rgba(31,41,55,0.75) 45%, /* gris anthracite */
+    rgba(55,65,81,0.60) 100% /* gris doux vers le bas */
   );
 }
 
@@ -132,9 +132,10 @@ body::after{
   margin:0 auto;
   padding:28px 14px;
   position:relative;
-  z-index:2;  /* garantit le passage devant l’overlay */
+  z-index:2;
 }
-/* === [FIN FOND IMAGE + OVERLAY ORANGE] === */
+/* === [FIN FOND IMAGE + OVERLAY SOMBRE] === */
+
 
 
 
