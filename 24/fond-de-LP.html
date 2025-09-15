@@ -1,0 +1,170 @@
+<!-- HERO MODERNISÉ — à coller en haut du <body> -->
+<section id="hero-solaire" aria-label="Simulation photovoltaïque">
+  <div class="hero-overlay"></div>
+
+  <header class="hero-top">
+    <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/main/logo-solution-solaire-pro-256.png" alt="Solution Solaire Pro" class="hero-logo" loading="lazy">
+    <ul class="hero-badges">
+      <li>RGE</li>
+      <li>QualiPV</li>
+      <li>Local 24</li>
+    </ul>
+  </header>
+
+  <div class="hero-card">
+    <h1 class="hero-title">
+      Estimez vos <span>économies solaires</span> en <strong>30&nbsp;secondes</strong>
+    </h1>
+    <p class="hero-sub">Résultat immédiat : production, prix TTC, financement. 100 % en ligne.</p>
+
+    <form class="hero-form" action="#simuler" method="get" onsubmit="return true;">
+      <label>
+        <span class="lbl">Code postal</span>
+        <input type="text" name="cp" inputmode="numeric" pattern="[0-9]{5}" placeholder="ex. 24000" required>
+      </label>
+      <label>
+        <span class="lbl">Facture annuelle (€)</span>
+        <input type="number" name="facture" min="200" max="10000" step="10" placeholder="ex. 1800" required>
+      </label>
+      <button type="submit" class="cta">Obtenir mon estimation</button>
+    </form>
+
+    <p class="hero-foot">
+      <span class="dot">●</span> Gratuit <span class="dot">●</span> Simple <span class="dot">●</span> Sans engagement
+    </p>
+  </div>
+</section>
+
+<style>
+/* ===== HERO MODERNISÉ (mobile-first) ===== */
+:root{
+  --hero-bg: url("https://images.unsplash.com/photo-1509395176047-4a66953fd231?q=80&w=1600&auto=format&fit=crop"); /* Remplace par ton image drone */
+  --brand:#0e7a83;           /* vert/bleu énergie */
+  --accent:#faa825;          /* orange bouton */
+  --ink:#0b1220;
+  --paper:#ffffff;
+  --muted:#6b7280;
+  --shadow: 0 10px 30px rgba(0,0,0,.18);
+  --radius: 18px;
+}
+
+#hero-solaire{
+  position:relative;
+  min-height: 92svh; /* remplit l’écran mobile sans masquer la barre d’URL */
+  background: #0c2c2f var(--hero-bg) center/cover no-repeat;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  align-items:center;
+  padding: clamp(14px, 4vw, 24px);
+  box-sizing:border-box;
+  overflow:hidden;
+}
+
+/* voile dégradé pour lisibilité */
+#hero-solaire .hero-overlay{
+  position:absolute; inset:0;
+  background:
+    linear-gradient(180deg, rgba(12,44,47,.65) 0%, rgba(12,44,47,.45) 35%, rgba(12,44,47,.60) 100%);
+  backdrop-filter: saturate(110%) blur(1px);
+}
+
+/* bandeau haut (logo + micro-badges) */
+#hero-solaire .hero-top{
+  position:relative; z-index:2;
+  width:100%; max-width:1000px;
+  display:flex; align-items:center; justify-content:space-between;
+  margin-top:4px; margin-bottom:12px;
+}
+.hero-logo{ height:34px; width:auto; filter: drop-shadow(0 2px 6px rgba(0,0,0,.25)); }
+.hero-badges{ list-style:none; margin:0; padding:0; display:flex; gap:8px; }
+.hero-badges li{
+  font: 600 12px/1.1 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35);
+}
+
+/* carte centrale */
+#hero-solaire .hero-card{
+  position:relative; z-index:2;
+  width:100%; max-width: 720px;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(14px, 4.5vw, 28px);
+  margin-top: clamp(6px, 2.2vh, 16px);
+}
+
+/* titres */
+.hero-title{
+  margin:0 0 6px 0;
+  font: 800 clamp(22px, 5.6vw, 36px)/1.15 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  letter-spacing:-.02em;
+}
+.hero-title span{ color: var(--brand); }
+.hero-title strong{ color: var(--accent); font-weight:800; }
+.hero-sub{
+  margin: 2px 0 14px 0; color: var(--muted);
+  font: 500 clamp(14px, 3.6vw, 16px)/1.35 system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+/* formulaire */
+.hero-form{
+  display:grid; gap:10px;
+  grid-template-columns: 1fr;
+}
+.hero-form label{ display:block; }
+.hero-form .lbl{
+  display:block; font:600 12px/1 system-ui, -apple-system, Segoe UI, Roboto;
+  color:#374151; margin: 4px 0 6px 2px;
+}
+.hero-form input{
+  width:100%; box-sizing:border-box;
+  padding:12px 14px; border-radius:12px;
+  border:1.5px solid #e5e7eb;
+  background:#fff; outline:none;
+  font: 600 15px/1.1 system-ui, -apple-system, Segoe UI, Roboto;
+  transition:border-color .2s, box-shadow .2s;
+}
+.hero-form input:focus{
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(250,168,37,.18);
+}
+
+/* CTA */
+.hero-form .cta{
+  margin-top: 4px;
+  appearance:none; -webkit-appearance:none;
+  width:100%;
+  border:0; border-radius:14px;
+  padding:14px 18px;
+  font: 800 16px/1 system-ui, -apple-system, Segoe UI, Roboto;
+  background: linear-gradient(180deg, #ffb73a, #faa825);
+  color:#1b1304; cursor:pointer;
+  box-shadow: 0 10px 18px rgba(250,168,37,.28);
+  transition: transform .06s ease, filter .2s ease;
+}
+.hero-form .cta:hover{ filter:saturate(105%); }
+.hero-form .cta:active{ transform: translateY(1px); }
+
+/* pied de carte (rassurance) */
+.hero-foot{
+  margin:10px 2px 0 2px;
+  color:#4b5563;
+  font:600 13px/1.2 system-ui, -apple-system, Segoe UI, Roboto;
+  display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+}
+.hero-foot .dot{ color: var(--accent); font-size: 18px; line-height: 0; }
+
+/* ====== Desktop : plus d’air ====== */
+@media (min-width: 900px){
+  #hero-solaire{ min-height: 84vh; padding: 28px; }
+  .hero-card{ padding: 32px 34px; }
+  .hero-form{ grid-template-columns: 1fr 1fr auto; gap:12px; align-items:end; }
+  .hero-form label{ margin-bottom: 0; }
+  .hero-form .cta{ margin-top: 0; white-space: nowrap; padding:15px 20px; }
+  .hero-title{ font-size: clamp(30px, 4.4vw, 40px); }
+  .hero-sub{ font-size: clamp(15px, 1.6vw, 17px); }
+}
+</style>
