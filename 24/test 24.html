@@ -874,30 +874,41 @@
         const recapEl = document.getElementById('recap');
         const libConso = (sourceConso === "reelle") ? "Conso annuelle (réelle)" : "Conso annuelle estimée";
 
-        recapEl.innerHTML = `
-          <h2>Votre estimation personnalisée</h2>
-          <div class="recap-grid">
-            <div class="recap-item"><div class="label">Code postal</div><div class="value">${esc(codePostal)}</div></div>
-            <div class="recap-item"><div class="label">${libConso}</div><div class="value value-ok">${Math.round(conso).toLocaleString('fr-FR')} kWh</div></div>
-            <div class="recap-item"><div class="label">Prix kWh TTC utilisé</div><div class="value">${prixKwh.toFixed(3)} €</div></div>
-            <div class="recap-item"><div class="label">Facture annuelle</div><div class="value">${facture.toLocaleString('fr-FR')} €</div></div>
-            <div class="recap-item" style="grid-column:1/-1">
-              <div class="label">Puissance & production</div>
-              <div class="value value-ok" style="font-size:18px">${esc(scenario.puissance)} — ${scenario.panels} panneaux (500 W) • ${scenario.prod.toLocaleString('fr-FR')} kWh/an</div>
-            </div>
-            <div class="recap-item" style="grid-column:1/-1">
-              <div class="label">% de votre conso couverte</div>
-              <div class="value value-ok">${((scenario.prod / conso) * 100).toFixed(2)} %</div>
-            </div>
-          </div>
-          <span class="note">Votre production est valorisée à 100 % grâce à la batterie virtuelle, même si elle ne couvre pas 100 % de votre consommation.</span>
-        `;
-          <div style="text-align:center;color:#6b7280;font-size:12px;margin-top:6px">
-        Hypothèse standard : exposition Sud/Sud, pente de toit 35°
-        </div>
-        recapEl.style.display='block';
-        recapEl.style.visibility='visible';
-        recapEl.style.height='auto';
+       recapEl.innerHTML = `
+  <h2>Votre estimation personnalisée</h2>
+  <div class="recap-grid">
+    <!-- Exemple de recap items -->
+    <div class="recap-item" style="grid-column:1/-1">
+      <div class="label">Puissance & production</div>
+      <div class="value value-ok" style="font-size:18px">
+        ${puissance} kW — ${nbPanneaux} panneaux (${puissancePanneau} W) • ${production.toLocaleString()} kWh/an
+      </div>
+    </div>
+
+    <div class="recap-item">
+      <div class="label">% de votre conso couverte</div>
+      <div class="value">${tauxCouv}%</div>
+    </div>
+
+    <div class="recap-item">
+      <div class="label">Gain estimé 1ʳᵉ année</div>
+      <div class="value value-ok">${gain1an.toLocaleString()} €</div>
+    </div>
+  </div>
+
+  <span class="note">
+    Votre production est valorisée à 100 % grâce à la batterie virtuelle, même si elle ne couvre pas 100 % de votre consommation.
+  </span>
+
+  <div style="text-align:center;color:#6b7280;font-size:12px;margin-top:6px">
+    Hypothèse standard : exposition Sud/Sud, pente de toit 35°
+  </div>
+`;
+
+recapEl.style.display = 'block';
+recapEl.style.visibility = 'visible';
+recapEl.style.height = 'auto';
+
 
         /* --------- PARTIE FLOUTÉE (KPI + détails + financement) --------- */
         const locked = document.getElementById('lockedContent');
