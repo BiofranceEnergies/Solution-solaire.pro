@@ -83,55 +83,11 @@
       --accent-soft:#fff7ed; /* fond pastille mensu */
     }
 
-  *{box-sizing:border-box}
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+    img{max-width:100%;height:auto}
 
-/* === FOND IMAGE piloté par pseudo-éléments === */
-html,body{
-  margin:0;
-  padding:0;
-  color:var(--text);
-  font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
-  background: var(--bg);     /* fond neutre seulement */
-  min-height:100%;
-}
-
-/* Image de fond */
-body::before{
-  content:"";
-  position: fixed;           /* couvre l’écran, suit le resize */
-  inset: 0;
-  z-index: -2;
-  background-image: url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp");
-  background-size: cover;    /* remplit, peut recadrer */
-  background-repeat: no-repeat;
-  background-position: 50% 35%; /* focale un peu haute (toit) */
-  transform: translateZ(0);  /* stabilité GPU */
-}
-
-/* Overlay au-dessus de l’image */
-body::after{
-  content:"";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(180deg, rgba(15,23,42,.60), rgba(15,23,42,.30) 45%, rgba(255,255,255,.20) 100%);
-}
-
-/* Mobile : éviter les bugs de fixed */
-@media (max-width:820px){
-  body::before,
-  body::after{ position:absolute; }
-}
-
-/* Conteneur principal au-dessus de l’overlay */
-.wrap{
-  max-width:980px;
-  margin:0 auto;
-  padding:28px 14px;
-  position:relative;  /* ← ajoute ceci */
-  z-index:0;          /* ← et ceci */
-}
-
+    .wrap { max-width:980px; margin:0 auto; padding:28px 14px; }
 
     .logo{display:block;margin:0 auto 6px;width:92px;height:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.08))}
     h1{font-size:clamp(24px,3.2vw,36px);text-align:center;color:#0f172a;margin:6px 0 8px 0;font-weight:800;line-height:1.18}
