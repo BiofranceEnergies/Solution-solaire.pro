@@ -151,21 +151,21 @@ body::after{
 
     .logo{display:block;margin:0 auto 6px;width:92px;height:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.08))}
     /* === Styles H1 bicolore === */
+/* === Styles H1 bicolore === */
 h1 {
   font-size: clamp(28px, 3vw, 42px);
   font-weight: 800;
   text-align: center;
   margin: 6px 0 16px;
   line-height: 1.2;
+  color: #ffffff; /* tout le titre en blanc par défaut */
 }
 
-.h1-white {
-  color: #ffffff; /* blanc pur */
+h1 em {
+  color: var(--accent); /* met en orange uniquement le texte entre <em>…</em> */
+  font-style: normal;
 }
 
-.h1-orange {
-  color: var(--accent); /* ton orange défini dans :root */
-}
 
     h1 em{color:var(--accent);font-style:normal}
     h2{font-size:clamp(18px,2.2vw,22px);text-align:center;color:#111827;margin:0 0 10px 0;font-weight:700}
