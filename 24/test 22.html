@@ -348,16 +348,74 @@
 }
 
 
-/* Bloc info — largeur et style identiques aux autres cartes CSS*/
+/* Bloc info – version pro & compact CSS */
 #bloc-info {
-  max-width: 720px;            /* ⬅ même largeur que les autres blocs */
-  margin: 18px auto;           /* centrage identique */
-  padding: 18px;               /* même padding que .card par défaut */
+  border: 1px solid #f97316;
   background: #fff;
-  border: 1px solid #f97316;   /* contour orange */
-  border-radius: 14px;         /* = var(--radius) */
-  box-shadow: var(--shadow);   /* même ombre que les autres cartes */
+  border-radius: 14px;
+  padding: 22px 26px;
+  max-width: 720px;
+  margin: 22px auto;
+  box-shadow: var(--shadow);
   box-sizing: border-box;
+}
+
+/* Titre */
+#bloc-info .bi-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: #111827;
+}
+
+/* Intro */
+#bloc-info .accent-intro {
+  text-align: center;
+  font-weight: 600;
+  color: #111827;
+  font-size: 16px;
+  margin-bottom: 14px;
+}
+
+/* Liste pro */
+#bloc-info .bi-list-pro {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 16px;
+  max-width: 520px;
+  font-size: 15.5px;
+  line-height: 1.5;
+}
+#bloc-info .bi-list-pro li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+  color: #1f2937;
+}
+#bloc-info .bi-list-pro .num {
+  flex: 0 0 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #f97316;
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* Outro mise en valeur */
+#bloc-info .bi-highlight {
+  text-align: center;
+  font-weight: 600;
+  color: #9a3412;
+  background: #fff7ed;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 15px;
 }
 
 
@@ -483,7 +541,7 @@
 </div>
     
 <!-- ============================== -->
-<!-- BLOC INFO - VERSION ALLEGEE HTML -->
+<!-- BLOC INFO - VERSION PRO & COMPACT HTML -->
 <!-- ============================== -->
 <div class="card" id="bloc-info" data-hide-after-sim="1">
 
@@ -493,17 +551,18 @@
     ⚡ En 2 minutes, vous savez : <strong>étude</strong>, <strong>économies</strong>, <strong>coût</strong>.
   </p>
 
-  <ul class="bi-list">
-    <li>1️⃣ <strong>Votre étude personnalisée</strong> selon votre consommation</li>
-    <li>2️⃣ <strong>Vos économies estimées</strong></li>
-    <li>3️⃣ <strong>Le coût précis</strong> de l’installation</li>
+  <ul class="bi-list-pro">
+    <li><span class="num">1</span> <strong>Votre étude personnalisée</strong> selon votre consommation</li>
+    <li><span class="num">2</span> <strong>Vos économies estimées</strong></li>
+    <li><span class="num">3</span> <strong>Le coût précis</strong> de l’installation</li>
   </ul>
 
-  <p class="bi-text accent-outro">
+  <p class="bi-highlight">
     👉 Rien de superflu. Juste les chiffres qui comptent.
   </p>
 
 </div>
+
 
 
 
