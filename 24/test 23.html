@@ -462,10 +462,9 @@
 
 /* === HERO (fond image + voile + carte) === */
 :root{
-  /* remplace l'URL par TA photo de toit/panneaux */
+  /* remplace l'URL par ta photo si tu veux */
   --hero-bg: url("https://images.unsplash.com/photo-1509395176047-4a66953fd231?q=80&w=1600&auto=format&fit=crop");
 }
-
 .hero{
   position: relative;
   padding: 24px 14px 28px;
@@ -489,7 +488,6 @@
   max-width: 980px;
   margin: 0 auto;
 }
-
 /* Carte formulaire mise en avant dans le hero */
 .hero .form-section{
   background:#fff; color:#111827;
@@ -497,14 +495,13 @@
   border-radius: var(--radius);
   box-shadow: var(--shadow);
 }
-
 /* Titres/sous-titres visibles sur fond image */
 .hero h1{ color:#fff; text-align:center; }
 .hero .lead-sub{ color:#e5eef0; text-align:center; }
-
-/* Badges rassurance (optionnels) sous le formulaire */
+/* Badges rassurance sous le formulaire */
 .hero .bullets{ justify-content:center; margin-top:8px; }
 .hero .bullet{ background:#ffffff; border-color:#e5e7eb; }
+
 
   </style>
 </head>
@@ -524,11 +521,13 @@
   </div>
 
   <div class="wrap">
- <!-- OUVERTURE HERO -->
+<!-- ============================== -->
+<!-- HERO avec fond image + logos + H1 + H2 + formulaire -->
+<!-- ============================== -->
 <section class="hero">
   <div class="hero-inner">
 
-    <!-- Header logos -->
+    <!-- === Logos certifications + SSP === -->
     <div class="header-logos">
       <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/4de4689a7d69beffb9cfb7f1c9233bccc7a7d171/rge.webp"
            alt="Certification RGE"
@@ -545,7 +544,7 @@
            class="logo-side">
     </div>
 
-    <!-- Compteur dynamique -->
+    <!-- === Compteur dynamique simulations === -->
     <div class="counter-wrap">
       <div class="counter-badge">
         <span id="compteurValeur" style="font-weight:900;letter-spacing:.2px">243 000</span>
@@ -553,16 +552,18 @@
       </div>
     </div>
 
-    <!-- Accroche principale -->
+    <!-- === Accroche principale (H1 + sous-texte) === -->
     <h1>Devis <em>panneaux solaires</em> en Dordogne (24)</h1>
     <p class="lead-sub" style="margin:6px auto;max-width:760px;font-size:14px;line-height:1.45">
-      Calculez votre production – vos panneaux – vos économies — Le chiffrage de votre installation – 100% en ligne.
+      Calculez votre production – vos panneaux – vos économies — Le chiffrage de votre installation, 100 % en ligne.
     </p>
 
-    <!-- H2 SEO visible -->
-    <h2 id="devis">Obtenir un devis en 1 minute</h2>
+    <!-- === H2 SEO visible === -->
+    <h2 id="devis" style="text-align:center;margin:6px 0 12px 0">
+      Obtenir un devis en 1 minute
+    </h2>
 
-    <!-- Formulaire -->
+    <!-- === Formulaire principal HERO === -->
     <div class="card form-section" style="border:2px solid var(--accent);max-width:720px">
       <h2 style="margin-top:2px">Simulation personnalisée</h2>
       <form onsubmit="calculerSimulation(); return false;" novalidate>
@@ -573,32 +574,39 @@
         <div id="modeAvance" style="display:none;">
           <input type="text" id="conso" placeholder="Conso annuelle (kWh, optionnel)" inputmode="decimal" autocomplete="off">
         </div>
-        <a href="#" id="lienAvance" class="helper">➕ Vous connaissez votre consommation annuelle ? Cliquez ici pour une estimation ultra-précise</a>
-        <div style="margin-top:6px;font-size:13px;color:#6b7280;text-align:center">Pas votre conso ? La facture suffit.</div>
+        <a href="#" id="lienAvance" class="helper">
+          ➕ Vous connaissez votre consommation annuelle ? Cliquez ici pour une estimation ultra-précise
+        </a>
+        <div style="margin-top:6px;font-size:13px;color:#6b7280;text-align:center">
+          Pas votre conso ? La facture suffit.
+        </div>
         <div style="height:10px"></div>
-        <button id="simuler" type="submit" class="primary" aria-label="Obtenir mon estimation photovoltaïque">🔍 Obtenir mon estimation</button>
+        <button id="simuler" type="submit" class="primary" aria-label="Obtenir mon estimation photovoltaïque">
+          🔍 Obtenir mon estimation
+        </button>
         <div style="margin-top:8px;font-size:13px;color:#374151;text-align:center">
           <strong>Résultat instantané :</strong> production, prix TTC et option de financement calculés en temps réel.
         </div>
       </form>
     </div>
 
-    <!-- (Optionnel) petits badges rassurance -->
+    <!-- === Badges rassurance === -->
     <div class="bullets" aria-hidden="true">
-      <span class="bullet"><span class="icon">✓</span><span class="label">Gratuit</span></span>
-      <span class="bullet"><span class="icon">✓</span><span class="label">Simple</span></span>
-      <span class="bullet"><span class="icon">✓</span><span class="label">Sans engagement</span></span>
+      <span class="bullet"><span class="icon">🔒</span><span class="label">Simulation 100 % en ligne</span></span>
+      <span class="bullet"><span class="icon">⚡</span><span class="label">Résultats immédiats</span></span>
+      <span class="bullet"><span class="icon">✅</span><span class="label">Certifié RGE – QualiPV</span></span>
     </div>
 
   </div>
 </section>
-<!-- FERMETURE HERO -->
+<!-- ============================== -->
+<!-- /HERO -->
+<!-- ============================== -->
 
 
 
 <!-- 🔶 Bloc Confiance : Image + garanties + réalisations -->
 <div class="card" id="bloc-toiture" data-hide-after-sim="1" style="max-width:720px;text-align:center;margin:18px auto;padding:16px">
-  <img
  <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/4e6404b6e080e1db51a9fbb9ed22c24dd00e62d5/Pose%20pv%202.webp" 
     alt="Pose de panneaux photovoltaïques en Nouvelle-Aquitaine"
     width="720" height="405"
