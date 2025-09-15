@@ -84,7 +84,7 @@
     }
 
     *{box-sizing:border-box}
-/* === [DEBUT FOND IMAGE + OVERLAY SOMBRE] === */
+/* === [DEBUT FOND IMAGE + OVERLAY SOMBRE (VARIANTE LEGERE)] === */
 html,body{
   margin:0;
   padding:0;
@@ -110,7 +110,7 @@ body::before{
   transform: translateZ(0);
 }
 
-/* Overlay sombre */
+/* Overlay sombre plus doux */
 body::after{
   content:"";
   position: fixed;
@@ -120,9 +120,9 @@ body::after{
   z-index: 1;
   background: linear-gradient(
     180deg,
-    rgba(17,24,39,0.85),   /* bleu nuit très sombre */
-    rgba(31,41,55,0.75) 45%, /* gris anthracite */
-    rgba(55,65,81,0.60) 100% /* gris doux vers le bas */
+    rgba(17,24,39,0.65),   /* bleu nuit plus léger */
+    rgba(31,41,55,0.55) 45%, /* gris anthracite adouci */
+    rgba(55,65,81,0.40) 100% /* gris doux vers le bas */
   );
 }
 
@@ -134,7 +134,7 @@ body::after{
   position:relative;
   z-index:2;
 }
-/* === [FIN FOND IMAGE + OVERLAY SOMBRE] === */
+/* === [FIN FOND IMAGE + OVERLAY SOMBRE (VARIANTE LEGERE)] === */
 
 
 
