@@ -350,188 +350,78 @@
 }
 
 /* ============================== */
-/* BLOC INFO – friendly+ + méthode + transparence */
+/* BLOC INFO - STYLE ALLÉGÉ CSS       */
 /* ============================== */
 
-/* Conteneur */
-#bloc-info{
-  --bi-muted:#1f2937;
-  --bi-rail:#e9eef9;
-  --bi-card:#ffffff;
-  --bi-shadow:0 10px 26px rgba(2,6,23,.10);
-  --bi-ring:rgba(245,158,11,.25);
-
-  max-width:720px;
-  margin:18px auto;
-  padding:18px;
-  border:2px solid var(--accent);
-  border-radius:14px;
-  background:#fff;
+#bloc-info {
+  border: 2px solid #faa825;   /* contour orange lumineux */
+  border-radius: 14px;
+  padding: 22px;
+  max-width: 720px;
+  margin: 22px auto;
+  background: #fff;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+  box-sizing: border-box;
 }
 
-/* Titres & paragraphes */
-#bloc-info .bi-title{
-  margin:8px 0 14px;
-  text-align:center;
-  font-weight:900;
-  letter-spacing:.2px;
-}
-#bloc-info .bi-text{
-  color:var(--bi-muted);
-  font-size:15.5px;
-  line-height:1.7;
-  margin:0 0 16px;
+/* Titre */
+#bloc-info .bi-title {
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.4rem;
+  margin: 0 0 14px;
+  color: #111827;
 }
 
-/* ===== Note importante (orange) ===== */
-#bloc-info .note-important{
-  border:2px solid #f97316;
-  background:#fff7ed;
-  border-left:5px solid #ea580c;
-  border-radius:12px;
-  padding:12px 14px;
-  margin:14px 0;
-  font-size:15.5px;
-  line-height:1.6;
-  box-shadow:0 6px 16px rgba(249,115,22,.15);
-  display:block;
-}
-#bloc-info .note-important .ico{ font-size:20px; margin-right:6px }
-
-/* ===== Timeline ===== */
-#bloc-info .bi-steps-num{
-  list-style:none;
-  margin:0;
-  padding:0 0 0 56px;       /* place pour rail + icônes */
-  position:relative;
-  display:flex; flex-direction:column; gap:18px;
-}
-#bloc-info .bi-steps-num::before{
-  content:"";
-  position:absolute; left:28px; top:6px; bottom:6px;
-  width:2px; background:linear-gradient(180deg,var(--bi-rail),transparent);
-  border-radius:2px;
-}
-#bloc-info .bi-steps-num li{
-  position:relative;
-  background:var(--bi-card);
-  border:1px solid var(--border);
-  border-radius:16px;
-  box-shadow:var(--bi-shadow);
-  padding:16px 18px;
-  color:#111827; font-size:15.5px; line-height:1.6;
-  display:block;                /* ✅ au lieu de flex */
-  transition:box-shadow .18s ease, transform .18s ease, border-color .18s ease;
+/* Intro */
+#bloc-info .bi-text {
+  text-align: center;
+  color: #374151;
+  font-size: 15.5px;
+  line-height: 1.6;
+  margin: 0 0 18px;
 }
 
-@media (hover:hover){
-  #bloc-info .bi-steps-num li:hover{
-    box-shadow:0 14px 34px rgba(2,6,23,.14);
-    transform:translateY(-1px);
-  }
+/* Liste des étapes */
+#bloc-info .bi-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
-#bloc-info .bi-steps-num li::before{
-  content:"";
-  position:absolute; left:-56px; top:50%; transform:translateY(-50%);
-  width:40px; height:40px; border-radius:50%;
-  display:grid; place-items:center;
-  font-size:20px; font-weight:900;
-  background:linear-gradient(180deg,#fff7ed,#ffedd5);
-  border:1px solid #fdba74; color:#7c2d12; box-shadow:0 6px 16px var(--bi-ring);
+#bloc-info .bi-steps li {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* espace uniquement entre num et texte */
+  margin: 10px 0;
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: #1f2937;
 }
-#bloc-info .bi-steps-num li:nth-child(1)::before{ content:"📍"; }
-#bloc-info .bi-steps-num li:nth-child(2)::before{ content:"⚙️"; }
-#bloc-info .bi-steps-num li:nth-child(3)::before{ content:"🔓"; }
-#bloc-info .bi-steps-num .num{
-  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
-  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
-}
-#bloc-info .bi-steps-num .hint{
-  flex:1 1 100%;
-  display:block;
-  margin-top:10px;
-  background:linear-gradient(180deg,#fffbeb,#fff7e6);
-  border:1px solid #fde68a;
-  border-radius:12px;
-  padding:10px 12px;
-  font-weight:800;
-  box-shadow:0 10px 22px rgba(245,158,11,.12);
-}
-#bloc-info .bi-steps-num li:nth-child(3){
-  border-color:#fed7aa;
-  box-shadow:0 16px 36px rgba(245,158,11,.12), var(--bi-shadow);
+#bloc-info .bi-steps .num {
+  flex: 0 0 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #faa825;
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
 }
 
-/* ===== Méthode (vert) ===== */
-#bloc-info .bi-method{
-  border:2px solid #16a34a;
-  background:#f0fdf4;
-  border-left:5px solid #15803d;
-  border-radius:12px;
-  padding:12px 14px;
-  margin:16px 0;
-  font-size:15.5px;
-  line-height:1.6;
-  box-shadow:0 6px 16px rgba(22,163,74,.15);
+/* Phrase finale */
+#bloc-info .bi-final {
+  margin-top: 18px;
+  text-align: center;
+  background: #fff7eb;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: #b45309;
+  font-weight: 700;
+  font-size: 15px;
 }
-#bloc-info .bi-method .ico{ font-size:20px; margin-right:6px }
 
-/* ===== Transparence (orange clair) ===== */
-#bloc-info .bi-transp{
-  border:2px solid #fbbf24;
-  background:#fffbeb;
-  border-left:5px solid #d97706;
-  border-radius:12px;
-  padding:12px 14px;
-  margin:16px 0;
-  font-size:15.5px;
-  line-height:1.6;
-  box-shadow:0 6px 16px rgba(245,158,11,.15);
-}
-#bloc-info .bi-transp .ico{ font-size:18px; margin-right:6px }
-
-/* ============================== */
-/* Mobile (≤ 560px) – version compacte */
-/* ============================== */
-@media (max-width:560px){
-
-  /* Conteneur + titres + texte */
-  #bloc-info{ padding:14px; border-radius:12px; }
-  #bloc-info .bi-title{ font-size:1rem; margin:6px 0 8px; }
-  #bloc-info .bi-text{ font-size:15px; line-height:1.6; margin:0 0 12px; }
-
-  /* Encadrés plus légers */
-  #bloc-info .note-important,
-  #bloc-info .bi-method,
-  #bloc-info .bi-transp{
-    padding:8px 10px;
-    margin:10px 0;
-    font-size:14.5px;
-    line-height:1.55;
-    border-radius:10px;
-    border-width:1.5px;
-    border-left-width:4px;
-    box-shadow:none;
-  }
-  #bloc-info .note-important .ico,
-  #bloc-info .bi-method .ico,
-  #bloc-info .bi-transp .ico{ font-size:18px; }
-
-  /* Timeline compacte */
-  #bloc-info .bi-steps-num{ padding-left:36px; gap:10px; }
-  #bloc-info .bi-steps-num::before{ left:20px; top:4px; bottom:4px; }
-  #bloc-info .bi-steps-num li{
-    padding:10px 12px;
-    border-radius:10px;
-    box-shadow:none;
-  }
-  #bloc-info .bi-steps-num li::before{
-    left:-36px; width:26px; height:26px; font-size:14px; box-shadow:none;
-  }
-  #bloc-info .bi-steps-num .hint{
-    padding:6px 8px; font-size:13.5px; border-radius:8px; box-shadow:none;
-  }
-}
 
 /* === Header logos (nouveau) === */
 .header-logos{
@@ -653,59 +543,35 @@
 </div>
 
 <!-- ============================== -->
-<!-- BLOC INFO - SIMULATEUR SOLAIRE -->
+<!-- BLOC INFO - VERSION ALLÉGÉE  HTML-->
 <!-- ============================== -->
 <div class="card" id="bloc-info" data-hide-after-sim="1">
 
   <h2 class="bi-title">Un simulateur qui va à l’essentiel</h2>
+
   <p class="bi-text">
-    Nous savons que vous avez déjà parcouru de nombreuses pages expliquant pourquoi le solaire est rentable.
-    Inutile de répéter les mêmes arguments : <strong>oui, l’électricité augmente</strong> et
-    <strong>oui, produire sa propre énergie est un choix intelligent</strong>. Ici, nous allons à l’essentiel :
-    une estimation claire et immédiate de votre projet — production, panneaux, couverture de votre consommation.
+    Obtenez en <strong>1 minute</strong> une estimation claire de votre projet solaire :
+    production, panneaux et couverture de votre consommation.
   </p>
 
-  <div class="note-important">
-    <span class="ico">📌</span>
-    L’étude complète s’affiche directement à l’écran, <strong>100&nbsp;% en ligne, sans attente ni relance</strong>.<br>
-    <span style="color:#15803d;font-weight:700">Un SMS de confirmation vous est envoyé.</span>
-  </div>
+  <ul class="bi-steps">
+    <li>
+      <span class="num">1</span>
+      <span><strong>Votre étude personnalisée</strong> selon votre consommation</span>
+    </li>
+    <li>
+      <span class="num">2</span>
+      <span><strong>Vos économies estimées</strong> dès la 1ʳᵉ année</span>
+    </li>
+    <li>
+      <span class="num">3</span>
+      <span><strong>Le coût précis</strong> de l’installation et son financement</span>
+    </li>
+  </ul>
 
-  <h2 class="bi-title">Comment ça marche</h2>
-<ul class="bi-steps-num">
-  <li>
-    <span class="num">1</span>
-    Entrez votre <strong>code postal</strong> et votre <strong>facture annuelle</strong>.
-  </li>
-  <li>
-    <span class="num">2</span>
-    Notre outil calcule l’<strong>installation adaptée</strong> (puissance, panneaux, couverture).
-  </li>
-  <li>
-    <span class="num">3</span>
-    Débloquez l’<strong>étude complète</strong> : économies et <strong>coût précis</strong> de l’installation.
-    <span class="hint">👉 Tout le processus se fait <strong>en direct, sur votre écran</strong>.</span>
-  </li>
-</ul>
-
-
-  <div class="bi-method">
-    <span class="ico">💡</span>
-    <strong>Comment fonctionne notre simulateur&nbsp;?</strong><br>
-    Il repose sur l’<strong>autoconsommation</strong> et le <strong>stockage virtuel</strong>, ce qui permet de
-    <a href="#" style="color:#0b61d8;font-weight:600;text-decoration:underline">valoriser 100&#8239;% de votre production</a>.
-    Contrairement à la revente à EDF (seulement <strong>0,04&nbsp;€/kWh</strong>), cette méthode maximise vos économies.
-  </div>
-
-  <h2 class="bi-title">Une démarche transparente</h2>
-  <div class="bi-transp">
-    <span class="ico">⚠️</span>
-    Nous préférons être clairs : <strong>l’État ne finance pas votre installation solaire</strong>.
-    Contrairement à de nombreux sites qui promettent des “aides” ou génèrent des appels indésirables,
-    ici vous obtenez une estimation <strong>fiable</strong>, <strong>immédiate</strong> et <strong>100&nbsp;% en ligne</strong>,
-    <a href="#" style="color:#0b61d8;font-weight:600;text-decoration:underline">sans démarchage téléphonique</a>.
-  </div>
-
+  <p class="bi-final">
+    👉 Rien de superflu. Juste les chiffres qui comptent.
+  </p>
 </div>
 
 
