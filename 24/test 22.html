@@ -347,57 +347,17 @@
   font-weight:600;
 }
 
-/* === Bloc info (Un simulateur qui va à l’essentiel) CSS === */
+
+/* Bloc info — largeur et style identiques aux autres cartes CSS*/
 #bloc-info {
-  border: 1px solid #f97316;   /* contour orange */
+  max-width: 720px;            /* ⬅ même largeur que les autres blocs */
+  margin: 18px auto;           /* centrage identique */
+  padding: 18px;               /* même padding que .card par défaut */
   background: #fff;
-  border-radius: 12px;
-  padding: 24px 28px;
-  max-width: 900px;            /* largeur harmonisée */
-  margin: 24px auto;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
-
-/* Titre du bloc */
-#bloc-info .bi-title {
-  text-align: center;
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 16px;
-  color: #111827;
-}
-
-/* Intro (phrase du haut) */
-#bloc-info .accent-intro {
-  text-align: center;
-  font-weight: 600;
-  color: #111827;
-  font-size: 16px;
-  margin-bottom: 18px;
-}
-
-/* Liste des 3 points */
-#bloc-info .bi-list {
-  list-style: none;
-  padding: 0;
-  margin: 0 auto 20px;
-  max-width: 520px;
-  font-size: 15.5px;
-  line-height: 1.6;
-}
-#bloc-info .bi-list li {
-  margin: 8px 0;
-  padding-left: 4px;
-  color: #1f2937;
-}
-
-/* Outro (phrase finale) */
-#bloc-info .accent-outro {
-  text-align: center;
-  margin-top: 12px;
-  font-weight: 700;
-  color: #374151;
-  font-size: 15.5px;
+  border: 1px solid #f97316;   /* contour orange */
+  border-radius: 14px;         /* = var(--radius) */
+  box-shadow: var(--shadow);   /* même ombre que les autres cartes */
+  box-sizing: border-box;
 }
 
 
