@@ -348,74 +348,86 @@
 }
 
 
-/* Bloc info – version pro & compact CSS*/
+/* ============================== */
+/* BLOC INFO – CSS */
+/* ============================== */
+
+/* Conteneur global */
 #bloc-info {
-  border: 1px solid #faa825;   /* contour orange lumineux */
-  background: #fff;
-  border-radius: 14px;
-  padding: 22px 26px;
-  max-width: 720px;
-  margin: 22px auto;
-  box-shadow: var(--shadow);
-  box-sizing: border-box;
+  --bi-muted:#1f2937;
+  --bi-card:#ffffff;
+  --bi-shadow:0 10px 26px rgba(2,6,23,.10);
+
+  max-width:720px;
+  margin:18px auto;
+  padding:18px;
+  border:2px solid var(--accent);
+  border-radius:14px;
+  background:#fff;
 }
 
-/* Titre */
+/* Titres & texte */
 #bloc-info .bi-title {
-  text-align: center;
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 14px;
-  color: #111827;
+  margin:8px 0 14px;
+  text-align:center;
+  font-weight:900;
+  letter-spacing:.2px;
+}
+#bloc-info .bi-text {
+  color:var(--bi-muted);
+  font-size:15.5px;
+  line-height:1.7;
+  margin:0 0 16px;
 }
 
-/* Intro */
-#bloc-info .accent-intro {
-  text-align: center;
-  font-weight: 600;
-  color: #111827;
-  font-size: 16px;
-  margin-bottom: 14px;
-}
-
-/* Liste pro */
+/* Liste numérotée */
 #bloc-info .bi-list-pro {
-  list-style: none;
-  padding: 0;
-  margin: 0 auto 16px;
-  max-width: 520px;
-  font-size: 15.5px;
-  line-height: 1.5;
+  list-style:none;
+  padding:0;
+  margin:0 auto 16px;
+  max-width:520px;
+  font-size:15.5px;
+  line-height:1.55;
 }
 #bloc-info .bi-list-pro li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 8px 0;
-  color: #1f2937;
+  display:flex;            /* cercle + texte */
+  align-items:center;
+  gap:10px;                /* espace uniquement entre num et texte */
+  margin:8px 0;
+  color:#1f2937;
 }
 #bloc-info .bi-list-pro .num {
-  flex: 0 0 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: #faa825; /* cercle orange lumineux */
-  color: #fff;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
+  flex:0 0 28px;
+  height:28px;
+  border-radius:50%;
+  background:#faa825;      /* orange cercles */
+  color:#fff;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+}
+#bloc-info .bi-list-pro .txt {
+  flex:1;
 }
 
-/* Outro mise en valeur */
-#bloc-info .bi-highlight {
-  text-align: center;
-  font-weight: 600;
-  color: #92400e;
-  background: #fff7ed;
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-size: 15px;
+/* Encadré note importante */
+#bloc-info .note-important {
+  border:2px solid #f97316;
+  background:#fff7ed;
+  border-left:5px solid #ea580c;
+  border-radius:12px;
+  padding:12px 14px;
+  margin:14px 0;
+  font-size:15.5px;
+  line-height:1.6;
+  box-shadow:0 6px 16px rgba(249,115,22,.15);
+  display:block;
+}
+#bloc-info .note-important .ico {
+  font-size:20px;
+  margin-right:6px;
 }
 
 
@@ -541,26 +553,36 @@
   </form>
 </div>
     
-<!-- ============================== -->
-<!-- BLOC INFO - VERSION PRO & CORRIGÉE  HTML-->
-<!-- ============================== -->
+<!-- BLOC INFO - LISTE PRO  HTML-->
 <div class="card" id="bloc-info" data-hide-after-sim="1">
 
   <h2 class="bi-title">Un simulateur qui va à l’essentiel</h2>
-
-  <p class="bi-text accent-intro">
-    ⚡ En 2 minutes, vous savez : <strong>étude</strong>, <strong>économies</strong>, <strong>coût</strong>.
+  <p class="bi-text">
+    Obtenez en <strong>1 minute</strong> une estimation claire de votre projet solaire :
+    production, panneaux et couverture de votre consommation.
   </p>
 
   <ul class="bi-list-pro">
-    <li><span class="num">1</span> <strong>Votre étude personnalisée</strong>&nbsp;selon votre consommation</li>
-    <li><span class="num">2</span> <strong>Vos économies estimées</strong></li>
-    <li><span class="num">3</span> <strong>Le coût précis</strong>&nbsp;de l’installation</li>
+    <li>
+      <span class="num">1</span>
+      <span class="txt"><strong>Votre étude personnalisée</strong> selon votre consommation</span>
+    </li>
+    <li>
+      <span class="num">2</span>
+      <span class="txt"><strong>Vos économies estimées</strong> dès la 1ʳᵉ année</span>
+    </li>
+    <li>
+      <span class="num">3</span>
+      <span class="txt"><strong>Le coût précis</strong> de l’installation et son financement</span>
+    </li>
   </ul>
 
-  <p class="bi-highlight">
-    👉 Rien de superflu. Juste les chiffres qui comptent.
-  </p>
+  <div class="note-important">
+    <span class="ico">📌</span>
+    L’étude complète s’affiche directement à l’écran,
+    <strong>100&nbsp;% en ligne</strong>, sans attente ni relance.<br>
+    <span style="color:#15803d;font-weight:700">Un SMS de confirmation vous est envoyé.</span>
+  </div>
 
 </div>
 
