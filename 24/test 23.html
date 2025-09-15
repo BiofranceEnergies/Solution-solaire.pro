@@ -524,23 +524,26 @@
   </div>
 
   <div class="wrap">
- <!-- Header logos -->
-<div class="header-logos">
-  <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/4de4689a7d69beffb9cfb7f1c9233bccc7a7d171/rge.webp"
-       alt="Certification RGE"
-       class="logo-side">
+ <!-- OUVERTURE HERO -->
+<section class="hero">
+  <div class="hero-inner">
 
-  <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/52db4f3ab1c38909b33d9037e74d7371c32a9cf5/logo%20SSP.webp"
-       alt="Logo Solution Solaire Pro"
-       class="logo-main"
-       fetchpriority="high"
-       decoding="async">
+    <!-- Header logos -->
+    <div class="header-logos">
+      <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/4de4689a7d69beffb9cfb7f1c9233bccc7a7d171/rge.webp"
+           alt="Certification RGE"
+           class="logo-side">
 
-  <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/4de4689a7d69beffb9cfb7f1c9233bccc7a7d171/qualipv.webp"
-       alt="Certification QualiPV"
-       class="logo-side">
-</div>
+      <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/52db4f3ab1c38909b33d9037e74d7371c32a9cf5/logo%20SSP.webp"
+           alt="Logo Solution Solaire Pro"
+           class="logo-main"
+           fetchpriority="high"
+           decoding="async">
 
+      <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/4de4689a7d69beffb9cfb7f1c9233bccc7a7d171/qualipv.webp"
+           alt="Certification QualiPV"
+           class="logo-side">
+    </div>
 
     <!-- Compteur dynamique -->
     <div class="counter-wrap">
@@ -552,68 +555,44 @@
 
     <!-- Accroche principale -->
     <h1>Devis <em>panneaux solaires</em> en Dordogne (24)</h1>
-    <p class="lead-sub" style="margin:6px auto 6px auto;max-width:760px;font-size:14px;line-height:1.45">
-  Calculez votre production - vos panneaux - vos économies — Le chiffrage de votre installation - 100% en ligne.
-</p>
-
+    <p class="lead-sub" style="margin:6px auto;max-width:760px;font-size:14px;line-height:1.45">
+      Calculez votre production – vos panneaux – vos économies — Le chiffrage de votre installation – 100% en ligne.
+    </p>
 
     <!-- H2 SEO visible -->
     <h2 id="devis">Obtenir un devis en 1 minute</h2>
 
-
     <!-- Formulaire -->
-<!-- Formulaire -->
-<div class="card form-section" style="border:2px solid var(--accent);max-width:720px">
-  <h2 style="margin-top:2px">Simulation personnalisée</h2>
-  <form onsubmit="calculerSimulation(); return false;" novalidate>
-    <div class="inputs" style="margin-bottom:8px">
-      <input type="text" id="codePostal" placeholder="Votre code postal" maxlength="5" inputmode="numeric" pattern="[0-9]{5}" autocomplete="postal-code" autofocus>
-      <input type="text" id="facture" placeholder="Votre facture élec /an (ex : 1800 €)" inputmode="decimal" autocomplete="off">
+    <div class="card form-section" style="border:2px solid var(--accent);max-width:720px">
+      <h2 style="margin-top:2px">Simulation personnalisée</h2>
+      <form onsubmit="calculerSimulation(); return false;" novalidate>
+        <div class="inputs" style="margin-bottom:8px">
+          <input type="text" id="codePostal" placeholder="Votre code postal" maxlength="5" inputmode="numeric" pattern="[0-9]{5}" autocomplete="postal-code" autofocus>
+          <input type="text" id="facture" placeholder="Votre facture élec /an (ex : 1800 €)" inputmode="decimal" autocomplete="off">
+        </div>
+        <div id="modeAvance" style="display:none;">
+          <input type="text" id="conso" placeholder="Conso annuelle (kWh, optionnel)" inputmode="decimal" autocomplete="off">
+        </div>
+        <a href="#" id="lienAvance" class="helper">➕ Vous connaissez votre consommation annuelle ? Cliquez ici pour une estimation ultra-précise</a>
+        <div style="margin-top:6px;font-size:13px;color:#6b7280;text-align:center">Pas votre conso ? La facture suffit.</div>
+        <div style="height:10px"></div>
+        <button id="simuler" type="submit" class="primary" aria-label="Obtenir mon estimation photovoltaïque">🔍 Obtenir mon estimation</button>
+        <div style="margin-top:8px;font-size:13px;color:#374151;text-align:center">
+          <strong>Résultat instantané :</strong> production, prix TTC et option de financement calculés en temps réel.
+        </div>
+      </form>
     </div>
-    <div id="modeAvance" style="display:none;">
-      <input type="text" id="conso" placeholder="Conso annuelle (kWh, optionnel)" inputmode="decimal" autocomplete="off">
+
+    <!-- (Optionnel) petits badges rassurance -->
+    <div class="bullets" aria-hidden="true">
+      <span class="bullet"><span class="icon">✓</span><span class="label">Gratuit</span></span>
+      <span class="bullet"><span class="icon">✓</span><span class="label">Simple</span></span>
+      <span class="bullet"><span class="icon">✓</span><span class="label">Sans engagement</span></span>
     </div>
-    <a href="#" id="lienAvance" class="helper">➕ Vous connaissez votre consommation annuelle ? Cliquez ici pour une estimation ultra-précise</a>
-    <div style="margin-top:6px;font-size:13px;color:#6b7280;text-align:center">Pas votre conso ? La facture suffit.</div>
-    <div style="height:10px"></div>
-    <button id="simuler" type="submit" class="primary" aria-label="Obtenir mon estimation photovoltaïque">🔍 Obtenir mon estimation</button>
-    <div style="margin-top:8px;font-size:13px;color:#374151;text-align:center">
-      <strong>Résultat instantané :</strong> production, prix TTC et option de financement calculés en temps réel.
-    </div>
-  </form>
-</div>
-    
-<!-- ============================== -->
-<!-- BLOC INFO - VERSION ALLÉGÉE  HTML-->
-<!-- ============================== -->
-<div class="card" id="bloc-info" data-hide-after-sim="1">
 
-  <h2 class="bi-title">Un simulateur qui va à l’essentiel</h2>
-
-  <p class="bi-text">
-    Obtenez en <strong>1 minute</strong> une estimation claire de votre projet solaire :
-    production, panneaux et couverture de votre consommation.
-  </p>
-
-  <ul class="bi-steps">
-    <li>
-      <span class="num">1</span>
-      <span><strong>Votre étude personnalisée</strong> selon votre consommation</span>
-    </li>
-    <li>
-      <span class="num">2</span>
-      <span><strong>Vos économies estimées</strong> dès la 1ʳᵉ année</span>
-    </li>
-    <li>
-      <span class="num">3</span>
-      <span><strong>Le coût précis</strong> de l’installation et son financement</span>
-    </li>
-  </ul>
-
-  <p class="bi-final">
-    👉 Rien de superflu. Juste les chiffres qui comptent.
-  </p>
-</div>
+  </div>
+</section>
+<!-- FERMETURE HERO -->
 
 
 
