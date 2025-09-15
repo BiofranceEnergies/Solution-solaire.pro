@@ -460,6 +460,52 @@
   .logo-side{ width:20vw; }
 }
 
+/* === HERO (fond image + voile + carte) === */
+:root{
+  /* remplace l'URL par TA photo de toit/panneaux */
+  --hero-bg: url("https://images.unsplash.com/photo-1509395176047-4a66953fd231?q=80&w=1600&auto=format&fit=crop");
+}
+
+.hero{
+  position: relative;
+  padding: 24px 14px 28px;
+  background: #0c2c2f var(--hero-bg) center/cover no-repeat;
+  color:#fff;
+  overflow: hidden;
+}
+.hero::before{
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(12,44,47,.65) 0%,
+    rgba(12,44,47,.45) 40%,
+    rgba(12,44,47,.65) 100%
+  );
+}
+.hero .hero-inner{
+  position: relative;
+  z-index: 1;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+/* Carte formulaire mise en avant dans le hero */
+.hero .form-section{
+  background:#fff; color:#111827;
+  border:1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Titres/sous-titres visibles sur fond image */
+.hero h1{ color:#fff; text-align:center; }
+.hero .lead-sub{ color:#e5eef0; text-align:center; }
+
+/* Badges rassurance (optionnels) sous le formulaire */
+.hero .bullets{ justify-content:center; margin-top:8px; }
+.hero .bullet{ background:#ffffff; border-color:#e5e7eb; }
+
   </style>
 </head>
 <body>
