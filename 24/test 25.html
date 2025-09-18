@@ -6,15 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO principal -->
-  <title>Devis panneaux solaires en Dordogne (24) | Gratuit & sans engagement</title>
-  <meta name="description" content="Obtenez un devis panneaux solaires en Dordogne (24). Estimation gratuite, claire et immédiate de votre installation photovoltaïque.">
-  <link rel="canonical" href="https://www.solution-solaire.pro/24/devis-panneaux-solaires.html">
+  <title>Prix installation photovoltaïque en Dordogne (24) | Gratuit & sans engagement</title>
+  <meta name="description" content="Calculez le prix d'une installation photovoltaïque en Dordogne (24). Estimation claire, gratuite et immédiate de votre projet solaire.">
+  <link rel="canonical" href="https://www.solution-solaire.pro/24/prix-installation-photovoltaique.html">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Devis panneaux solaires en Dordogne (24)">
-  <meta property="og:description" content="Recevez un devis clair et gratuit pour votre installation de panneaux solaires en Dordogne (24). Simulation immédiate et sans engagement.">
+  <meta property="og:title" content="Prix installation photovoltaïque en Dordogne (24)">
+  <meta property="og:description" content="Obtenez une estimation immédiate et gratuite du prix de votre installation photovoltaïque en Dordogne (24).">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.solution-solaire.pro/24/devis-panneaux-solaires.html">
+  <meta property="og:url" content="https://www.solution-solaire.pro/24/prix-installation-photovoltaique.html">
   <meta property="og:image" content="https://www.solution-solaire.pro/24/og-image-24.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -485,13 +485,13 @@
     </div>
 
     <!-- Accroche principale -->
-    <h1>Devis <em>panneaux solaires</em> en Dordogne (24)</h1>
+    <h1>Prix <em>installation photovoltaïque</em> en Dordogne (24)</h1>
     <p class="lead-sub" style="margin:6px auto 6px auto;max-width:760px;font-size:14px;line-height:1.45">
       Calculez votre production - vos panneaux - vos économies — Le chiffrage de votre installation - 100% en ligne.
     </p>
 
     <!-- H2 SEO visible -->
-    <h2 id="devis">Obtenir un devis en 1 minute</h2>
+    <h2 id="prix">Calculez le prix de votre installation photovoltaïque</h2>
 
     <!-- Formulaire -->
     <div class="card form-section" style="border:2px solid var(--accent);max-width:720px">
@@ -870,105 +870,97 @@
         const totalTxt = Number.isFinite(scenario.total) ? scenario.total.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2}) + " €" : "—";
         const dureeTxt = Number.isFinite(scenario.dureeMois) ? scenario.dureeMois + " mois" : "—";
 
-/* --------- RÉCAP (VISIBLE) --------- */
-const recapEl = document.getElementById('recap');
-const libConso = (sourceConso === "reelle") ? "Conso annuelle (réelle)" : "Conso annuelle estimée";
+        /* --------- RÉCAP (VISIBLE) --------- */
+        const recapEl = document.getElementById('recap');
+        const libConso = (sourceConso === "reelle") ? "Conso annuelle (réelle)" : "Conso annuelle estimée";
 
-recapEl.innerHTML = `
-  <h2>Votre estimation personnalisée</h2>
-  <div class="recap-grid">
-    <div class="recap-item"><div class="label">Code postal</div><div class="value">${esc(codePostal)}</div></div>
-    <div class="recap-item"><div class="label">${libConso}</div><div class="value value-ok">${Math.round(conso).toLocaleString('fr-FR')} kWh</div></div>
-    <div class="recap-item"><div class="label">Prix kWh TTC utilisé</div><div class="value">${prixKwh.toFixed(3)} €</div></div>
-    <div class="recap-item"><div class="label">Facture annuelle</div><div class="value">${facture.toLocaleString('fr-FR')} €</div></div>
-    <div class="recap-item" style="grid-column:1/-1">
-      <div class="label">Puissance & production</div>
-      <div class="value value-ok" style="font-size:18px">
-        ${esc(scenario.puissance)} — ${scenario.panels} panneaux (500 W) • ${scenario.prod.toLocaleString('fr-FR')} kWh/an
-      </div>
-    </div>
-  </div>
-`;
-recapEl.style.display='block';
-recapEl.style.visibility='visible';
-recapEl.style.height='auto';
+        recapEl.innerHTML = `
+          <h2>Votre estimation personnalisée</h2>
+          <div class="recap-grid">
+            <div class="recap-item"><div class="label">Code postal</div><div class="value">${esc(codePostal)}</div></div>
+            <div class="recap-item"><div class="label">${libConso}</div><div class="value value-ok">${Math.round(conso).toLocaleString('fr-FR')} kWh</div></div>
+            <div class="recap-item"><div class="label">Prix kWh TTC utilisé</div><div class="value">${prixKwh.toFixed(3)} €</div></div>
+            <div class="recap-item"><div class="label">Facture annuelle</div><div class="value">${facture.toLocaleString('fr-FR')} €</div></div>
+            <div class="recap-item" style="grid-column:1/-1">
+              <div class="label">Puissance & production</div>
+              <div class="value value-ok" style="font-size:18px">${esc(scenario.puissance)} — ${scenario.panels} panneaux (500 W) • ${scenario.prod.toLocaleString('fr-FR')} kWh/an</div>
+            </div>
+            <div class="recap-item" style="grid-column:1/-1">
+              <div class="label">% de votre conso couverte</div>
+              <div class="value value-ok">${((scenario.prod / conso) * 100).toFixed(2)} %</div>
+            </div>
+          </div>
+          <span class="note">Votre production est valorisée à 100 % grâce à la batterie virtuelle, même si elle ne couvre pas 100 % de votre consommation.</span>
+         <div style="text-align:center;color:#9ca3af;font-size:11px;margin-top:6px;font-style:italic">
+         Hypothèse standard : exposition Sud/Sud, pente de toit 35°
+         </div>
+        `;
+        recapEl.style.display='block';
+        recapEl.style.visibility='visible';
+        recapEl.style.height='auto';
 
         /* --------- PARTIE FLOUTÉE (KPI + détails + financement) --------- */
-const locked = document.getElementById('lockedContent');
-const pctCouverture = ((scenario.prod / conso) * 100).toFixed(2);
+        const locked = document.getElementById('lockedContent');
+        locked.innerHTML = `
+          <div class="kpi">
+            <div class="kpi-box">
+              <strong>Gain estimé la 1ʳᵉ année :</strong>
+              <b>${Math.round(economieAnnuelle).toLocaleString('fr-FR')} €</b>
+            </div>
+          </div>
 
-locked.innerHTML = `
-  <!-- Bloc déplacé derrière l’overlay -->
-  <div style="max-width:720px;margin:0 auto 12px auto">
-    <div class="recap-item" style="border:1px solid var(--border);border-radius:12px;padding:12px 14px;background:#fff;margin-bottom:10px">
-      <div class="label">% de votre conso couverte</div>
-      <div class="value value-ok">${pctCouverture} %</div>
-    </div>
-    <span class="note">Votre production est valorisée à 100 % grâce à la batterie virtuelle, même si elle ne couvre pas 100 % de votre consommation.</span>
-    <div style="text-align:center;color:#9ca3af;font-size:11px;margin-top:6px;font-style:italic">
-      Hypothèse standard : exposition Sud/Sud, pente de toit 35°
-    </div>
-  </div>
+          <div class="kpi-box"><strong>Soit un gain par mois de :</strong> <b>${Math.round(economieMensuelle).toLocaleString('fr-FR')} €</b></div>
+          <div class="kpi-box"><strong>Économie cumulée sur 15 ans :</strong> <b>${Math.round(gain15ans).toLocaleString('fr-FR')} €</b></div>
 
-  <div class="kpi">
-    <div class="kpi-box">
-      <strong>Gain estimé la 1ʳᵉ année :</strong>
-      <b>${Math.round(economieAnnuelle).toLocaleString('fr-FR')} €</b>
-    </div>
-  </div>
+          <div style="border-top:1px solid var(--border);margin:10px 0 12px 0"></div>
 
-  <div class="kpi-box"><strong>Soit un gain par mois de :</strong> <b>${Math.round(economieMensuelle).toLocaleString('fr-FR')} €</b></div>
-  <div class="kpi-box"><strong>Économie cumulée sur 15 ans :</strong> <b>${Math.round(gain15ans).toLocaleString('fr-FR')} €</b></div>
+          <!-- Ce que nous vous proposons -->
+          <div class="propo">
+            <div class="propo-title">Ce que nous vous proposons</div>
+            <ul class="propo-list">
+              <li><span class="point-title">Remplacer votre facture par un investissement</span><br>Une partie de votre budget électricité finance votre installation solaire.</li>
+              <li><span class="point-title">Autofinancement simple</span><br>Les économies générées couvrent votre mensualité.</li>
+              <li><span class="point-title">Mensualité fixe</span><br><span class="pill">${mensualiteTxt}</span> &nbsp;hors assurance.</li>
+              <li><span class="point-title">Aucune charge supplémentaire</span><br>Cette mensualité remplace ce que vous payez déjà, elle ne s’ajoute pas.</li>
+              <li><span class="point-title">Protégez-vous des hausses</span><br>Devenez propriétaire de votre production et sécurisez vos coûts.</li>
+            </ul>
+          </div>
 
-  <div style="border-top:1px solid var(--border);margin:10px 0 12px 0"></div>
+          <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:14px;padding:16px;text-align:center;margin:12px 0">
+            <div style="color:#92400e;font-weight:800;font-size:1.05rem;margin-bottom:6px">Offre spéciale “Groupage chantiers”</div>
+            <div style="display:flex;justify-content:center;align-items:center;gap:10px;font-size:1.2rem;font-weight:800;color:#1b1202;margin-bottom:2px">
+              <span style="display:inline-block;background:linear-gradient(180deg,var(--accent),var(--accent-2));color:#1b1202;padding:8px 14px;border-radius:999px;font-weight:900;box-shadow:0 6px 16px rgba(245,158,11,.25);">
+                ${Number.isFinite(scenario.remiseChantier) ? scenario.remiseChantier.toLocaleString('fr-FR') : "—"} €
+              </span>
+              <span>de remise immédiate</span>
+            </div>
+            <div style="font-size:.92rem;color:#374151;margin-bottom:6px">(à déduire du prix TTC affiché ci-dessous)</div>
+            <div style="font-size:.92rem;color:#6b7280">Offre valable jusqu’au <strong>30 septembre 2025</strong> — Places limitées</div>
+          </div>
 
-  <!-- Ce que nous vous proposons -->
-  <div class="propo">
-    <div class="propo-title">Ce que nous vous proposons</div>
-    <ul class="propo-list">
-      <li><span class="point-title">Remplacer votre facture par un investissement</span><br>Une partie de votre budget électricité finance votre installation solaire.</li>
-      <li><span class="point-title">Autofinancement simple</span><br>Les économies générées couvrent votre mensualité.</li>
-      <li><span class="point-title">Mensualité fixe</span><br><span class="pill">${mensualiteTxt}</span> &nbsp;hors assurance.</li>
-      <li><span class="point-title">Aucune charge supplémentaire</span><br>Cette mensualité remplace ce que vous payez déjà, elle ne s’ajoute pas.</li>
-      <li><span class="point-title">Protégez-vous des hausses</span><br>Devenez propriétaire de votre production et sécurisez vos coûts.</li>
-    </ul>
-  </div>
+          <div style="background:#fff;border-left:4px solid var(--accent);border-radius:12px;padding:14px;margin-top:10px;color:#1f2937;border:1px solid var(--border)">
+            <div style="margin-bottom:10px;line-height:1.55">
+              <div style="margin-bottom:6px">
+                <span class="point-title">Installation ${esc(scenario.puissance)} :</span>
+                <span style="display:inline-block;background:#111827;color:#fff;padding:2px 8px;border-radius:999px;font-weight:700;margin-left:6px">${scenario.prix.toLocaleString('fr-FR')} € TTC</span>
+                <span style="color:#6b7280;font-size:.9em;margin-left:8px">(prix indicatif hors options)</span>
+              </div>
+              <div style="font-weight:700;color:#0b61d8;margin-bottom:4px">Option financement <span style="color:#6b7280;font-weight:600">(facultatif)</span></div>
+              <div>
+                <span style="display:inline-block;background:#111827;color:#fff;padding:2px 8px;border-radius:999px;font-weight:700">${mensualiteTxt}</span> par mois (hors assurance)
+                • Durée : <span style="display:inline-block;background:#111827;color:#fff;padding:2px 8px;border-radius:999px;font-weight:700">${dureeTxt}</span>
+                • TAEG fixe : <span style="display:inline-block;background:#111827;color:#fff;padding:2px 8px;border-radius:999px;font-weight:700">${taegTxt}</span>
+              </div>
+              <div style="margin-top:6px">Prix total : <span style="display:inline-block;background:#111827;color:#fff;padding:2px 8px;border-radius:999px;font-weight:700">${totalTxt}</span></div>
+              <div style="margin-top:6px;color:#374151">Financement proposé par notre partenaire Projexio, sous réserve d’acceptation.</div>
+            </div>
+            <div style="color:#6b7280;font-size:12px">⚠️ Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</div>
+            <div style="color:#6b7280;font-size:12px;margin-top:6px">L’estimation affichée est indicative. Une visite technique est nécessaire pour établir un devis ferme et adapté à votre situation.</div>
+          </div>
+        `;
 
-  <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:14px;padding:16px;text-align:center;margin:12px 0">
-    <div style="color:#92400e;font-weight:800;font-size:1.05rem;margin-bottom:6px">Offre spéciale “Groupage chantiers”</div>
-    <div style="display:flex;justify-content:center;align-items:center;gap:10px;font-size:1.2rem;font-weight:800;color:#1b1202;margin-bottom:2px">
-      <span style="display:inline-block;background:linear-gradient(180deg,var(--accent),var(--accent-2));color:#1b1202;padding:8px 14px;border-radius:999px;font-weight:900;box-shadow:0 6px 16px rgba(245,158,11,.25);">
-        ${Number.isFinite(scenario.remiseChantier) ? scenario.remiseChantier.toLocaleString('fr-FR') : "—"} €
-      </span>
-      <span>de remise immédiate</span>
-    </div>
-    <div style="font-size:.92rem;color:#374151;margin-bottom:6px">(à déduire du prix TTC affiché ci-dessous)</div>
-    <div style="font-size:.92rem;color:#6b7280">Offre valable jusqu’au <strong>30 septembre 2025</strong> — Places limitées</div>
-  </div>
-
-  <div style="background:#fff;border-left:4px solid var(--accent);border-radius:12px;padding:14px;margin-top:10px;color:#1f2937;border:1px solid var(--border)">
-    <div style="margin-bottom:10px;line-height:1.55">
-      <div style="margin-bottom:6px">
-        <span class="point-title">Installation ${esc(scenario.puissance)} :</span>
-        <span style="display:inline-block;background:#111827;color:#fff;padding:2px 8px;border-radius:999px;font-weight:700;margin-left:6px">${scenario.prix.toLocaleString('fr-FR')} € TTC</span>
-        <span style="color:#6b7280;font-size:.9em;margin-left:8px">(prix indicatif hors options)</span>
-      </div>
-      <div style="font-weight:700;color:#0b61d8;margin-bottom:4px">Option financement <span style="color:#6b7280;font-weight:600">(facultatif)</span></div>
-      <div>
-        <span style="display:inline-block;background:#111827;color:#fff;padding:2px 8px;border-radius:999px;font-weight:700">${mensualiteTxt}</span> par mois (hors assurance)
-        • Durée : <span style="display:inline-block;background:#111827;color:#fff;padding:2px 8px;border-radius:999px;font-weight:700">${dureeTxt}</span>
-        • TAEG fixe : <span style="display:inline-block;background:#111827;color:#fff;padding:2px 8px;border-radius:999px;font-weight:700">${taegTxt}</span>
-      </div>
-      <div style="margin-top:6px">Prix total : <span style="display:inline-block;background:#111827;color:#fff;padding:2px 8px;border-radius:999px;font-weight:700">${totalTxt}</span></div>
-      <div style="margin-top:6px;color:#374151">Financement proposé par notre partenaire Projexio, sous réserve d’acceptation.</div>
-    </div>
-    <div style="color:#6b7280;font-size:12px">⚠️ Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</div>
-    <div style="color:#6b7280;font-size:12px;margin-top:6px">L’estimation affichée est indicative. Une visite technique est nécessaire pour établir un devis ferme et adapté à votre situation.</div>
-  </div>
-`;
-
-const section = document.getElementById('lockedSection');
-section.style.display='block'; section.style.visibility='visible'; section.style.height='auto';
+        const section = document.getElementById('lockedSection');
+        section.style.display='block'; section.style.visibility='visible'; section.style.height='auto';
 
         /* Masquer les témoignages après simulation */
         hideAfterSimulationBlocks();
