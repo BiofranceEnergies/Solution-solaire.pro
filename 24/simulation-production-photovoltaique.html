@@ -25,41 +25,50 @@
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
 
-  <!-- Google tag (gtag.js) – Consent Mode V2 + init différée -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11242044118"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
+  <!-- Google tag (gtag.js) + Consent Mode V2 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11242044118"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
 
-    /* Consent par défaut (avant choix) */
-    gtag('consent', 'default', {
-      ad_storage: 'denied',
-      analytics_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
-      wait_for_update: 500
+  /* Consent par défaut (refusé) */
+  gtag('consent','default',{
+    ad_storage:'denied',
+    analytics_storage:'denied',
+    ad_user_data:'denied',
+    ad_personalization:'denied',
+    wait_for_update:500
+  });
+
+  /* Recommandations Google */
+  gtag('set','ads_data_redaction',true);
+  gtag('set','url_passthrough',true);
+
+  /* Initialisation immédiate (pings cookieless visibles par Google) */
+  gtag('js', new Date());
+  gtag('config','AW-11242044118');
+
+  /* Fonction à appeler après consentement */
+  window.__grantAdsConsent = function(){
+    gtag('consent','update',{
+      ad_storage:'granted',
+      analytics_storage:'granted',
+      ad_user_data:'granted',
+      ad_personalization:'granted'
     });
+  };
+</script>
 
-    /* Recommandations Google */
-    gtag('set', 'ads_data_redaction', true);
-    gtag('set', 'url_passthrough', true);
+<!-- Conversion Google Ads -->
+<script>
+  function gtag_report_conversion(){
+    try{
+      gtag('event','conversion',{ send_to:'AW-11242044118/MslOCKGZzo0bENb1z_Ap' });
+    }catch(e){}
+    return true;
+  }
+</script>
 
-    /* Init différée (après consentement) */
-    window.__initAds = function(){
-      gtag('js', new Date());
-      gtag('config', 'AW-11242044118'); /* Ajouter GA4 si besoin */
-    };
-  </script>
-
-  <!-- Conversion Google Ads -->
-  <script>
-    function gtag_report_conversion() {
-      try {
-        gtag('event', 'conversion', { send_to: 'AW-11242044118/MslOCKGZzo0bENb1z_Ap' });
-      } catch(e) {}
-      return true;
-    }
-  </script>
 
   <style>
     :root{
