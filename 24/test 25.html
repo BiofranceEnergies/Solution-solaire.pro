@@ -6,15 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO principal -->
-  <title>Simulation production photovoltaïque en Dordogne (24) | Gratuit & sans engagement</title>
-  <meta name="description" content="Lancez une simulation de production photovoltaïque en Dordogne (24). Estimation claire, gratuite et immédiate de votre projet solaire.">
-  <link rel="canonical" href="https://www.solution-solaire.pro/24/simulation-production-photovoltaique.html">
+  <title>Devis panneaux solaires en Dordogne (24) | Gratuit & sans engagement</title>
+  <meta name="description" content="Obtenez un devis panneaux solaires en Dordogne (24). Estimation gratuite, claire et immédiate de votre installation photovoltaïque.">
+  <link rel="canonical" href="https://www.solution-solaire.pro/24/devis-panneaux-solaires.html">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Simulation production photovoltaïque en Dordogne (24)">
-  <meta property="og:description" content="Obtenez immédiatement une simulation de production photovoltaïque en Dordogne (24). Estimation gratuite et sans engagement.">
+  <meta property="og:title" content="Devis panneaux solaires en Dordogne (24)">
+  <meta property="og:description" content="Recevez un devis clair et gratuit pour votre installation de panneaux solaires en Dordogne (24). Simulation immédiate et sans engagement.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.solution-solaire.pro/24/simulation-production-photovoltaique.html">
+  <meta property="og:url" content="https://www.solution-solaire.pro/24/devis-panneaux-solaires.html">
   <meta property="og:image" content="https://www.solution-solaire.pro/24/og-image-24.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -25,31 +25,40 @@
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
 
-  <!-- Google tag (gtag.js) – Consent Mode V2 + init différée -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11242044118"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
+ <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-11242044118"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
 
-    /* Consent par défaut (avant choix) */
-    gtag('consent', 'default', {
-      ad_storage: 'denied',
-      analytics_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
-      wait_for_update: 500
+  /* 1) Consent par défaut : refus */
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    analytics_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    wait_for_update: 500
+  });
+
+  /* 2) Recos Google */
+  gtag('set', 'ads_data_redaction', true);
+  gtag('set', 'url_passthrough', true);
+
+  /* 3) IMPORTANT : initialiser tout de suite (pings cookieless) */
+  gtag('js', new Date());
+  gtag('config', 'AW-11242044118');  // <-- ne pas attendre le consentement
+
+  /* 4) À l’acceptation : on met à jour le consent */
+  window.__grantAdsConsent = function(){
+    gtag('consent','update', {
+      ad_storage: 'granted',
+      analytics_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted'
     });
+  };
+</script>
 
-    /* Recommandations Google */
-    gtag('set', 'ads_data_redaction', true);
-    gtag('set', 'url_passthrough', true);
-
-    /* Init différée (après consentement) */
-    window.__initAds = function(){
-      gtag('js', new Date());
-      gtag('config', 'AW-11242044118'); /* Ajouter GA4 si besoin */
-    };
-  </script>
 
   <!-- Conversion Google Ads -->
   <script>
@@ -485,13 +494,13 @@
     </div>
 
     <!-- Accroche principale -->
-    <h1>Simulation <em>production photovoltaïque</em> en Dordogne (24)</h1>
+    <h1>Devis <em>panneaux solaires</em> en Dordogne (24)</h1>
     <p class="lead-sub" style="margin:6px auto 6px auto;max-width:760px;font-size:14px;line-height:1.45">
       Calculez votre production - vos panneaux - vos économies — Le chiffrage de votre installation - 100% en ligne.
     </p>
 
     <!-- H2 SEO visible -->
-     <h2 id="simulation">Lancez votre simulation de production photovoltaïque</h2>
+    <h2 id="devis">Obtenir un devis en 1 minute</h2>
 
     <!-- Formulaire -->
     <div class="card form-section" style="border:2px solid var(--accent);max-width:720px">
@@ -893,8 +902,7 @@ recapEl.style.display='block';
 recapEl.style.visibility='visible';
 recapEl.style.height='auto';
 
-
-       /* --------- PARTIE FLOUTÉE (KPI + détails + financement) --------- */
+        /* --------- PARTIE FLOUTÉE (KPI + détails + financement) --------- */
 const locked = document.getElementById('lockedContent');
 const pctCouverture = ((scenario.prod / conso) * 100).toFixed(2);
 
@@ -970,7 +978,6 @@ locked.innerHTML = `
 
 const section = document.getElementById('lockedSection');
 section.style.display='block'; section.style.visibility='visible'; section.style.height='auto';
-
 
         /* Masquer les témoignages après simulation */
         hideAfterSimulationBlocks();
