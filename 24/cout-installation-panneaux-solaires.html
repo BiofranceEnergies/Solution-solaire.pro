@@ -5,7 +5,7 @@
   <link rel="icon" href="data:,">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   <!-- SEO principal -->
+  <!-- SEO principal -->
   <title>Coût installation panneaux solaires en Dordogne (24) | Estimation immédiate</title>
   <meta name="description" content="Calculez le coût de votre installation de panneaux solaires en Dordogne (24). Estimation claire, gratuite et immédiate : puissance, panneaux, budget.">
   <link rel="canonical" href="https://www.solution-solaire.pro/24/cout-installation-panneaux-solaires.html">
@@ -17,7 +17,7 @@
   <meta property="og:url" content="https://www.solution-solaire.pro/24/cout-installation-panneaux-solaires.html">
   <meta property="og:image" content="https://www.solution-solaire.pro/24/og-image-24.jpg">
   <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image:height" content="630">   
 
   <!-- Préconnexions -->
   <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
@@ -25,49 +25,66 @@
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
 
-<!-- Google tag (gtag.js) + Consent Mode V2 -->
+ <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11242044118"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(){ dataLayer.push(arguments); }
 
-  /* Consent par défaut (refusé) */
-  gtag('consent','default',{
-    ad_storage:'denied',
-    analytics_storage:'denied',
-    ad_user_data:'denied',
-    ad_personalization:'denied',
-    wait_for_update:500
+  /* 1) Consent par défaut : refus */
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    analytics_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    wait_for_update: 500
   });
 
-  /* Recommandations Google */
-  gtag('set','ads_data_redaction',true);
-  gtag('set','url_passthrough',true);
+  /* 2) Recos Google */
+  gtag('set', 'ads_data_redaction', true);
+  gtag('set', 'url_passthrough', true);
 
-  /* Initialisation immédiate (pings cookieless visibles par Google) */
+  /* 3) IMPORTANT : initialiser tout de suite (pings cookieless) */
   gtag('js', new Date());
-  gtag('config','AW-11242044118');
+  gtag('config', 'AW-11242044118');  // <-- ne pas attendre le consentement
 
-  /* Fonction à appeler après consentement */
+  /* 4) À l’acceptation : on met à jour le consent */
   window.__grantAdsConsent = function(){
-    gtag('consent','update',{
-      ad_storage:'granted',
-      analytics_storage:'granted',
-      ad_user_data:'granted',
-      ad_personalization:'granted'
+    gtag('consent','update', {
+      ad_storage: 'granted',
+      analytics_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted'
     });
   };
 </script>
 
+
 <!-- Conversion Google Ads -->
 <script>
-  function gtag_report_conversion(){
-    try{
-      gtag('event','conversion',{ send_to:'AW-11242044118/MslOCKGZzo0bENb1z_Ap' });
-    }catch(e){}
+  function gtag_report_conversion() {
+    try {
+      gtag('event', 'conversion', { send_to: 'AW-11242044118/MslOCKGZzo0bENb1z_Ap' });
+    } catch(e) {}
     return true;
   }
 </script>
+<!-- ✅ Simulation lancée (PV) -->
+<script>
+  // Flag anti-doublon
+  window.__simConvSent = false;
+
+  function gtag_report_simulation() {
+    try {
+      gtag('event', 'conversion', {
+        send_to: 'AW-11242044118/TM3qCM3e1Z8bENbiz_Ap',
+        value: 1.0,
+        currency: 'EUR'
+      });
+    } catch (e) {}
+  }
+</script>
+
 
 
   <style>
@@ -902,9 +919,7 @@ recapEl.style.display='block';
 recapEl.style.visibility='visible';
 recapEl.style.height='auto';
 
-
-
-      /* --------- PARTIE FLOUTÉE (KPI + détails + financement) --------- */
+        /* --------- PARTIE FLOUTÉE (KPI + détails + financement) --------- */
 const locked = document.getElementById('lockedContent');
 const pctCouverture = ((scenario.prod / conso) * 100).toFixed(2);
 
@@ -981,6 +996,11 @@ locked.innerHTML = `
 const section = document.getElementById('lockedSection');
 section.style.display='block'; section.style.visibility='visible'; section.style.height='auto';
 
+// 🔔 Conversion Google Ads : Simulation lancée
+if (!window.__simConvSent) { 
+  gtag_report_simulation(); 
+  window.__simConvSent = true; 
+}
 
         /* Masquer les témoignages après simulation */
         hideAfterSimulationBlocks();
