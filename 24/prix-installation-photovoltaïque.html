@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO principal -->
-  <title>Prix installation photovoltaïque en Dordogne (24) | Gratuit & sans engagement</title>
+   <title>Prix installation photovoltaïque en Dordogne (24) | Gratuit & sans engagement</title>
   <meta name="description" content="Calculez le prix d'une installation photovoltaïque en Dordogne (24). Estimation claire, gratuite et immédiate de votre projet solaire.">
   <link rel="canonical" href="https://www.solution-solaire.pro/24/prix-installation-photovoltaique.html">
 
@@ -19,13 +19,14 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
+
   <!-- Préconnexions -->
   <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
   <link rel="dns-prefetch" href="//raw.githubusercontent.com">
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
 
-<!-- Google tag (gtag.js) -->
+ <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11242044118"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -896,7 +897,7 @@
         const totalTxt = Number.isFinite(scenario.total) ? scenario.total.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2}) + " €" : "—";
         const dureeTxt = Number.isFinite(scenario.dureeMois) ? scenario.dureeMois + " mois" : "—";
 
-        /* --------- RÉCAP (VISIBLE) --------- */
+/* --------- RÉCAP (VISIBLE) --------- */
 const recapEl = document.getElementById('recap');
 const libConso = (sourceConso === "reelle") ? "Conso annuelle (réelle)" : "Conso annuelle estimée";
 
@@ -918,7 +919,6 @@ recapEl.innerHTML = `
 recapEl.style.display='block';
 recapEl.style.visibility='visible';
 recapEl.style.height='auto';
-
 
         /* --------- PARTIE FLOUTÉE (KPI + détails + financement) --------- */
 const locked = document.getElementById('lockedContent');
@@ -997,6 +997,11 @@ locked.innerHTML = `
 const section = document.getElementById('lockedSection');
 section.style.display='block'; section.style.visibility='visible'; section.style.height='auto';
 
+// 🔔 Conversion Google Ads : Simulation lancée
+if (!window.__simConvSent) { 
+  gtag_report_simulation(); 
+  window.__simConvSent = true; 
+}
 
         /* Masquer les témoignages après simulation */
         hideAfterSimulationBlocks();
