@@ -25,49 +25,66 @@
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
   <link rel="dns-prefetch" href="//www.googletagmanager.com">
 
- <!-- Google tag (gtag.js) + Consent Mode V2 -->
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11242044118"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(){ dataLayer.push(arguments); }
 
-  /* Consent par défaut (refusé) */
-  gtag('consent','default',{
-    ad_storage:'denied',
-    analytics_storage:'denied',
-    ad_user_data:'denied',
-    ad_personalization:'denied',
-    wait_for_update:500
+  /* 1) Consent par défaut : refus */
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    analytics_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    wait_for_update: 500
   });
 
-  /* Recommandations Google */
-  gtag('set','ads_data_redaction',true);
-  gtag('set','url_passthrough',true);
+  /* 2) Recos Google */
+  gtag('set', 'ads_data_redaction', true);
+  gtag('set', 'url_passthrough', true);
 
-  /* Initialisation immédiate (pings cookieless visibles par Google) */
+  /* 3) IMPORTANT : initialiser tout de suite (pings cookieless) */
   gtag('js', new Date());
-  gtag('config','AW-11242044118');
+  gtag('config', 'AW-11242044118');  // <-- ne pas attendre le consentement
 
-  /* Fonction à appeler après consentement */
+  /* 4) À l’acceptation : on met à jour le consent */
   window.__grantAdsConsent = function(){
-    gtag('consent','update',{
-      ad_storage:'granted',
-      analytics_storage:'granted',
-      ad_user_data:'granted',
-      ad_personalization:'granted'
+    gtag('consent','update', {
+      ad_storage: 'granted',
+      analytics_storage: 'granted',
+      ad_user_data: 'granted',
+      ad_personalization: 'granted'
     });
   };
 </script>
 
+
 <!-- Conversion Google Ads -->
 <script>
-  function gtag_report_conversion(){
-    try{
-      gtag('event','conversion',{ send_to:'AW-11242044118/MslOCKGZzo0bENb1z_Ap' });
-    }catch(e){}
+  function gtag_report_conversion() {
+    try {
+      gtag('event', 'conversion', { send_to: 'AW-11242044118/MslOCKGZzo0bENb1z_Ap' });
+    } catch(e) {}
     return true;
   }
 </script>
+<!-- ✅ Simulation lancée (PV) -->
+<script>
+  // Flag anti-doublon
+  window.__simConvSent = false;
+
+  function gtag_report_simulation() {
+    try {
+      gtag('event', 'conversion', {
+        send_to: 'AW-11242044118/TM3qCM3e1Z8bENbiz_Ap',
+        value: 1.0,
+        currency: 'EUR'
+      });
+    } catch (e) {}
+  }
+</script>
+
 
 
   <style>
