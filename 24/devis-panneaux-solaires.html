@@ -60,15 +60,32 @@
 </script>
 
 
-  <!-- Conversion Google Ads -->
-  <script>
-    function gtag_report_conversion() {
-      try {
-        gtag('event', 'conversion', { send_to: 'AW-11242044118/MslOCKGZzo0bENb1z_Ap' });
-      } catch(e) {}
-      return true;
-    }
-  </script>
+<!-- Conversion Google Ads -->
+<script>
+  function gtag_report_conversion() {
+    try {
+      gtag('event', 'conversion', { send_to: 'AW-11242044118/MslOCKGZzo0bENb1z_Ap' });
+    } catch(e) {}
+    return true;
+  }
+</script>
+<!-- ✅ Simulation lancée (PV) -->
+<script>
+  // Flag anti-doublon
+  window.__simConvSent = false;
+
+  function gtag_report_simulation() {
+    try {
+      gtag('event', 'conversion', {
+        send_to: 'AW-11242044118/TM3qCM3e1Z8bENbiz_Ap',
+        value: 1.0,
+        currency: 'EUR'
+      });
+    } catch (e) {}
+  }
+</script>
+
+
 
   <style>
     :root{
@@ -978,6 +995,12 @@ locked.innerHTML = `
 
 const section = document.getElementById('lockedSection');
 section.style.display='block'; section.style.visibility='visible'; section.style.height='auto';
+
+// 🔔 Conversion Google Ads : Simulation lancée
+if (!window.__simConvSent) { 
+  gtag_report_simulation(); 
+  window.__simConvSent = true; 
+}
 
         /* Masquer les témoignages après simulation */
         hideAfterSimulationBlocks();
