@@ -6,18 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- SEO principal -->
-  <title>Coût installation panneaux solaires en Dordogne (24) | Estimation immédiate</title>
-  <meta name="description" content="Calculez le coût de votre installation de panneaux solaires en Dordogne (24). Estimation claire, gratuite et immédiate : puissance, panneaux, budget.">
-  <link rel="canonical" href="https://www.solution-solaire.pro/24/cout-installation-panneaux-solaires.html">
+  <title>Prix installation photovoltaïque en Dordogne (24) | Gratuit & sans engagement</title>
+  <meta name="description" content="Calculez le prix d'une installation photovoltaïque en Dordogne (24). Estimation claire, gratuite et immédiate de votre projet solaire.">
+  <link rel="canonical" href="https://www.solution-solaire.pro/24/prix-installation-photovoltaique.html">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Coût installation panneaux solaires en Dordogne (24)">
-  <meta property="og:description" content="Obtenez immédiatement le coût estimé de votre installation solaire en Dordogne : production, panneaux et budget.">
+   <!-- Open Graph -->
+  <meta property="og:title" content="Prix installation photovoltaïque en Dordogne (24)">
+  <meta property="og:description" content="Obtenez une estimation immédiate et gratuite du prix de votre installation photovoltaïque en Dordogne (24).">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.solution-solaire.pro/24/cout-installation-panneaux-solaires.html">
+  <meta property="og:url" content="https://www.solution-solaire.pro/24/prix-installation-photovoltaique.html">
   <meta property="og:image" content="https://www.solution-solaire.pro/24/og-image-24.jpg">
   <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">   
+  <meta property="og:image:height" content="630">
 
   <!-- Préconnexions -->
   <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
@@ -511,7 +512,7 @@
     </div>
 
     <!-- Accroche principale -->
-  <h1>Combien pouvez-vous <em>économiser</em> avec vos panneaux solaires en Dordogne (24) ?</h1>
+    <h1>Combien pouvez-vous <em>économiser</em> avec vos panneaux solaires en Dordogne (24) ?</h1>
 <p class="lead-sub">Simulation immédiate : combien de panneaux pour votre maison et <strong>1 000 à 1 500 € d’économies/an</strong> selon votre consommation.</p>
 
 <!-- H2 SEO visible -->
@@ -537,7 +538,6 @@
     </div>
   </form>
 </div>
-
     <!-- ============================== -->
     <!-- BLOC INFO - VERSION ALLÉGÉE  -->
     <!-- ============================== -->
@@ -600,7 +600,7 @@
       <div id="lockedContent" class="lockedContent"></div>
       <div class="veil" id="veil">
         <div class="pw-head" style="text-align:center">
-          <h2 class="pw-title" style="margin:0 0 15px 0;font-size:1.6rem;font-weight:900;line-height:1.3;color:#111827;text-align:center">
+        <h2 class="pw-title" style="margin:0 0 15px 0;font-size:1.6rem;font-weight:900;line-height:1.3;color:#111827;text-align:center">
   <span style="display:block;color:#111827">Vous avez vu vos panneaux et votre production…</span>
  <span style="color:#f97316;font-size:1.6rem;font-weight:900">💡 Et si on allait plus loin ?</span>
 
@@ -608,7 +608,7 @@
           <ul class="pw-sub" style="margin:12px auto;color:#374151;list-style:none;padding:0;max-width:600px;font-size:1rem;line-height:1.55">
             <li style="margin:6px 0"><strong style="color:#111827">Découvrez</strong> le coût précis de votre installation</li>
             <li style="margin:6px 0"><strong style="color:#111827">Voyez immédiatement</strong> vos économies et votre mensualité fixe</li>
-            <li style="margin:6px 0"><strong style="color:var(--accent-dark)">Profitez</strong> de 800 € de remise immédiate <span style="color:#d97706">(jusqu’au 30/09/2025)</span></li>
+            <li style="margin:6px 0"><strong style="color:var(--accent-dark)">Profitez</strong> de 800 € de remise immédiate <span style="color:#d97706">(jusqu’au 31/10/2025)</span></li>
           </ul>
         </div>
 
@@ -968,7 +968,7 @@ locked.innerHTML = `
       <span>de remise immédiate</span>
     </div>
     <div style="font-size:.92rem;color:#374151;margin-bottom:6px">(à déduire du prix TTC affiché ci-dessous)</div>
-    <div style="font-size:.92rem;color:#6b7280">Offre valable jusqu’au <strong>30 septembre 2025</strong> — Places limitées</div>
+    <div style="font-size:.92rem;color:#6b7280">Offre valable jusqu’au <strong>31 octobre 2025</strong> — Places limitées</div>
   </div>
 
   <div style="background:#fff;border-left:4px solid var(--accent);border-radius:12px;padding:14px;margin-top:10px;color:#1f2937;border:1px solid var(--border)">
@@ -1093,8 +1093,11 @@ if (!window.__simConvSent) {
         gain15ans += (factureAv - factureAp);
         prixActuel *= 1.05;
       }
+      // --- contenu HTML à réutiliser dans l'email auto ---
+        const recapHTML  = document.getElementById('recap')?.outerHTML || "";
+        const resultHTML = document.getElementById('lockedContent')?.outerHTML || "";
 
-      // Envoi lead identifié
+     // Envoi lead identifié
       const fd = new FormData();
       fd.append("code_postal", codePostal);
       fd.append("conso", Math.round(conso));
@@ -1115,6 +1118,10 @@ if (!window.__simConvSent) {
       fd.append("email", email); fd.append("tel", tel);
       fd.append("emailUser", email); fd.append("telephone", tel);
       fd.append("unlock", "1");
+      fd.append("sendEmail",  email ? "1" : "0");
+      fd.append("recapHTML",  recapHTML);
+      fd.append("resultHTML", resultHTML);
+
 
       fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec',{method:'POST',mode:'no-cors',body:fd});
 
