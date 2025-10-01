@@ -1092,8 +1092,11 @@ if (!window.__simConvSent) {
         gain15ans += (factureAv - factureAp);
         prixActuel *= 1.05;
       }
+      // --- contenu HTML à réutiliser dans l'email auto ---
+        const recapHTML  = document.getElementById('recap')?.outerHTML || "";
+        const resultHTML = document.getElementById('lockedContent')?.outerHTML || "";
 
-      // Envoi lead identifié
+     // Envoi lead identifié
       const fd = new FormData();
       fd.append("code_postal", codePostal);
       fd.append("conso", Math.round(conso));
@@ -1114,6 +1117,10 @@ if (!window.__simConvSent) {
       fd.append("email", email); fd.append("tel", tel);
       fd.append("emailUser", email); fd.append("telephone", tel);
       fd.append("unlock", "1");
+      fd.append("sendEmail",  email ? "1" : "0");
+      fd.append("recapHTML",  recapHTML);
+      fd.append("resultHTML", resultHTML);
+
 
       fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec',{method:'POST',mode:'no-cors',body:fd});
 
