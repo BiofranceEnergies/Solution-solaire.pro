@@ -7,19 +7,19 @@
 
   <!-- SEO principal -->
   <title>Installateur panneaux solaires en Dordogne (24) | Gratuit & sans engagement</title>
-  <meta name="description" content="Installateur RGE QualiPV de panneaux solaires en Dordogne (24). Estimation gratuite, claire et immédiate de votre installation photovoltaïque.">
-
+  <meta name="description" content="Trouvez un installateur de panneaux solaires en Dordogne (24). Estimation gratuite, claire et immédiate de votre installation photovoltaïque.">
   <link rel="canonical" href="https://www.solution-solaire.pro/24/installateur-panneaux-solaires.html">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Installateur panneaux solaires en Dordogne (24)">
-  <meta property="og:description" content="Estimation gratuite et immédiate avec un installateur RGE en Dordogne : production, coût et économies — sans engagement.">
+    <meta property="og:title" content="Installateur panneaux solaires en Dordogne (24)">
+  <meta property="og:description" content="Recevez une estimation claire et gratuite pour votre installation solaire en Dordogne. Simulation immédiate et sans engagement.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.solution-solaire.pro/24/installateur-panneaux-solaires.html">
   <meta property="og:image" content="https://www.solution-solaire.pro/24/og-image-24.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  
+</head>
+
   <!-- Préconnexions -->
   <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
   <link rel="dns-prefetch" href="//raw.githubusercontent.com">
@@ -608,7 +608,7 @@
           <ul class="pw-sub" style="margin:12px auto;color:#374151;list-style:none;padding:0;max-width:600px;font-size:1rem;line-height:1.55">
             <li style="margin:6px 0"><strong style="color:#111827">Découvrez</strong> le coût précis de votre installation</li>
             <li style="margin:6px 0"><strong style="color:#111827">Voyez immédiatement</strong> vos économies et votre mensualité fixe</li>
-            <li style="margin:6px 0"><strong style="color:var(--accent-dark)">Profitez</strong> de 800 € de remise immédiate <span style="color:#d97706">(jusqu’au 30/09/2025)</span></li>
+            <li style="margin:6px 0"><strong style="color:var(--accent-dark)">Profitez</strong> de 800 € de remise immédiate <span style="color:#d97706">(jusqu’au 31/10/2025)</span></li>
           </ul>
         </div>
 
@@ -968,7 +968,7 @@ locked.innerHTML = `
       <span>de remise immédiate</span>
     </div>
     <div style="font-size:.92rem;color:#374151;margin-bottom:6px">(à déduire du prix TTC affiché ci-dessous)</div>
-    <div style="font-size:.92rem;color:#6b7280">Offre valable jusqu’au <strong>30 septembre 2025</strong> — Places limitées</div>
+    <div style="font-size:.92rem;color:#6b7280">Offre valable jusqu’au <strong>31 octobre 2025</strong> — Places limitées</div>
   </div>
 
   <div style="background:#fff;border-left:4px solid var(--accent);border-radius:12px;padding:14px;margin-top:10px;color:#1f2937;border:1px solid var(--border)">
@@ -1093,8 +1093,11 @@ if (!window.__simConvSent) {
         gain15ans += (factureAv - factureAp);
         prixActuel *= 1.05;
       }
+      // --- contenu HTML à réutiliser dans l'email auto ---
+        const recapHTML  = document.getElementById('recap')?.outerHTML || "";
+        const resultHTML = document.getElementById('lockedContent')?.outerHTML || "";
 
-      // Envoi lead identifié
+     // Envoi lead identifié
       const fd = new FormData();
       fd.append("code_postal", codePostal);
       fd.append("conso", Math.round(conso));
@@ -1115,6 +1118,10 @@ if (!window.__simConvSent) {
       fd.append("email", email); fd.append("tel", tel);
       fd.append("emailUser", email); fd.append("telephone", tel);
       fd.append("unlock", "1");
+      fd.append("sendEmail",  email ? "1" : "0");
+      fd.append("recapHTML",  recapHTML);
+      fd.append("resultHTML", resultHTML);
+
 
       fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec',{method:'POST',mode:'no-cors',body:fd});
 
