@@ -1026,6 +1026,19 @@ if (!window.__simConvSent) {
         fd.append("email", ""); fd.append("tel", "");
         fd.append("emailUser", ""); fd.append("telephone", "");
         fd.append("unlock", "0");
+        // === Trace Ads / UTM ===
+const ads = (typeof __getAdsTrack === 'function') ? __getAdsTrack() : {};
+fd.append('utm_source',    ads.utm_source    || '');
+fd.append('utm_medium',    ads.utm_medium    || '');
+fd.append('utm_campaign',  ads.utm_campaign  || '');
+fd.append('utm_adgroup',   ads.utm_adgroup   || '');
+fd.append('utm_term',      ads.utm_term      || '');      // <-- MOT-CLÉ
+fd.append('utm_matchtype', ads.utm_matchtype || '');
+fd.append('utm_device',    ads.utm_device    || '');
+fd.append('gclid',         ads.gclid         || '');
+fd.append('gbraid',        ads.gbraid        || '');
+fd.append('wbraid',        ads.wbraid        || '');
+
         fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec', {method:'POST', mode:'no-cors', body:fd});
 
       } finally {
@@ -1120,6 +1133,19 @@ if (!window.__simConvSent) {
       fd.append("sendEmail",  email ? "1" : "0");
       fd.append("recapHTML",  recapHTML);
       fd.append("resultHTML", resultHTML);
+
+      // === Trace Ads / UTM ===
+const ads = (typeof __getAdsTrack === 'function') ? __getAdsTrack() : {};
+fd.append('utm_source',    ads.utm_source    || '');
+fd.append('utm_medium',    ads.utm_medium    || '');
+fd.append('utm_campaign',  ads.utm_campaign  || '');
+fd.append('utm_adgroup',   ads.utm_adgroup   || '');
+fd.append('utm_term',      ads.utm_term      || '');      // <-- MOT-CLÉ
+fd.append('utm_matchtype', ads.utm_matchtype || '');
+fd.append('utm_device',    ads.utm_device    || '');
+fd.append('gclid',         ads.gclid         || '');
+fd.append('gbraid',        ads.gbraid        || '');
+fd.append('wbraid',        ads.wbraid        || '');
 
 
       fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec',{method:'POST',mode:'no-cors',body:fd});
@@ -1485,6 +1511,42 @@ if (!window.__simConvSent) {
       };
     })();
   </script>
+<script>
+/* Capture & persistance des paramètres Ads (UTM, gclid...) */
+(function(){
+  const p = new URLSearchParams(location.search);
+  const track = {
+    utm_source:    p.get('utm_source')    || '',
+    utm_medium:    p.get('utm_medium')    || '',
+    utm_campaign:  p.get('utm_campaign')  || '',
+    utm_adgroup:   p.get('utm_adgroup')   || '',
+    utm_term:      p.get('utm_term')      || '',
+    utm_matchtype: p.get('utm_matchtype') || '',
+    utm_device:    p.get('utm_device')    || '',
+    gclid:         p.get('gclid')         || '',
+    gbraid:        p.get('gbraid')        || '',
+    wbraid:        p.get('wbraid')        || ''
+  };
 
+  const isAds = track.gclid || track.gbraid || track.wbraid ||
+                (track.utm_source==='google' && track.utm_medium==='cpc');
+  if (isAds) {
+    try { localStorage.setItem('ads_tracking_v1', JSON.stringify({ t: Date.now(), ...track })); } catch(e){}
+  }
+
+  // Helper global pour récupérer la dernière trace (<= 7 jours)
+  window.__getAdsTrack = function(){
+    try{
+      const raw = localStorage.getItem('ads_tracking_v1');
+      if (!raw) return track;
+      const obj = JSON.parse(raw);
+      if (Date.now() - (obj.t||0) > 7*24*60*60*1000) return track;
+      return obj;
+    }catch(e){ return track; }
+  };
+})();
+</script>
+
+  
 </body>
 </html>
