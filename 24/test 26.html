@@ -151,6 +151,31 @@
     .header-logos{display:flex;align-items:center;justify-content:center;gap:20px;margin:0 auto 12px;max-width:var(--content-w)}
     .logo-main{width:130px;height:auto;filter:drop-shadow(0 2px 8px rgba(0,0,0,.08))}
     .logo-side{width:70px;height:auto;opacity:.95}
+
+    /* Étoiles or avec remplissage partiel */
+.stars{
+  --rating: 4.7;              /* valeur par défaut (sera écrasée en inline) */
+  position: relative;
+  display: inline-block;
+  font-size: 18px;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+.stars::before{
+  content: "★★★★★";
+  color: #e5e7eb;             /* gris clair (fond) */
+}
+.stars::after{
+  content: "★★★★★";
+  position: absolute;
+  left: 0; top: 0;
+  width: calc(var(--rating) / 5 * 100%);
+  overflow: hidden;
+  white-space: nowrap;
+  color: #f59e0b;             /* or / accent */
+}
+
+    
   </style>
 </head>
 
@@ -247,10 +272,12 @@
     </div>
 
     <!-- Témoignages -->
-    <div class="card temoins content-card" id="bloc-temoins" data-hide-after-sim="1">
-      <h2>Ils l'ont testé</h2>
-      <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px;font-weight:700">
-        <span aria-hidden="true" style="color:#e5e7eb;font-size:18px;letter-spacing:1px">★★★★★</span>
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px;font-weight:700">
+  <span class="stars" style="--rating:4.7" aria-label="Note moyenne 4,7 sur 5"></span>
+  <span style="color:#111827;font-size:15px"><strong>4,7 / 5</strong> – Nos clients satisfaits</span>
+</div>
+
+
         <span style="color:#111827;font-size:15px"><strong>4,7 / 5</strong> – Nos clients satisfaits</span>
       </div>
       <div style="display:grid;gap:14px">
