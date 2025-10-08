@@ -10,6 +10,7 @@
   <meta name="description" content="Coût installation panneaux solaires en Dordogne (24) : estimation claire et immédiate, gratuite et sans engagement. Calculez votre coût et vos économies en 1 minute.">
   <link rel="canonical" href="https://www.solution-solaire.pro/24/cout-installation-panneaux-solaires.html">
 
+  <!-- Préconnexions -->
   <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
   <link rel="dns-prefetch" href="//raw.githubusercontent.com">
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
@@ -21,6 +22,7 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
 
+    /* Consent par défaut : refus */
     gtag('consent', 'default', {
       ad_storage: 'denied',
       analytics_storage: 'denied',
@@ -28,11 +30,16 @@
       ad_personalization: 'denied',
       wait_for_update: 500
     });
+
+    /* Recos Google */
     gtag('set', 'ads_data_redaction', true);
     gtag('set', 'url_passthrough', true);
+
+    /* Init */
     gtag('js', new Date());
     gtag('config', 'AW-11242044118');
 
+    /* Mise à jour au consentement */
     window.__grantAdsConsent = function(){
       gtag('consent','update', {
         ad_storage:'granted',
@@ -46,14 +53,17 @@
   <!-- Conversions Google Ads -->
   <script>
     function gtag_report_conversion() {
-      try { gtag('event','conversion',{send_to:'AW-11242044118/MslOCKGZzo0bENb1z_Ap'}); } catch(e) {}
+      try { gtag('event','conversion',{ send_to:'AW-11242044118/MslOCKGZzo0bENb1z_Ap' }); } catch(e){}
       return true;
     }
     window.__simConvSent = false;
     function gtag_report_simulation() {
       try {
-        gtag('event','conversion',{send_to:'AW-11242044118/TM3qCM3e1Z8bENbiz_Ap',value:1.0,currency:'EUR'});
-      } catch(e) {}
+        gtag('event','conversion',{
+          send_to:'AW-11242044118/TM3qCM3e1Z8bENbiz_Ap',
+          value:1.0,currency:'EUR'
+        });
+      } catch(e){}
     }
   </script>
 
@@ -77,7 +87,7 @@
     h1{font-size:clamp(28px,3vw,42px);font-weight:800;text-align:center;margin:6px 0 16px;color:#fff;line-height:1.2}
     h1 em{color:var(--accent);font-style:normal}
     h2{font-size:clamp(18px,2.2vw,22px);text-align:center;color:#fff;margin:0 0 10px;font-weight:800;text-shadow:0 1px 2px rgba(0,0,0,.35)}
-    /* Titres DANS cartes = noir (corrige “Votre estimation personnalisée” blanc) */
+    /* Titres DANS cartes = noir */
     .card h1,.card h2,.card h3{color:#111827 !important;text-shadow:none !important}
 
     .lead-sub{color:#fff;text-align:center;margin:8px auto 14px;max-width:760px;line-height:1.5;text-shadow:0 1px 2px rgba(0,0,0,.35)}
@@ -153,35 +163,15 @@
     .logo-side{width:70px;height:auto;opacity:.95}
 
     /* Étoiles or avec remplissage partiel */
-.stars{
-  --rating: 4.7;              /* valeur par défaut (sera écrasée en inline) */
-  position: relative;
-  display: inline-block;
-  font-size: 18px;
-  line-height: 1;
-  letter-spacing: 1px;
-}
-.stars::before{
-  content: "★★★★★";
-  color: #e5e7eb;             /* gris clair (fond) */
-}
-.stars::after{
-  content: "★★★★★";
-  position: absolute;
-  left: 0; top: 0;
-  width: calc(var(--rating) / 5 * 100%);
-  overflow: hidden;
-  white-space: nowrap;
-  color: #f59e0b;             /* or / accent */
-}
-
-    
+    .stars{ --rating:4.7; position:relative; display:inline-block; font-size:18px; line-height:1; letter-spacing:1px; }
+    .stars::before{ content:"★★★★★"; color:#e5e7eb; }
+    .stars::after{ content:"★★★★★"; position:absolute; left:0; top:0; width:calc(var(--rating) / 5 * 100%); overflow:hidden; white-space:nowrap; color:#f59e0b; }
   </style>
 </head>
 
 <body>
 
-  <!-- Consent Mode V2 (bandeau) -->
+  <!-- Consent Mode V2 – bandeau -->
   <div id="consent-banner" class="consent-banner" role="dialog" aria-live="polite" aria-label="Préférences de confidentialité" style="position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--border);color:#111827;padding:12px;z-index:9999;display:none;box-shadow:0 -6px 26px rgba(0,0,0,.12);font:14px/1.5 system-ui,Segoe UI,Roboto;min-height:56px">
     <div class="consent-inner" style="max-width:900px;margin:0 auto;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap">
       <div class="consent-text" style="flex:1 1 520px;font-size:14px;color:#374151">Nous utilisons des technologies pour la mesure et la publicité. Vous pouvez refuser.</div>
@@ -272,12 +262,10 @@
     </div>
 
     <!-- Témoignages -->
-    <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px;font-weight:700">
-  <span class="stars" style="--rating:4.7" aria-label="Note moyenne 4,7 sur 5"></span>
-  <span style="color:#111827;font-size:15px"><strong>4,7 / 5</strong> – Nos clients satisfaits</span>
-</div>
-
-
+    <div class="card temoins content-card" id="bloc-temoins" data-hide-after-sim="1">
+      <h2>Ils l'ont testé</h2>
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px;font-weight:700">
+        <span class="stars" style="--rating:4.7" aria-label="Note moyenne 4,7 sur 5"></span>
         <span style="color:#111827;font-size:15px"><strong>4,7 / 5</strong> – Nos clients satisfaits</span>
       </div>
       <div style="display:grid;gap:14px">
@@ -296,11 +284,11 @@
       </div>
     </div>
 
-    <!-- Récap -->
+    <!-- Récap (VISIBLE) -->
     <div id="recap" class="card recap content-card" style="display:none;visibility:hidden;height:0;overflow:hidden;"></div>
 
-    <!-- Section verrouillée -->
-    <div id="lockedSection" class="card content-card" style="display:none;visibility:hidden;height:0;overflow:hidden;border:5px solid var(--accent);border-radius:16px;padding:20px;">
+    <!-- SECTION VERROUILLÉE (floue) -->
+    <div id="lockedSection" class="card content-card" style="display:none;visibility:hidden;height:0;overflow:hidden; border:5px solid var(--accent); border-radius:16px; padding:20px;">
       <div id="lockedContent" class="lockedContent"></div>
       <div class="veil" id="veil">
         <h2 style="margin:0 0 15px">Vous avez vu vos panneaux et votre production…<br><span style="color:#f97316">💡 Et si on allait plus loin ?</span></h2>
@@ -533,7 +521,7 @@
         const totalTxt = Number.isFinite(scenario.total) ? scenario.total.toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2}) + " €" : "—";
         const dureeTxt = Number.isFinite(scenario.dureeMois) ? scenario.dureeMois + " mois" : "—";
 
-        /* Récap (dans carte → titres noirs grâce au CSS .card h2) */
+        /* Récap (dans carte) */
         const recapEl = document.getElementById('recap');
         const libConso = (sourceConso === "reelle") ? "Conso annuelle (réelle)" : "Conso annuelle estimée";
         recapEl.innerHTML = `
