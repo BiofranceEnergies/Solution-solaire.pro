@@ -336,6 +336,122 @@
       </div>
     </div>
 
+      <!-- FAQ -->
+<div class="card content-card" id="bloc-faq" data-hide-after-sim="1"
+     style="border:2px solid var(--accent);
+            background:#fffefb;
+            box-shadow:0 8px 22px rgba(245,158,11,.15);
+            margin-top:16px;
+            opacity:0;
+            transform:translateY(20px);
+            transition:opacity 0.6s ease, transform 0.6s ease;">
+  <h2 style="text-align:center;">Questions fréquentes</h2>
+
+  <div class="faq-item" style="margin-bottom:12px">
+    <h3 style="margin:0 0 6px">Qu’est-ce que l’autoconsommation solaire&nbsp;?</h3>
+    <p style="margin:0;color:#374151;line-height:1.55">
+      L’<strong>autoconsommation</strong>, c’est utiliser votre électricité solaire
+      <strong>en continu, à l’instant T</strong> (pendant que les panneaux produisent).
+      Ce que vous ne consommez pas tout de suite peut être <strong>stocké en batterie virtuelle</strong>
+      puis <strong>réinjecté pour vous</strong> le soir, la nuit ou en hiver. Résultat&nbsp;:
+      vous valorisez <strong>100&nbsp;% de votre production</strong> et réduisez fortement votre facture.
+    </p>
+  </div>
+
+  <div class="faq-item" style="margin-bottom:12px">
+    <h3 style="margin:0 0 6px">Combien coûte une installation pour une maison de 150&nbsp;m²&nbsp;?</h3>
+    <p style="margin:0;color:#374151;line-height:1.55">
+      On ne dimensionne pas sur la surface de la maison, mais sur la
+      <strong>consommation annuelle</strong> et la <strong>toiture</strong>.
+      À titre indicatif, beaucoup de foyers autour de 150&nbsp;m² consomment 8&nbsp;000–10&nbsp;000&nbsp;kWh/an,
+      ce qui donne un budget type de <strong>8&nbsp;000 à 12&nbsp;000&nbsp;€ TTC</strong>.
+      <br>👉 Lancez la simulation ci-dessous pour votre chiffrage précis.
+    </p>
+  </div>
+
+  <div class="faq-item" style="margin-bottom:12px">
+    <h3 style="margin:0 0 6px">Quelle puissance d’installation choisir&nbsp;?</h3>
+    <p style="margin:0;color:#374151;line-height:1.55">
+      La puissance se calcule en fonction de votre <strong>consommation annuelle</strong> et de votre
+      <strong>taux d’autoconsommation visé</strong>. En moyenne, une famille consomme environ
+      <strong>4&nbsp;000 à 5&nbsp;000&nbsp;kWh/an</strong>, soit une installation d’environ
+      <strong>4 à 5&nbsp;kWc (8 à 10 panneaux de 500&nbsp;W)</strong>.
+      Notre simulateur ajuste automatiquement la puissance idéale selon votre profil.
+    </p>
+  </div>
+
+  <div class="faq-item" style="margin-bottom:12px">
+    <h3 style="margin:0 0 6px">En combien de temps l’installation est-elle rentable&nbsp;?</h3>
+    <p style="margin:0;color:#374151;line-height:1.55">
+      En moyenne, une installation solaire est <strong>rentabilisée entre 7 et 9 ans</strong>,
+      selon votre région et votre consommation.
+      <br>Après cette période, vous profitez de <strong>15 à 20 ans d’électricité gratuite</strong>.
+      La batterie virtuelle accélère encore cette rentabilité en valorisant 100&nbsp;% de votre production.
+    </p>
+  </div>
+
+  <div class="faq-item" style="margin-bottom:12px">
+    <h3 style="margin:0 0 6px">Est-ce intéressant de vendre le surplus&nbsp;?</h3>
+    <p style="margin:0;color:#374151;line-height:1.55">
+      Aujourd’hui, le rachat du surplus est d’environ <strong>0,04&nbsp;€/kWh</strong>,
+      alors que votre électricité achetée coûte <strong>~0,25–0,30&nbsp;€/kWh</strong>.
+      Il est donc bien plus rentable de <strong>consommer votre production</strong>
+      (autoconsommation) que de la revendre.
+    </p>
+  </div>
+
+  <div class="faq-item" style="margin-bottom:12px">
+    <h3 style="margin:0 0 6px">La batterie virtuelle, c’est vraiment un plus&nbsp;?</h3>
+    <p style="margin:0;color:#374151;line-height:1.55">
+      Oui. Plutôt que revendre à 0,04&nbsp;€/kWh, votre surplus est
+      <strong>crédité</strong> et <strong>réutilisé</strong> plus tard (soir/nuit/hiver).
+      Vous maximisez ainsi l’autoconsommation et vos économies, sans matériel à poser chez vous.
+    </p>
+  </div>
+
+  <div class="faq-item">
+    <h3 style="margin:0 0 6px">Faut-il un entretien annuel&nbsp;?</h3>
+    <p style="margin:0;color:#374151;line-height:1.55">
+      Pas d’entretien lourd&nbsp;: un <strong>rinçage à l’eau claire</strong> 1–2 fois/an suffit
+      pour garder un bon rendement. Certains installateurs proposent un
+      <strong>contrat d’entretien (facultatif)</strong>, mais il n’est pas obligatoire.
+    </p>
+  </div>
+</div>
+
+<style>
+  /* Ombre légère au survol */
+  #bloc-faq:hover {
+    box-shadow: 0 10px 28px rgba(245,158,11,.25);
+  }
+
+  /* Apparition douce au scroll */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .faq-visible {
+    animation: fadeUp 0.7s ease forwards;
+  }
+</style>
+
+<script>
+  /* Animation d’apparition au chargement */
+  document.addEventListener("DOMContentLoaded", function(){
+    const faq = document.getElementById("bloc-faq");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          faq.classList.add("faq-visible");
+        }
+      });
+    }, { threshold: 0.3 });
+    observer.observe(faq);
+  });
+</script>
+<!-- /FAQ -->
+
    <!-- Mentions -->
 <div class="content-card">
   <div id="mentions-legales-container">
