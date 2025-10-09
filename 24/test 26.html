@@ -199,14 +199,19 @@
     </div>
 
     <!-- Accroche principale (sur overlay) -->
-    <h1>Coût <em>d’installation</em> panneaux solaires en Dordogne (24) – Calculez-le en 1 minute</h1>
-    <p class="lead-sub">Simulation immédiate : combien de panneaux pour votre maison et <strong>1 000 à 1 500 € d’économies/an</strong> selon votre consommation.</p>
+    <h1><em>Coût installation panneaux solaires</em> en Dordogne (24)</h1>
+  <p class="lead-sub">
+  Obtenez le <strong>coût installation panneaux solaires</strong> pour votre maison en 1 minute&nbsp;:
+  nombre de panneaux, production et économies estimées (≈ 1 000 à 1 500 €/an selon profil).
+</p>
 
-    <h2 id="devis">Obtenir votre estimation en 1 minute</h2>
+
+    <h2 style="margin-top:6px">Calculez votre coût précis en 1 minute</h2>
 
     <!-- Formulaire -->
     <div class="card form-section content-card" style="border:2px solid var(--accent)">
-      <h2>Vos économies en direct</h2>
+      <h2>Coût de votre installation & économies en direct</h2>
+
       <form onsubmit="calculerSimulation(); return false;" novalidate>
         <div class="inputs" style="margin-bottom:8px">
           <input type="text" id="codePostal" placeholder="Votre code postal (ex : 24300)" maxlength="5" inputmode="numeric" pattern="[0-9]{5}" autocomplete="postal-code" required>
@@ -218,7 +223,10 @@
         <a href="#" id="lienAvance" class="helper">➕ Vous connaissez votre consommation annuelle ? Cliquez ici pour une estimation ultra-précise</a>
         <div style="margin-top:6px;font-size:13px;color:#6b7280;text-align:center">Pas votre conso ? La facture suffit.</div>
         <div style="height:10px"></div>
-        <button id="simuler" type="submit" class="primary" aria-label="Voir mes économies">⚡ Voir mes économies maintenant</button>
+        <button id="simuler" type="submit" class="primary" aria-label="Calculer le coût installation panneaux solaires">
+⚡ Calculer mon coût maintenant
+</button>
+
       </form>
     </div>
 
@@ -326,6 +334,65 @@
       </div>
     </div>
 
+<!-- FAQ -->
+<div class="card content-card" id="bloc-faq" data-hide-after-sim="1">
+  <h2>Questions fréquentes</h2>
+
+  <div class="faq-item" style="margin-bottom:12px">
+    <h3 style="margin:0 0 6px">Qu’est-ce que l’autoconsommation solaire&nbsp;?</h3>
+    <p style="margin:0;color:#374151;line-height:1.55">
+      L’<strong>autoconsommation</strong>, c’est utiliser votre électricité solaire
+      <strong>en continu, à l’instant T</strong> (pendant que les panneaux produisent).
+      Ce que vous ne consommez pas tout de suite peut être <strong>stocké en batterie virtuelle</strong>
+      puis <strong>réinjecté pour vous</strong> le soir, la nuit ou en hiver. Résultat&nbsp;:
+      vous valorisez <strong>100&nbsp;% de votre production</strong> et réduisez fortement votre facture.
+    </p>
+  </div>
+
+  <div class="faq-item" style="margin-bottom:12px">
+    <h3 style="margin:0 0 6px">Combien coûte une installation pour une maison de 150&nbsp;m²&nbsp;?</h3>
+    <p style="margin:0;color:#374151;line-height:1.55">
+      On ne dimensionne pas sur la surface de la maison, mais sur la
+      <strong>consommation annuelle</strong> et la <strong>toiture</strong>.
+      À titre indicatif, beaucoup de foyers autour de 150&nbsp;m² consomment 8&nbsp;000–10&nbsp;000&nbsp;kWh/an,
+      ce qui donne un budget type de <strong>8&nbsp;000 à 12&nbsp;000&nbsp;€ TTC</strong>.
+      <br>👉 Lancez la simulation ci-dessous pour votre chiffrage précis.
+    </p>
+  </div>
+
+  <div class="faq-item" style="margin-bottom:12px">
+    <h3 style="margin:0 0 6px">Est-ce intéressant de vendre le surplus&nbsp;?</h3>
+    <p style="margin:0;color:#374151;line-height:1.55">
+      Aujourd’hui, le rachat du surplus est d’environ <strong>0,04&nbsp;€/kWh</strong>,
+      alors que votre électricité achetée coûte <strong>~0,25–0,30&nbsp;€/kWh</strong>.
+      Il est donc bien plus rentable de <strong>consommer votre production</strong>
+      (autoconsommation) que de la revendre.
+    </p>
+  </div>
+
+  <div class="faq-item" style="margin-bottom:12px">
+    <h3 style="margin:0 0 6px">La batterie virtuelle, c’est vraiment un plus&nbsp;?</h3>
+    <p style="margin:0;color:#374151;line-height:1.55">
+      Oui. Plutôt que revendre à 0,04&nbsp;€/kWh, votre surplus est
+      <strong>crédité</strong> et <strong>réutilisé</strong> plus tard (soir/nuit/hiver).
+      Vous maximisez ainsi l’autoconsommation et vos économies, sans matériel à poser chez vous.
+    </p>
+  </div>
+
+  <div class="faq-item">
+    <h3 style="margin:0 0 6px">Faut-il un entretien annuel&nbsp;?</h3>
+    <p style="margin:0;color:#374151;line-height:1.55">
+      Pas d’entretien lourd&nbsp;: un <strong>rinçage à l’eau claire</strong> 1–2 fois/an suffit
+      pour garder un bon rendement. Certains installateurs proposent un
+      <strong>contrat d’entretien (facultatif)</strong>, mais il n’est pas obligatoire.
+    </p>
+  </div>
+</div>
+<!-- /FAQ -->
+
+
+
+    
    <!-- Mentions -->
 <div class="content-card">
   <div id="mentions-legales-container">
