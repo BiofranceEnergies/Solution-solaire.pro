@@ -338,8 +338,10 @@
 <div class="card content-card" id="bloc-faq" data-hide-after-sim="1"
      style="border:2px solid var(--accent);
             background:#fffefb;
-            box-shadow:0 8px 22px rgba(245,158,11,.15);">
-  <h2>Questions fréquentes</h2>
+            box-shadow:0 8px 22px rgba(245,158,11,.15);
+            margin-top:16px;
+            transition:box-shadow .25s ease;">
+  <h2 style="text-align:center;">Questions fréquentes</h2>
 
   <div class="faq-item" style="margin-bottom:12px">
     <h3 style="margin:0 0 6px">Qu’est-ce que l’autoconsommation solaire&nbsp;?</h3>
@@ -391,7 +393,15 @@
     </p>
   </div>
 </div>
+
+<style>
+  /* Ombre légère au survol */
+  #bloc-faq:hover {
+    box-shadow: 0 10px 28px rgba(245,158,11,.25);
+  }
+</style>
 <!-- /FAQ -->
+
 
 
 
