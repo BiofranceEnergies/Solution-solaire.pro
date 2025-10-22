@@ -288,10 +288,25 @@
   background:#fff;border:1px solid var(--border);border-radius:16px;
   box-shadow:0 10px 24px rgba(2,6,23,.06); overflow:hidden;
 }
-.faq summary{
-  list-style:none; cursor:pointer; display:flex; align-items:center; gap:10px;
-  padding:18px 20px; font-weight:800; font-size:clamp(15px,1.9vw,17px);
+.faq summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 20px;
+  font-weight: 800;
+  font-size: clamp(15px, 1.9vw, 17px);
+  color: var(--ink);
+  transition: color .25s ease;
 }
+
+/* au survol et quand ouvert → orange */
+.faq summary:hover,
+details[open] summary {
+  color: var(--accent);
+}
+
 .faq summary::-webkit-details-marker{display:none;}
 
 .faq__chev{
