@@ -96,7 +96,17 @@
     color:#1b1202;font-weight:900;border:0;border-radius:6px;
     box-shadow:0 10px 26px rgba(245,158,11,.25);cursor:pointer;
   }
+/* ✅ Correction équilibre des champs du formulaire */
+.inputs input {
+  font-size: 15px;
+  padding: 10px 12px;
+}
 
+input::placeholder {
+  color: #9ca3af;
+  font-size: 15px;
+  opacity: 1;
+}
   /* ================== SECTION 3 ÉTAPES ================== */
   .steps-2025{background:#fff;padding:clamp(40px,7vw,80px) 16px;color:var(--ink);}
   .steps-2025__inner{max-width:var(--maxw);margin:0 auto;text-align:center;}
