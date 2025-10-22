@@ -125,10 +125,7 @@
     color:var(--ink);
     font-size:clamp(16px,2vw,20px);
   }
-  .steps-2025__check svg{
-    width:44px;height:44px;
-    stroke:var(--ok);fill:none;stroke-width:2.5;
-  }
+ 
 
   @media(max-width:860px){
     .hero__inner{grid-template-columns:1fr;text-align:center;align-items:flex-end;padding-bottom:80px;}
@@ -185,9 +182,15 @@
       <div class="steps-2025__note">
         <p>Rien de superflu. Juste les chiffres qui comptent.</p>
         <div class="steps-2025__check">
-          <svg viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="11"/>
-            <path d="M7 12.5l3.2 3.2L17 9" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg viewBox="0 0 24 24" width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="12" cy="12" r="11" fill="#22c55e"/>
+  <path d="M7 12.5l3.2 3.2L17 9"
+        fill="none"
+        stroke="#ffffff"
+        stroke-width="2.6"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
           </svg>
         </div>
       </div>
