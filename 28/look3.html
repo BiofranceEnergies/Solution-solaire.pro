@@ -130,10 +130,16 @@
   @media(max-width:860px){
     .hero__inner{grid-template-columns:1fr;text-align:center;align-items:flex-end;padding-bottom:80px;}
   }
-  /* ===== Chiffres clés – bande panneaux full black ===== */
+/* ===== Chiffres clés – bande panneaux full black ===== */
 .stats-bg{
-  --overlay-light: rgba(255,255,255,.26);  /* voile clair (éclaircissant) */
-  --overlay-grad: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.28));
+  /* Full-bleed : occupe toute la largeur de l’écran, quel que soit le parent */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+
+  /* Voile plus discret (moins clair) */
+  --overlay-light: rgba(255,255,255,.14);
+  --overlay-grad: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.18));
+
   position: relative;
   padding: clamp(36px, 7vw, 72px) 16px;
   color:#fff;
@@ -141,7 +147,7 @@
   isolation:isolate;
 }
 
-/* Calque image en pseudo-élément pour pouvoir filtrer & voiler */
+/* Calque image (éclairci très légèrement + saturation réduite) */
 .stats-bg::before{
   content:"";
   position:absolute; inset:0;
@@ -149,12 +155,11 @@
     var(--overlay-grad),
     url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/687b0f048a98e03f86e7852020887ff4f05eb913/bande%20panneaux%20full%20black.webp")
     center/cover no-repeat;
-  /* on “éclaircit” légèrement l’image et on la calme un peu */
-  filter: brightness(1.12) saturate(.9);
+  filter: brightness(1.08) saturate(.9);
   z-index:-1;
 }
 
-/* Voile blanc doux pour améliorer la lisibilité + effet “flou léger” */
+/* Voile clair doux pour la lisibilité (moins prononcé) */
 .stats-bg::after{
   content:"";
   position:absolute; inset:0;
@@ -197,6 +202,7 @@
   color: rgba(255,255,255,.92);
   text-shadow: 0 1px 4px rgba(0,0,0,.25);
 }
+
 
 /* accessibilité visuelle – cacher le titre sans le retirer des lecteurs d’écran */
 .sr-only{
