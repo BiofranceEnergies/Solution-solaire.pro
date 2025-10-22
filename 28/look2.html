@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Coût installation panneaux solaires | Eure-et-Loir (28)</title>
+<meta name="description" content="Estimez gratuitement le coût d’installation de panneaux solaires dans l’Eure-et-Loir (28), la production et vos économies en moins d’une minute.">
+
+<style>
+  :root{
+    /* Hero */
+    --hero-h-desktop: 95vh;   /* occupe ~plein écran desktop */
+    --hero-h-mobile: 100svh;  /* plein écran utile sur mobile */
+    --hero-min: 700px;
+
+    /* Palette / UI */
+    --accent:   #f59e0b;      /* orange principal */
+    --accent-2: #f7b733;      /* dégradé orange clair */
+    --ink:      #0f172a;      /* texte principal (bleu-noir) */
+    --muted:    #64748b;      /* texte secondaire */
+    --border:   #e5e7eb;      /* séparateurs discrets */
+    --ok:       #22c55e;      /* vert coche */
+    --card:     #ffffff;
+    --maxw:     1180px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial;
+    color:#fff;
+    background:#fff;
+  }
+
+  /* ================= HERO ================= */
+  header.hero{
+    position:relative;
+    height:var(--hero-h-desktop);
+    min-height:var(--hero-min);
+    overflow:hidden;
+    isolation:isolate; /* sépare le calque ::before */
+  }
+  /* Calque image + overlay (plus sombre à gauche) */
+  header.hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      linear-gradient(90deg,
+        rgba(5,12,24,.82) 0%,
+        rgba(7,16,30,.66) 34%,
+        rgba(10,18,28,.42) 62%,
+        rgba(12,20,28,.22) 100%
+      ),
+      url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp")
+      center 35% / cover no-repeat;
+    z-index:-1;
+    pointer-events:none;
+    transform:translateZ(0);
+  }
+
+  .hero__inner{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:60px clamp(16px,4vw,40px);
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:clamp(20px,4vw,42px);
+    height:100%;
+    align-items:center;
+  }
+
+  /* Colonne gauche : titre + lead */
+  .title{
+    margin:0 0 14px;
+    font-weight:900;
+    line-height:1.1;
+    font-size:clamp(28px,4.4vw,52px);
+    letter-spacing:.2px;
+  }
+  .title em{
+    color:var(--accent);
+    font-style:normal;
+    text-shadow:0 2px 10px rgba(245,158,11,0.3);
+  }
+  .lead{
+    margin:8px 0 0;
+    color:rgba(255,255,255,0.92);
+    max-width:54ch;
+  }
+
+  /* Colonne droite : formulaire épuré */
+  .panel{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    width:100%;
+  }
+  .pill{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:46px;
+    background:linear-gradient(180deg,var(--accent),var(--accent-2));
+    color:#1b1202;
+    font-weight:800;
+    border-radius:6px;
+    letter-spacing:.2px;
+    box-shadow:0 10px 26px rgba(245,158,11,.25);
+    text-align:center;
+    padding:10px 14px;
+  }
+  .row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  .rect,.option{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 14px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.22);
+    border-radius:6px;
+    backdrop-filter:saturate(120%) blur(0.5px);
+  }
+  .rect input,.option input{
+    width:100%;
+    background:transparent;
+    border:0;
+    color:#fff;
+    font:inherit;
+    outline:none;
+  }
+  .rect input::placeholder,.option input::placeholder{
+    color:rgba(255,255,255,.75);
+  }
+
+  .cta{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:48px;
+    width:100%;
+    background:linear-gradient(180deg,var(--accent),var(--accent-2));
+    color:#1b1202;
+    font-weight:900;
+    border:0;
+    border-radius:6px;
+    box-shadow:0 10px 26px rgba(245,158,11,.25);
+    cursor:pointer;
+    letter-spacing:.2px;
+  }
+
+  /* ================= SECTION ÉTAPES (style 2025) ================= */
+  main{display:block;background:#fff;color:var(--ink)}
+  .steps-2025{
+    background:#fff;
+    padding: clamp(40px, 7vw, 80px) 16px;
+  }
+  .steps-2025__inner{
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .steps-2025__title{
+    margin: 0 0 6px;
+    font-weight: 800;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    font-size: clamp(26px, 3.8vw, 44px);
+    text-align: center;
+  }
+  .steps-2025__subtitle{
+    margin: 0 auto clamp(28px, 5vw, 48px);
+    color: var(--muted);
+    text-align: center;
+    font-size: clamp(14px, 1.6vw, 18px);
+    max-width: 760px;
+  }
+  .steps-2025__grid{
+    display: grid;
+    gap: clamp(18px, 3vw, 28px);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 860px){
+    .steps-2025__grid{ grid-template-columns: repeat(3, 1fr); }
+  }
+  .steps-2025__item{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: clamp(18px, 3.2vw, 26px);
+    box-shadow: 0 10px 28px rgba(2,6,23,.06);
+    display: grid;
+    gap: 8px;
+  }
+  .steps-2025__num{
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    display: inline-grid; place-items: center;
+    font-weight: 800;
+    color: #fff;
+    background: linear-gradient(180deg, var(--accent), #fdba74);
+    box-shadow: 0 10px 24px rgba(245,158,11,.25);
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .steps-2025__heading{
+    margin: 0;
+    color: var(--ink);
+    font-weight: 800;
+    letter-spacing: -.01em;
+    font-size: clamp(18px, 2.2vw, 22px);
+  }
+  .steps-2025__text{
+    margin: 0;
+    color: var(--muted);
+    font-size: clamp(14px, 1.6vw, 16px);
+    line-height: 1.55;
+  }
+  .steps-2025__note{
+    margin: clamp(26px, 5vw, 42px) auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--ok);
+  }
+  .steps-2025__check{
+    display: inline-grid; place-items: center;
+    color: var(--ok);
+  }
+  .steps-2025__note-text{
+    color: var(--ink);
+    font-weight: 700;
+    font-size: clamp(14px, 1.6vw, 16px);
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    padding: 10px 14px;
+    border-radius: 12px;
+  }
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width:860px){
+    header.hero{
+      height:var(--hero-h-mobile);
+      min-height:560px;
+    }
+    .hero__inner{
+      grid-template-columns:1fr;
+      text-align:center;
+      align-items:flex-end;
+      padding-bottom:80px;
+    }
+  }
+</style>
+</head>
+
+<body>
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <div class="hero__inner">
+      <!-- Colonne gauche -->
+      <div>
+        <h1 class="title">
+          Coût installation<br>
+          panneaux solaires dans<br>
+          <em>l’Eure-et-Loir (28)</em>
+        </h1>
+        <p class="lead">
+          Estimez gratuitement le coût d’installation, la production et vos économies en moins d’une minute.
+        </p>
+      </div>
+
+      <!-- Colonne droite (formulaire épuré) -->
+      <div class="panel" role="form" aria-label="Simulation solaire">
+        <div class="pill">Coût de votre installation & économies en direct</div>
+
+        <div class="row">
+          <label class="rect" aria-label="Votre code postal">
+            <input type="text" placeholder="Votre code postal (ex : 28000)"
+                   inputmode="numeric" maxlength="5" autocomplete="postal-code">
+          </label>
+          <label class="rect" aria-label="Votre facture élec / an">
+            <input type="text" placeholder="Votre facture élec / an (ex : 1 800 €)"
+                   inputmode="decimal" autocomplete="off">
+          </label>
+        </div>
+
+        <label class="option" aria-label="Option pour un calcul plus précis — vos kWh/an">
+          <input type="text" placeholder="Option pour un calcul plus précis — vos kWh/an (facultatif)"
+                 inputmode="decimal" autocomplete="off">
+        </label>
+
+        <button class="cta" type="button">⚡ Calculer mon coût maintenant</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= SECTION ÉTAPES ================= -->
+  <main>
+    <section class="steps-2025" aria-labelledby="steps-title">
+      <div class="steps-2025__inner">
+        <h2 id="steps-title" class="steps-2025__title">Un simulateur qui va à l’essentiel</h2>
+        <p class="steps-2025__subtitle">Un processus simple et transparent en 3 étapes</p>
+
+        <div class="steps-2025__grid">
+          <!-- Étape 01 -->
+          <article class="steps-2025__item">
+            <span class="steps-2025__num">01</span>
+            <h3 class="steps-2025__heading">Étude personnalisée</h3>
+            <p class="steps-2025__text">
+              Votre étude personnalisée selon votre consommation.
+            </p>
+          </article>
+
+          <!-- Étape 02 -->
+          <article class="steps-2025__item">
+            <span class="steps-2025__num">02</span>
+            <h3 class="steps-2025__heading">Économies estimées</h3>
+            <p class="steps-2025__text">
+              Vos économies estimées dès la 1<sup>re</sup> année.
+            </p>
+          </article>
+
+          <!-- Étape 03 -->
+          <article class="steps-2025__item">
+            <span class="steps-2025__num">03</span>
+            <h3 class="steps-2025__heading">Coût précis & financement</h3>
+            <p class="steps-2025__text">
+              Le coût précis de l’installation et son financement.
+            </p>
+          </article>
+        </div>
+
+        <div class="steps-2025__note" role="note" aria-label="Note d’information">
+          <span class="steps-2025__check" aria-hidden="true">
+            <!-- Coche dans un cercle vert -->
+            <svg viewBox="0 0 24 24" width="28" height="28" focusable="false">
+              <circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="steps-2025__note-text">Rien de superflu. Juste les chiffres qui comptent.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
