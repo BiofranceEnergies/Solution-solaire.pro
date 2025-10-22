@@ -231,6 +231,43 @@
   /* CTA facultatif sous les avis (si besoin) */
   .testi__cta{margin-top:clamp(16px,3vw,24px);display:flex;justify-content:center;}
   .testi__cta .cta{width:auto;padding:0 18px;min-width:260px;}
+  /* ================== POURQUOI LE SOLAIRE ================== */
+.why{
+  background:#f7f9fc; /* fond clair respirant */
+  color:var(--ink);
+  padding:clamp(40px,7vw,90px) 16px;
+  margin-top:clamp(40px,6vw,80px);
+}
+.why__inner{max-width:var(--maxw);margin:0 auto;}
+.why__head{text-align:center;margin-bottom:clamp(22px,4vw,34px);}
+.why__title{
+  font-weight:900;line-height:1.1;
+  font-size:clamp(28px,4vw,48px);margin:0 0 10px;
+}
+.why__subtitle{color:var(--muted);font-size:clamp(14px,1.9vw,18px);}
+
+.why__grid{
+  display:grid;gap:clamp(14px,2.4vw,20px);
+  grid-template-columns:1fr;
+}
+@media (min-width:860px){ .why__grid{grid-template-columns:repeat(2,1fr);} }
+@media (min-width:1180px){ .why__grid{grid-template-columns:repeat(4,1fr);} }
+
+.why__card{
+  background:#fff;border:1px solid var(--border);border-radius:16px;
+  padding:clamp(18px,2.6vw,24px);
+  box-shadow:0 10px 24px rgba(2,6,23,.06);
+}
+.why__top{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.why__icon{
+  width:42px;height:42px;border-radius:12px;
+  display:grid;place-items:center;flex:0 0 auto;
+  background:linear-gradient(180deg,#fff3db,#ffe1b3);
+  border:1px solid #f4c981;color:#b45309; /* ton accent doux */
+}
+.why__heading{font-weight:800;font-size:clamp(16px,2vw,20px);margin:0;}
+.why__text{color:var(--muted);margin:6px 0 0;font-size:clamp(14px,1.7vw,16px);line-height:1.45;}
+
 </style>
 </head>
 
@@ -290,6 +327,65 @@
         </div>
       </div>
     </div>
+
+    <section class="why" aria-labelledby="why-title">
+  <div class="why__inner">
+    <header class="why__head">
+      <h2 id="why-title" class="why__title">Pourquoi passer à l’énergie solaire&nbsp;?</h2>
+      <p class="why__subtitle">Les bénéfices concrets d’une installation photovoltaïque chez vous</p>
+    </header>
+
+    <div class="why__grid">
+      <!-- Carte 1 -->
+      <article class="why__card">
+        <div class="why__top">
+          <div class="why__icon" aria-hidden="true">
+            <!-- icône tendance ↘ -->
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M4 7h2.9l5.2 6.2 3.2-3.4H20v2h-3.7l-3.2 3.4L6.9 9H4z"/></svg>
+          </div>
+          <h3 class="why__heading">Économies importantes</h3>
+        </div>
+        <p class="why__text">Baissez durablement votre facture d’électricité grâce à l’autoconsommation.</p>
+      </article>
+
+      <!-- Carte 2 -->
+      <article class="why__card">
+        <div class="why__top">
+          <div class="why__icon" aria-hidden="true">
+            <!-- icône feuille -->
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 3C6 3 3 9 3 13c0 4 3 8 9 8 6 0 9-4 9-8 0-6-3-10-9-10zm1.6 6.2c2.4 0 4.4 1.8 4.4 4.1 0 2.9-2.2 5.6-6 6.2-2.6.4-5.2-.9-5.2-3.3 0-3.6 3.8-7 6.8-7z"/></svg>
+          </div>
+          <h3 class="why__heading">Énergie propre</h3>
+        </div>
+        <p class="why__text">Produisez localement une énergie renouvelable et réduisez votre empreinte carbone.</p>
+      </article>
+
+      <!-- Carte 3 -->
+      <article class="why__card">
+        <div class="why__top">
+          <div class="why__icon" aria-hidden="true">
+            <!-- icône éclair -->
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M13 3L4 14h6l-1 7 9-11h-6l1-7z"/></svg>
+          </div>
+          <h3 class="why__heading">Performance actuelle</h3>
+        </div>
+        <p class="why__text">Panneaux de dernière génération, rendement élevé et suivi transparent de la production.</p>
+      </article>
+
+      <!-- Carte 4 -->
+      <article class="why__card">
+        <div class="why__top">
+          <div class="why__icon" aria-hidden="true">
+            <!-- icône bouclier -->
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2l8 3v6c0 5-3.5 9.7-8 11-4.5-1.3-8-6-8-11V5l8-3z"/></svg>
+          </div>
+          <h3 class="why__heading">Garantie et pérennité</h3>
+        </div>
+        <p class="why__text">Matériel garanti, installation durable et service après-vente local.</p>
+      </article>
+    </div>
+  </div>
+</section>
 
     <!-- CHIFFRES CLÉS – fond panneaux full black, style épuré -->
     <section class="stats-bg" aria-labelledby="stats-title">
