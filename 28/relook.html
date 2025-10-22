@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coût installation panneaux solaires – Eure-et-Loir (28)</title>
+  <meta name="description" content="Calculez le coût d’installation de panneaux solaires dans l’Eure-et-Loir (28) et estimez vos économies en 1 minute.">
+
+  <style>
+    :root{
+      /* Thème */
+      --text:#0f172a;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --border:#e5e7eb;
+      --accent:#f59e0b;
+      --accent-2:#fbbf24;
+
+      /* Overlay hero (plus sombre à gauche) */
+      --overlay-left: rgba(10, 16, 28, .72);
+      --overlay-mid:  rgba(10, 16, 28, .45);
+      --overlay-right:rgba(10, 16, 28, .18);
+
+      /* UI */
+      --radius:16px;
+      --shadow:0 18px 40px rgba(2,6,23,.18);
+      --content: 1120px;      /* largeur max du contenu dans le hero */
+      --card-w: 860px;        /* largeur max de la carte */
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      color:var(--text);
+      font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
+      background:#fff;
+    }
+
+    /* HERO plein écran */
+    .hero{
+      position:relative;
+      min-height: clamp(72vh, 78vh, 92vh);
+      display:grid;
+      place-items:center;
+      overflow:clip;
+      isolation:isolate;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:0; z-index:0;
+      background:
+        linear-gradient(90deg,
+          var(--overlay-left) 0%,
+          var(--overlay-mid) 45%,
+          var(--overlay-right) 100%
+        ),
+        url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp")
+        center 40% / cover no-repeat;
+    }
+
+    .hero-inner{
+      width:100%;
+      max-width:var(--content);
+      padding: clamp(16px, 3vw, 28px);
+      display:grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: clamp(18px, 3vw, 32px);
+      align-items:center;
+      z-index:1;
+    }
+    @media (max-width: 980px){
+      .hero-inner{ grid-template-columns: 1fr; gap: 18px; }
+    }
+
+    .hero-copy{
+      color:#eaf2ff;
+      text-shadow: 0 2px 14px rgba(0,0,0,.25);
+    }
+    .hero h1{
+      margin:0 0 10px;
+      font-weight:900;
+      line-height:1.12;
+      letter-spacing:.2px;
+      font-size: clamp(28px, 4.4vw, 52px);
+    }
+    .hero h1 span{
+      color: var(--accent);
+      text-shadow: 0 1px 8px rgba(245,158,11,.2);
+    }
+    .hero p{
+      margin: 6px 0 0;
+      max-width: 640px;
+      color: #dbe7ff;
+      font-size: clamp(15px, 1.6vw, 18px);
+      line-height:1.6;
+      opacity:.95;
+    }
+
+    /* Carte calcul – style “lovable classieux” */
+    .calc-card{
+      width:100%;
+      max-width: var(--card-w);
+      margin-left:auto;
+      margin-right:auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(16px, 2.6vw, 22px);
+      backdrop-filter: blur(2px);
+    }
+    .calc-title{
+      margin:4px 0 14px;
+      text-align:center;
+      font-weight: 900;
+      font-size: clamp(18px, 2.2vw, 22px);
+      color:#0f172a;
+      letter-spacing:.2px;
+    }
+
+    .calc-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 620px){ .calc-grid{ grid-template-columns:1fr; } }
+
+    .calc-input{
+      display:flex; align-items:center; gap:10px;
+      background:#fff;
+      border:1.5px solid var(--border);
+      border-radius:12px;
+      padding:12px 14px;
+      box-shadow: 0 3px 10px rgba(2,6,23,.04) inset;
+    }
+    .calc-input .icon{
+      flex:0 0 20px; width:20px; height:20px; display:grid; place-items:center;
+      font-size:16px; opacity:.75;
+    }
+    .calc-input input{
+      border:0; outline:0; background:transparent; width:100%;
+      font: 16px/1.2 inherit; color:#111827;
+    }
+    .calc-input input::placeholder{ color:#9aa4b2; }
+
+    .calc-helper{
+      display:inline-block; margin-top:8px;
+      font-size:14.5px; color:#0b61d8; text-decoration:underline;
+    }
+    .calc-note{
+      text-align:center; margin:10px 0 0;
+      color:#6b7280; font-size:13.5px;
+    }
+
+    .calc-btn{
+      margin-top: 12px;
+      width:100%;
+      border:0; cursor:pointer;
+      border-radius:999px;
+      padding:14px 16px;
+      font-weight:900; letter-spacing:.2px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+      color:#1b1202;
+      box-shadow: 0 12px 28px rgba(245,158,11,.25), 0 2px 0 rgba(0,0,0,.08) inset;
+      transition: transform .04s ease, filter .15s ease;
+    }
+    .calc-btn:hover{ filter:brightness(1.03) }
+    .calc-btn:active{ transform: translateY(1px) }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-inner">
+      <!-- Texte gauche -->
+      <div class="hero-copy">
+        <h1>
+          Coût installation panneaux solaires dans l’<span>Eure-et-Loir (28)</span>
+        </h1>
+        <p>
+          Estimez gratuitement le coût d’installation, la production et vos économies
+          en moins d’une minute.
+        </p>
+      </div>
+
+      <!-- Carte droite -->
+      <section class="calc-card" aria-labelledby="calc-titre">
+        <h2 id="calc-titre" class="calc-title">Coût de votre installation & économies en direct</h2>
+
+        <form onsubmit="simulerLovable(event)" novalidate>
+          <div class="calc-grid">
+            <label class="calc-input" for="cp">
+              <span class="icon">📍</span>
+              <input type="text" id="cp" placeholder="Votre code postal (ex : 28000)"
+                     maxlength="5" inputmode="numeric" pattern="[0-9]{5}" autocomplete="postal-code" required>
+            </label>
+
+            <label class="calc-input" for="facture">
+              <span class="icon">€</span>
+              <input type="text" id="facture" placeholder="Votre facture élec /an (ex : 1 800 €)" inputmode="decimal" required>
+            </label>
+          </div>
+
+          <a href="#" class="calc-helper" id="lien-precis">
+            ➕ Vous connaissez votre consommation annuelle ?
+          </a>
+
+          <label class="calc-input" id="bloc-conso" for="conso" style="display:none;margin-top:8px">
+            <span class="icon">⚡</span>
+            <input type="text" id="conso" placeholder="Conso annuelle (kWh, optionnel)" inputmode="decimal">
+          </label>
+
+          <p class="calc-note">Pas votre conso ? La facture suffit.</p>
+
+          <button type="submit" class="calc-btn">⚡ Calculer mon coût maintenant</button>
+        </form>
+      </section>
+    </div>
+  </header>
+
+  <script>
+    // Afficher/cacher la conso précise
+    (function(){
+      const lien = document.getElementById('lien-precis');
+      const bloc = document.getElementById('bloc-conso');
+      if(lien && bloc){
+        lien.addEventListener('click', function(e){
+          e.preventDefault();
+          const show = bloc.style.display === 'none' || !bloc.style.display;
+          bloc.style.display = show ? 'flex' : 'none';
+          if(show) document.getElementById('conso')?.focus();
+        });
+      }
+    })();
+
+    // Bouchon de soumission (à relier à ton calculateur)
+    function simulerLovable(e){
+      e.preventDefault();
+      const cp = document.getElementById('cp')?.value.trim();
+      const facture = document.getElementById('facture')?.value.trim();
+      const conso = document.getElementById('conso')?.value.trim();
+      console.log({cp, facture, conso}); // branchement futur
+      alert("Simulation en place 🧪 (branche ton calculateur ici).");
+    }
+  </script>
+</body>
+</html>
