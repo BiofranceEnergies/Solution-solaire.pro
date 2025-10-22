@@ -3,40 +3,47 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LP – Hero seul</title>
-  <meta name="robots" content="noindex,nofollow,noarchive" />
-
+  <title>LP – Hero seul (recul)</title>
   <style>
-    /* Page blanche, zéro contrainte globale */
-    html, body { margin: 0; padding: 0; background: #fff; }
-    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin:0; padding:0; background:#fff; }
+    *,*::before,*::after{ box-sizing:border-box; }
 
-    /* ---------- HERO IMAGE SEULE ---------- */
-    .hero {
-      position: relative;
-      width: 100%;                 /* pleine largeur */
-      min-height: clamp(360px, 55vh, 720px); /* hauteur adaptative */
+    /* -- Réglages rapides du cadrage -- */
+    :root{
+      /* ratio plus “plat” => plus de recul */
+      --hero-aspect: 16/6;    /* ~37.5% de la largeur en hauteur */
+      --hero-min: 320px;      /* garde une bonne hauteur mini */
+      --hero-max: 560px;      /* évite un hero trop haut sur grands écrans */
+      /* décentrage léger vers le haut pour voir davantage la maison */
+      --hero-pos-y: 28%;      /* 0%=haut, 50%=centre */
+    }
+
+    .hero{
+      width:100%;
+      aspect-ratio: var(--hero-aspect);
+      min-height: var(--hero-min);
+      max-height: var(--hero-max);
       background:
         url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp")
-        center 40% / cover no-repeat;
-      /* aucun overlay, aucun dégradé */
+        center var(--hero-pos-y) / cover no-repeat;
     }
 
-    /* Optionnel : assurer une hauteur correcte sur très petits écrans paysage */
-    @media (max-height: 420px) and (orientation: landscape) {
-      .hero { min-height: 320px; }
+    /* Sur petits écrans, on remonte un peu et on assure une hauteur mini lisible */
+    @media (max-width: 640px){
+      :root{ --hero-aspect: 16/8; --hero-pos-y: 35%; --hero-min: 260px; }
     }
-    /* Le reste de la page reste vide/blanc */
-    .page { padding: 0; }
+
+    main{ padding:0; }
   </style>
 </head>
 <body>
 
-  <!-- Image de tête seule -->
+  <!-- Image seule, plus de recul -->
   <header class="hero" aria-hidden="true"></header>
 
-  <!-- Zone vide pour la suite (blanche) -->
-  <main class="page"></main>
+  <!-- Page vide pour la suite -->
+  <main></main>
 
 </body>
 </html>
+
