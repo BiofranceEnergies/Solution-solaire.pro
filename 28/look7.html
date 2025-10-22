@@ -268,6 +268,43 @@
 .why__heading{font-weight:800;font-size:clamp(16px,2vw,20px);margin:0;}
 .why__text{color:var(--muted);margin:6px 0 0;font-size:clamp(14px,1.7vw,16px);line-height:1.45;}
 
+
+  /* ================== FAQ (accordéon 2025) ================== */
+.faq{
+  background:#f7f9fc; color:var(--ink);
+  margin-top:clamp(56px,8vw,96px);
+  padding:clamp(32px,7vw,80px) 16px;
+}
+.faq__inner{max-width:var(--maxw);margin:0 auto;}
+.faq__head{text-align:center;margin-bottom:clamp(18px,3.6vw,28px);}
+.faq__title{font-weight:900;font-size:clamp(28px,4vw,48px);margin:0 0 8px;line-height:1.1;}
+.faq__subtitle{color:var(--muted);font-size:clamp(14px,1.9vw,18px);}
+
+.faq__list{
+  display:grid;gap:12px;
+}
+
+.faq details{
+  background:#fff;border:1px solid var(--border);border-radius:16px;
+  box-shadow:0 10px 24px rgba(2,6,23,.06); overflow:hidden;
+}
+.faq summary{
+  list-style:none; cursor:pointer; display:flex; align-items:center; gap:10px;
+  padding:18px 20px; font-weight:800; font-size:clamp(15px,1.9vw,17px);
+}
+.faq summary::-webkit-details-marker{display:none;}
+
+.faq__chev{
+  margin-left:auto; transition:transform .2s ease; flex:0 0 auto; opacity:.7;
+}
+details[open] .faq__chev{ transform:rotate(180deg); opacity:1; }
+
+.faq__panel{
+  padding:0 20px 18px 20px; color:var(--muted); font-size:clamp(14px,1.8vw,16px); line-height:1.55;
+  border-top:1px solid var(--border); background:#fbfbfd;
+}
+
+
 </style>
 </head>
 
@@ -499,3 +536,136 @@
     </div>
   </div>
 </section>
+<section class="faq" aria-labelledby="faq-title">
+  <div class="faq__inner">
+    <header class="faq__head">
+      <h2 id="faq-title" class="faq__title">Questions fréquentes</h2>
+      <p class="faq__subtitle">Tout ce qu’il faut savoir avant de passer à l’énergie solaire</p>
+    </header>
+
+    <div class="faq__list faq">
+      <!-- Q1 -->
+      <details>
+        <summary>
+          Comment est calculée mon estimation ?
+          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </summary>
+        <div class="faq__panel">
+          Elle s’appuie sur votre consommation annuelle (ou facture), un prix du kWh indicatif, l’ensoleillement local et
+          un scénario technique standard. Les résultats restent des ordres de grandeur.
+        </div>
+      </details>
+
+      <!-- Q2 -->
+      <details>
+        <summary>
+          Combien de panneaux pour mon cas ?
+          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </summary>
+        <div class="faq__panel">
+          Cela dépend de votre conso, de l’espace disponible, de l’orientation/inclinaison et des ombres. Le simulateur propose une fourchette dimensionnée.
+        </div>
+      </details>
+
+      <!-- Q3 -->
+      <details>
+        <summary>
+          Quelles économies puis-je espérer ?
+          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </summary>
+        <div class="faq__panel">
+          Elles varient selon votre profil et votre taux d’autoconsommation. Nous affichons un ordre de grandeur la 1<sup>re</sup> année et une projection à 15 ans, sans promesse fixe.
+        </div>
+      </details>
+
+      <!-- Q4 -->
+      <details>
+        <summary>
+          Revente d’électricité&nbsp;: est-ce intéressant ?
+          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </summary>
+        <div class="faq__panel">
+          Aujourd’hui, l’autoconsommation reste le levier principal. La revente à prix de marché est faible&nbsp;(~centimes/kWh). Nous dimensionnons d’abord pour consommer sur place.
+        </div>
+      </details>
+
+      <!-- Q5 -->
+      <details>
+        <summary>
+          Quelles contraintes pour ma toiture ?
+          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </summary>
+        <div class="faq__panel">
+          Toiture saine et étanche, absence d’amiante, charge admissible OK. Orientation sud idéale, est/ouest acceptable. Les ombres proches sont à éviter.
+        </div>
+      </details>
+
+      <!-- Q6 -->
+      <details>
+        <summary>
+          Combien de temps dure l’installation ?
+          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </summary>
+        <div class="faq__panel">
+          La pose standard prend 1 à 2 jours. Les démarches (Enedis, Consuel, administratif) suivent un calendrier séparé.
+        </div>
+      </details>
+
+      <!-- Q7 -->
+      <details>
+        <summary>
+          Garanties et entretien ?
+          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </summary>
+        <div class="faq__panel">
+          Garanties fabricant 25–30 ans selon les modèles (puissance dégressive). Peu d’entretien&nbsp;: contrôle visuel et rinçage ponctuel si dépôts.
+        </div>
+      </details>
+
+      <!-- Q8 -->
+      <details>
+        <summary>
+          Aides financières et financement ?
+          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </summary>
+        <div class="faq__panel">
+          Nous privilégions la transparence&nbsp;: coût posé noir sur blanc, sans artifices. Des mensualités sont possibles. Les aides évoluent&nbsp;: nous précisons ce qui est éligible lors de l’étude.
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('click', (e)=>{
+  if(e.target.closest('summary')){
+    const d = e.target.closest('details');
+    if(!d) return;
+    const group = d.parentElement;
+    // Ferme les autres items du même groupe
+    group.querySelectorAll('details[open]').forEach(x => { if(x!==d) x.removeAttribute('open'); });
+  }
+});
+</script>
+  
+</body>
+</html>
+
+
+  
