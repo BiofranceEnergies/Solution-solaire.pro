@@ -1,241 +1,42 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="robots" content="noindex,nofollow,noarchive">
-
-  <title>Coût installation panneaux solaires | Estimation rapide & gratuite</title>
-  <meta name="description" content="Simulez le coût et les économies de votre installation solaire en 1 minute. Estimation claire et immédiate, sans engagement.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LP – Hero seul</title>
+  <meta name="robots" content="noindex,nofollow,noarchive" />
 
   <style>
-    :root {
-      --accent: #f59e0b;
-      --accent-2: #fbbf24;
-      --accent-dark: #d97706;
-      --text: #111827;
-      --muted: #6b7280;
-      --bg: #ffffff;
-      --border: #e5e7eb;
-      --radius: 14px;
-      --shadow: 0 10px 28px rgba(0,0,0,.08);
-      --content-w: 720px;
+    /* Page blanche, zéro contrainte globale */
+    html, body { margin: 0; padding: 0; background: #fff; }
+    *, *::before, *::after { box-sizing: border-box; }
+
+    /* ---------- HERO IMAGE SEULE ---------- */
+    .hero {
+      position: relative;
+      width: 100%;                 /* pleine largeur */
+      min-height: clamp(360px, 55vh, 720px); /* hauteur adaptative */
+      background:
+        url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp")
+        center 40% / cover no-repeat;
+      /* aucun overlay, aucun dégradé */
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      color: var(--text);
-      background: var(--bg);
+    /* Optionnel : assurer une hauteur correcte sur très petits écrans paysage */
+    @media (max-height: 420px) and (orientation: landscape) {
+      .hero { min-height: 320px; }
     }
-
-  /* --- HERO --- */
-.hero {
-  position: relative;
-  width: 100vw;                /* occupe toute la largeur de la fenêtre */
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;          /* annule le centrage du conteneur parent */
-  margin-right: -50vw;
-  background: url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp")
-              center 40% / cover no-repeat;
-  color: #fff;
-  padding: 100px 20px 130px;
-  text-align: center;
-  overflow: hidden;
-}
-
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(17,24,39,.65), rgba(31,41,55,.55) 45%, rgba(55,65,81,.4) 100%);
-  z-index: 0;
-}
-
-.hero-inner {
-  position: relative;
-  z-index: 1;
-  max-width: var(--content-w);
-  margin: 0 auto;
-}
-
-
-    .hero h1 {
-      font-size: clamp(28px, 3vw, 42px);
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 12px;
-    }
-
-    .hero h1 em {
-      color: var(--accent);
-      font-style: normal;
-    }
-
-    .hero p {
-      font-size: 17px;
-      line-height: 1.6;
-      margin-bottom: 20px;
-      color: #f3f4f6;
-    }
-
-    /* --- SECTION --- */
-    section {
-      max-width: var(--content-w);
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-
-    /* --- FORMULAIRE --- */
-    .card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 24px;
-      margin-bottom: 24px;
-    }
-
-    .card h2 {
-      font-size: 22px;
-      margin-bottom: 12px;
-      font-weight: 800;
-      color: var(--text);
-    }
-
-    form {
-      display: grid;
-      gap: 12px;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 12px;
-      border: 1.5px solid var(--border);
-      font-size: 16px;
-    }
-
-    button.primary {
-      background: linear-gradient(180deg, var(--accent), var(--accent-2));
-      color: #1b1202;
-      border: none;
-      padding: 14px 18px;
-      font-size: 17px;
-      font-weight: 800;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: filter .2s;
-      box-shadow: 0 6px 20px rgba(245,158,11,.25);
-    }
-
-    button.primary:hover { filter: brightness(1.05); }
-
-    /* --- TÉMOIGNAGES --- */
-    .testimonials h2 { text-align: center; }
-    .testimonials .grid {
-      display: grid;
-      gap: 16px;
-      margin-top: 20px;
-    }
-
-    .testimonial {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--accent);
-      border-radius: 12px;
-      padding: 16px;
-      box-shadow: var(--shadow);
-    }
-
-    .testimonial cite {
-      display: block;
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    /* --- FAQ --- */
-    .faq h2 { text-align: center; margin-bottom: 20px; }
-    .faq-item + .faq-item { margin-top: 16px; }
-    .faq-item h3 {
-      font-size: 17px;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-    .faq-item p {
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    /* --- FOOTER --- */
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: var(--muted);
-      font-size: 14px;
-      border-top: 1px solid var(--border);
-    }
+    /* Le reste de la page reste vide/blanc */
+    .page { padding: 0; }
   </style>
 </head>
-
 <body>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <h1><em>Coût installation panneaux solaires</em> dans votre région</h1>
-      <p>Estimez gratuitement votre projet solaire : nombre de panneaux, production et économies en 1 minute.</p>
-    </div>
-  </section>
+  <!-- Image de tête seule -->
+  <header class="hero" aria-hidden="true"></header>
 
-  <!-- FORMULAIRE -->
-  <section id="lead-form">
-    <div class="card">
-      <h2>Calculez votre coût précis</h2>
-      <form onsubmit="calculerSimulation(); return false;">
-        <input type="text" id="codePostal" placeholder="Votre code postal (ex : 27000)" required>
-        <input type="text" id="facture" placeholder="Votre facture élec /an (ex : 1800 €)" required>
-        <button id="simuler" type="submit" class="primary">⚡ Calculer mon coût maintenant</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- TÉMOIGNAGES -->
-  <section class="testimonials">
-    <h2>Ils l'ont testé</h2>
-    <div class="grid">
-      <div class="testimonial">
-        <blockquote>“Simulation claire et rapide. Résultat immédiat, très utile avant de se décider.”</blockquote>
-        <cite>— Alain T., Évreux</cite>
-      </div>
-      <div class="testimonial">
-        <blockquote>“Bonne estimation, sans démarchage agressif. Je recommande.”</blockquote>
-        <cite>— Martine R., Vernon</cite>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="faq">
-    <h2>Questions fréquentes</h2>
-    <div class="faq-item">
-      <h3>Combien de temps faut-il pour rentabiliser une installation ?</h3>
-      <p>En moyenne entre 7 et 9 ans, selon la région et la consommation. Après cette période, vous profitez de 15 à 20 ans d’électricité gratuite.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Que devient le surplus d’électricité produit ?</h3>
-      <p>Il est soit réinjecté dans le réseau (rachat à 0,04 €/kWh), soit stocké virtuellement pour votre usage ultérieur.</p>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    Solution Solaire Pro © 2025 — Estimation gratuite et sans engagement.
-  </footer>
+  <!-- Zone vide pour la suite (blanche) -->
+  <main class="page"></main>
 
 </body>
 </html>
