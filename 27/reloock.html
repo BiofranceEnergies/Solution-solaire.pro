@@ -198,64 +198,70 @@ body {
 
 <body>
 
-  <!-- Consent Mode V2 – bandeau -->
-  <div id="consent-banner" class="consent-banner" role="dialog" aria-live="polite" aria-label="Préférences de confidentialité" style="position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--border);color:#111827;padding:12px;z-index:9999;display:none;box-shadow:0 -6px 26px rgba(0,0,0,.12);font:14px/1.5 system-ui,Segoe UI,Roboto;min-height:56px">
-    <div class="consent-inner" style="max-width:900px;margin:0 auto;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap">
-      <div class="consent-text" style="flex:1 1 520px;font-size:14px;color:#374151">Nous utilisons des technologies pour la mesure et la publicité. Vous pouvez refuser.</div>
-      <div class="consent-buttons" style="display:flex;gap:10px">
-        <button id="consent-reject" type="button" style="padding:8px 16px;border-radius:999px;font-weight:700;cursor:pointer;border:none;font-size:14px;background:#111827;color:#fff">Tout refuser</button>
-        <button id="consent-accept" type="button" style="padding:8px 16px;border-radius:999px;font-weight:700;cursor:pointer;border:none;font-size:14px;background:linear-gradient(180deg,var(--accent),var(--accent-2));color:#1b1202">Tout accepter</button>
-      </div>
+ <!-- Consent Mode V2 – bandeau -->
+<div id="consent-banner" class="consent-banner" role="dialog" aria-live="polite" aria-label="Préférences de confidentialité" style="position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--border);color:#111827;padding:12px;z-index:9999;display:none;box-shadow:0 -6px 26px rgba(0,0,0,.12);font:14px/1.5 system-ui,Segoe UI,Roboto;min-height:56px">
+  <div class="consent-inner" style="max-width:900px;margin:0 auto;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+    <div class="consent-text" style="flex:1 1 520px;font-size:14px;color:#374151">Nous utilisons des technologies pour la mesure et la publicité. Vous pouvez refuser.</div>
+    <div class="consent-buttons" style="display:flex;gap:10px">
+      <button id="consent-reject" type="button" style="padding:8px 16px;border-radius:999px;font-weight:700;cursor:pointer;border:none;font-size:14px;background:#111827;color:#fff">Tout refuser</button>
+      <button id="consent-accept" type="button" style="padding:8px 16px;border-radius:999px;font-weight:700;cursor:pointer;border:none;font-size:14px;background:linear-gradient(180deg,var(--accent),var(--accent-2));color:#1b1202">Tout accepter</button>
     </div>
   </div>
+</div>
+
+<!-- HERO avec fond image limité -->
 <div class="wrap hero-bg">
 
-    <!-- Header logos -->
-    <div class="header-logos">
-      <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/4064855dc178a214f463137266443f8de49a2cfa/icone%20RGE.webp" alt="Certification RGE" class="logo-side" width="70" height="70" loading="lazy">
-      <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/52db4f3ab1c38909b33d9037e74d7371c32a9cf5/logo%20SSP.webp" alt="Logo Solution Solaire Pro" class="logo-main" fetchpriority="high" decoding="async" width="130" height="40">
-      <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/4064855dc178a214f463137266443f8de49a2cfa/icone%20qualipv.webp" alt="Certification QualiPV" class="logo-side" width="70" height="70" loading="lazy">
-    </div>
+  <!-- Header logos -->
+  <div class="header-logos">
+    <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/4064855dc178a214f463137266443f8de49a2cfa/icone%20RGE.webp" alt="Certification RGE" class="logo-side" width="70" height="70" loading="lazy">
+    <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/52db4f3ab1c38909b33d9037e74d7371c32a9cf5/logo%20SSP.webp" alt="Logo Solution Solaire Pro" class="logo-main" fetchpriority="high" decoding="async" width="130" height="40">
+    <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/4064855dc178a214f463137266443f8de49a2cfa/icone%20qualipv.webp" alt="Certification QualiPV" class="logo-side" width="70" height="70" loading="lazy">
+  </div>
 
-    <!-- Compteur -->
-    <div class="counter-wrap">
-      <div class="counter-badge">
-        <span id="compteurValeur" style="font-weight:900;letter-spacing:.2px">250</span>
-        <span style="opacity:.85"> simulations depuis le 1ᵉʳ mai 2025</span>
-      </div>
+  <!-- Compteur -->
+  <div class="counter-wrap">
+    <div class="counter-badge">
+      <span id="compteurValeur" style="font-weight:900;letter-spacing:.2px">250</span>
+      <span style="opacity:.85"> simulations depuis le 1ᵉʳ mai 2025</span>
     </div>
+  </div>
 
-    <!-- Accroche principale (sur overlay) -->
-    <h1><em>Coût installation panneaux solaires</em> dans l'Eure (27)</h1>
+  <!-- Accroche principale (sur overlay) -->
+  <h1><em>Coût installation panneaux solaires</em> dans l'Eure (27)</h1>
   <p class="lead-sub">
-  Obtenez le <strong>coût installation panneaux solaires</strong> pour votre maison en 1 minute&nbsp;:
-  nombre de panneaux, production et économies estimées (≈ 1 000 à 1 500 €/an selon profil).
-</p>
+    Obtenez le <strong>coût installation panneaux solaires</strong> pour votre maison en 1 minute&nbsp;:
+    nombre de panneaux, production et économies estimées (≈ 1 000 à 1 500 €/an selon profil).
+  </p>
 
+  <h2 style="margin-top:6px">Calculez votre coût précis en 1 minute</h2>
 
-    <h2 style="margin-top:6px">Calculez votre coût précis en 1 minute</h2>
+  <!-- Formulaire -->
+  <div class="card form-section content-card" style="border:2px solid var(--accent)">
+    <h2>Coût de votre installation & économies en direct</h2>
 
-    <!-- Formulaire -->
-    <div class="card form-section content-card" style="border:2px solid var(--accent)">
-      <h2>Coût de votre installation & économies en direct</h2>
+    <form onsubmit="calculerSimulation(); return false;" novalidate>
+      <div class="inputs" style="margin-bottom:8px">
+        <input type="text" id="codePostal" placeholder="Votre code postal (ex : 27000)" maxlength="5" inputmode="numeric" pattern="[0-9]{5}" autocomplete="postal-code" required>
+        <input type="text" id="facture" placeholder="Votre facture élec /an (ex : 1 800 €)" inputmode="decimal" autocomplete="off" required>
+      </div>
+      <div id="modeAvance" style="display:none">
+        <input type="text" id="conso" placeholder="Conso annuelle (kWh, optionnel)" inputmode="decimal" autocomplete="off">
+      </div>
+      <a href="#" id="lienAvance" class="helper">➕ Vous connaissez votre consommation annuelle ? Cliquez ici pour une estimation ultra-précise</a>
+      <div style="margin-top:6px;font-size:13px;color:#6b7280;text-align:center">Pas votre conso ? La facture suffit.</div>
+      <div style="height:10px"></div>
+      <button id="simuler" type="submit" class="primary" aria-label="Calculer le coût installation panneaux solaires">
+        ⚡ Calculer mon coût maintenant
+      </button>
+    </form>
+  </div>
 
-      <form onsubmit="calculerSimulation(); return false;" novalidate>
-        <div class="inputs" style="margin-bottom:8px">
-          <input type="text" id="codePostal" placeholder="Votre code postal (ex : 27000)" maxlength="5" inputmode="numeric" pattern="[0-9]{5}" autocomplete="postal-code" required>
-          <input type="text" id="facture" placeholder="Votre facture élec /an (ex : 1 800 €)" inputmode="decimal" autocomplete="off" required>
-        </div>
-        <div id="modeAvance" style="display:none">
-          <input type="text" id="conso" placeholder="Conso annuelle (kWh, optionnel)" inputmode="decimal" autocomplete="off">
-        </div>
-        <a href="#" id="lienAvance" class="helper">➕ Vous connaissez votre consommation annuelle ? Cliquez ici pour une estimation ultra-précise</a>
-        <div style="margin-top:6px;font-size:13px;color:#6b7280;text-align:center">Pas votre conso ? La facture suffit.</div>
-        <div style="height:10px"></div>
-        <button id="simuler" type="submit" class="primary" aria-label="Calculer le coût installation panneaux solaires">
-⚡ Calculer mon coût maintenant
-</button>
+</div><!-- fin .wrap hero-bg -->
 
-      </form>
-    </div>
+<!-- Reprise du flux sur fond blanc -->
+<div class="wrap">
+
 
     <!-- Bloc Info -->
     <div class="card content-card" id="bloc-info" data-hide-after-sim="1">
