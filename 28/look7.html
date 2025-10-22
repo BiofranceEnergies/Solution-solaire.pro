@@ -49,6 +49,13 @@
     z-index:-1;
   }
 
+    <!-- Logos certifications (haut-gauche) -->
+  <div class="certifs" aria-label="Labels et certifications">
+    <img class="certifs__img" src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/687b0f048a98e03f86e7852020887ff4f05eb913/icone%20RGE.webp" alt="Label RGE – Reconnu Garant de l’Environnement">
+    <img class="certifs__img certifs__img--main" src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/687b0f048a98e03f86e7852020887ff4f05eb913/logo%20SSP.webp" alt="Solution Solaire Pro">
+    <img class="certifs__img" src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/687b0f048a98e03f86e7852020887ff4f05eb913/icone%20qualipv.webp" alt="Certification QualiPV 2025">
+  </div>
+  
   .hero__inner{
     max-width:var(--maxw);
     margin:0 auto;
@@ -332,6 +339,39 @@ details[open] .faq__chev{ transform:rotate(180deg); opacity:1; }
   margin-top: 6px; /* supprime un peu de vide supplémentaire */
 }  
 
+  /* Logos certifications dans le héros */
+.certifs {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 5;
+}
+.certifs__img {
+  height: 38px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,.25));
+}
+.certifs__img--main {
+  height: 48px;
+}
+@media (max-width: 860px) {
+  .certifs {
+    top: 12px;
+    left: 12px;
+    gap: 8px;
+  }
+  .certifs__img {
+    height: 30px;
+  }
+  .certifs__img--main {
+    height: 38px;
+  }
+}
+  
 </style>
 </head>
 
