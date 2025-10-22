@@ -77,22 +77,35 @@
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;min-height:100%}
     body{background:transparent}
- /* Fond limité au hero */
+/* Fond limité au hero complet (jusqu'au simulateur) */
 .hero-bg {
   position: relative;
-  background: 
+  background:
     linear-gradient(180deg, rgba(17,24,39,.65), rgba(31,41,55,.55) 45%, rgba(55,65,81,.4) 100%),
-    url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp") center 35%/cover no-repeat;
+    url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp") center 35% / cover no-repeat;
   color: #fff;
   padding-top: 28px;
-  padding-bottom: 40px;
+  padding-bottom: 80px; /* ← allonge la zone pour couvrir sous le simulateur */
   z-index: 0;
+  overflow: hidden;
 }
 
-/* Le reste de la page en fond blanc */
+/* Séparation nette après le hero */
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 90%);
+}
+
+/* Le reste de la page est sur fond blanc */
 body {
   background: #fff;
 }
+
 
 
     .wrap{max-width:980px;margin:0 auto;padding:28px 14px;position:relative;z-index:2}
@@ -195,8 +208,8 @@ body {
       </div>
     </div>
   </div>
+<div class="wrap hero-bg">
 
-  <div class="wrap">
     <!-- Header logos -->
     <div class="header-logos">
       <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/4064855dc178a214f463137266443f8de49a2cfa/icone%20RGE.webp" alt="Certification RGE" class="logo-side" width="70" height="70" loading="lazy">
