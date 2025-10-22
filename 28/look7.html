@@ -319,6 +319,18 @@ details[open] .faq__chev{ transform:rotate(180deg); opacity:1; }
   border-top:1px solid var(--border); background:#fbfbfd;
 }
 
+/* Ajustement d'espacement entre le titre et les blocs FAQ */
+.faq {
+  padding-top: clamp(20px, 4vw, 40px); /* réduit l’espace interne en haut */
+}
+
+.faq h2 {
+  margin-bottom: clamp(10px, 2vw, 16px); /* rapproche les blocs accordéon du titre */
+}
+
+.faq__list {
+  margin-top: 6px; /* supprime un peu de vide supplémentaire */
+}  
 
 </style>
 </head>
