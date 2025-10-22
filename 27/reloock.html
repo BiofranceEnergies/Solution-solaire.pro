@@ -77,9 +77,23 @@
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;color:var(--text);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;min-height:100%}
     body{background:transparent}
-    /* Fond + overlay */
-    body::before{content:"";position:fixed;inset:0;z-index:0;background:url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp") center 35%/cover no-repeat}
-    body::after{content:"";position:fixed;inset:0;z-index:1;background:linear-gradient(180deg,rgba(17,24,39,.65),rgba(31,41,55,.55) 45%,rgba(55,65,81,.4) 100%)}
+ /* Fond limité au hero */
+.hero-bg {
+  position: relative;
+  background: 
+    linear-gradient(180deg, rgba(17,24,39,.65), rgba(31,41,55,.55) 45%, rgba(55,65,81,.4) 100%),
+    url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp") center 35%/cover no-repeat;
+  color: #fff;
+  padding-top: 28px;
+  padding-bottom: 40px;
+  z-index: 0;
+}
+
+/* Le reste de la page en fond blanc */
+body {
+  background: #fff;
+}
+
 
     .wrap{max-width:980px;margin:0 auto;padding:28px 14px;position:relative;z-index:2}
 
