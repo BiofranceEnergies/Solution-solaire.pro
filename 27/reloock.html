@@ -18,17 +18,17 @@
     .hero {
       position: relative;
       width: 100%;
-      min-height: 100vh; /* ← pleine hauteur d’écran */
+      min-height: 100vh;
       background:
         url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp")
         center 35% / cover no-repeat;
       overflow: hidden;
       display: flex;
-      align-items: center;  /* verticalement centré */
-      justify-content: flex-start; /* ← contenu à gauche */
+      align-items: center;
+      justify-content: flex-start;
     }
 
-    /* Overlay bleu profond façon Lovable */
+    /* Overlay bleu profond */
     .hero::before {
       content: "";
       position: absolute;
@@ -47,8 +47,8 @@
       position: relative;
       z-index: 2;
       color: #fff;
-      max-width: 620px;
-      padding: 0 5vw;  /* marges gauche/droite adaptatives */
+      max-width: 720px;
+      padding: 0 5vw;
     }
 
     .hero-content h1 {
@@ -56,6 +56,10 @@
       font-weight: 800;
       margin: 0 0 14px;
       line-height: 1.2;
+    }
+
+    .hero-content h1 span {
+      color: #f59e0b; /* mot coloré en orange */
     }
 
     .hero-content p {
@@ -86,7 +90,7 @@
     @media(max-width:768px){
       .hero {
         align-items: flex-start;
-        padding-top: 120px; /* pour laisser de l’air en haut sur mobile */
+        padding-top: 120px;
       }
       .hero-content{
         padding: 0 6vw;
@@ -99,9 +103,9 @@
 
   <header class="hero">
     <div class="hero-content">
-      <h1>L’énergie solaire pour votre maison</h1>
-      <p>Réduisez vos factures d’électricité jusqu’à 70 % avec nos panneaux photovoltaïques de haute qualité.</p>
-      <button class="btn">Demander un devis gratuit</button>
+      <h1>Coût installation panneaux solaires dans l’<span>Eure-et-Loir (28)</span></h1>
+      <p>Estimez gratuitement le coût d’installation de vos panneaux solaires : production, nombre de panneaux et économies potentielles en 1 minute.</p>
+      <button class="btn">Calculer mon coût maintenant</button>
     </div>
   </header>
 
