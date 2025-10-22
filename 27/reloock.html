@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LP – Hero ajusté</title>
+  <title>LP – Hero grand format</title>
   <style>
     html, body { margin:0; padding:0; background:#fff; }
     *,*::before,*::after{ box-sizing:border-box; }
 
     :root{
-      /* Hauteur légèrement augmentée pour plus de présence visuelle */
-      --hero-aspect: 16/7;     /* avant : 16/6 → maintenant un peu plus haut */
-      --hero-min: 380px;
-      --hero-max: 640px;
-      --hero-pos-y: 35%;       /* cadrage un peu plus centré sur le toit */
+      /* Hauteur augmentée pour une présence visuelle plus forte */
+      --hero-aspect: 16/8;     /* ratio plus haut → environ 50% de la hauteur d’écran */
+      --hero-min: 460px;       /* hauteur mini */
+      --hero-max: 720px;       /* plafond pour très grands écrans */
+      --hero-pos-y: 38%;       /* on garde le cadrage équilibré */
     }
 
     .hero{
@@ -26,17 +26,19 @@
         center var(--hero-pos-y) / cover no-repeat;
     }
 
+    /* Ajustements pour mobiles */
     @media (max-width: 640px){
       :root{
-        --hero-aspect: 16/9;
-        --hero-pos-y: 40%;
-        --hero-min: 300px;
+        --hero-aspect: 16/10;
+        --hero-pos-y: 42%;
+        --hero-min: 360px;
       }
     }
   </style>
 </head>
 <body>
 
+  <!-- Image de tête grand format -->
   <header class="hero" aria-hidden="true"></header>
 
 </body>
