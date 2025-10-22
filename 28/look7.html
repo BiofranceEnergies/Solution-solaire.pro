@@ -386,6 +386,22 @@ details[open] .faq__chev{ transform:rotate(180deg); opacity:1; }
   }
 }
 
+/* --- Mentions légales (footer + mini-modal) --- */
+.legal{background:#f7f9fc;color:var(--ink);padding:24px 16px;margin-top:clamp(40px,6vw,80px)}
+.legal__inner{max-width:var(--maxw);margin:0 auto;text-align:center}
+.legal__link{color:#0b61d8;text-decoration:underline;font-weight:800;cursor:pointer}
+.legal .sep{border:0;border-top:1px solid var(--border);margin:16px auto 0;max-width:var(--maxw)}
+
+#mentions-popup{
+  display:none;position:fixed;left:50%;bottom:64px;transform:translateX(-50%);
+  width:360px;max-width:95vw;background:#fff;color:var(--ink);
+  border:1px solid var(--border);border-radius:14px;padding:18px 20px 14px;
+  box-shadow:0 10px 36px rgba(2,6,23,.15);z-index:9999;font-size:13px;line-height:1.7
+}
+#close-mentions{
+  position:absolute;top:6px;right:12px;background:none;border:0;color:var(--ink);
+  font-size:20px;font-weight:800;cursor:pointer
+}
 
 
   
@@ -741,6 +757,28 @@ details[open] .faq__chev{ transform:rotate(180deg); opacity:1; }
       </details>
     </div>
   </div>
+
+  <!-- Mentions légales -->
+<div class="legal">
+  <div class="legal__inner">
+    <span id="mentions-legales-link" class="legal__link">Mentions légales</span>
+    <hr class="sep">
+  </div>
+</div>
+
+<!-- Popup Mentions -->
+<div id="mentions-popup" role="dialog" aria-modal="true" aria-labelledby="mentions-title">
+  <button id="close-mentions" type="button" aria-label="Fermer">&times;</button>
+  <strong id="mentions-title">Mentions légales :</strong><br>
+  Solution Solaire Pro, marque de Biofrance Énergies<br>
+  SIRET : 422 231 928 00025<br>
+  Adresse : 4 rue du Pont Saint Jean, 27530 Ézy-sur-Eure<br>
+  Contact : solutionsolairepro@gmail.com<br>
+  Hébergeur : GitHub Pages, 88 Colin P. Kelly Jr. Street, San Francisco CA 94107 USA<br>
+  Données personnelles : Les informations saisies sont utilisées uniquement pour traiter votre demande. Aucun démarchage ni revente.<br>
+  RGPD : Suppression possible sur simple demande par e-mail.
+</div>
+
 </section>
 
 <script>
@@ -753,6 +791,18 @@ document.addEventListener('click', (e)=>{
     group.querySelectorAll('details[open]').forEach(x => { if(x!==d) x.removeAttribute('open'); });
   }
 });
+
+  // Mentions légales – ouverture/fermeture
+document.addEventListener("DOMContentLoaded", ()=>{
+  const link=document.getElementById("mentions-legales-link");
+  const popup=document.getElementById("mentions-popup");
+  const close=document.getElementById("close-mentions");
+  if(link && popup && close){
+    link.addEventListener("click", e=>{e.preventDefault();popup.style.display="block";});
+    close.addEventListener("click", e=>{e.preventDefault();popup.style.display="none";});
+  }
+});
+
 </script>
   
 </body>
