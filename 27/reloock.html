@@ -15,15 +15,16 @@
     *, *::before, *::after { box-sizing: border-box; }
 
     /* -------- HERO BLEU FONCÉ LOVABLE -------- */
-    .hero {
-      position: relative;
-      width: 100%;
-      min-height: clamp(420px, 60vh, 780px);
-      background: 
-        url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp")
-        center 40% / cover no-repeat;
-      overflow: hidden;
-    }
+   .hero {
+  position: relative;
+  width: 100%;
+  min-height: clamp(580px, 75vh, 860px); /* ← hauteur augmentée */
+  background: 
+    url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp")
+    center 40% / cover no-repeat;
+  overflow: hidden;
+}
+
 
     /* Overlay bleu profond */
     .hero::before {
