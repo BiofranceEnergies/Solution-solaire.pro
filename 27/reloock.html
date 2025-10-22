@@ -4,12 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Coût installation panneaux solaires – Eure-et-Loir (28)</title>
-  <meta name="description" content="Calculez le coût d’installation de panneaux solaires dans l’Eure-et-Loir (28) et estimez vos économies en 1 minute." />
+  <meta name="description" content="Calculez le coût d’installation de panneaux solaires dans l’Eure-et-Loir (28) et estimez vos économies en 1 minute.">
 
   <style>
     :root{
       /* Thème */
-      --bg:#0b1220;
       --text:#0f172a;
       --muted:#6b7280;
       --card:#ffffff;
@@ -25,21 +24,19 @@
       /* UI */
       --radius:16px;
       --shadow:0 18px 40px rgba(2,6,23,.18);
-      --shadow-soft:0 10px 24px rgba(2,6,23,.12);
       --content: 1120px;      /* largeur max du contenu dans le hero */
       --card-w: 860px;        /* largeur max de la carte */
     }
 
-    /* Reset + base */
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
     body{
       color:var(--text);
-      font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
+      font:16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial;
       background:#fff;
     }
 
-    /* HERO 100% largeur + responsive hauteur */
+    /* HERO plein écran */
     .hero{
       position:relative;
       min-height: clamp(72vh, 78vh, 92vh);
@@ -49,7 +46,6 @@
       isolation:isolate;
     }
     .hero::before{
-      /* Image de fond plein écran */
       content:"";
       position:absolute; inset:0; z-index:0;
       background:
@@ -60,10 +56,8 @@
         ),
         url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp")
         center 40% / cover no-repeat;
-      will-change: transform;
     }
 
-    /* Contenu hero */
     .hero-inner{
       width:100%;
       max-width:var(--content);
@@ -91,7 +85,6 @@
     }
     .hero h1 span{
       color: var(--accent);
-      font-style:normal;
       text-shadow: 0 1px 8px rgba(245,158,11,.2);
     }
     .hero p{
@@ -103,7 +96,7 @@
       opacity:.95;
     }
 
-    /* Carte de calcul – style Lovable chic */
+    /* Carte calcul – style “lovable classieux” */
     .calc-card{
       width:100%;
       max-width: var(--card-w);
@@ -175,13 +168,12 @@
     .calc-btn:active{ transform: translateY(1px) }
   </style>
 </head>
-
 <body>
 
   <!-- HERO -->
   <header class="hero">
     <div class="hero-inner">
-      <!-- Colonne gauche : texte -->
+      <!-- Texte gauche -->
       <div class="hero-copy">
         <h1>
           Coût installation panneaux solaires dans l’<span>Eure-et-Loir (28)</span>
@@ -192,7 +184,7 @@
         </p>
       </div>
 
-      <!-- Colonne droite : carte -->
+      <!-- Carte droite -->
       <section class="calc-card" aria-labelledby="calc-titre">
         <h2 id="calc-titre" class="calc-title">Coût de votre installation & économies en direct</h2>
 
@@ -228,7 +220,7 @@
   </header>
 
   <script>
-    // Toggle du champ "conso" (mode précis)
+    // Afficher/cacher la conso précise
     (function(){
       const lien = document.getElementById('lien-precis');
       const bloc = document.getElementById('bloc-conso');
@@ -242,14 +234,13 @@
       }
     })();
 
-    // Handler de soumission (bouchon – à connecter à ton script calcul plus tard)
+    // Bouchon de soumission (à relier à ton calculateur)
     function simulerLovable(e){
       e.preventDefault();
       const cp = document.getElementById('cp')?.value.trim();
       const facture = document.getElementById('facture')?.value.trim();
       const conso = document.getElementById('conso')?.value.trim();
-      // 👉 Ici, tu brancheras ton vrai calculateur
-      console.log({cp, facture, conso});
+      console.log({cp, facture, conso}); // branchement futur
       alert("Simulation en place 🧪 (branche ton calculateur ici).");
     }
   </script>
