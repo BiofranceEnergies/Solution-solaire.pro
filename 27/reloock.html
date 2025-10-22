@@ -3,19 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LP – Hero seul (recul)</title>
+  <title>LP – Hero ajusté</title>
   <style>
     html, body { margin:0; padding:0; background:#fff; }
     *,*::before,*::after{ box-sizing:border-box; }
 
-    /* -- Réglages rapides du cadrage -- */
     :root{
-      /* ratio plus “plat” => plus de recul */
-      --hero-aspect: 16/6;    /* ~37.5% de la largeur en hauteur */
-      --hero-min: 320px;      /* garde une bonne hauteur mini */
-      --hero-max: 560px;      /* évite un hero trop haut sur grands écrans */
-      /* décentrage léger vers le haut pour voir davantage la maison */
-      --hero-pos-y: 28%;      /* 0%=haut, 50%=centre */
+      /* Hauteur légèrement augmentée pour plus de présence visuelle */
+      --hero-aspect: 16/7;     /* avant : 16/6 → maintenant un peu plus haut */
+      --hero-min: 380px;
+      --hero-max: 640px;
+      --hero-pos-y: 35%;       /* cadrage un peu plus centré sur le toit */
     }
 
     .hero{
@@ -28,22 +26,18 @@
         center var(--hero-pos-y) / cover no-repeat;
     }
 
-    /* Sur petits écrans, on remonte un peu et on assure une hauteur mini lisible */
     @media (max-width: 640px){
-      :root{ --hero-aspect: 16/8; --hero-pos-y: 35%; --hero-min: 260px; }
+      :root{
+        --hero-aspect: 16/9;
+        --hero-pos-y: 40%;
+        --hero-min: 300px;
+      }
     }
-
-    main{ padding:0; }
   </style>
 </head>
 <body>
 
-  <!-- Image seule, plus de recul -->
   <header class="hero" aria-hidden="true"></header>
-
-  <!-- Page vide pour la suite -->
-  <main></main>
 
 </body>
 </html>
-
