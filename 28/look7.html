@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Coût installation panneaux solaires | Eure-et-Loir (28)</title>
+
+<style>
+  :root{
+    /* Layout */
+    --hero-h-desktop: 95vh;
+    --hero-h-mobile: 100svh;
+    --hero-min: 700px;
+    --maxw: 1100px;
+
+    /* Palette */
+    --accent:#f59e0b;
+    --accent-2:#f7b733;
+    --ink:#0f172a;
+    --muted:#64748b;
+    --border:#e5e7eb;
+    --ok:#22c55e;
+    --card:#ffffff;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial;color:#fff;background:#fff}
+
+  /* ================== HERO ================== */
+  header.hero{
+    position:relative;
+    height:var(--hero-h-desktop);
+    min-height:var(--hero-min);
+    overflow:hidden;
+    isolation:isolate;
+  }
+  header.hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      /* overlay sombre, plus dense à gauche */
+      linear-gradient(90deg,
+        rgba(5,12,24,.82) 0%,
+        rgba(7,16,30,.66) 34%,
+        rgba(10,18,28,.42) 62%,
+        rgba(12,20,28,.22) 100%),
+      url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp")
+      center 35%/cover no-repeat;
+    z-index:-1;
+  }
+
+  .hero__inner{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:60px clamp(16px,4vw,40px);
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:clamp(20px,4vw,42px);
+    height:100%;
+    align-items:center;
+  }
+  @media (max-width:860px){
+    .hero__inner{grid-template-columns:1fr;text-align:center;align-items:flex-end;padding-bottom:80px;}
+  }
+
+  .title{
+    margin:0 0 14px;
+    font-weight:900;
+    line-height:1.1;
+    font-size:clamp(28px,4.4vw,52px);
+  }
+  .title em{color:var(--accent);font-style:normal;text-shadow:0 2px 10px rgba(245,158,11,.3);}
+  .lead{margin:8px 0 0;color:rgba(255,255,255,.9);max-width:54ch;}
+
+  .panel{display:flex;flex-direction:column;gap:12px;width:100%;}
+  .pill{
+    display:flex;align-items:center;justify-content:center;
+    min-height:46px;background:linear-gradient(180deg,var(--accent),var(--accent-2));
+    color:#1b1202;font-weight:800;border-radius:6px;
+    box-shadow:0 10px 26px rgba(245,158,11,.25);
+  }
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .rect,.option{
+    display:flex;align-items:center;padding:12px 14px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.22);
+    border-radius:6px;
+  }
+  input{width:100%;background:transparent;border:0;color:#fff;font:inherit;}
+  input::placeholder{color:rgba(255,255,255,.75);}
+  .cta{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-height:48px;width:100%;
+    background:linear-gradient(180deg,var(--accent),var(--accent-2));
+    color:#1b1202;font-weight:900;border:0;border-radius:6px;
+    box-shadow:0 10px 26px rgba(245,158,11,.25);cursor:pointer;
+  }
+
+  /* ================== SECTION 3 ÉTAPES ================== */
+  .steps-2025{background:#fff;padding:clamp(40px,7vw,80px) 16px;color:var(--ink);}
+  .steps-2025__inner{max-width:var(--maxw);margin:0 auto;text-align:center;}
+  .steps-2025__title{font-weight:800;font-size:clamp(26px,3.8vw,44px);margin-bottom:6px;}
+  .steps-2025__subtitle{color:var(--muted);margin-bottom:clamp(28px,5vw,48px);}
+
+  .steps-2025__grid{
+    display:grid;gap:clamp(18px,3vw,28px);
+    grid-template-columns:1fr;
+  }
+  @media(min-width:860px){.steps-2025__grid{grid-template-columns:repeat(3,1fr);}}
+
+  .steps-2025__item{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:clamp(18px,3vw,26px);
+    box-shadow:0 10px 28px rgba(2,6,23,.06);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  }
+
+  .steps-2025__num{
+    width:72px;height:72px;border-radius:50%;
+    display:grid;place-items:center;
+    font-weight:800;color:#fff;
+    background:linear-gradient(180deg,var(--accent),#fdba74);
+    box-shadow:0 10px 24px rgba(245,158,11,.25);
+    font-size:22px;margin-bottom:12px;
+  }
+
+  .steps-2025__heading{margin:0;font-weight:800;font-size:clamp(18px,2.2vw,22px);}
+  .steps-2025__text{margin:6px 0 0;color:var(--muted);font-size:clamp(14px,1.6vw,16px);}
+
+  /* Phrase finale + coche */
+  .steps-2025__note{margin:clamp(40px,6vw,60px) 0 0;display:flex;flex-direction:column;align-items:center;gap:18px;}
+  .steps-2025__note p{font-weight:700;color:var(--ink);font-size:clamp(16px,2vw,20px);}
+
+  /* ================== CHIFFRES CLÉS (bande panneaux full black) ================== */
+  .stats-bg{
+    width:100vw;
+    margin-left:calc(50% - 50vw);
+    margin-top:clamp(72px,9vw,140px);
+    position:relative;
+    padding:clamp(48px,9vw,96px) 16px;
+    color:#fff;
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .stats-bg::before{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/687b0f048a98e03f86e7852020887ff4f05eb913/bande%20panneaux%20full%20black.webp")
+      center/cover no-repeat;
+    filter:brightness(1.02) saturate(.95);
+    z-index:-1;
+  }
+  .stats-bg::after{content:"";position:absolute;inset:0;background:none;backdrop-filter:none;z-index:-1;}
+
+  .stats-bg__inner{
+    max-width:var(--maxw);
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:clamp(14px,3vw,20px);
+    text-align:center;
+  }
+  @media (min-width:820px){
+    .stats-bg__inner{grid-template-columns:repeat(4,1fr);}
+  }
+  .stat{padding:clamp(10px,2vw,14px);}
+  .stat__value{
+    font-weight:900;
+    letter-spacing:-.02em;
+    font-size:clamp(34px,5.5vw,56px);
+    line-height:1.05;
+    color:var(--accent,#f59e0b);
+    text-shadow:0 2px 10px rgba(0,0,0,.25);
+  }
+  .stat__label{
+    margin-top:4px;
+    font-size:clamp(14px,1.7vw,16px);
+    color:rgba(255,255,255,.92);
+    text-shadow:0 1px 4px rgba(0,0,0,.25);
+  }
+
+  /* accessibilité : cacher visuellement tout en gardant au lecteur d’écran */
+  .sr-only{
+    position:absolute !important;
+    width:1px;height:1px;margin:-1px;padding:0;border:0;overflow:hidden;
+    clip:rect(0 0 0 0);clip-path:inset(50%);
+  }
+
+  /* ================== AVIS CLIENTS – 2025 ================== */
+  .testi{
+  background:#fff; color:var(--ink);
+  margin-top:clamp(40px,6vw,80px);
+  padding:clamp(28px,6vw,60px) 16px;
+}
+
+  .testi__inner{max-width:var(--maxw);margin:0 auto;}
+  .testi__head{text-align:center;margin-bottom:clamp(18px,3vw,28px);}
+  .testi__title{font-weight:900;line-height:1.15;font-size:clamp(26px,3.6vw,40px);margin:0 0 8px;}
+  .testi__meta{color:var(--muted);font-size:clamp(14px,1.8vw,16px);}
+
+  .testi__grid{
+    display:grid;gap:clamp(16px,2.6vw,22px);
+    grid-template-columns:1fr;
+  }
+  @media (min-width:1024px){
+    .testi__grid{grid-template-columns:repeat(3,1fr);}
+  }
+
+  .tcard{
+    background:#fff;border:1px solid var(--border);border-radius:16px;
+    padding:clamp(16px,2.6vw,22px);
+    box-shadow:0 10px 24px rgba(2,6,23,.06);
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .tcard__top{display:flex;align-items:center;gap:12px;}
+  .avatar{
+    width:44px;height:44px;border-radius:999px;
+    display:grid;place-items:center;
+    font-weight:700;color:#111827;background:linear-gradient(180deg,#fff6e5,#ffe4bf);
+    border:1px solid #f1c987;
+  }
+  .tcard__name{font-weight:800;}
+  .tcard__loc{color:var(--muted);font-size:14px;margin-top:2px;}
+  .stars{display:flex;gap:2px;}
+  .stars svg{width:18px;height:18px}
+  .tcard__text{color:#334155;font-style:italic}
+
+  /* CTA facultatif sous les avis (si besoin) */
+  .testi__cta{margin-top:clamp(16px,3vw,24px);display:flex;justify-content:center;}
+  .testi__cta .cta{width:auto;padding:0 18px;min-width:260px;}
+  /* ================== POURQUOI LE SOLAIRE ================== */
+.why{
+  background:#f7f9fc; /* fond clair respirant */
+  color:var(--ink);
+  padding:clamp(40px,7vw,90px) 16px;
+  margin-top:clamp(40px,6vw,80px);
+}
+.why__inner{max-width:var(--maxw);margin:0 auto;}
+.why__head{text-align:center;margin-bottom:clamp(22px,4vw,34px);}
+.why__title{
+  font-weight:900;line-height:1.1;
+  font-size:clamp(28px,4vw,48px);margin:0 0 10px;
+}
+.why__subtitle{color:var(--muted);font-size:clamp(14px,1.9vw,18px);}
+
+.why__grid{
+  display:grid;gap:clamp(14px,2.4vw,20px);
+  grid-template-columns:1fr;
+}
+@media (min-width:860px){ .why__grid{grid-template-columns:repeat(2,1fr);} }
+@media (min-width:1180px){ .why__grid{grid-template-columns:repeat(4,1fr);} }
+
+.why__card{
+  background:#fff;border:1px solid var(--border);border-radius:16px;
+  padding:clamp(18px,2.6vw,24px);
+  box-shadow:0 10px 24px rgba(2,6,23,.06);
+}
+.why__top{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.why__icon{
+  width:42px;height:42px;border-radius:12px;
+  display:grid;place-items:center;flex:0 0 auto;
+  background:linear-gradient(180deg,#fff3db,#ffe1b3);
+  border:1px solid #f4c981;color:#b45309; /* ton accent doux */
+}
+.why__heading{font-weight:800;font-size:clamp(16px,2vw,20px);margin:0;}
+.why__text{color:var(--muted);margin:6px 0 0;font-size:clamp(14px,1.7vw,16px);line-height:1.45;}
+
+</style>
+</head>
+
+<body>
+<header class="hero">
+  <div class="hero__inner">
+    <div>
+      <h1 class="title">
+        Coût installation<br>panneaux solaires dans<br><em>l’Eure-et-Loir (28)</em>
+      </h1>
+      <p class="lead">Estimez gratuitement le coût d’installation, la production et vos économies en moins d’une minute.</p>
+    </div>
+
+    <div class="panel">
+      <div class="pill">Coût de votre installation & économies en direct</div>
+      <div class="row">
+        <label class="rect"><input type="text" placeholder="Votre code postal (ex : 28000)" inputmode="numeric" maxlength="5" autocomplete="postal-code"></label>
+        <label class="rect"><input type="text" placeholder="Votre facture élec / an (ex : 1 800 €)" inputmode="decimal" autocomplete="off"></label>
+      </div>
+      <label class="option"><input type="text" placeholder="Option pour un calcul plus précis — vos kWh/an (facultatif)" inputmode="decimal" autocomplete="off"></label>
+      <button class="cta" type="button">⚡ Calculer mon coût maintenant</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="steps-2025">
+    <div class="steps-2025__inner">
+      <h2 class="steps-2025__title">Un simulateur qui va à l’essentiel</h2>
+      <p class="steps-2025__subtitle">Un processus simple et transparent en 3 étapes</p>
+
+      <div class="steps-2025__grid">
+        <article class="steps-2025__item">
+          <span class="steps-2025__num">01</span>
+          <h3 class="steps-2025__heading">Étude personnalisée</h3>
+          <p class="steps-2025__text">Votre étude personnalisée selon votre consommation.</p>
+        </article>
+        <article class="steps-2025__item">
+          <span class="steps-2025__num">02</span>
+          <h3 class="steps-2025__heading">Économies estimées</h3>
+          <p class="steps-2025__text">Vos économies estimées dès la 1<sup>re</sup> année.</p>
+        </article>
+        <article class="steps-2025__item">
+          <span class="steps-2025__num">03</span>
+          <h3 class="steps-2025__heading">Coût précis & financement</h3>
+          <p class="steps-2025__text">Le coût précis de l’installation et son financement.</p>
+        </article>
+      </div>
+
+      <div class="steps-2025__note">
+        <p>Rien de superflu. Juste les chiffres qui comptent.</p>
+        <div class="steps-2025__check">
+          <svg viewBox="0 0 24 24" width="60" height="60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="12" cy="12" r="11" fill="#22c55e"/>
+            <path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <section class="why" aria-labelledby="why-title">
+  <div class="why__inner">
+    <header class="why__head">
+      <h2 id="why-title" class="why__title">Pourquoi passer à l’énergie solaire&nbsp;?</h2>
+      <p class="why__subtitle">Les bénéfices concrets d’une installation photovoltaïque chez vous</p>
+    </header>
+
+    <div class="why__grid">
+      <!-- Carte 1 -->
+      <article class="why__card">
+        <div class="why__top">
+          <div class="why__icon" aria-hidden="true">
+            <!-- icône tendance ↘ -->
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M4 7h2.9l5.2 6.2 3.2-3.4H20v2h-3.7l-3.2 3.4L6.9 9H4z"/></svg>
+          </div>
+          <h3 class="why__heading">Économies importantes</h3>
+        </div>
+        <p class="why__text">Baissez durablement votre facture d’électricité grâce à l’autoconsommation.</p>
+      </article>
+
+      <!-- Carte 2 -->
+      <article class="why__card">
+        <div class="why__top">
+          <div class="why__icon" aria-hidden="true">
+            <!-- icône feuille -->
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 3C6 3 3 9 3 13c0 4 3 8 9 8 6 0 9-4 9-8 0-6-3-10-9-10zm1.6 6.2c2.4 0 4.4 1.8 4.4 4.1 0 2.9-2.2 5.6-6 6.2-2.6.4-5.2-.9-5.2-3.3 0-3.6 3.8-7 6.8-7z"/></svg>
+          </div>
+          <h3 class="why__heading">Énergie propre</h3>
+        </div>
+        <p class="why__text">Produisez localement une énergie renouvelable et réduisez votre empreinte carbone.</p>
+      </article>
+
+      <!-- Carte 3 -->
+      <article class="why__card">
+        <div class="why__top">
+          <div class="why__icon" aria-hidden="true">
+            <!-- icône éclair -->
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M13 3L4 14h6l-1 7 9-11h-6l1-7z"/></svg>
+          </div>
+          <h3 class="why__heading">Performance actuelle</h3>
+        </div>
+        <p class="why__text">Panneaux de dernière génération, rendement élevé et suivi transparent de la production.</p>
+      </article>
+
+      <!-- Carte 4 -->
+      <article class="why__card">
+        <div class="why__top">
+          <div class="why__icon" aria-hidden="true">
+            <!-- icône bouclier -->
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2l8 3v6c0 5-3.5 9.7-8 11-4.5-1.3-8-6-8-11V5l8-3z"/></svg>
+          </div>
+          <h3 class="why__heading">Garantie et pérennité</h3>
+        </div>
+        <p class="why__text">Matériel garanti, installation durable et service après-vente local.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+    <!-- CHIFFRES CLÉS – fond panneaux full black, style épuré -->
+    <section class="stats-bg" aria-labelledby="stats-title">
+      <h2 id="stats-title" class="sr-only">Chiffres clés</h2>
+      <div class="stats-bg__inner">
+        <div class="stat">
+          <div class="stat__value">+300</div>
+          <div class="stat__label">Installations en Centre-Val de Loire</div>
+        </div>
+        <div class="stat">
+          <div class="stat__value">30 ans</div>
+          <div class="stat__label">Garantie matériel</div>
+        </div>
+        <div class="stat">
+          <div class="stat__value">70%</div>
+          <div class="stat__label">d’économies moyennes</div>
+        </div>
+        <div class="stat">
+          <div class="stat__value">98%</div>
+          <div class="stat__label">Clients satisfaits</div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+ <!-- ================== AVIS CLIENTS ================== -->
+<section class="testi" aria-labelledby="testi-title">
+  <div class="testi__inner">
+    <header class="testi__head">
+      <h2 id="testi-title" class="testi__title">Ils ont utilisé notre simulateur</h2>
+      <p class="testi__meta" aria-label="Note moyenne">
+        ★★★★☆ &nbsp; <strong>4,7 / 5</strong> — extraits d’avis clients récents (12 derniers mois)
+      </p>
+    </header>
+
+    <div class="testi__grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));max-width:950px;margin:0 auto;">
+      <!-- Avis 1 -->
+      <article class="tcard" aria-label="Avis client">
+        <div class="tcard__top">
+          <div class="avatar" aria-hidden="true">HB</div>
+          <div>
+            <div class="tcard__name">Hervé B.</div>
+            <div class="tcard__loc">Chartres (28) · 05/2025</div>
+          </div>
+        </div>
+        <div class="stars" aria-label="Note 5 sur 5">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)">
+            <path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/>
+          </svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)">
+            <path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/>
+          </svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)">
+            <path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/>
+          </svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)">
+            <path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/>
+          </svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)">
+            <path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/>
+          </svg>
+        </div>
+        <p class="tcard__text">“Estimation rapide et claire. Les chiffres annoncés sont cohérents avec ma conso.”</p>
+      </article>
+
+      <!-- Avis 2 -->
+      <article class="tcard" aria-label="Avis client">
+        <div class="tcard__top">
+          <div class="avatar" aria-hidden="true">CR</div>
+          <div>
+            <div class="tcard__name">Camille R.</div>
+            <div class="tcard__loc">Dreux (28) · 06/2025</div>
+          </div>
+        </div>
+        <div class="stars" aria-label="Note 4 sur 5">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)">
+            <path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/>
+          </svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)">
+            <path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/>
+          </svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)">
+            <path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/>
+          </svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)">
+            <path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/>
+          </svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:#d1d5db)">
+            <path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/>
+          </svg>
+        </div>
+        <p class="tcard__text">“Présentation simple et résultats fiables. Permet de juger si le projet est cohérent.”</p>
+      </article>
+
+      <!-- Avis 3 -->
+      <article class="tcard" aria-label="Avis client">
+        <div class="tcard__top">
+          <div class="avatar" aria-hidden="true">JM</div>
+          <div>
+            <div class="tcard__name">Julie M.</div>
+            <div class="tcard__loc">Lucé (28) · 04/2025</div>
+          </div>
+        </div>
+        <div class="stars" aria-label="Note 5 sur 5">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)">
+            <path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/>
+          </svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)">
+            <path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/>
+          </svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)">
+            <path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/>
+          </svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)">
+            <path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/>
+          </svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)">
+            <path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/>
+          </svg>
+        </div>
+        <p class="tcard__text">“Le coût est affiché noir sur blanc, avec une projection claire sur 15 ans.”</p>
+      </article>
+    </div>
+  </div>
+</section>
