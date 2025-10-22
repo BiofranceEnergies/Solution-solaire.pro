@@ -3,43 +3,100 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LP – Hero grand format</title>
+  <title>LP – Hero avec overlay type Lovable</title>
   <style>
-    html, body { margin:0; padding:0; background:#fff; }
-    *,*::before,*::after{ box-sizing:border-box; }
-
-    :root{
-      /* Hauteur augmentée pour une présence visuelle plus forte */
-      --hero-aspect: 16/8;     /* ratio plus haut → environ 50% de la hauteur d’écran */
-      --hero-min: 460px;       /* hauteur mini */
-      --hero-max: 720px;       /* plafond pour très grands écrans */
-      --hero-pos-y: 38%;       /* on garde le cadrage équilibré */
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
     }
 
-    .hero{
-      width:100%;
+    :root {
+      --hero-aspect: 16/8;    /* ratio vertical équilibré */
+      --hero-min: 460px;
+      --hero-max: 720px;
+      --hero-pos-y: 38%;      /* cadrage vertical */
+    }
+
+    .hero {
+      position: relative;
+      width: 100%;
       aspect-ratio: var(--hero-aspect);
       min-height: var(--hero-min);
       max-height: var(--hero-max);
       background:
         url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp")
         center var(--hero-pos-y) / cover no-repeat;
+      overflow: hidden;
     }
 
-    /* Ajustements pour mobiles */
+    /* Overlay dégradé façon Lovable */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.1));
+      z-index: 1;
+      pointer-events: none; /* ne bloque rien */
+    }
+
+    /* Texte exemple (optionnel, pour visualiser le rendu) */
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 8%;
+      transform: translateY(-50%);
+      z-index: 2;
+      color: #fff;
+      max-width: 480px;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    .hero-content h1 {
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.1;
+      margin: 0 0 12px;
+      font-weight: 800;
+    }
+    .hero-content p {
+      font-size: 18px;
+      line-height: 1.5;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
+    .hero-content .cta {
+      background: linear-gradient(180deg, #f59e0b, #fbbf24);
+      color: #1b1202;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+    }
+
     @media (max-width: 640px){
       :root{
         --hero-aspect: 16/10;
         --hero-pos-y: 42%;
         --hero-min: 360px;
       }
+      .hero-content {
+        left: 5%;
+        right: 5%;
+      }
     }
   </style>
 </head>
+
 <body>
-
-  <!-- Image de tête grand format -->
-  <header class="hero" aria-hidden="true"></header>
-
+  <header class="hero">
+    <div class="hero-content">
+      <h1>L’énergie solaire pour votre maison</h1>
+      <p>Réduisez vos factures d’électricité jusqu’à 70 % avec nos panneaux photovoltaïques de haute qualité.</p>
+      <a href="#" class="cta">Demander un devis gratuit</a>
+    </div>
+  </header>
 </body>
 </html>
