@@ -345,26 +345,25 @@ details[open] .faq__chev{ transform:rotate(180deg); opacity:1; }
 }
 
 .certifs__img {
-  height: 38px; /* taille de base réduite pour RGE et QualiPV */
+  height: 36px; /* base harmonisée */
   width: auto;
   display: block;
   filter: drop-shadow(0 1px 3px rgba(0,0,0,.25));
 }
 
-/* Logo Solution Solaire Pro mis en avant */
+/* Logo Solution Solaire Pro – plus mis en avant */
 .certifs__img--main {
-  height: 64px; /* taille accentuée */
-  margin: 0 2px;
+  height: 76px; /* taille augmentée pour être bien visible */
+  margin: 0 3px;
 }
 
-/* QualiPV légèrement plus grand que RGE pour compenser son format carré */
+/* Ajustement des autres */
 .certifs__img[src*="qualipv"] {
   height: 44px;
 }
 
-/* RGE légèrement réduit */
 .certifs__img[src*="RGE.webp"] {
-  height: 34px;
+  height: 32px;
 }
 
 @media (max-width: 860px) {
@@ -374,18 +373,19 @@ details[open] .faq__chev{ transform:rotate(180deg); opacity:1; }
     gap: 8px;
   }
   .certifs__img {
-    height: 30px;
-  }
-  .certifs__img--main {
-    height: 46px;
-  }
-  .certifs__img[src*="qualipv"] {
-    height: 36px;
-  }
-  .certifs__img[src*="RGE.webp"] {
     height: 28px;
   }
+  .certifs__img--main {
+    height: 52px;
+  }
+  .certifs__img[src*="qualipv"] {
+    height: 34px;
+  }
+  .certifs__img[src*="RGE.webp"] {
+    height: 26px;
+  }
 }
+
 
 
   
