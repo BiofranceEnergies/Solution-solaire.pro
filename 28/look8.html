@@ -435,17 +435,51 @@ details[open] .faq__chev{ transform:rotate(180deg); opacity:1; }
       <p class="lead">Estimez gratuitement le coût d’installation, la production et vos économies en moins d’une minute.</p>
     </div>
 
-    <div class="panel">
-      <div class="pill">Coût de votre installation & économies en direct</div>
-      <div class="row">
-        <label class="rect"><input type="text" placeholder="Votre code postal (ex : 28000)" inputmode="numeric" maxlength="5" autocomplete="postal-code"></label>
-        <label class="rect"><input type="text" placeholder="Votre facture élec / an (ex : 1 800 €)" inputmode="decimal" autocomplete="off"></label>
-      </div>
-      <label class="option"><input type="text" placeholder="Option pour un calcul plus précis — vos kWh/an (facultatif)" inputmode="decimal" autocomplete="off"></label>
-      <button class="cta" type="button">⚡ Calculer mon coût maintenant</button>
+   <div class="panel">
+  <form onsubmit="return __handleSubmitEtape1(event)" novalidate>
+    <div class="pill">Coût de votre installation & économies en direct</div>
+
+    <div class="row">
+      <label class="rect">
+        <input
+          id="codePostal"
+          type="text"
+          placeholder="Votre code postal (ex : 28000)"
+          inputmode="numeric"
+          maxlength="5"
+          pattern="[0-9]{5}"
+          autocomplete="postal-code"
+          required
+        >
+      </label>
+
+      <label class="rect">
+        <input
+          id="facture"
+          type="text"
+          placeholder="Votre facture élec / an (ex : 1 800 €)"
+          inputmode="decimal"
+          autocomplete="off"
+          required
+        >
+      </label>
     </div>
-  </div>
+
+    <label class="option">
+      <input
+        id="conso"
+        type="text"
+        placeholder="Option pour un calcul plus précis — vos kWh/an (facultatif)"
+        inputmode="decimal"
+        autocomplete="off"
+      >
+    </label>
+
+    <button id="simuler" class="cta" type="submit">⚡ Calculer mon coût maintenant</button>
+  </form>
+</div>
 </header>
+
 
 <main>
   <section class="steps-2025">
