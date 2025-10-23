@@ -1078,6 +1078,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
      // --- Calculs affichés (ajoutés juste avant le rendu) ---
 const autoconso = Math.min(Number(sc.prod||0), Number(conso||0));
 const gainAn    = autoconso * (Number.isFinite(prixKwh) ? prixKwh : 0);
+const gainMois  = gainAn / 12;
 const prixBrut  = Number.isFinite(sc.prix) ? sc.prix : null;
 const remise    = Number.isFinite(sc.remiseChantier) ? sc.remiseChantier : 0;
 const prixNet   = prixBrut !== null ? Math.max(0, prixBrut - remise) : null;
@@ -1126,6 +1127,12 @@ recap.innerHTML = `
         <div class="label">Gain 1ʳᵉ année (ordre de grandeur)</div>
         <div class="value">${Math.round(gainAn).toLocaleString('fr-FR')} € / an</div>
       </div>
+
+      <div class="kpi">
+  <div class="label">Économie moyenne mensuelle</div>
+  <div class="value">${Math.round(gainMois).toLocaleString('fr-FR')} € / mois</div>
+</div>
+
 
       ${ prixNet !== null ? `
         <div class="kpi">
