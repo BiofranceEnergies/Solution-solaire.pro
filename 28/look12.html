@@ -979,6 +979,80 @@ recap.innerHTML = `
 </section>
 `;
 
+// -- Palier 2 : Carte d'engagement -------------------------------------------------
+const locked = document.getElementById('lockedSection');
+if (locked){
+  const remiseTxt = Number.isFinite(sc.remiseChantier)
+    ? Math.round(sc.remiseChantier).toLocaleString('fr-FR')
+    : '800';
+
+  locked.innerHTML = `
+    <section class="lead-card" aria-label="Étape suivante">
+      <div class="lead-card__head">
+        <div style="text-align:center; font-weight:800; color:#334155;">
+          Vous avez vu vos panneaux et votre production…
+        </div>
+        <h3 class="subtitle" style="text-align:center;">Et si on allait plus loin&nbsp;?</h3>
+        <p class="lead-notes" style="text-align:center; margin:6px 0 0;">
+          Découvrez le coût précis de votre installation, vos économies et votre mensualité fixe.<br>
+          Profitez de <strong>${remiseTxt} €</strong> de remise immédiate <span class="note">(jusqu’au 31/10/2025)</span>.
+        </p>
+      </div>
+
+      <div class="badges">
+        <span class="badge-chip">🔒 Données protégées</span>
+        <span class="badge-chip">🖥️ Étude affichée immédiatement à l’écran</span>
+      </div>
+
+      <div class="lead-grid">
+        <label class="input">
+          <span style="color:#94a3b8;font-weight:700">Email</span>
+          <input id="leadEmail" type="email" placeholder="Votre email (facultatif)">
+        </label>
+        <label class="input">
+          <span style="color:#94a3b8;font-weight:700">Téléphone</span>
+          <input id="leadPhone" type="tel" inputmode="tel" autocomplete="tel"
+                 placeholder="06 12 34 56 78 (obligatoire)">
+        </label>
+      </div>
+
+      <div class="lead-notes">Un SMS de confirmation vous sera envoyé. Libre à vous d’échanger ensuite.</div>
+
+      <label class="lead-notes" style="display:flex;align-items:center;gap:8px;margin-top:8px">
+        <input id="leadSmsOnly" type="checkbox">
+        Je consens à être contacté par SMS uniquement.
+      </label>
+
+      <div class="lead-notes" style="display:flex;align-items:flex-start;gap:8px;margin-top:6px">
+        <span>✅</span>
+        <span>Votre projet s’autofinance grâce à vos économies. Vérifiez-le par vous-même&nbsp;!</span>
+      </div>
+
+      <div class="lead-cta">
+        <button id="leadSubmit" class="cta" type="button">📊 Voir mon étude complète et mes économies</button>
+      </div>
+
+      <div class="lead-alert">⚠️ Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</div>
+      <div class="lead-foot">Vos données ne seront jamais revendues ni utilisées à d’autres fins.</div>
+    </section>
+  `;
+  locked.style.display = 'block';
+
+  // (Optionnel) micro-validation téléphone FR + feedback simple
+  const telInput = document.getElementById('leadPhone');
+  const btnLead  = document.getElementById('leadSubmit');
+  btnLead?.addEventListener('click', () => {
+    const tel = (telInput?.value || '').replace(/\D/g,'');
+    const ok = /^0[1-9]\d{8}$/.test(tel); // FR basique
+    if (!ok){
+      alert('Merci de saisir un numéro de téléphone mobile valide (format FR).');
+      telInput?.focus();
+      return;
+    }
+    // Ici : envoi vers ton endpoint / webhook si tu veux (à définir plus tard).
+    alert('Parfait. Votre étude complète va être affichée (simulation étape suivante).');
+  });
+}
 
 
 
