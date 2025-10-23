@@ -886,56 +886,50 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 <script>
   (function(){
-    const overlay  = document.getElementById('calc-overlay');
-    const btn      = document.getElementById('simuler');
-    const inputCP  = document.getElementById('codePostal');
-    const inputFact= document.getElementById('facture');
+    const overlay   = document.getElementById('calc-overlay');
+    const btn       = document.getElementById('simuler');
+    const inputCP   = document.getElementById('codePostal');
+    const inputFact = document.getElementById('facture');
 
     function showCalcOverlay(msg){
       if (!overlay) return;
-      if (msg) {
-        const t = overlay.querySelector('#calc-title');
-        if (t) t.textContent = msg;
-      }
+      if (msg) { const t = overlay.querySelector('#calc-title'); if (t) t.textContent = msg; }
       overlay.style.display = 'flex';
       document.body.classList.add('no-scroll');
       overlay.querySelector('.panel')?.focus();
       if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
     }
-
     function hideCalcOverlay(){
       if (!overlay) return;
       overlay.style.display = 'none';
       document.body.classList.remove('no-scroll');
       if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
     }
-
     function validateStep1(){
       const cp = (inputCP?.value || '').trim();
-      const factureRaw = (inputFact?.value || '').trim().replace(',', '.');
+      const factureRaw = (inputFact?.value || '');
+      const num = parseFloat(factureRaw.replace(/\s/g,'').replace(',', '.').replace(/[^0-9.]/g,''));
       const okCP = /^[0-9]{5}$/.test(cp);
-      const val = parseFloat(factureRaw);
-      const okFact = Number.isFinite(val) && val > 0;
+      const okFact = Number.isFinite(num) && num > 0;
       if (!okCP)  { alert('Veuillez entrer un code postal valide (5 chiffres).'); return false; }
-      if (!okFact){ alert('Veuillez indiquer une facture annuelle valide.');      return false; }
+      if (!okFact){ alert("Veuillez indiquer une facture annuelle valide."); return false; }
       return true;
     }
 
     async function fetchScenarios(departement){
       try{
-        const url = 'https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec';
-        const r = await fetch(url);
+        const r = await fetch('https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec');
         const data = await r.json();
         return (data || [])
-          .filter(row => String(row.Departement || '') === String(departement))
+          .filter(row => String(row.Departement||'') === String(departement))
           .map(row => ({
-            prixKwh: parseFloat((row.PrixKwh||'').toString().replace(',', '.').replace(/[^0-9.]/g,'')),
+            prixKwh: parseFloat(String(row.PrixKwh||'').replace(',', '.').replace(/[^0-9.]/g,'')),
             puissance: row.Puissance,
             prod: parseFloat(row.Prod),
             seuil: parseFloat(row.Seuil),
             panels: parseInt(row.Panels),
             prix: parseFloat(row.Prix),
-            remiseChantier: parseFloat((row.RemiseChantier||'').toString().replace(',', '.').replace(/[^0-9.]/g,'')),
+            remiseChantier: parseFloat(String(row.RemiseChantier||'').replace(',', '.').replace(/[^0-9.]/g,'')),
             mensualite: parseFloat(row.Mensualite),
             taeg: parseFloat(row.Taeg),
             total: parseFloat(row.Total),
@@ -943,7 +937,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
           }));
       }catch(e){
         console.error('fetchScenarios error', e);
-        alert('Impossible de charger les données, réessayez plus tard.');
+        alert("Impossible de charger les données, réessayez plus tard.");
         return [];
       }
     }
@@ -967,11 +961,78 @@ document.addEventListener("DOMContentLoaded", ()=>{
       }
 
       console.log('Scénarios chargés :', scenarios.length, scenarios);
+
+      // --- Calculs ---
+      const cp = inputCP.value.trim();
+      const facture = parseFloat((inputFact.value || '')
+        .replace(/\s/g,'').replace(',', '.').replace(/[^0-9.]/g,'')
+      );
+
+      const inputConso = document.getElementById('conso');
+      let conso, prixKwh;
+      if (inputConso && inputConso.value) {
+        conso   = parseFloat((inputConso.value || '').replace(/\s/g,'').replace(',', '.').replace(/[^0-9.]/g,''));
+        prixKwh = facture / conso;
+      } else {
+        prixKwh = scenarios[0].prixKwh;
+        conso   = facture / prixKwh;
+      }
+
+      const minProd = Math.min(...scenarios.map(s => Number(s.prod) || 0));
+      if (conso < minProd) {
+        alert("Consommation trop faible : installation non conseillée.");
+        hideCalcOverlay();
+        return false;
+      }
+      let sc = scenarios.filter(s => (s.prod||0) <= conso).sort((a,b)=> (b.prod||0) - (a.prod||0))[0];
+      if (!sc) sc = scenarios.sort((a,b)=> (b.prod||0) - (a.prod||0))[0];
+
+      // --- Rendu ---
+      const recap = document.getElementById('recap');
+      if (!recap){
+        console.warn('#recap manquant dans le HTML');
+        hideCalcOverlay();
+        return false;
+      }
+      recap.innerHTML = `
+        <div class="card" style="max-width:720px;margin:16px auto;border:1px solid #e5e7eb;border-radius:12px;padding:14px;background:#fff;box-shadow:0 10px 24px rgba(2,6,23,.06)">
+          <h2 style="margin:0 0 10px;font-weight:800">Votre estimation personnalisée</h2>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+            <div style="border:1px solid #e5e7eb;border-radius:10px;padding:10px">
+              <div style="color:#374151;font-size:13px">Code postal</div>
+              <div style="font-weight:700">${cp}</div>
+            </div>
+            <div style="border:1px solid #e5e7eb;border-radius:10px;padding:10px">
+              <div style="color:#374151;font-size:13px">Conso annuelle estimée</div>
+              <div style="color:#16a34a;font-weight:800">${Math.round(conso).toLocaleString('fr-FR')} kWh</div>
+            </div>
+            <div style="border:1px solid #e5e7eb;border-radius:10px;padding:10px">
+              <div style="color:#374151;font-size:13px">Prix kWh TTC utilisé</div>
+              <div>${(Number.isFinite(prixKwh)?prixKwh:0).toFixed(3)} €</div>
+            </div>
+            <div style="border:1px solid #e5e7eb;border-radius:10px;padding:10px">
+              <div style="color:#374151;font-size:13px">Facture annuelle</div>
+              <div>${(Number.isFinite(facture)?facture:0).toLocaleString('fr-FR')} €</div>
+            </div>
+            <div style="grid-column:1/-1;border:1px solid #e5e7eb;border-radius:10px;padding:10px">
+              <div style="color:#374151;font-size:13px">Puissance & production</div>
+              <div style="color:#16a34a;font-weight:800;font-size:18px">
+                ${sc.puissance} — ${sc.panels} panneaux (500 W) • ${(sc.prod||0).toLocaleString('fr-FR')} kWh/an
+              </div>
+            </div>
+          </div>
+        </div>`;
+      recap.style.display = 'block';
+
+      // scroll vers le résultat
+      recap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
       hideCalcOverlay();
       return false;
     };
   })();
 </script>
+
 
 </body>
 </html>
