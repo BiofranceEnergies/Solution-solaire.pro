@@ -879,6 +879,60 @@ document.addEventListener("DOMContentLoaded", ()=>{
     <p id="calc-desc" class="desc">Nous préparons votre estimation.</p>
   </div>
 </div>
+<script>
+  // === Étape 1 : overlay + validation basique ===
+  (function(){
+    const overlay = document.getElementById('calc-overlay');
+    const btn = document.getElementById('simuler');
+    const inputCP = document.getElementById('codePostal');
+    const inputFact = document.getElementById('facture');
+
+    // --- Affiche l’overlay ---
+    function showCalcOverlay(msg){
+      if (!overlay) return;
+      if (msg) {
+        const t = overlay.querySelector('#calc-title');
+        if (t) t.textContent = msg;
+      }
+      overlay.style.display = 'flex';
+      document.body.classList.add('no-scroll');
+      overlay.querySelector('.panel')?.focus();
+      if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
+    }
+
+    // --- Cache l’overlay ---
+    function hideCalcOverlay(){
+      if (!overlay) return;
+      overlay.style.display = 'none';
+      document.body.classList.remove('no-scroll');
+      if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+    }
+
+    // --- Validation légère ---
+    function validateStep1(){
+      const cp = (inputCP?.value || '').trim();
+      const factureRaw = (inputFact?.value || '').trim().replace(',', '.');
+      const okCP = /^[0-9]{5}$/.test(cp);
+      const val = parseFloat(factureRaw);
+      const okFact = Number.isFinite(val) && val > 0;
+      if (!okCP) { alert('Veuillez entrer un code postal valide (5 chiffres).'); return false; }
+      if (!okFact){ alert("Veuillez indiquer une facture annuelle valide."); return false; }
+      return true;
+    }
+
+    // --- Gestion du formulaire ---
+    window.__handleSubmitEtape1 = function(ev){
+      ev.preventDefault();
+      showCalcOverlay('Calcul en cours…');
+
+      const valid = validateStep1();
+
+      // Étape 1 : pas de vrai calcul encore, juste fermeture de l’overlay
+      setTimeout(()=>{ hideCalcOverlay(); }, 600);
+      return false;
+    };
+  })();
+</script>
 
 </body>
 </html>
