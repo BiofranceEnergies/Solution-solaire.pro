@@ -846,117 +846,101 @@ const prixNet   = prixBrut !== null ? Math.max(0, prixBrut - remise) : null;
 
 // --- Rendu (NOUVEAU) ---
 recap.innerHTML = `
-  <div class="result-card" role="region" aria-label="Votre estimation personnalisée">
-    <h2>Votre estimation personnalisée</h2>
+<section class="result-card" role="region" aria-label="Votre estimation personnalisée">
+  <h2>Votre estimation personnalisée</h2>
 
-    <div class="result-grid" style="margin-top:12px">
-      <div class="kpi">
-        <div class="label">Code postal</div>
-        <div class="value">${cp}</div>
-      </div>
-
-      <div class="kpi">
-        <div class="label">Conso annuelle estimée</div>
-        <div class="value" style="color:#16a34a">${Math.round(conso).toLocaleString('fr-FR')} kWh</div>
-      </div>
-
-      <div class="kpi">
-        <div class="label">Prix du kWh utilisé</div>
-        <div class="value">${(Number.isFinite(prixKwh)?prixKwh:0).toFixed(3)} €</div>
-      </div>
-
-      <div class="kpi">
-        <div class="label">Facture annuelle</div>
-        <div class="value">${(Number.isFinite(facture)?facture:0).toLocaleString('fr-FR')} €</div>
-      </div>
-
-      <div class="kpi kpi--highlight" style="grid-column:1/-1">
-        <div class="label">Dimensionnement proposé</div>
-        <div class="value">
-          ${sc.puissance} — ${sc.panels} panneaux (500 W) • ${(sc.prod||0).toLocaleString('fr-FR')} kWh/an
-        </div>
-      </div>
-
-      <div class="kpi" style="grid-column:1/-1">
-  <div class="value" style="font-size:18px;font-weight:700;color:#16a34a;margin-bottom:6px">
-    ${((autoconso / conso) * 100).toFixed(1)} % <span style="color:#0f172a;font-weight:600">de votre consommation est couverte par votre production</span>
-  </div>
-  <div style="color:#334155;font-size:13px;line-height:1.5;margin-top:2px">
-    Votre production est valorisée à 100&nbsp;% grâce à la batterie virtuelle, même si elle ne couvre pas 100&nbsp;% de votre consommation. 
-    <em>Hypothèse standard&nbsp;: exposition Sud/Sud-Est, pente de toit 35°.</em>
-  </div>
-</div>
-
-
-      <div class="kpi">
-        <div class="label">Gain 1ʳᵉ année (ordre de grandeur)</div>
-        <div class="value">${Math.round(gainAn).toLocaleString('fr-FR')} € / an</div>
-      </div>
-
-      <div class="kpi">
-        <div class="label">Économie moyenne mensuelle</div>
-        <div class="value">${Math.round(gainMois).toLocaleString('fr-FR')} € / mois</div>
-      </div>
-    </div> <!-- /result-grid -->
-
- ${ (Number.isFinite(sc.remiseChantier) && sc.remiseChantier > 0) ? `
-  <div class="financial-banner" style="text-align:center; background:#fff7ed; border:1px solid #fcd34d; border-radius:12px; padding:18px; margin:24px 0">
-    <div style="font-weight:700; color:#7c2d12; margin-bottom:4px">
-      Offre spéciale « Groupage chantiers »
+  <div class="result-grid">
+    <div class="kpi">
+      <div class="label">Code postal</div>
+      <div class="value">${cp}</div>
     </div>
-    <div style="font-size:22px; font-weight:900; color:#7c2d12;">
-      ${Math.round(sc.remiseChantier).toLocaleString('fr-FR')} € de remise immédiate
+
+    <div class="kpi">
+      <div class="label">Conso annuelle estimée</div>
+      <div class="value">${Math.round(conso).toLocaleString('fr-FR')} kWh</div>
     </div>
-    <div class="note" style="margin-top:6px; color:#334155">
-      (à déduire du prix TTC indiqué ci-dessous)
+
+    <div class="kpi">
+      <div class="label">Prix du kWh utilisé</div>
+      <div class="value">${(Number.isFinite(prixKwh)?prixKwh:0).toFixed(3)} €</div>
     </div>
-    <div class="note" style="margin-top:4px; color:#334155">
-      <strong>Valable jusqu’au 31 octobre 2025</strong>
+
+    <div class="kpi">
+      <div class="label">Facture annuelle</div>
+      <div class="value">${(Number.isFinite(facture)?facture:0).toLocaleString('fr-FR')} €</div>
+    </div>
+
+    <div class="kpi kpi--highlight" style="grid-column:1/-1">
+      <div class="label">Dimensionnement proposé</div>
+      <div class="value">
+        ${sc.puissance} — ${sc.panels} panneaux (500 W) • ${(sc.prod||0).toLocaleString('fr-FR')} kWh/an
+      </div>
+    </div>
+
+    <div class="kpi" style="grid-column:1/-1">
+      <div class="label">% de votre consommation couverte</div>
+      <div class="value">
+        <strong>${((autoconso / conso) * 100).toFixed(1)} %</strong> de votre consommation est couverte par votre production
+      </div>
+      <p class="note">
+        Votre production est valorisée à 100 % grâce à la batterie virtuelle, même si elle ne couvre pas 100 % de votre consommation.
+        <em> Hypothèse standard : exposition Sud/Sud-Est, pente de toit 35°.</em>
+      </p>
+    </div>
+
+    <div class="kpi">
+      <div class="label">Gain 1ʳᵉ année (ordre de grandeur)</div>
+      <div class="value">${Math.round(gainAn).toLocaleString('fr-FR')} € / an</div>
+    </div>
+
+    <div class="kpi">
+      <div class="label">Économie moyenne mensuelle</div>
+      <div class="value">${Math.round(gainMois).toLocaleString('fr-FR')} € / mois</div>
     </div>
   </div>
-` : `` }
 
+  ${ (Number.isFinite(sc.remiseChantier) && sc.remiseChantier > 0) ? `
+    <div class="financial-banner">
+      <div style="font-weight:800">Offre spéciale « Groupage chantiers »</div>
+      <div style="font-weight:900; font-size:20px;">
+        ${Math.round(sc.remiseChantier).toLocaleString('fr-FR')} € de remise immédiate
+      </div>
+      <p class="note">(déduite du prix TTC indiqué ci-dessous) • Valable jusqu’au 31 octobre 2025</p>
+    </div>
+  ` : `` }
 
-    <div class="financial-card">
-      <h3 class="financial-title">Coût et financement</h3>
+  <div class="financial-card">
+    <h3 class="financial-title">Coût et financement</h3>
 
-      ${ (Number.isFinite(sc.prix)) ? `
-        <p style="margin:0 0 8px">
-          <strong>Installation ${sc.puissance}</strong> :
-          <span class="token">${Math.round(sc.prix).toLocaleString('fr-FR')} € TTC</span>
-          <span class="note">(prix indicatif hors options)</span>
+    ${ Number.isFinite(sc.prix) ? `
+      <p>
+        <strong>Installation ${sc.puissance}</strong> :
+        <span class="token">${Math.round(sc.prix).toLocaleString('fr-FR')} € TTC</span>
+        <span class="note">(prix indicatif hors options)</span>
+      </p>
+    ` : `` }
+
+    ${ Number.isFinite(sc.mensualite) ? `
+      <p class="note" style="font-weight:700">Option financement <span class="note">(facultatif)</span></p>
+      <div class="tokens">
+        <span class="token">${sc.mensualite.toLocaleString('fr-FR')} € / mois</span>
+        ${ Number.isFinite(sc.dureeMois) ? `<span class="token">Durée : ${sc.dureeMois} mois</span>` : `` }
+        ${ Number.isFinite(sc.taeg) ? `<span class="token">TAEG fixe : ${sc.taeg}%</span>` : `` }
+      </div>
+
+      ${ Number.isFinite(sc.total) ? `
+        <p><strong>Prix total</strong> :
+          <span class="token">${Number(sc.total).toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2})} €</span>
         </p>
       ` : `` }
 
-      ${ Number.isFinite(sc.mensualite) ? `
-        <p style="margin:10px 0 4px; font-weight:700">
-          Option financement <span class="note">(facultatif)</span>
-        </p>
-        <div class="tokens">
-          <span class="token">${sc.mensualite.toLocaleString('fr-FR')} € / mois</span>
-          ${ Number.isFinite(sc.dureeMois) ? `<span class="token">Durée : ${sc.dureeMois} mois</span>` : `` }
-          ${ Number.isFinite(sc.taeg) ? `<span class="token">TAEG fixe : ${sc.taeg}%</span>` : `` }
-        </div>
-
-        ${ Number.isFinite(sc.total) ? `
-          <p style="margin:6px 0 0"><strong>Prix total</strong> :
-            <span class="token">${Number(sc.total).toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2})} €</span>
-          </p>
-        ` : `` }
-
-        <p class="note" style="margin:10px 0 0">
-          Financement proposé par notre partenaire, sous réserve d’acceptation.
-        </p>
-        <div class="note note-alert">
-          ⚠️ Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.
-        </div>
-        <p class="note" style="margin:8px 0 0">
-          Estimation indicative. Une visite technique est nécessaire pour un devis ferme.
-        </p>
-      ` : `` }
-    </div>
+      <p class="note">Financement proposé par notre partenaire, sous réserve d’acceptation.</p>
+      <div class="note note-alert">⚠️ Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</div>
+      <p class="note">Estimation indicative. Une visite technique est nécessaire pour un devis ferme.</p>
+    ` : `` }
   </div>
-`; // <-- ferme .result-card ET la template string
+</section>
+`;
 
 
 
