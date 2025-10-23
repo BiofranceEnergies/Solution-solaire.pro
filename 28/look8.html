@@ -879,15 +879,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
     <p id="calc-desc" class="desc">Nous préparons votre estimation.</p>
   </div>
 </div>
+
 <script>
-  // === Étape 1 : overlay + validation basique ===
   (function(){
-    const overlay = document.getElementById('calc-overlay');
-    const btn = document.getElementById('simuler');
-    const inputCP = document.getElementById('codePostal');
-    const inputFact = document.getElementById('facture');
+    const overlay  = document.getElementById('calc-overlay');
+    const btn      = document.getElementById('simuler');
+    const inputCP  = document.getElementById('codePostal');
+    const inputFact= document.getElementById('facture');
 
-    // --- Affiche l’overlay ---
     function showCalcOverlay(msg){
       if (!overlay) return;
       if (msg) {
@@ -900,48 +899,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
       if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
     }
 
-    // --- Cache l’overlay ---
-    function hideCalcOverlay(){
-      if (!overlay) return;
-      overlay.style.display = 'none';
-      document.body.classList.remove('no-scroll');
-      if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
-    }
-
-    // --- Validation légère ---
-    function validateStep1(){
-      const cp = (inputCP?.value || '').trim();
-      const factureRaw = (inputFact?.value || '').trim().replace(',', '.');
-      const okCP = /^[0-9]{5}$/.test(cp);
-      const val = parseFloat(factureRaw);
-      const okFact = Number.isFinite(val) && val > 0;
-      if (!okCP) { alert('Veuillez entrer un code postal valide (5 chiffres).'); return false; }
-      if (!okFact){ alert("Veuillez indiquer une facture annuelle valide."); return false; }
-      return true;
-    }
-
-    <script>
-  // === Étape 2 : overlay + validation + chargement scénarios ===
-  (function(){
-    const overlay = document.getElementById('calc-overlay');
-    const btn = document.getElementById('simuler');
-    const inputCP = document.getElementById('codePostal');
-    const inputFact = document.getElementById('facture');
-
-    let scenarios = [];           
-    let selectedScenario = null;  
-
-    function showCalcOverlay(msg){
-      if (!overlay) return;
-      if (msg) {
-        const t = overlay.querySelector('#calc-title');
-        if (t) t.textContent = msg;
-      }
-      overlay.style.display = 'flex';
-      document.body.classList.add('no-scroll');
-      overlay.querySelector('.panel')?.focus();
-      if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
-    }
     function hideCalcOverlay(){
       if (!overlay) return;
       overlay.style.display = 'none';
@@ -955,8 +912,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
       const okCP = /^[0-9]{5}$/.test(cp);
       const val = parseFloat(factureRaw);
       const okFact = Number.isFinite(val) && val > 0;
-      if (!okCP) { alert('Veuillez entrer un code postal valide (5 chiffres).'); return false; }
-      if (!okFact){ alert("Veuillez indiquer une facture annuelle valide."); return false; }
+      if (!okCP)  { alert('Veuillez entrer un code postal valide (5 chiffres).'); return false; }
+      if (!okFact){ alert('Veuillez indiquer une facture annuelle valide.');      return false; }
       return true;
     }
 
@@ -982,7 +939,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
           }));
       }catch(e){
         console.error('fetchScenarios error', e);
-        alert("Impossible de charger les données, réessayez plus tard.");
+        alert('Impossible de charger les données, réessayez plus tard.');
         return [];
       }
     }
@@ -991,19 +948,17 @@ document.addEventListener("DOMContentLoaded", ()=>{
       ev.preventDefault();
       showCalcOverlay('Calcul en cours…');
 
-      if(!validateStep1()){
+      if (!validateStep1()){
         hideCalcOverlay();
         return false;
       }
 
-      const cp = inputCP.value.trim();
-      const departement = cp.substring(0,2);
-
-      scenarios = await fetchScenarios(departement);
+      const departement = (inputCP.value.trim()).substring(0,2);
+      const scenarios = await fetchScenarios(departement);
 
       if (!scenarios.length){
         hideCalcOverlay();
-        alert("Aucune donnée disponible pour ce département.");
+        alert('Aucune donnée disponible pour ce département.');
         return false;
       }
 
@@ -1013,7 +968,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
     };
   })();
 </script>
-
 
 </body>
 </html>
