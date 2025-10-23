@@ -457,19 +457,19 @@ body.results-mode .panel{
   margin-bottom: 0;
 }
 
-/* Cache uniquement les sections du bas — SAUF les mentions légales */
-body.results-mode .steps-2025,
-body.results-mode .why,
-body.results-mode .stats-bg,
-body.results-mode .testi,
-body.results-mode .faq{
+/* ===== Mode résultat : n'affiche que le récapitulatif et les mentions légales ===== */
+body.results-mode main > * {
   display: none !important;
 }
 
-/* Laisse les mentions visibles */
-body.results-mode .legal{
+body.results-mode main > #recap,
+body.results-mode main > .legal {
   display: block !important;
-  margin-top: 24px; /* optionnel, juste pour un peu d’air */
+}
+
+/* Petit espace pour respirer sous le récap */
+body.results-mode main > .legal {
+  margin-top: 24px;
 }
 
 
