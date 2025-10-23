@@ -1137,16 +1137,15 @@ recap.innerHTML = `
       </div>
 
       <div class="kpi" style="grid-column:1/-1">
-        <div class="label">% de votre conso couverte</div>
-        <div class="value" style="color:#16a34a;font-size:18px;font-weight:800;margin-bottom:4px">
-          ${((autoconso / conso) * 100).toFixed(1)} %
-        </div>
-        <div style="color:#334155;font-size:13px;line-height:1.5">
-          Votre production est valorisée à 100&nbsp;% grâce à la batterie virtuelle,<br>
-          même si elle ne couvre pas 100&nbsp;% de votre consommation.<br>
-          <em>Hypothèse standard&nbsp;: exposition Sud/Sud-Est, pente de toit 35°.</em>
-        </div>
-      </div>
+  <div class="value" style="font-size:18px;font-weight:700;color:#16a34a;margin-bottom:6px">
+    ${((autoconso / conso) * 100).toFixed(1)} % <span style="color:#0f172a;font-weight:600">de votre consommation est couverte par votre production</span>
+  </div>
+  <div style="color:#334155;font-size:13px;line-height:1.5;margin-top:2px">
+    Votre production est valorisée à 100&nbsp;% grâce à la batterie virtuelle, même si elle ne couvre pas 100&nbsp;% de votre consommation. 
+    <em>Hypothèse standard&nbsp;: exposition Sud/Sud-Est, pente de toit 35°.</em>
+  </div>
+</div>
+
 
       <div class="kpi">
         <div class="label">Gain 1ʳᵉ année (ordre de grandeur)</div>
