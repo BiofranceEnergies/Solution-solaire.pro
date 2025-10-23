@@ -440,37 +440,50 @@ body.no-scroll{ overflow:hidden; }
 #recap .card {
   color: var(--ink); /* texte sombre lisible sur fond blanc */
 }
- /* ============== MODE RÉSULTAT ============== */
-/* Atténue un peu le header et réduit sa hauteur */
+/* ============== MODE RÉSULTAT ============== */
+/* Le héros reste visible normalement */
 body.results-mode header.hero{
-  height:auto;
-  min-height:unset;
-  padding-bottom:24px;
+  height: var(--hero-h-desktop);
+  min-height: var(--hero-min);
+  padding-bottom: 0;
+}
+@media (max-width:860px){
+  body.results-mode header.hero{ height: var(--hero-h-mobile); }
 }
 body.results-mode header.hero::before{
-  opacity:.25; /* facultatif : assombrit moins le fond */
+  opacity: 1 !important;
 }
-
-/* Optionnel : resserre le petit panneau du héros */
 body.results-mode .panel{
-  margin-bottom:12px;
+  margin-bottom: 0;
 }
 
-/* Cache toutes les sections non-résultat */
+/* Cache uniquement les sections du bas — SAUF les mentions légales */
 body.results-mode .steps-2025,
 body.results-mode .why,
 body.results-mode .stats-bg,
 body.results-mode .testi,
-body.results-mode .faq,
-body.results-mode .legal{
-  display:none !important;
+body.results-mode .faq{
+  display: none !important;
 }
 
-/* S’assure que le récap est bien visible en mode résultat */
+/* Laisse les mentions visibles */
+body.results-mode .legal{
+  display: block !important;
+  margin-top: 24px; /* optionnel, juste pour un peu d’air */
+}
+
+
+/* Le récap reste visible sous le héros */
 body.results-mode #recap{
   display:block !important;
-  margin-top:8px;
+  margin-top: 12px;
 }
+
+/* Texte sombre sur fond blanc pour le récap */
+#recap .card {
+  color: var(--ink);
+}
+
 </style>
 </head>
 
