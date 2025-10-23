@@ -1160,57 +1160,60 @@ recap.innerHTML = `
     </div> <!-- /result-grid -->
 
     ${ (Number.isFinite(sc.remiseChantier) && sc.remiseChantier > 0) ? `
-  <div class="financial-banner">
-    <div style="text-align:center; font-weight:800; color:#7c2d12; margin-bottom:4px">
-      Offre spéciale « Groupage chantiers »
-    </div>
-    <div style="text-align:center; font-size:22px; font-weight:900; color:#7c2d12;">
-      ${Math.round(sc.remiseChantier).toLocaleString('fr-FR')} € de remise immédiate
-    </div>
-    <div class="note" style="text-align:center; margin-top:6px">
-      (déduite du prix TTC indiqué ci-dessous)
-    </div>
-  </div>
-` : `` }
-
-<div class="financial-card">
-  <h3 class="financial-title">Coût et financement</h3>
-
-  ${ (Number.isFinite(sc.prix)) ? `
-    <p style="margin:0 0 8px">
-      <strong>Installation ${sc.puissance}</strong> :
-      <span class="token">${Math.round(sc.prix).toLocaleString('fr-FR')} € TTC</span>
-      <span class="note">(prix indicatif hors options)</span>
-    </p>
-  ` : `` }
-
-  ${ Number.isFinite(sc.mensualite) ? `
-    <p style="margin:10px 0 4px; font-weight:700">
-      Option financement <span class="note">(facultatif)</span>
-    </p>
-    <div class="tokens">
-      <span class="token">${sc.mensualite.toLocaleString('fr-FR')} € / mois</span>
-      ${ Number.isFinite(sc.dureeMois) ? `<span class="token">Durée : ${sc.dureeMois} mois</span>` : `` }
-      ${ Number.isFinite(sc.taeg) ? `<span class="token">TAEG fixe : ${sc.taeg}%</span>` : `` }
-    </div>
-
-    ${ Number.isFinite(sc.total) ? `
-      <p style="margin:6px 0 0"><strong>Prix total</strong> :
-        <span class="token">${Number(sc.total).toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2})} €</span>
-      </p>
+      <div class="financial-banner">
+        <div style="text-align:center; font-weight:800; color:#7c2d12; margin-bottom:4px">
+          Offre spéciale « Groupage chantiers »
+        </div>
+        <div style="text-align:center; font-size:22px; font-weight:900; color:#7c2d12;">
+          ${Math.round(sc.remiseChantier).toLocaleString('fr-FR')} € de remise immédiate
+        </div>
+        <div class="note" style="text-align:center; margin-top:6px">
+          (déduite du prix TTC indiqué ci-dessous)
+        </div>
+      </div>
     ` : `` }
 
-    <p class="note" style="margin:10px 0 0">
-      Financement proposé par notre partenaire, sous réserve d’acceptation.
-    </p>
-    <div class="note note-alert">
-      ⚠️ Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.
+    <div class="financial-card">
+      <h3 class="financial-title">Coût et financement</h3>
+
+      ${ (Number.isFinite(sc.prix)) ? `
+        <p style="margin:0 0 8px">
+          <strong>Installation ${sc.puissance}</strong> :
+          <span class="token">${Math.round(sc.prix).toLocaleString('fr-FR')} € TTC</span>
+          <span class="note">(prix indicatif hors options)</span>
+        </p>
+      ` : `` }
+
+      ${ Number.isFinite(sc.mensualite) ? `
+        <p style="margin:10px 0 4px; font-weight:700">
+          Option financement <span class="note">(facultatif)</span>
+        </p>
+        <div class="tokens">
+          <span class="token">${sc.mensualite.toLocaleString('fr-FR')} € / mois</span>
+          ${ Number.isFinite(sc.dureeMois) ? `<span class="token">Durée : ${sc.dureeMois} mois</span>` : `` }
+          ${ Number.isFinite(sc.taeg) ? `<span class="token">TAEG fixe : ${sc.taeg}%</span>` : `` }
+        </div>
+
+        ${ Number.isFinite(sc.total) ? `
+          <p style="margin:6px 0 0"><strong>Prix total</strong> :
+            <span class="token">${Number(sc.total).toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2})} €</span>
+          </p>
+        ` : `` }
+
+        <p class="note" style="margin:10px 0 0">
+          Financement proposé par notre partenaire, sous réserve d’acceptation.
+        </p>
+        <div class="note note-alert">
+          ⚠️ Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.
+        </div>
+        <p class="note" style="margin:8px 0 0">
+          Estimation indicative. Une visite technique est nécessaire pour un devis ferme.
+        </p>
+      ` : `` }
     </div>
-    <p class="note" style="margin:8px 0 0">
-      Estimation indicative. Une visite technique est nécessaire pour un devis ferme.
-    </p>
-  ` : `` }
-</div>
+  </div>
+`; // <-- ferme .result-card ET la template string
+
 
 
 
