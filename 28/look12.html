@@ -228,14 +228,28 @@
   #calc-overlay .desc{color:#374151;font-size:14px;margin:0;}
 
   /* ============== MODE RÉSULTAT ============== */
-  body.results-mode header.hero{height:var(--hero-h-desktop);min-height:var(--hero-min);padding-bottom:0;}
-  @media (max-width:860px){ body.results-mode header.hero{ height: var(--hero-h-mobile); } }
-  body.results-mode header.hero::before{opacity:1 !important;}
-  body.results-mode .panel{margin-bottom:0;}
-  body.results-mode main > *{display:none !important;}
-  body.results-mode main > #recap, body.results-mode main > .legal{display:block !important;}
-  body.results-mode main > .legal{margin-top:24px;}
-  body.results-mode #recap{display:block !important;margin-top:12px;}
+body.results-mode header.hero{
+  height:var(--hero-h-desktop);
+  min-height:var(--hero-min);
+  padding-bottom:0;
+}
+@media (max-width:860px){
+  body.results-mode header.hero{ height:var(--hero-h-mobile); }
+}
+body.results-mode header.hero::before{opacity:1 !important;}
+body.results-mode .panel{margin-bottom:0;}
+
+/* Cache tout sauf recap, lockedSection et mentions */
+body.results-mode main > *{display:none !important;}
+body.results-mode main > #recap,
+body.results-mode main > #lockedSection,
+body.results-mode main > .legal{
+  display:block !important;
+}
+body.results-mode main > .legal{margin-top:24px;}
+body.results-mode #recap{display:block !important;margin-top:12px;}
+#lockedSection{margin-top:12px;}
+
 
   /* ===== Résultats – style 2025 ===== */
   .result-card{
