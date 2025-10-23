@@ -252,15 +252,17 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 
 
   /* ===== Résultats – style 2025 ===== */
-  .result-card{
-    max-width: 860px; margin: 16px auto; padding: 18px;
-    background:#fff; color:var(--ink); border:1px solid var(--border);
-    border-radius:16px; box-shadow:0 6px 18px rgba(15,23,42,.06);
-  }
-  .result-card h2{ margin:0 0 20px; font-weight:900; font-size:clamp(20px,2.4vw,24px); }
-  .result-grid{ display:grid; gap:12px; grid-template-columns:1fr; }
-  @media(min-width:780px){ .result-grid{ grid-template-columns:repeat(2,1fr); } }
+.result-card{ ... }
+.result-card h2{ ... }
+.result-grid{ display:grid; gap:12px; grid-template-columns:1fr; }
+@media(min-width:780px){ .result-grid{ grid-template-columns:repeat(2,1fr); } }
 
+/* ➜ ajoute ceci juste après */
+#lockedPart{ display:none; margin-top:12px; } /* confort */
+#lockedPart .result-grid{ display:grid; gap:12px; grid-template-columns:1fr; }
+@media (min-width:780px){
+  #lockedPart .result-grid{ grid-template-columns:repeat(2,1fr); }
+}
   .kpi{
     background:#fff; border:1px solid var(--border);
     border-radius:12px; padding:12px;
@@ -887,7 +889,8 @@ document.addEventListener("DOMContentLoaded", ()=>{
         hideCalcOverlay();
         return false;
       }
-     // --- Calculs affichés (ajoutés juste avant le rendu) ---
+     
+// --- Calculs affichés (ajoutés juste avant le rendu) ---
 const autoconso = Math.min(Number(sc.prod||0), Number(conso||0));
 const gainAn    = autoconso * (Number.isFinite(prixKwh) ? prixKwh : 0);
 const gainMois  = gainAn / 12;
@@ -895,7 +898,7 @@ const prixBrut  = Number.isFinite(sc.prix) ? sc.prix : null;
 const remise    = Number.isFinite(sc.remiseChantier) ? sc.remiseChantier : 0;
 const prixNet   = prixBrut !== null ? Math.max(0, prixBrut - remise) : null;
 
-// --- Rendu (NOUVEAU) ---
+// --- Rendu (NOUVEAU : on coupe après “% conso couverte”) ---
 recap.innerHTML = `
 <section class="result-card" role="region" aria-label="Votre estimation personnalisée">
   <h2>Votre estimation personnalisée</h2>
@@ -938,6 +941,10 @@ recap.innerHTML = `
         <em> Hypothèse standard : exposition Sud/Sud-Est, pente de toit 35°.</em>
       </p>
     </div>
+  </div> <!-- /result-grid -->
+
+  <!-- ⛔ Masqué au départ : sera révélé après l'engagement -->
+  <div id="lockedPart" style="display:none">
 
     <div class="kpi">
       <div class="label">Gain 1ʳᵉ année (ordre de grandeur)</div>
@@ -948,48 +955,48 @@ recap.innerHTML = `
       <div class="label">Économie moyenne mensuelle</div>
       <div class="value">${Math.round(gainMois).toLocaleString('fr-FR')} € / mois</div>
     </div>
-  </div>
 
-  ${ (Number.isFinite(sc.remiseChantier) && sc.remiseChantier > 0) ? `
-    <div class="financial-banner">
-      <div style="font-weight:800">Offre spéciale « Groupage chantiers »</div>
-      <div style="font-weight:900; font-size:20px;">
-        ${Math.round(sc.remiseChantier).toLocaleString('fr-FR')} € de remise immédiate
+    ${ (Number.isFinite(sc.remiseChantier) && sc.remiseChantier > 0) ? `
+      <div class="financial-banner">
+        <div style="font-weight:800">Offre spéciale « Groupage chantiers »</div>
+        <div style="font-weight:900; font-size:20px;">
+          ${Math.round(sc.remiseChantier).toLocaleString('fr-FR')} € de remise immédiate
+        </div>
+        <p class="note">(déduite du prix TTC indiqué ci-dessous) • Valable jusqu’au 31 octobre 2025</p>
       </div>
-      <p class="note">(déduite du prix TTC indiqué ci-dessous) • Valable jusqu’au 31 octobre 2025</p>
-    </div>
-  ` : `` }
-
-  <div class="financial-card">
-    <h3 class="financial-title">Coût et financement</h3>
-
-    ${ Number.isFinite(sc.prix) ? `
-      <p>
-        <strong>Installation ${sc.puissance}</strong> :
-        <span class="token">${Math.round(sc.prix).toLocaleString('fr-FR')} € TTC</span>
-        <span class="note">(prix indicatif hors options)</span>
-      </p>
     ` : `` }
 
-    ${ Number.isFinite(sc.mensualite) ? `
-      <p class="note" style="font-weight:700">Option financement <span class="note">(facultatif)</span></p>
-      <div class="tokens">
-        <span class="token">${sc.mensualite.toLocaleString('fr-FR')} € / mois</span>
-        ${ Number.isFinite(sc.dureeMois) ? `<span class="token">Durée : ${sc.dureeMois} mois</span>` : `` }
-        ${ Number.isFinite(sc.taeg) ? `<span class="token">TAEG fixe : ${sc.taeg}%</span>` : `` }
-      </div>
+    <div class="financial-card">
+      <h3 class="financial-title">Coût et financement</h3>
 
-      ${ Number.isFinite(sc.total) ? `
-        <p><strong>Prix total</strong> :
-          <span class="token">${Number(sc.total).toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2})} €</span>
+      ${ Number.isFinite(sc.prix) ? `
+        <p>
+          <strong>Installation ${sc.puissance}</strong> :
+          <span class="token">${Math.round(sc.prix).toLocaleString('fr-FR')} € TTC</span>
+          <span class="note">(prix indicatif hors options)</span>
         </p>
       ` : `` }
 
-      <p class="note">Financement proposé par notre partenaire, sous réserve d’acceptation.</p>
-      <div class="note note-alert">⚠️ Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</div>
-      <p class="note">Estimation indicative. Une visite technique est nécessaire pour un devis ferme.</p>
-    ` : `` }
-  </div>
+      ${ Number.isFinite(sc.mensualite) ? `
+        <p class="note" style="font-weight:700">Option financement <span class="note">(facultatif)</span></p>
+        <div class="tokens">
+          <span class="token">${sc.mensualite.toLocaleString('fr-FR')} € / mois</span>
+          ${ Number.isFinite(sc.dureeMois) ? `<span class="token">Durée : ${sc.dureeMois} mois</span>` : `` }
+          ${ Number.isFinite(sc.taeg) ? `<span class="token">TAEG fixe : ${sc.taeg}%</span>` : `` }
+        </div>
+
+        ${ Number.isFinite(sc.total) ? `
+          <p><strong>Prix total</strong> :
+            <span class="token">${Number(sc.total).toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2})} €</span>
+          </p>
+        ` : `` }
+
+        <p class="note">Financement proposé par notre partenaire, sous réserve d’acceptation.</p>
+        <div class="note note-alert">⚠️ Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</div>
+        <p class="note">Estimation indicative. Une visite technique est nécessaire pour un devis ferme.</p>
+      ` : `` }
+    </div>
+  </div> <!-- /#lockedPart -->
 </section>
 `;
 
@@ -1052,7 +1059,7 @@ if (locked){
   `;
   locked.style.display = 'block';
 
-  // (Optionnel) micro-validation téléphone FR + feedback simple
+  // ➜ Révélation de la suite au clic
   const telInput = document.getElementById('leadPhone');
   const btnLead  = document.getElementById('leadSubmit');
   btnLead?.addEventListener('click', () => {
@@ -1063,8 +1070,12 @@ if (locked){
       telInput?.focus();
       return;
     }
-    // Ici : envoi vers ton endpoint / webhook si tu veux (à définir plus tard).
-    alert('Parfait. Votre étude complète va être affichée (simulation étape suivante).');
+    // Révèle la partie masquée + masque la carte
+    const lockedPart = document.getElementById('lockedPart');
+    if (lockedPart) lockedPart.style.display = 'block';
+    const lockedSection = document.getElementById('lockedSection');
+    if (lockedSection) lockedSection.style.display = 'none';
+    lockedPart?.scrollIntoView({ behavior:'smooth', block:'start' });
   });
 }
 
