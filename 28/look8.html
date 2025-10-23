@@ -1057,6 +1057,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
           </div>
         </div>`;
       recap.style.display = 'block';
+      document.body.classList.add('results-mode');   // active le mode résultat
+recap.scrollIntoView({ behavior: 'smooth', block: 'start' }); // optionnel: remonte au récap
+
 
       // scroll vers le résultat
       recap.scrollIntoView({ behavior: 'smooth', block: 'start' });
