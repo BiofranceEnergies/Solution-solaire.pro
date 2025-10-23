@@ -1142,30 +1142,32 @@ recap.innerHTML = `
   <div class="value">${Math.round(gainMois).toLocaleString('fr-FR')} € / mois</div>
 </div>
 
+       <div class="result-subsection" style="margin-top:28px; padding-top:18px; border-top:1px solid #e5e7eb">
+  <h3 style="font-weight:800; font-size:18px; margin:0 0 10px; color:#0f172a;">
+    Coût et financement
+  </h3>
 
-
-
-
-      ${ prixNet !== null ? `
-        <div class="kpi">
-          <div class="label">Coût indicatif installé</div>
-          <div class="value">${Math.round(prixBrut).toLocaleString('fr-FR')} €</div>
-        </div>
-        <div class="kpi">
-          <div class="label">Après remise chantier</div>
-          <div class="value">${Math.round(prixNet).toLocaleString('fr-FR')} €</div>
-        </div>` : `` }
-
-      ${ Number.isFinite(sc.mensualite) ? `
-        <div class="kpi" style="grid-column:1/-1">
-          <div class="label">Financement (indicatif)</div>
-          <div class="value">
-            ${sc.mensualite.toLocaleString('fr-FR')} € / mois
-            ${Number.isFinite(sc.dureeMois)?`• ${sc.dureeMois} mois`:``}
-            ${Number.isFinite(sc.taeg)?`• TAEG ${sc.taeg}%`:``}
-          </div>
-        </div>` : `` }
+  ${ prixNet !== null ? `
+    <div class="kpi">
+      <div class="label">Coût indicatif installé</div>
+      <div class="value">${Math.round(prixBrut).toLocaleString('fr-FR')} €</div>
     </div>
+    <div class="kpi">
+      <div class="label">Après remise chantier</div>
+      <div class="value">${Math.round(prixNet).toLocaleString('fr-FR')} €</div>
+    </div>` : `` }
+
+  ${ Number.isFinite(sc.mensualite) ? `
+    <div class="kpi" style="grid-column:1/-1">
+      <div class="label">Financement (indicatif)</div>
+      <div class="value">
+        ${sc.mensualite.toLocaleString('fr-FR')} € / mois
+        ${Number.isFinite(sc.dureeMois)?`• ${sc.dureeMois} mois`:``}
+        ${Number.isFinite(sc.taeg)?`• TAEG ${sc.taeg}%`:``}
+      </div>
+    </div>` : `` }
+</div>
+
 
     <p style="margin:12px 0 0; color:#475569; font-size:13px">
       Estimation simplifiée basée sur votre conso/facture, l’ensoleillement local et un scénario technique standard. Montants indicatifs.
