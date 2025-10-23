@@ -440,7 +440,37 @@ body.no-scroll{ overflow:hidden; }
 #recap .card {
   color: var(--ink); /* texte sombre lisible sur fond blanc */
 }
- 
+ /* ============== MODE RÉSULTAT ============== */
+/* Atténue un peu le header et réduit sa hauteur */
+body.results-mode header.hero{
+  height:auto;
+  min-height:unset;
+  padding-bottom:24px;
+}
+body.results-mode header.hero::before{
+  opacity:.25; /* facultatif : assombrit moins le fond */
+}
+
+/* Optionnel : resserre le petit panneau du héros */
+body.results-mode .panel{
+  margin-bottom:12px;
+}
+
+/* Cache toutes les sections non-résultat */
+body.results-mode .steps-2025,
+body.results-mode .why,
+body.results-mode .stats-bg,
+body.results-mode .testi,
+body.results-mode .faq,
+body.results-mode .legal{
+  display:none !important;
+}
+
+/* S’assure que le récap est bien visible en mode résultat */
+body.results-mode #recap{
+  display:block !important;
+  margin-top:8px;
+}
 </style>
 </head>
 
