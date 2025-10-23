@@ -1158,19 +1158,23 @@ recap.innerHTML = `
       </div>
     </div> <!-- /result-grid -->
 
-    ${ (Number.isFinite(sc.remiseChantier) && sc.remiseChantier > 0) ? `
-      <div class="financial-banner">
-        <div style="text-align:center; font-weight:800; color:#7c2d12; margin-bottom:4px">
-          Offre spéciale « Groupage chantiers »
-        </div>
-        <div style="text-align:center; font-size:22px; font-weight:900; color:#7c2d12;">
-          ${Math.round(sc.remiseChantier).toLocaleString('fr-FR')} € de remise immédiate
-        </div>
-        <div class="note" style="text-align:center; margin-top:6px">
-          (à déduire du prix TTC indiqué ci-dessous)
-        </div>
-      </div>
-    ` : `` }
+ ${ (Number.isFinite(sc.remiseChantier) && sc.remiseChantier > 0) ? `
+  <div class="financial-banner" style="text-align:center; background:#fff7ed; border:1px solid #fcd34d; border-radius:12px; padding:18px; margin:24px 0">
+    <div style="font-weight:700; color:#7c2d12; margin-bottom:4px">
+      Offre spéciale « Groupage chantiers »
+    </div>
+    <div style="font-size:22px; font-weight:900; color:#7c2d12;">
+      ${Math.round(sc.remiseChantier).toLocaleString('fr-FR')} € de remise immédiate
+    </div>
+    <div class="note" style="margin-top:6px; color:#334155">
+      (déduite du prix TTC indiqué ci-dessous)
+    </div>
+    <div class="note" style="margin-top:4px; color:#334155">
+      <strong>Valable jusqu’au 31 octobre 2025</strong>
+    </div>
+  </div>
+` : `` }
+
 
     <div class="financial-card">
       <h3 class="financial-title">Coût et financement</h3>
