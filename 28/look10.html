@@ -537,6 +537,44 @@ input::placeholder{ opacity:1; }      /* déjà présent, on confirme */
 .note{ color:#334155; font-size:13px; line-height:1.5; }
 .note-alert{ margin-top:10px; padding:10px 12px; background:#fff8e1; border:1px dashed #f59e0b; border-radius:10px; }
 
+  /* 1) KPI plus sobres (fond blanc) */
+.kpi{
+  background:#fff;               /* au lieu de #fbfbfd */
+  border:1px solid var(--border);
+  border-radius:12px; padding:12px;
+}
+.kpi .label{ color:#64748b; font-size:13px; }
+.kpi .value{ font-weight:800; font-size:18px; color:var(--ink); }
+
+/* 2) "Dimensionnement" pro : liseré gauche, pas de fond jaune */
+.kpi--highlight{
+  background:#fff !important;
+  border-color:var(--border) !important;
+  position:relative;
+}
+.kpi--highlight::before{
+  content:""; position:absolute; left:-1px; top:-1px; bottom:-1px; width:4px;
+  border-radius:12px 0 0 12px; background:var(--accent);
+}
+.kpi--highlight .value{ color:var(--ink) !important; }
+
+/* 3) Ombres adoucies */
+.result-card{ box-shadow:0 6px 18px rgba(2,6,23,.06) !important; }
+.financial-card{ box-shadow:0 6px 18px rgba(2,6,23,.06) !important; }
+
+/* 4) Tokens neutres et cohérents */
+.token{
+  background:#f8fafc; border:1px solid var(--border);
+  font-weight:700; border-radius:999px; padding:6px 10px;
+}
+
+/* 5) Rythme vertical homogène pour la section financière si tu l’utilises sans inline styles */
+.result-subsection{ margin-top:24px; padding-top:16px; border-top:1px solid var(--border); }
+
+/* 6) Lisibilité des chiffres (alignement) – optionnel */
+.result-card, .financial-card{ font-variant-numeric: tabular-nums; }
+
+
   
 </style>
 </head>
