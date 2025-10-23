@@ -870,7 +870,16 @@ document.addEventListener("DOMContentLoaded", ()=>{
 });
 
 </script>
-  
+
+<!-- === Overlay "Calcul en cours…" — Étape 1 === -->
+<div id="calc-overlay" role="alertdialog" aria-modal="true" aria-labelledby="calc-title" aria-describedby="calc-desc">
+  <div class="panel" tabindex="-1">
+    <div class="spinner" aria-hidden="true"></div>
+    <h3 id="calc-title" class="title">Calcul en cours…</h3>
+    <p id="calc-desc" class="desc">Nous préparons votre estimation.</p>
+  </div>
+</div>
+
 </body>
 </html>
 
