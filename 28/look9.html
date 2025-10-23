@@ -1118,6 +1118,21 @@ recap.innerHTML = `
         </div>
       </div>
 
+      <div class="kpi" style="grid-column:1/-1">
+  <div class="label">% de votre conso couverte</div>
+  <div class="value" style="color:#16a34a;font-size:20px;font-weight:800">
+    ${((autoconso / conso) * 100).toFixed(1)} %
+  </div>
+</div>
+
+<div class="kpi" style="grid-column:1/-1;background:#f9fafb">
+  <div style="color:#334155;font-size:13px;line-height:1.5">
+    Votre production est valorisée à 100&nbsp;% grâce à la batterie virtuelle,<br>
+    même si elle ne couvre pas 100&nbsp;% de votre consommation.<br>
+    <em>Hypothèse standard&nbsp;: exposition Sud/Sud-Est, pente de toit 35°.</em>
+  </div>
+</div>
+
       <div class="kpi">
         <div class="label">Autoconsommation estimée</div>
         <div class="value">${Math.round(autoconso).toLocaleString('fr-FR')} kWh / an</div>
@@ -1133,20 +1148,7 @@ recap.innerHTML = `
   <div class="value">${Math.round(gainMois).toLocaleString('fr-FR')} € / mois</div>
 </div>
 
-<div class="kpi" style="grid-column:1/-1">
-  <div class="label">% de votre conso couverte</div>
-  <div class="value" style="color:#16a34a;font-size:20px;font-weight:800">
-    ${((autoconso / conso) * 100).toFixed(1)} %
-  </div>
-</div>
 
-<div class="kpi" style="grid-column:1/-1;background:#f9fafb">
-  <div style="color:#334155;font-size:13px;line-height:1.5">
-    Votre production est valorisée à 100&nbsp;% grâce à la batterie virtuelle,<br>
-    même si elle ne couvre pas 100&nbsp;% de votre consommation.<br>
-    <em>Hypothèse standard&nbsp;: exposition Sud/Sud-Est, pente de toit 35°.</em>
-  </div>
-</div>
 
 
 
