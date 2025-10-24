@@ -442,7 +442,25 @@ a.mentions:hover {
   text-decoration:underline !important;
 }
 
- 
+/* === Ajustement visibilité placeholders === */
+.rect input,
+.option input {
+  padding: 12px 14px;              /* plus d’espace interne */
+  font-size: 16px;                 /* légèrement plus grand */
+}
+
+.rect,
+.option {
+  min-width: 48%;                  /* laisse un peu plus de largeur */
+}
+
+@media (max-width: 860px){
+  .rect,
+  .option {
+    min-width: 100%;               /* empile les champs sur mobile */
+  }
+}
+
 
 </style>
 
