@@ -394,27 +394,54 @@
   /* Étire les éléments de la grille du gate (évite les contenus trop étroits) */
 .gate-form{ justify-items:stretch; }
 
-/* Ligne consentement : largeur pleine, centrée, propre */
+/* ——— Gate: grille + lignes pleine largeur + consentement (version unique) ——— */
+.gate-form{
+  display:grid;
+  gap:10px;
+  grid-template-columns: 1fr;                 /* 1 colonne par défaut */
+  max-width:680px;
+  margin:14px auto 0;
+  justify-items:stretch;
+}
+@media (min-width:760px){
+  .gate-form{
+    grid-template-columns: repeat(2, minmax(0,1fr)); /* 2 colonnes fluides */
+  }
+}
+
+/* Tout élément .full s'étend sur les 2 colonnes */
+.gate-form .full{ grid-column: 1 / -1; }
+
+/* Ligne consentement: case + texte alignés sur une ligne, centrés */
 .gate-consentline{
   grid-column: 1 / -1;
-  width: 100%;
-  max-width: 680px;
-  margin: 8px auto 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;   /* mets flex-start si tu préfères à gauche */
-  gap: 10px;
-  text-align: center;
+  display:flex;
+  align-items:center;
+  justify-content:center;       /* mets flex-start si tu préfères à gauche */
+  gap:10px;
+  width:100%;
+  max-width:680px;
+  margin:8px auto 0;
+  text-align:center;
+}
+.gate-consentline input{
+  margin:0;
+  flex:0 0 auto;                /* la case garde sa taille */
+}
+.gate-consentline span{
+  flex:0 1 100%;
+  line-height:1.4;
+  white-space:normal;           /* autorise les retours à la ligne si besoin */
 }
 
-/* Case + texte */
-.gate-consentline input{ margin:0; flex:0 0 auto; }
-.gate-consentline span{ flex:0 1 auto; white-space: nowrap; line-height: 1.4; }
-
-/* Sur très petit écran, on autorise le retour à la ligne pour éviter un débordement */
-@media (max-width: 480px){
-  .gate-consentline span{ white-space: normal; }
+/* Option mobile : rien ne déborde */
+@media (max-width:480px){
+  .gate-consentline{ padding:0 4px; }
 }
+
+/* Sécurité : si une ancienne classe .gate-consent existe, on la neutralise */
+.gate-consent{ display:contents; }
+
 
 </style>
 
