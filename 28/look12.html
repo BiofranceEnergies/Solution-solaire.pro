@@ -600,6 +600,21 @@ input {
   grid-column: 1 / -1;
 }
 
+/* Ligne “pleine largeur” dans la grille du formulaire */
+.gate-form .full{ grid-column:1 / -1; }
+
+/* Nouvelle ligne consentement sous les inputs */
+.gate-consentline{
+  display:flex; align-items:flex-start; gap:10px;
+  font-size:14px; color:#334155;
+  margin-top:6px;
+}
+.gate-consentline input{ margin-top:3px; }
+
+/* Spacings révisés pour l’ordre demandé */
+.gate-hint{ margin-top:6px; }
+.gate-proof{ margin-top:10px; }
+.gate-cta{ margin-top:14px; }
 
 
 
@@ -1302,16 +1317,32 @@ const gate = `
 
       <!-- Form -->
       <form id="gate-form" class="gate-form" novalidate>
-        <input id="gate-email" class="gate-input" type="email" placeholder="Votre email (facultatif)" autocomplete="email" />
-        <input id="gate-phone" class="gate-input" type="tel" placeholder="Téléphone (obligatoire)" autocomplete="tel" required />
-        <div class="gate-consent">
-          <input id="gate-consent" type="checkbox" />
-          <label for="gate-consent">Je consens à être contacté <strong>par SMS uniquement</strong>.</label>
-        </div>
-        <div class="gate-proof">✅ Votre projet s’autofinance grâce à vos économies. Vérifiez-le par vous-même&nbsp;!</div>
-        <div class="gate-hint">Un SMS de confirmation vous sera envoyé. Libre à vous d’échanger ensuite.</div>
-        <button class="gate-cta" type="submit">Voir mon étude complète et mes économies</button>
-      </form>
+  <!-- 1) Ligne champs -->
+  <input id="gate-email" class="gate-input" type="email"
+         placeholder="Votre email (facultatif)" autocomplete="email" />
+  <input id="gate-phone" class="gate-input" type="tel"
+         placeholder="Téléphone (obligatoire)" autocomplete="tel" required />
+
+  <!-- 2) Consentement — pleine largeur -->
+  <div class="gate-consentline full">
+    <input id="gate-consent" type="checkbox" />
+    <label for="gate-consent">Je consens à être contacté <strong>par SMS uniquement</strong>.</label>
+  </div>
+
+  <!-- 3) Hint — pleine largeur -->
+  <div class="gate-hint full">
+    Un SMS de confirmation vous sera envoyé. Libre à vous d’échanger ensuite.
+  </div>
+
+  <!-- 4) Preuve — pleine largeur -->
+  <div class="gate-proof full">
+    ✅ Votre projet s’autofinance grâce à vos économies. Vérifiez-le par vous-même&nbsp;!
+  </div>
+
+  <!-- CTA — pleine largeur -->
+  <button class="gate-cta full" type="submit">Voir mon étude complète et mes économies</button>
+</form>
+
 
       <div class="gate-note">Vos données ne seront jamais revendues ni utilisées à d’autres fins.</div>
     </div>
