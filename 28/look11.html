@@ -442,24 +442,30 @@ a.mentions:hover {
   text-decoration:underline !important;
 }
 
-/* === Ajustement visibilité placeholders === */
+/* === Correction affichage placeholders & grille === */
 .rect input,
 .option input {
-  padding: 12px 14px;              /* plus d’espace interne */
-  font-size: 16px;                 /* légèrement plus grand */
+  padding: 0;                 /* on annule l'ancien padding */
 }
 
 .rect,
 .option {
-  min-width: 48%;                  /* laisse un peu plus de largeur */
+  padding: 12px 14px;         /* le padding est géré ici */
 }
 
-@media (max-width: 860px){
-  .rect,
-  .option {
-    min-width: 100%;               /* empile les champs sur mobile */
-  }
+/* Grille adaptative : casse la ligne si manque de place */
+.row{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 10px;
 }
+
+/* Placeholder plus petit et sans retour à la ligne */
+input::placeholder{
+  font-size: 14px;
+  white-space: nowrap;
+}
+
 
 
 </style>
