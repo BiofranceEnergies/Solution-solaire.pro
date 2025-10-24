@@ -904,14 +904,19 @@ recap.innerHTML = `
 
 
       <div class="kpi">
-        <div class="label">Gain 1ʳᵉ année (ordre de grandeur)</div>
-        <div class="value">${Math.round(gainAn).toLocaleString('fr-FR')} € / an</div>
-      </div>
+  <div class="label">Gain 1ʳᵉ année (ordre de grandeur)</div>
+  <div class="value" style="color:#16a34a">
+    ${Math.round(gainAn).toLocaleString('fr-FR')} € / an
+  </div>
+</div>
 
-      <div class="kpi">
-        <div class="label">Économie moyenne mensuelle</div>
-        <div class="value">${Math.round(gainMois).toLocaleString('fr-FR')} € / mois</div>
-      </div>
+<div class="kpi">
+  <div class="label">Économie moyenne mensuelle</div>
+  <div class="value" style="color:#16a34a">
+    ${Math.round(gainMois).toLocaleString('fr-FR')} € / mois
+  </div>
+</div>
+
     </div> <!-- /result-grid -->
 
  ${ (Number.isFinite(sc.remiseChantier) && sc.remiseChantier > 0) ? `
