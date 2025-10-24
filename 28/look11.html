@@ -870,12 +870,14 @@ recap.innerHTML = `
         <div class="value">${(Number.isFinite(facture)?facture:0).toLocaleString('fr-FR')} €</div>
       </div>
 
-      <div class="kpi kpi--highlight" style="grid-column:1/-1">
-        <div class="label">Dimensionnement proposé</div>
-        <div class="value">
-          ${sc.puissance} — ${sc.panels} panneaux (500 W) • ${(sc.prod||0).toLocaleString('fr-FR')} kWh/an
-        </div>
-      </div>
+     <div class="kpi kpi--highlight" style="grid-column:1/-1">
+  <div class="label">Dimensionnement proposé</div>
+  <div class="value">
+    ${sc.puissance} — ${sc.panels} panneaux (500 W) • Production estimée 
+    <span style="color:#16a34a;font-weight:800">${(sc.prod||0).toLocaleString('fr-FR')} kWh/an</span>
+  </div>
+</div>
+
 
       <div class="kpi" style="grid-column:1/-1">
   <div class="value" style="font-size:18px;font-weight:700;color:#16a34a;margin-bottom:6px">
