@@ -424,58 +424,32 @@ input {
   }
 }
 
-/* ===== Harmonisation des largeurs ===== */
-/* Donne la même largeur max au bandeau, au bloc champs (.row) et au CTA */
+/* === Harmonisation largeur formulaire + CTA + bandeau === */
 .pill,
 .row,
 .cta {
-  max-width: 980px;       /* ajuste la valeur pour coller visuellement (ex : 960, 1000…) */
+  max-width: 900px;   /* équilibre visuel idéal */
   margin-left: auto;
   margin-right: auto;
 }
 
-/* Le bloc champs occupe toute la largeur du conteneur */
+/* Réduction légère des champs pour garder de la cohérence */
 .row {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-/* Chaque « carte » de champ s’étire à 100% */
 .row > .rect,
 .row > .option {
   width: 100%;
 }
 
-/* L’input lui-même prend toute la place à l’intérieur */
 .row input {
   width: 100%;
   box-sizing: border-box;
 }
 
-/* (Optionnel) si tu veux conserver des colonnes à très large écran :
-@media (min-width: 1280px) {
-  .row { flex-wrap: wrap; }
-  .row > .rect, .row > .option { flex: 1 1 48%; }
-}
-*/
-
-/* === Ajustement de la taille des placeholders sur mobile === */
-input::placeholder {
-  font-size: 15px;
-}
-
-@media (max-width: 480px) {
-  input::placeholder {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 380px) {
-  input::placeholder {
-    font-size: 13px;
-  }
-}
 
 
 
