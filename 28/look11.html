@@ -850,12 +850,20 @@ document.addEventListener("DOMContentLoaded", ()=>{
         return false;
       }
      // --- Calculs affichés (ajoutés juste avant le rendu) ---
-const autoconso = Math.min(Number(sc.prod||0), Number(conso||0));
-const gainAn    = autoconso * (Number.isFinite(prixKwh) ? prixKwh : 0);
-const gainMois  = gainAn / 12;
-const prixBrut  = Number.isFinite(sc.prix) ? sc.prix : null;
-const remise    = Number.isFinite(sc.remiseChantier) ? sc.remiseChantier : 0;
-const prixNet   = prixBrut !== null ? Math.max(0, prixBrut - remise) : null;
+const autocons = Math.min(Number(sc.prod||0), Number(conso||0));
+const gainAn   = autocons * (Number.isFinite(prixKwh) ? prixKwh : 0);
+const gainMois = gainAn / 12;
+
+// ➕ Nouveau calcul — économie cumulée sur 15 ans avec +3 %/an
+const taux = 0.03;
+const duree = 15;
+const facteurCumul = (Math.pow(1 + taux, duree) - 1) / taux;
+const gain15 = gainAn * facteurCumul;
+
+const prixBrut = Number.isFinite(sc.prix) ? sc.prix : null;
+const remise   = Number.isFinite(sc.remiseChantier) ? sc.remiseChantier : 0;
+const prixNet  = prixBrut !== null ? Math.max(0, prixBrut - remise) : null;
+
 
 // --- Rendu (NOUVEAU) ---
 recap.innerHTML = `
@@ -914,6 +922,15 @@ recap.innerHTML = `
   <div class="label">Économie moyenne mensuelle</div>
   <div class="value" style="color:#16a34a">
     ${Math.round(gainMois).toLocaleString('fr-FR')} € / mois
+  </div>
+</div>
+<div class="kpi" style="grid-column:1/-1">
+  <div class="label">Économie cumulée sur 15 ans</div>
+  <div class="value" style="color:#16a34a">
+    ${Math.round(gain15).toLocaleString('fr-FR')} €
+  </div>
+  <div class="note" style="margin-top:4px">
+    Hypothèses&nbsp;: prix du kWh +3&nbsp;%/an, production constante, ordre de grandeur indicatif.
   </div>
 </div>
 
