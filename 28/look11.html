@@ -442,28 +442,13 @@ a.mentions:hover {
   text-decoration:underline !important;
 }
 
-/* === Correction affichage placeholders & grille === */
-.rect input,
-.option input {
-  padding: 0;                 /* on annule l'ancien padding */
-}
-
-.rect,
-.option {
-  padding: 12px 14px;         /* le padding est géré ici */
-}
-
-/* Grille adaptative : casse la ligne si manque de place */
-.row{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 10px;
-}
-
-/* Placeholder plus petit et sans retour à la ligne */
-input::placeholder{
-  font-size: 14px;
-  white-space: nowrap;
+/* === Largeur max élégante pour le formulaire + bandeau === */
+@media (min-width: 1024px){
+  .panel,
+  .pill{
+    max-width: 640px;     /* largeur contenue, visuellement équilibrée */
+    margin: 0 auto;       /* centrage propre */
+  }
 }
 
 
