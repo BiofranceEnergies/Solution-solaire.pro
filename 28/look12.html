@@ -478,7 +478,9 @@ input {
 .gate-overlay{
   position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
   padding:20px; z-index:10;
-  background: radial-gradient(1200px 600px at 50% 0%, rgba(255,255,255,.78), rgba(255,255,255,.9));
+  background: rgba(255,255,255,.92); /* fond blanc légèrement translucide, net */
+backdrop-filter: blur(1px);        /* léger adoucissement */
+
   backdrop-filter: blur(2px);
 }
 
