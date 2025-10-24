@@ -476,6 +476,30 @@
   font-weight:600;
 }
 
+  /* Patch visibilité inputs (force la bordure + focus) */
+.gate-card .gate-input{
+  border:2px solid #d1d5db !important;   /* plus contrasté, et vraiment 2px */
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.04) !important;
+  background:#fff !important;
+  color:#111827 !important;
+}
+
+.gate-card .gate-input::placeholder{
+  color:#9ca3af !important;              /* placeholder plus lisible */
+  opacity:1 !important;
+}
+
+.gate-card .gate-input:hover{
+  border-color:#cbd5e1 !important;       /* léger feedback au survol */
+}
+
+.gate-card .gate-input:focus{
+  border-color:#f59e0b !important;       /* accent net au focus */
+  box-shadow:0 0 0 3px rgba(245,158,11,.18) !important;
+  outline:0 !important;
+}
+
+
 </style>
 
 </head>
