@@ -291,6 +291,12 @@
 
   /* Petits correctifs formulaires */
   .rect input{ min-width:0; }
+  
+  #calc-overlay small {
+  color:#94a3b8;
+  font-size:0.9em;
+}
+
 </style>
 
 </head>
@@ -735,7 +741,11 @@ document.addEventListener("DOMContentLoaded", ()=>{
   <div class="panel" tabindex="-1">
     <div class="spinner" aria-hidden="true"></div>
     <h3 id="calc-title" class="title">Calcul en cours…</h3>
-    <p id="calc-desc" class="desc">Nous préparons votre estimation.</p>
+    <p id="calc-desc" class="desc">
+  ⚡ Nous préparons votre estimation…<br>
+  <small>(calcul en cours)</small>
+</p>
+
   </div>
 </div>
 
