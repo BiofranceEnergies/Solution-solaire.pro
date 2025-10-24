@@ -1147,22 +1147,27 @@ const gate = `
   <input id="gate-phone" class="gate-input" type="tel"
          placeholder="Téléphone (obligatoire)" autocomplete="tel" required />
 
-  <!-- 2) Consentement — pleine largeur -->
- <label class="gate-consentline full" id="gate-consent-wrap">
-  <input id="gate-consent" type="checkbox" />
-  <span>Je consens à être contacté <strong>par SMS uniquement</strong>.</span>
-</label>
+  <!-- 2) Bloc consentement + info + preuve -->
+<div class="gate-consent-wrapper full" style="text-align:center; margin-top:8px;">
+  
+  <!-- Case + texte alignés -->
+  <label class="gate-consentline" style="display:inline-flex; align-items:center; gap:8px; font-size:14px; color:#334155;">
+    <input id="gate-consent" type="checkbox" required aria-required="true" style="margin:0; transform:scale(1.1); accent-color:var(--accent);">
+    <span>Je consens à être contacté <strong>par SMS uniquement</strong>.</span>
+  </label>
 
-
-  <!-- 3) Hint — pleine largeur -->
-  <div class="gate-hint full">
+  <!-- Ligne aide -->
+  <div class="gate-hint" style="font-size:13px; color:#64748b; margin-top:6px;">
     Un SMS de confirmation vous sera envoyé. Libre à vous d’échanger ensuite.
   </div>
 
-  <!-- 4) Preuve — pleine largeur -->
-  <div class="gate-proof full">
+  <!-- Ligne preuve -->
+  <div class="gate-proof" style="margin-top:10px; font-size:14px; font-weight:600; color:#065f46; background:#ecfdf5; border:1px solid #a7f3d0; border-radius:10px; display:inline-block; padding:8px 12px;">
     ✅ Votre projet s’autofinance grâce à vos économies. Vérifiez-le par vous-même&nbsp;!
   </div>
+
+</div>
+
 
   <!-- CTA — pleine largeur -->
   <button class="gate-cta full" type="submit">Voir mon étude complète et mes économies</button>
