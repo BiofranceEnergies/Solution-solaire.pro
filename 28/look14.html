@@ -969,6 +969,26 @@ document.addEventListener("DOMContentLoaded", ()=>{
 </div>
 
 <script>
+
+  /* === Format téléphone FR automatique (00 00 00 00 00) === */
+document.addEventListener("DOMContentLoaded", () => {
+  const telInput = document.getElementById("gate-phone");
+  if (!telInput) return;
+
+  telInput.addEventListener("input", () => {
+    let digits = telInput.value.replace(/\D/g, "").substring(0, 10);
+    let formatted = digits.replace(/(\d{2})(?=\d)/g, "$1 ").trim();
+    telInput.value = formatted;
+  });
+
+  telInput.addEventListener("paste", (e) => {
+    e.preventDefault();
+    let text = (e.clipboardData || window.clipboardData).getData("text");
+    let digits = text.replace(/\D/g, "").substring(0, 10);
+    telInput.value = digits.replace(/(\d{2})(?=\d)/g, "$1 ").trim();
+  });
+});
+</script>
   (function(){
     const overlay   = document.getElementById('calc-overlay');
     const btn       = document.getElementById('simuler');
