@@ -1284,14 +1284,27 @@ const gate = `
   <div class="gate-overlay" id="gate-overlay" role="dialog" aria-modal="true" aria-labelledby="gate-title">
     <div class="gate-card">
       <h3 id="gate-title" class="gate-title">Vous avez vu vos panneaux et votre production…</h3>
-      <p class="gate-sub"><strong>Et si on allait plus loin ?</strong></p>
+      <p class="gate-sub"><strong>Et si on allait plus loin&nbsp;?</strong></p>
       <p class="gate-sub">Découvrez le coût précis, vos économies et votre mensualité fixe.<br>
         Profitez de <strong>la remise immédiate</strong> <span class="gate-deadline">(jusqu’au 31/10/2025)</span>.
       </p>
 
+      <!-- Badges confiance -->
+      <div class="gate-badges" aria-hidden="true">
+        <div class="badge"><span>🔒</span><b>Données protégées</b></div>
+        <div class="badge"><span>⚡</span><b>Étude affichée immédiatement à l’écran</b></div>
+      </div>
+
+      <!-- Form -->
       <form id="gate-form" class="gate-form" novalidate>
         <input id="gate-email" class="gate-input" type="email" placeholder="Votre email (facultatif)" autocomplete="email" />
         <input id="gate-phone" class="gate-input" type="tel" placeholder="Téléphone (obligatoire)" autocomplete="tel" required />
+        <div class="gate-consent">
+          <input id="gate-consent" type="checkbox" />
+          <label for="gate-consent">Je consens à être contacté <strong>par SMS uniquement</strong>.</label>
+        </div>
+        <div class="gate-proof">✅ Votre projet s’autofinance grâce à vos économies. Vérifiez-le par vous-même&nbsp;!</div>
+        <div class="gate-hint">Un SMS de confirmation vous sera envoyé. Libre à vous d’échanger ensuite.</div>
         <button class="gate-cta" type="submit">Voir mon étude complète et mes économies</button>
       </form>
 
@@ -1299,6 +1312,7 @@ const gate = `
     </div>
   </div>
 `;
+
 
 recap.innerHTML = `
   <div class="result-card" role="region" aria-label="Votre estimation personnalisée">
