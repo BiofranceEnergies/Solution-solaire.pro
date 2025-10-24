@@ -213,7 +213,19 @@
   /* Mentions légales */
   .legal{background:#f7f9fc;color:var(--ink);padding:24px 16px;margin-top:clamp(40px,6vw,80px)}
   .legal__inner{max-width:var(--maxw);margin:0 auto;text-align:center}
-  .legal__link{color:#0b61d8;text-decoration:underline;font-weight:800;cursor:pointer}
+  .legal__link{
+  color:#6b7280 !important;        /* gris neutre */
+  font-weight:400 !important;      /* non gras */
+  text-decoration:none !important; /* pas de soulignement au repos */
+  cursor:pointer;
+}
+.legal__link:hover{
+  color:#374151 !important;        /* gris plus foncé au survol */
+  text-decoration:underline !important;
+}
+.legal__link:visited{
+  color:#6b7280 !important;        /* évite le violet visité */
+}
   .legal .sep{border:0;border-top:1px solid var(--border);margin:16px auto 0;max-width:var(--maxw)}
   #mentions-popup{display:none;position:fixed;left:50%;bottom:64px;transform:translateX(-50%);width:360px;max-width:95vw;background:#fff;color:var(--ink);border:1px solid var(--border);border-radius:14px;padding:18px 20px 14px;box-shadow:0 10px 36px rgba(2,6,23,.15);z-index:9999;font-size:13px;line-height:1.7}
   #close-mentions{position:absolute;top:6px;right:12px;background:none;border:0;color:var(--ink);font-size:20px;font-weight:800;cursor:pointer}
