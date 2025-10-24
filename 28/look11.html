@@ -412,20 +412,24 @@ input {
   }
 }
 
- /* === Mentions légales – style sobre === */
+/* === Mentions légales — neutralisation du style global === */
 footer a,
-.mentions a {
-  color:#6b7280;             /* gris neutre */
-  font-weight:400;           /* normal, non gras */
-  text-decoration:none;      /* pas de soulignement par défaut */
+.mentions a,
+a.mentions {
+  color:#6b7280 !important;          /* gris neutre, priorité absolue */
+  font-weight:400 !important;        /* texte normal, non gras */
+  text-decoration:none !important;   /* pas de soulignement au repos */
+  font-family:inherit !important;    /* garde la même police que le reste du site */
   transition:color .2s ease;
 }
 
 footer a:hover,
-.mentions a:hover {
-  color:#374151;             /* gris plus foncé au survol */
-  text-decoration:underline; /* soulignement uniquement au survol */
+.mentions a:hover,
+a.mentions:hover {
+  color:#374151 !important;          /* gris foncé au survol */
+  text-decoration:underline !important;
 }
+
  
 
 </style>
