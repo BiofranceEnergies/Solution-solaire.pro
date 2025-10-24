@@ -424,34 +424,44 @@ input {
   }
 }
 
-/* === Formulaire : 1 colonne par défaut === */
-.row{
-  display:grid;
-  gap:10px;
-  grid-template-columns: 1fr; /* toujours lisible */
+/* === Correction alignement formulaire et largeur dynamique === */
+
+/* Mise en forme de base */
+.row {
+  display: flex;
+  flex-wrap: wrap;          /* permet de repasser en 1 colonne si manque de place */
+  gap: 10px;
+  justify-content: center;
 }
 
-/* === On élargit légèrement le conteneur global (bandeau, inputs, CTA) === */
+/* Les champs (inputs) occupent toute la largeur sur mobile */
+.row input {
+  flex: 1 1 100%;
+  min-width: 280px;
+}
+
+/* Bandeau, inputs, CTA : largeur commune */
 .panel,
 .pill,
-.cta{
-  max-width: 1000px;   /* plus large que 860px */
-  margin: 0 auto;      /* centrage propre */
+.cta {
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-/* === Seulement sur grands écrans : 2 colonnes quand on a VRAIMENT la place === */
-@media (min-width:1280px){
-  .row{
-    /* chaque colonne a au moins 520px pour afficher tout le placeholder */
-    grid-template-columns: repeat(2, minmax(520px, 1fr));
+/* Sur écrans larges : 2 colonnes équilibrées */
+@media (min-width: 1280px) {
+  .row input {
+    flex: 1 1 48%; /* 2 colonnes avec un léger espace */
   }
 }
 
-/* Placeholder un peu plus compact pour aider sans casser l’esthétique */
-input::placeholder{
+/* Placeholder légèrement réduit mais bien visible */
+input::placeholder {
   font-size: 13.5px;
-  letter-spacing: .1px;
+  letter-spacing: 0.2px;
+  white-space: nowrap; /* évite la coupure du texte */
 }
+
 
 
 
