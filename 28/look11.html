@@ -450,6 +450,21 @@ input {
   box-sizing: border-box;
 }
 
+/* ====== AJUSTEMENTS SUPPLÉMENTAIRES ====== */
+
+/* 1️⃣ Version mobile : largeur fluide et espacement plus compact */
+@media (max-width: 600px){
+  .pill, .row, .cta { max-width: 92vw; } /* marges latérales sur petits écrans */
+  .row { gap: 8px; }                     /* espace réduit entre les champs */
+}
+
+/* 2️⃣ Version grand écran : un peu plus d’air sur écrans larges */
+@media (min-width: 1400px){
+  .pill, .row, .cta { max-width: 920px; } /* légère expansion sur desktop XL */
+}
+
+</style>
+
 
 
 
