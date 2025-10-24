@@ -424,43 +424,42 @@ input {
   }
 }
 
-/* === Correction alignement formulaire et largeur dynamique === */
+/* ===== Harmonisation des largeurs ===== */
+/* Donne la même largeur max au bandeau, au bloc champs (.row) et au CTA */
+.pill,
+.row,
+.cta {
+  max-width: 980px;       /* ajuste la valeur pour coller visuellement (ex : 960, 1000…) */
+  margin-left: auto;
+  margin-right: auto;
+}
 
-/* Mise en forme de base */
+/* Le bloc champs occupe toute la largeur du conteneur */
 .row {
   display: flex;
-  flex-wrap: wrap;          /* permet de repasser en 1 colonne si manque de place */
+  flex-direction: column;
   gap: 10px;
-  justify-content: center;
 }
 
-/* Les champs (inputs) occupent toute la largeur sur mobile */
+/* Chaque « carte » de champ s’étire à 100% */
+.row > .rect,
+.row > .option {
+  width: 100%;
+}
+
+/* L’input lui-même prend toute la place à l’intérieur */
 .row input {
-  flex: 1 1 100%;
-  min-width: 280px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* Bandeau, inputs, CTA : largeur commune */
-.panel,
-.pill,
-.cta {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-/* Sur écrans larges : 2 colonnes équilibrées */
+/* (Optionnel) si tu veux conserver des colonnes à très large écran :
 @media (min-width: 1280px) {
-  .row input {
-    flex: 1 1 48%; /* 2 colonnes avec un léger espace */
-  }
+  .row { flex-wrap: wrap; }
+  .row > .rect, .row > .option { flex: 1 1 48%; }
 }
+*/
 
-/* Placeholder légèrement réduit mais bien visible */
-input::placeholder {
-  font-size: 13.5px;
-  letter-spacing: 0.2px;
-  white-space: nowrap; /* évite la coupure du texte */
-}
 
 
 
