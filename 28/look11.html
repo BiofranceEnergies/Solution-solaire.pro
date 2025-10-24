@@ -460,6 +460,22 @@ input {
 }
 */
 
+/* === Ajustement de la taille des placeholders sur mobile === */
+input::placeholder {
+  font-size: 15px;
+}
+
+@media (max-width: 480px) {
+  input::placeholder {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  input::placeholder {
+    font-size: 13px;
+  }
+}
 
 
 
