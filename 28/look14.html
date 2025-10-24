@@ -370,25 +370,29 @@
   .badge span{ opacity:.85; font-weight:700; }
   .badge b{ font-weight:800; }
 
-  /* Consentement + messages */
-  .gate-consentline{
-    grid-column:1 / -1;
-    display:flex; align-items:center; justify-content:center;
-    gap:10px; font-size:14px; color:#334155; margin-top:8px;
-  }
-  .gate-consentline input{ margin:0; flex:0 0 auto; }
-  .gate-consentline span{ line-height:1.4; }
+  /* RGPD inline (sans case) */
+.gate-hint{
+  max-width:520px;
+  margin:8px auto 0;
+  font-size:13px;
+  line-height:1.45;
+  color:#334155;
+  text-align:center;
+}
+#rgpd-info{ font-weight:600; }
 
-  .gate-hint{
-    max-width:680px; margin:6px auto 0;
-    font-size:12px; color:#64748b;
-  }
-  .gate-proof{
-    max-width:680px; margin:10px auto 0;
-    padding:10px 12px; border-radius:10px;
-    background:#ecfdf5; border:1px solid #a7f3d0;
-    color:#065f46; font-size:14px; font-weight:600;
-  }
+.gate-proof{
+  max-width:520px;
+  margin:10px auto 0;
+  padding:10px 12px;
+  border-radius:10px;
+  background:#ecfdf5;
+  border:1px solid #a7f3d0;
+  color:#065f46;
+  font-size:14px;
+  font-weight:600;
+}
+
 </style>
 
 </head>
@@ -1093,17 +1097,16 @@ const gate = `
   <input id="gate-phone" class="gate-input" type="tel"
          placeholder="Téléphone (obligatoire)" autocomplete="tel" required />
 
-  <!-- 2) Consentement — pleine largeur -->
- <label class="gate-consentline full" id="gate-consent-wrap">
-  <input id="gate-consent" type="checkbox" />
-  <span>Je consens à être contacté <strong>par SMS uniquement</strong>.</span>
-</label>
+  <!-- 2) Information RGPD — pleine largeur -->
+  <p class="gate-hint full" id="rgpd-info">
+    En validant, vous acceptez d’être contacté uniquement par <strong>SMS</strong> pour votre étude photovoltaïque.
+  </p>
 
-
-  <!-- 3) Hint — pleine largeur -->
-  <div class="gate-hint full">
+  <!-- 3) Info complémentaire — pleine largeur -->
+  <div class="gate-hint full" aria-hidden="true">
     Un SMS de confirmation vous sera envoyé. Libre à vous d’échanger ensuite.
   </div>
+
 
   <!-- 4) Preuve — pleine largeur -->
   <div class="gate-proof full">
