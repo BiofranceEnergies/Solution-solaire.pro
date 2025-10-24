@@ -339,29 +339,39 @@ input {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
-/* === CTA inversé premium === */
-.cta {
+/* === CTA inversé premium – Finition === */
+.cta{
   background:#0f172a !important;      /* fond foncé */
   color:#fff !important;              /* texte blanc */
   border:2px solid var(--accent);     /* liseré orange */
-  box-shadow:0 8px 22px rgba(245,158,11,.25);
-  transition:all .25s ease;
+  border-radius:14px;                 /* coins plus doux */
+  min-height:58px;                    /* plus tactile */
+  font-size:17px;                     /* lisibilité accrue */
+  box-shadow:
+    0 10px 26px rgba(245,158,11,.35), /* ombre chaude principale */
+    0 0 12px rgba(245,158,11,.20);    /* halo discret */
+  transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
 }
 
-.cta:hover {
+.cta:hover{
   transform:translateY(-1px);
-  box-shadow:0 12px 28px rgba(245,158,11,.4);
+  box-shadow:
+    0 14px 32px rgba(245,158,11,.45),
+    0 0 14px rgba(245,158,11,.24);
 }
 
-.cta:active {
+.cta:active{
   transform:translateY(0);
-  box-shadow:0 4px 12px rgba(245,158,11,.3);
+  box-shadow:
+    0 6px 16px rgba(245,158,11,.30),
+    0 0 8px rgba(245,158,11,.18);
 }
 
-.cta:focus-visible {
+.cta:focus-visible{
   outline:2px solid var(--accent);
   outline-offset:2px;
 }
+
 
 </style>
 
