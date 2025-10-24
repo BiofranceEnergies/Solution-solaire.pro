@@ -970,25 +970,39 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
 <script>
 
-  /* === Format téléphone FR automatique (00 00 00 00 00) === */
-document.addEventListener("DOMContentLoaded", () => {
-  const telInput = document.getElementById("gate-phone");
-  if (!telInput) return;
+<!-- === Masque téléphone FR (00 00 00 00 00) === -->
+<script>
+  function attachPhoneMask() {
+    const telInput = document.getElementById('gate-phone');
+    if (!telInput) return;
 
-  telInput.addEventListener("input", () => {
-    let digits = telInput.value.replace(/\D/g, "").substring(0, 10);
-    let formatted = digits.replace(/(\d{2})(?=\d)/g, "$1 ").trim();
-    telInput.value = formatted;
-  });
+    // Configuration du champ
+    telInput.setAttribute('inputmode','numeric');
+    telInput.setAttribute('maxlength','14'); // "00 00 00 00 00"
 
-  telInput.addEventListener("paste", (e) => {
-    e.preventDefault();
-    let text = (e.clipboardData || window.clipboardData).getData("text");
-    let digits = text.replace(/\D/g, "").substring(0, 10);
-    telInput.value = digits.replace(/(\d{2})(?=\d)/g, "$1 ").trim();
-  });
-});
+    // Fonction de formatage
+    const format = v =>
+      v.replace(/\D/g,'').substring(0,10)     // garde 10 chiffres max
+       .replace(/(\d{2})(?=\d)/g,'$1 ')       // espace toutes les 2
+       .trim();
+
+    // Application lors de la saisie
+    telInput.addEventListener('input', () => {
+      telInput.value = format(telInput.value);
+    });
+
+    // Application lors du collage
+    telInput.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const txt = (e.clipboardData || window.clipboardData).getData('text') || '';
+      telInput.value = format(txt);
+    });
+  }
 </script>
+<script>
+  document.addEventListener('DOMContentLoaded', attachPhoneMask);
+</script>
+
   <script>
   (function(){
     const overlay   = document.getElementById('calc-overlay');
@@ -1290,11 +1304,8 @@ recap.innerHTML = `
   </div>
 `;
 
-
-
-
-   
-
+ attachPhoneMask();
+     
 recap.style.display = 'block';
 document.body.classList.add('results-mode');
 recap.scrollIntoView({ behavior: 'smooth', block: 'start' });
