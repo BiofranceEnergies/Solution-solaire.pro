@@ -412,14 +412,31 @@
 
   .gate-note{ margin-top:10px; font-size:12px; color:#64748b; }
 
-  /* Champs nets dans la card (anti-blur) */
-  .gate-card .gate-input{
-    -webkit-backdrop-filter:none !important;
-    backdrop-filter:none !important;
-    background:#fff !important; color:var(--ink);
-    box-shadow:0 1px 0 rgba(15,23,42,.04) inset; border:1px solid var(--border);
-  }
-  .gate-card .gate-input::placeholder{ color:#94a3b8; text-shadow:none; opacity:1; }
+  /* Champs nets dans la card (anti-blur) — version Lovable 2025 */
+.gate-card .gate-input{
+  -webkit-backdrop-filter:none !important;
+  backdrop-filter:none !important;
+  background:#fff !important;
+  color:#111827;
+
+  /* >>> entourage + relief */
+  border:1.5px solid #e5e7eb;
+  border-radius:12px;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.04);
+
+  transition:border-color .2s ease, box-shadow .2s ease;
+}
+.gate-card .gate-input::placeholder{
+  color:#9ca3af;
+  text-shadow:none;
+  opacity:1;
+}
+.gate-card .gate-input:focus{
+  border-color:#f59e0b;                 /* accent */
+  box-shadow:0 0 0 3px rgba(245,158,11,.15);
+  outline:none;
+}
+
 
   /* Badges confiance */
   .gate-badges{
