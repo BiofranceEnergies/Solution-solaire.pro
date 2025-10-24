@@ -631,6 +631,24 @@ input {
   margin:0;
 }
 
+  /* Aligne la case et le texte sur une seule ligne */
+.gate-form .full{ grid-column:1 / -1; }
+
+.gate-consentline{
+  display:flex;
+  align-items:center;
+  justify-content:center;   /* mets flex-start si tu préfères aligné à gauche */
+  gap:10px;
+  font-size:14px;
+  color:#334155;
+  margin-top:8px;
+}
+.gate-consentline input{ margin:0; flex:0 0 auto; }
+.gate-consentline span{ line-height:1.4; }
+
+/* Sécurité : si une ancienne classe .gate-consent existe, on la neutralise ici */
+.gate-consent{ display:contents; }
+
 
 
 </style>
@@ -1338,10 +1356,11 @@ const gate = `
          placeholder="Téléphone (obligatoire)" autocomplete="tel" required />
 
   <!-- 2) Consentement — pleine largeur -->
-  <div class="gate-consentline full">
-    <input id="gate-consent" type="checkbox" />
-    <label for="gate-consent">Je consens à être contacté <strong>par SMS uniquement</strong>.</label>
-  </div>
+ <label class="gate-consentline full" id="gate-consent-wrap">
+  <input id="gate-consent" type="checkbox" />
+  <span>Je consens à être contacté <strong>par SMS uniquement</strong>.</span>
+</label>
+
 
   <!-- 3) Hint — pleine largeur -->
   <div class="gate-hint full">
