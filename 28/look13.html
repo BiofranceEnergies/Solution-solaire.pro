@@ -389,6 +389,33 @@
     background:#ecfdf5; border:1px solid #a7f3d0;
     color:#065f46; font-size:14px; font-weight:600;
   }
+
+
+  /* Étire les éléments de la grille du gate (évite les contenus trop étroits) */
+.gate-form{ justify-items:stretch; }
+
+/* Ligne consentement : largeur pleine, centrée, propre */
+.gate-consentline{
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: 680px;
+  margin: 8px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;   /* mets flex-start si tu préfères à gauche */
+  gap: 10px;
+  text-align: center;
+}
+
+/* Case + texte */
+.gate-consentline input{ margin:0; flex:0 0 auto; }
+.gate-consentline span{ flex:0 1 auto; white-space: nowrap; line-height: 1.4; }
+
+/* Sur très petit écran, on autorise le retour à la ligne pour éviter un débordement */
+@media (max-width: 480px){
+  .gate-consentline span{ white-space: normal; }
+}
+
 </style>
 
 </head>
