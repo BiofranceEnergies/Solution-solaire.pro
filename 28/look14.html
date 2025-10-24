@@ -389,33 +389,6 @@
     background:#ecfdf5; border:1px solid #a7f3d0;
     color:#065f46; font-size:14px; font-weight:600;
   }
-
-  /* --- Fix consentement : alignement, largeur, lisibilité --- */
-.gate-consentline{
-  grid-column:1 / -1;
-  display:inline-flex;            /* une seule ligne compacte */
-  align-items:center;
-  gap:10px;
-  padding:10px 12px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:#fff;
-  max-width:520px;                /* recentré, pas toute la largeur */
-  margin:10px auto 0;             /* centré */
-}
-.gate-consentline input{
-  width:18px; height:18px; margin:0; flex:0 0 auto;
-}
-.gate-consentline span{
-  color:#334155; font-size:14px; line-height:1.35; text-align:left;
-}
-
-/* Harmonisation des lignes info sous le consentement */
-.gate-hint, .gate-proof{
-  max-width:520px;                /* aligné avec la ligne de consentement */
-  margin-left:auto; margin-right:auto;
-}
-
 </style>
 
 </head>
@@ -1182,30 +1155,10 @@ recap.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   if(!form || !blur || !gate) return;
 
- form.addEventListener('submit', (e)=>{
-  e.preventDefault();
-  const phone   = String(document.getElementById('gate-phone')?.value || '').trim();
-  const email   = String(document.getElementById('gate-email')?.value || '').trim();
-  const consent = document.getElementById('gate-consent')?.checked === true;
-
-  // Consentement obligatoire (SMS-only)
-  if(!consent){
-    alert('Merci de cocher la case de consentement (SMS uniquement).');
-    return;
-  }
-
-  // Validation simple téléphone FR (10 chiffres)
-  const digits = phone.replace(/\D/g,'');
-  if(digits.length < 10){
-    alert('Merci d’indiquer un numéro de téléphone valide (10 chiffres).');
-    return;
-  }
-
-  // Déverrouillage
-  blur.classList.remove('lock-blur');
-  gate.remove();
-  // window.__leadOverlay = { phone: digits, email };
-});
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const phone = String(document.getElementById('gate-phone')?.value || '').trim();
+    const email = String(document.getElementById('gate-email')?.value || '').trim();
 
     // Validation simple téléphone FR (10 chiffres)
     const digits = phone.replace(/\D/g,'');
