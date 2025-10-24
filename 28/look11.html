@@ -384,6 +384,34 @@ input {
   border:0;
 }
 
+/* Harmonisation des coins */
+.pill,
+.rect,
+.option { border-radius:12px; }   /* au lieu de 10px sur rect/option */
+
+/* Focus clair et accessible sur les champs */
+.rect:focus-within,
+.option:focus-within {
+  outline:2px solid var(--accent);
+  outline-offset:2px;
+}
+
+/* Espacement doux entre le bandeau et la 1re rangée */
+.pill { margin-bottom:10px; }
+
+/* Ajustements mobiles : bandeau et CTA lisibles sans être massifs */
+@media (max-width: 860px){
+  .pill{
+    padding:12px 14px;
+    font-weight:800;        /* on garde le poids mais on évite d’augmenter la taille */
+  }
+  .cta{
+    min-height:54px;
+    font-size:16px;
+    border-radius:12px;     /* un poil moins arrondi sur mobile */
+  }
+}
+  
 
 </style>
 
