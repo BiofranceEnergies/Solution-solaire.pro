@@ -336,15 +336,16 @@
   color:#94a3b8;
   font-size:0.9em;
 }
-/* ✅ Amélioration lisibilité placeholders (2025 UX style) */
-input::placeholder {
-  color: #ffffff;                        /* texte blanc pur */
-  background: rgba(0,0,0,0.25);          /* fond semi-transparent sombre */
-  padding: 4px 6px;                      /* petit espace interne */
-  border-radius: 6px;                    /* coins doux */
-  text-shadow: 0 0 4px rgba(0,0,0,0.5);  /* halo subtil pour contraste */
-  font-size: 15px;
+/* Placeholder stylé uniquement dans le héros */
+header.hero .panel input::placeholder {
+  color:#ffffff;
+  background: rgba(0,0,0,.25);
+  padding:4px 6px;
+  border-radius:6px;
+  text-shadow:0 0 4px rgba(0,0,0,.5);
+  font-size:15px;
 }
+
 
 /* Optionnel — rend la saisie plus confortable sur fond photo */
 input {
