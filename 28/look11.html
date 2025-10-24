@@ -424,32 +424,30 @@ input {
   }
 }
 
-/* === Mentions légales — neutralisation du style global === */
-footer a,
-.mentions a,
-a.mentions {
-  color:#6b7280 !important;          /* gris neutre, priorité absolue */
-  font-weight:400 !important;        /* texte normal, non gras */
-  text-decoration:none !important;   /* pas de soulignement au repos */
-  font-family:inherit !important;    /* garde la même police que le reste du site */
-  transition:color .2s ease;
+/* === Ajustement intelligent du formulaire et alignement CTA === */
+
+/* Par défaut (mobile/tablette) : 1 seule colonne */
+.row {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
 }
 
-footer a:hover,
-.mentions a:hover,
-a.mentions:hover {
-  color:#374151 !important;          /* gris foncé au survol */
-  text-decoration:underline !important;
-}
+/* Sur écrans larges : 2 colonnes équilibrées */
+@media (min-width: 1024px) {
+  .row {
+    grid-template-columns: 1fr 1fr;
+  }
 
-/* === Largeur max élégante pour le formulaire + bandeau === */
-@media (min-width: 1024px){
+  /* On élargit légèrement le conteneur global (panel + bandeau + CTA) */
   .panel,
-  .pill{
-    max-width: 640px;     /* largeur contenue, visuellement équilibrée */
-    margin: 0 auto;       /* centrage propre */
+  .pill,
+  .cta {
+    max-width: 860px;   /* largeur parfaite pour 2 champs lisibles */
+    margin: 0 auto;     /* centrage horizontal propre */
   }
 }
+
 
 
 
