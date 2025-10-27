@@ -732,6 +732,46 @@
   }
 }
 
+/* ======= Correctifs MOBILE — UNIQUEMENT après téléphone (results-mode) ======= */
+body.results-mode {
+  overflow-x: hidden; /* évite l’élargissement horizontal */
+}
+
+/* Limiter la largeur de tout le contenu du récap */
+body.results-mode #recap,
+body.results-mode #recap * {
+  max-width: 100%;
+}
+
+/* Cartes & bannières résultats : largeur fluide, sans débordement */
+body.results-mode #recap .result-card,
+body.results-mode #recap .financial-card,
+body.results-mode #recap .financial-banner,
+body.results-mode #recap .kpi {
+  width: auto;
+  max-width: 100%;
+}
+
+/* Grille : imposer 1 colonne sur mobile */
+@media (max-width: 860px){
+  body.results-mode #recap .result-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Tokens (puces) : retour à la ligne autorisé, pas de débordement */
+body.results-mode #recap .tokens { flex-wrap: wrap; }
+body.results-mode #recap .token  { white-space: normal; overflow-wrap: anywhere; }
+
+/* Compactage léger sur petits écrans pour éviter l’étirement */
+@media (max-width: 480px){
+  body.results-mode #recap .result-card { margin:12px auto; padding:12px; }
+  body.results-mode #recap .kpi         { margin:6px 0; padding:10px; }
+  body.results-mode #recap .kpi .value  { font-size:15px; line-height:1.3; }
+  body.results-mode #recap .financial-card,
+  body.results-mode #recap .financial-banner { padding:12px; }
+  body.results-mode #recap .gate-cta { width:100%; height:54px; }
+}
 
 
 </style>
