@@ -658,6 +658,21 @@
   color: #1b1202;
 }
 /* FIN CSS BANDEAU COOKIE */
+/* === Impression PDF : ne garder que le récap + mentions === */
+@media print{
+  @page{ size:A4; margin:14mm; }
+  body{ background:#fff !important; color:#111 !important; }
+
+  header.hero, #consent-banner, .steps-2025, .why, .stats-bg, .testi, .faq, .gate-overlay, .certifs{ display:none !important; }
+  main > *:not(#recap):not(.legal){ display:none !important; }
+  .legal{ display:block !important; }
+
+  #recap .result-card{ border:0; box-shadow:none; color:#111; padding:0; margin:0; }
+  #recap .kpi .value{ color:#111 !important; }
+
+  .gate-cta, .gate-note, .financial-banner .note{ display:none !important; }
+  .print-header{ display:block !important; margin:0 0 12mm 0; }
+}
 
 </style>
 </head>
@@ -1151,9 +1166,65 @@ document.addEventListener('DOMContentLoaded', attachPhoneMask);
         // 3. Déverrouillage UI
         blurDiv.classList.remove('lock-blur');
         gateDiv.remove(); 
+        insertPdfCta();   // le bouton PDF apparaît maintenant, uniquement après le téléphone
+
         
       }); // Fin listener submit
     } // Fin initGateForm
+    // Injecte le bouton PDF en bas des résultats APRÈS déverrouillage
+function insertPdfCta(){
+  if (document.getElementById('btn-pdf')) return; // déjà présent
+  const card = document.querySelector('#recap .result-card');
+  if (!card) return;
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'kpi';
+  wrapper.style.cssText = 'grid-column:1/-1; text-align:center; padding-top:6px;';
+  wrapper.innerHTML = `
+    <button id="btn-pdf" type="button" class="gate-cta" style="width:min(420px,100%);">
+      Télécharger mon estimation en PDF
+      <span class="arrow" aria-hidden="true">→</span>
+    </button>
+    <div class="note" style="margin-top:8px">PDF d’une page avec votre estimation et les mentions légales.</div>
+  `;
+  card.appendChild(wrapper);
+  attachPdfHandler();
+}
+
+function attachPdfHandler(){
+  const btn = document.getElementById('btn-pdf');
+  if(!btn) return;
+  btn.addEventListener('click', () => {
+    try{ prepareAndPrint(); }
+    catch(e){ console.error('Erreur impression PDF', e); alert("Impossible de préparer le PDF. Réessayez."); }
+  });
+}
+
+// En-tête imprimable + window.print + nettoyage
+function prepareAndPrint(){
+  const recap = document.getElementById('recap');
+  if(!recap){ window.print(); return; }
+
+  const header = document.createElement('div');
+  header.className = 'print-header';
+  header.innerHTML = `
+    <div style="display:flex;align-items:center;gap:12px;">
+      <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/687b0f048a98e03f86e7852020887ff4f05eb913/logo%20SSP.webp"
+           alt="Solution Solaire Pro" style="height:36px;width:auto;">
+      <div style="font-weight:900;font-size:18px;line-height:1.2;color:#111">
+        Estimation photovoltaïque – Eure-et-Loir (28)
+        <div style="font-size:12px;font-weight:600;color:#374151">Édition du ${new Date().toLocaleDateString('fr-FR')}</div>
+      </div>
+    </div>
+    <hr style="border:0;border-top:1px solid #e5e7eb;margin:8px 0 0">
+  `;
+  const card = recap.querySelector('.result-card');
+  if(card) card.insertAdjacentElement('afterbegin', header);
+
+  const cleanup = () => { header.remove(); window.removeEventListener('afterprint', cleanup); };
+  window.addEventListener('afterprint', cleanup);
+  window.print();
+}
 
     // --- Fonctions pour générer le HTML des résultats ---
     function generateVisiblePartHTML(data) {
