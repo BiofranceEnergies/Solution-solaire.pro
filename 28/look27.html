@@ -1243,19 +1243,12 @@ function prepareAndPrint(){
     </div>
   `;
 
-  // Pied de page imprimable (signature sobre)
-  const footer = document.createElement('div');
-  footer.className = 'print-footer';
-  footer.innerHTML = `
-    Estimation fournie par <strong>Solution Solaire Pro</strong> – Biofrance Énergies ·
-    Contact : <a href="tel:0648893480" style="color:#111;text-decoration:none;font-weight:700;">06&nbsp;48&nbsp;89&nbsp;34&nbsp;80</a>
-  `;
 
   // Insertion en tête de la carte + pied après la carte
   const card = recap.querySelector('.result-card');
   if(card){
     card.insertAdjacentElement('afterbegin', header);
-    card.insertAdjacentElement('afterend', footer);
+
   }
 
   // Impression puis nettoyage
