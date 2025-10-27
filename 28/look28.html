@@ -773,7 +773,43 @@ body.results-mode #recap .token  { white-space: normal; overflow-wrap: anywhere;
   body.results-mode #recap .gate-cta { width:100%; height:54px; }
 }
 
+/* ===== Fix mobile spécifique après téléphone ===== */
+@media (max-width: 860px){
+  body.results-mode header.hero{ display:none !important; }
+  body.results-mode main{
+    margin:0 !important;
+    padding:0 12px !important;
+    max-width:100% !important;
+  }
+  body.results-mode #recap{
+    width:100% !important;
+    max-width:100% !important;
+    overflow-x:hidden !important;
+    margin:12px auto !important;
+  }
+  body.results-mode #recap *,
+  body.results-mode .result-grid,
+  body.results-mode .result-card,
+  body.results-mode .kpi,
+  body.results-mode .financial-card,
+  body.results-mode .financial-banner{
+    max-width:100% !important;
+  }
+  body.results-mode #recap .result-grid{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:12px !important;
+  }
+}
 
+/* Sécurité totale anti-scroll horizontal */
+@media (max-width: 860px){
+  body.results-mode, body.results-mode html{
+    overflow-x:hidden !important;
+    width:100% !important;
+  }
+}
+  
 </style>
 </head>
 
