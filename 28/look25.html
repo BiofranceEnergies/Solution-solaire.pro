@@ -658,39 +658,6 @@
   color: #1b1202;
 }
 /* FIN CSS BANDEAU COOKIE */
-/* === Impression PDF d'une page : résultats + mentions === */
-@media print{
-  @page{ size:A4; margin:14mm; }
-
-  body{ background:#fff !important; color:#111 !important; }
-
-  /* On masque tout sauf le récap et les mentions */
-  header.hero,
-  #consent-banner,
-  .steps-2025,
-  .why,
-  .stats-bg,
-  .testi,
-  .faq,
-  .gate-overlay,
-  .certifs{ display:none !important; }
-
-  main > *:not(#recap):not(.legal){ display:none !important; }
-  .legal{ display:block !important; }
-
-  /* Carte résultat en mode sobre */
-  #recap .result-card{
-    border:0; box-shadow:none; color:#111;
-    padding:0; margin:0;
-  }
-  #recap .kpi .value{ color:#111 !important; }
-
-  /* Boutons et notes inutiles à l'impression */
-  .gate-cta, .gate-note, .financial-banner .note{ display:none !important; }
-
-  /* En-tête imprimable (injecté via JS) */
-  .print-header{ display:block !important; margin:0 0 12mm 0; }
-}
 
 </style>
 </head>
