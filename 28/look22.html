@@ -93,34 +93,14 @@
     position:relative; height:var(--hero-h-desktop); min-height:var(--hero-min);
     overflow:hidden; isolation:isolate;
   }
- /* +++ DÉBUT DU NOUVEAU BLOC +++ */
-header.hero::before {
-  content:""; 
-  position:absolute; 
-  inset:0;
-  /* Propriétés communes */
-  background-color: #0f172a; 
-  background-position: center 35%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  z-index:-1;
-  
-  /* Image par DÉFAUT (mobile) */
-  background-image: 
-    linear-gradient(90deg, rgba(5,12,24,.82) 0%, rgba(7,16,30,.66) 34%, rgba(10,18,28,.42) 62%, rgba(12,20,28,.22) 100%),
-    url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/0c095a99ab10429d2883f52ed8cf465bad7efce3/fond%20solaire%20mobile.webp"); /* <-- Nouvelle image mobile */
-}
-
-/* Media Query pour écrans plus larges */
-@media (min-width: 768px) { 
-  header.hero::before {
-    /* Redéfinit SEULEMENT l'image pour desktop */
-    background-image: 
+  header.hero::before{
+    content:""; position:absolute; inset:0;
+    background:
       linear-gradient(90deg, rgba(5,12,24,.82) 0%, rgba(7,16,30,.66) 34%, rgba(10,18,28,.42) 62%, rgba(12,20,28,.22) 100%),
-      url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp"); /* <-- Image desktop originale */
+      url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp")
+      center 35%/cover no-repeat;
+    z-index:-1;
   }
-}
-/* +++ FIN DU NOUVEAU BLOC +++ */
   .hero__inner{
     max-width:var(--maxw); margin:0 auto;
     padding:60px clamp(16px,4vw,40px);
@@ -134,24 +114,18 @@ header.hero::before {
   .title em{color:var(--accent);font-style:normal;text-shadow:0 2px 10px rgba(245,158,11,.3);}
   .lead{margin:8px 0 0;color:rgba(255,255,255,.92);max-width:54ch;}
 
-  /* ▼▼▼ [CORRECTION 1/3] : On remet la règle .panel originale ▼▼▼ */
   .panel{display:flex;flex-direction:column;gap:12px;width:100%;}
-  /* ▲▲▲ [FIN CORRECTION 1/3] ▲▲▲ */
-
-  /* ▼▼▼ [CORRECTION 2/3] : On remet la règle .pill originale + text-align:center ▼▼▼ */
   .pill{
-    display:flex;align-items:center;justify-content:center;min-height:46px; /* Gardé */
+    display:flex;align-items:center;justify-content:center;min-height:46px;
     background: linear-gradient(180deg, #fbbf24, #f59e0b);
     color:#111827;font-weight:800;border-radius:12px;border:0;
     box-shadow:0 4px 12px rgba(245,158,11,.35), inset 0 -2px 4px rgba(0,0,0,.15);
     padding:14px 16px;
     transition:transform .2s ease, box-shadow .2s ease;
-    margin-bottom:10px; /* Remis */
-    text-align: center; /* Ajouté */
+    margin-bottom:10px;
+    text-align: center; /* <-- [MODIFICATION CSS] Ajouté pour centrer le texte sur 2 lignes */
   }
-  /* ▲▲▲ [FIN CORRECTION 2/3] ▲▲▲ */
-
-  .pill:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(245,158,11,.32);} /* Gardé */
+  .pill:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(245,158,11,.32);}
   .row{display:flex;flex-direction:column;gap:10px;max-width:900px;margin-inline:auto;}
   .rect,.option{
     display:flex;align-items:center;padding:12px 14px;border-radius:12px;
@@ -683,15 +657,6 @@ header.hero::before {
 }
 /* FIN CSS BANDEAU COOKIE */
 
-/* ▼▼▼ [CORRECTION 3/3] : Suppression de la règle ajoutée précédemment ▼▼▼ */
-/*
-.panel .row,
-.panel .option {
-  margin-bottom: 12px;
-}
-*/
-/* ▲▲▲ [FIN CORRECTION 3/3] ▲▲▲ */
-
 </style>
 </head>
 
@@ -722,9 +687,12 @@ header.hero::before {
       <p class="lead">Estimez gratuitement le coût d’installation, la production et vos économies en moins d’une minute.</p>
     </div>
 
-    <div class="panel">       <form onsubmit="return __handleSubmitEtape1(event)" novalidate>
+    <div class="panel">
+      <form onsubmit="return __handleSubmitEtape1(event)" novalidate>
         
-        <div class="pill">Votre étude 100% en ligne :<br>Prix • Économies • Dimensionnement</div>         <div class="row">           <label class="rect">
+                <div class="pill">Votre étude 100% en ligne :<br>Prix • Économies • Dimensionnement</div>
+                <div class="row">
+          <label class="rect">
             <span class="sr-only">Votre code postal</span>
             <input
               id="codePostal"
@@ -751,7 +719,8 @@ header.hero::before {
           </label>
         </div>
 
-        <label class="option">           <span class="sr-only">Consommation en kWh par an (facultatif)</span>
+        <label class="option">
+          <span class="sr-only">Consommation en kWh par an (facultatif)</span>
           <input
             id="conso"
             type="text"
@@ -761,7 +730,8 @@ header.hero::before {
           >
         </label>
 
-        <button id="simuler" class="cta" type="submit">⚡ Calculer mon coût maintenant</button>       </form>
+        <button id="simuler" class="cta" type="submit">⚡ Calculer mon coût maintenant</button>
+      </form>
     </div>
   </div>
 </header>
@@ -1045,20 +1015,20 @@ document.addEventListener('DOMContentLoaded', attachPhoneMask);
         const consoVal = parseFloat((inputConsoElem.value || '').replace(/\s/g,'').replace(',', '.').replace(/[^0-9.]/g,''));
         if (Number.isFinite(consoVal) && consoVal > 0) {
           conso = consoVal;
-          prixKwh = (conso > 0) ? facture / conso : (scenarios[0]?.prixKwh || 0.25); 
+          prixKwh = (conso > 0) ? facture / conso : (scenarios[0]?.prixKwh || 0.25); // Eviter division par zéro
           sourceConso = "kwh";
         } else { 
           alert("Consommation kWh invalide, calcul basé sur la facture uniquement.");
           prixKwh = scenarios[0]?.prixKwh || 0.25; 
-          conso = (prixKwh > 0) ? facture / prixKwh : 0; 
+          conso = (prixKwh > 0) ? facture / prixKwh : 0; // Eviter division par zéro
         }
       } else {
         prixKwh = scenarios[0]?.prixKwh || 0.25; 
-        conso = (prixKwh > 0) ? facture / prixKwh : 0; 
+        conso = (prixKwh > 0) ? facture / prixKwh : 0; // Eviter division par zéro
       }
       
       // Choix du scénario pertinent
-      const minProd = Math.min(...scenarios.map(s => s.prod || Infinity), Infinity); 
+      const minProd = Math.min(...scenarios.map(s => s.prod || Infinity), Infinity); // Ajout Infinity pour cas vide
       if (conso < minProd) { alert("Consommation trop faible : installation non conseillée."); hideCalcOverlay(); return false; }
       let sc = scenarios.filter(s => (s.prod||0) <= conso).sort((a,b)=> (b.prod||0) - (a.prod||0))[0];
       if (!sc) sc = scenarios.sort((a,b)=> (b.prod||0) - (a.prod||0))[0]; 
@@ -1070,7 +1040,7 @@ document.addEventListener('DOMContentLoaded', attachPhoneMask);
       const gainMois = gainAn / 12;
       const tauxHausse = 0.03; 
       const dureeProjection = 15;
-      const facteurCumul = (tauxHausse > 0) ? (Math.pow(1 + tauxHausse, dureeProjection) - 1) / tauxHausse : dureeProjection; 
+      const facteurCumul = (tauxHausse > 0) ? (Math.pow(1 + tauxHausse, dureeProjection) - 1) / tauxHausse : dureeProjection; // Gère taux = 0
       const gain15 = gainAn * facteurCumul;
 
       // Stockage des données
@@ -1186,48 +1156,33 @@ document.addEventListener('DOMContentLoaded', attachPhoneMask);
     // --- Fonctions pour générer le HTML des résultats ---
     function generateVisiblePartHTML(data) {
       const { cp = 'N/A', conso = 0, prixKwh = 0, facture = 0, sc = {} } = data;
-      // Helper pour formater les nombres
-      const formatNum = (num, decimals = 0) => Number.isFinite(num) ? num.toLocaleString('fr-FR', {minimumFractionDigits: decimals, maximumFractionDigits: decimals}) : 'N/A';
-      
       return `
         <div class="kpi"> <div class="label">Code postal</div> <div class="value">${cp}</div> </div>
-        <div class="kpi"> <div class="label">Conso annuelle estimée</div> <div class="value" style="color:#0f172a">${formatNum(conso)} kWh</div> </div>
-        <div class="kpi"> <div class="label">Prix du kWh utilisé</div> <div class="value">${formatNum(prixKwh, 3)} €</div> </div>
-        <div class="kpi"> <div class="label">Facture annuelle</div> <div class="value">${formatNum(facture)} €</div> </div>
-        <div class="kpi kpi--highlight" style="grid-column:1/-1"> 
-          <div class="label">Dimensionnement proposé</div> 
-          <div class="value"> ${sc.puissance || 'N/A'} — ${sc.panels || 0} panneaux (500 W) • Production estimée <span style="color:#16a34a;font-weight:800">${formatNum(sc.prod)} kWh/an</span> </div> 
-        </div>`;
+        <div class="kpi"> <div class="label">Conso annuelle estimée</div> <div class="value" style="color:#0f172a">${conso.toLocaleString('fr-FR')} kWh</div> </div>
+        <div class="kpi"> <div class="label">Prix du kWh utilisé</div> <div class="value">${Number(prixKwh).toFixed(3)} €</div> </div>
+        <div class="kpi"> <div class="label">Facture annuelle</div> <div class="value">${Number(facture).toLocaleString('fr-FR')} €</div> </div>
+        <div class="kpi kpi--highlight" style="grid-column:1/-1"> <div class="label">Dimensionnement proposé</div> <div class="value"> ${sc.puissance || 'N/A'} — ${sc.panels || 0} panneaux (500 W) • Production estimée <span style="color:#16a34a;font-weight:800">${(sc.prod || 0).toLocaleString('fr-FR')} kWh/an</span> </div> </div>`;
     }
 
     function generateLockedPartHTML(data) {
       const { sc = {}, gainAn = 0, gainMois = 0, gain15 = 0, autocons = 0, conso = 0 } = data;
-      const pctCouverture = (conso > 0 && autocons >= 0) ? ((autocons / conso) * 100).toFixed(1) : 0; // autocons peut être 0
-      const tauxHausse = 0.03; 
-       // Helper pour formater les nombres
-      const formatNum = (num, decimals = 0) => Number.isFinite(num) ? num.toLocaleString('fr-FR', {minimumFractionDigits: decimals, maximumFractionDigits: decimals}) : 'N/A';
-      
+      const pctCouverture = (conso > 0) ? ((autocons / conso) * 100).toFixed(1) : 0;
+      const tauxHausse = 0.03; // Assurez-vous que cette variable est définie ou passée
       return `
-        <div class="kpi" style="grid-column:1/-1"> 
-          <div class="value" style="font-size:18px;font-weight:700;color:#16a34a;margin-bottom:6px"> ${pctCouverture} % <span style="color:#0f172a;font-weight:600">de votre consommation est couverte par votre production</span> </div> 
-          
-          <div style="color:#334155;font-size:13px;line-height:1.5;margin-top:2px"> Votre production est valorisée à 100&nbsp;% grâce à la batterie virtuelle, même si elle ne couvre pas 100&nbsp;% de votre consommation. <em>Hypothèse standard&nbsp;: exposition Sud/Sud-Est, pente de toit 35°.</em> </div> 
-          </div>
-        <div class="kpi"> <div class="label">Gain 1ʳᵉ année (ordre de grandeur)</div> <div class="value" style="color:#16a34a"> ${formatNum(gainAn)} € / an </div> </div>
-        <div class="kpi"> <div class="label">Économie moyenne mensuelle</div> <div class="value" style="color:#16a34a"> ${formatNum(gainMois)} € / mois </div> </div>
-        <div class="kpi" style="grid-column:1/-1"> <div class="label">Économie cumulée sur 15 ans</div> <div class="value" style="color:#16a34a"> ${formatNum(gain15)} € </div> <div class="note" style="margin-top:4px"> Hypothèses&nbsp;: prix du kWh +${(tauxHausse*100)}&nbsp;%/an... </div> </div>
+        <div class="kpi" style="grid-column:1/-1"> <div class="value" style="font-size:18px;font-weight:700;color:#16a34a;margin-bottom:6px"> ${pctCouverture} % <span style="color:#0f172a;font-weight:600">de votre consommation est couverte par votre production</span> </div> <div style="color:#334155;font-size:13px;line-height:1.5;margin-top:2px"> Votre production est valorisée à 100&nbsp;% grâce à la batterie virtuelle... <em>Hypothèse standard...</em> </div> </div>
+        <div class="kpi"> <div class="label">Gain 1ʳᵉ année (ordre de grandeur)</div> <div class="value" style="color:#16a34a"> ${gainAn.toLocaleString('fr-FR')} € / an </div> </div>
+        <div class="kpi"> <div class="label">Économie moyenne mensuelle</div> <div class="value" style="color:#16a34a"> ${gainMois.toLocaleString('fr-FR')} € / mois </div> </div>
+        <div class="kpi" style="grid-column:1/-1"> <div class="label">Économie cumulée sur 15 ans</div> <div class="value" style="color:#16a34a"> ${gain15.toLocaleString('fr-FR')} € </div> <div class="note" style="margin-top:4px"> Hypothèses&nbsp;: prix du kWh +${(tauxHausse*100)}&nbsp;%/an... </div> </div>
         ${generateRemiseBannerHTML(sc)}
         ${generateFinancementCardHTML(sc)}`;
     }
     
     function generateRemiseBannerHTML(sc) {
-       // Helper pour formater les nombres
-      const formatNum = (num, decimals = 0) => Number.isFinite(num) ? num.toLocaleString('fr-FR', {minimumFractionDigits: decimals, maximumFractionDigits: decimals}) : 'N/A';
       if (Number.isFinite(sc?.remiseChantier) && sc.remiseChantier > 0) {
         return `
           <div class="financial-banner" style="grid-column: 1 / -1;">
             <div style="font-weight:700; color:#7c2d12; margin-bottom:4px">Offre spéciale « Groupage chantiers »</div>
-            <div style="font-size:22px; font-weight:900; color:#7c2d12;"> ${formatNum(sc.remiseChantier)} € de remise immédiate </div>
+            <div style="font-size:22px; font-weight:900; color:#7c2d12;"> ${Math.round(sc.remiseChantier).toLocaleString('fr-FR')} € de remise immédiate </div>
             <div class="note" style="margin-top:6px; color:#334155">(à déduire du prix TTC indiqué ci-dessous)</div>
             <div class="note" style="margin-top:4px; color:#334155"><strong>Valable jusqu’au 31 octobre 2025</strong></div>
           </div>`;
@@ -1235,25 +1190,24 @@ document.addEventListener('DOMContentLoaded', attachPhoneMask);
     }
 
     function generateFinancementCardHTML(sc) {
-       // Helper pour formater les nombres
-      const formatNum = (num, decimals = 0) => Number.isFinite(num) ? num.toLocaleString('fr-FR', {minimumFractionDigits: decimals, maximumFractionDigits: decimals}) : 'N/A';
-      const prixHTML = Number.isFinite(sc?.prix) ? `<p style="margin:0 0 8px"><strong>Installation ${sc.puissance || ''}</strong> : <span class="token">${formatNum(sc.prix)} € TTC</span> <span class="note">(prix indicatif hors options)</span> </p>` : '';
+      const prixHTML = Number.isFinite(sc?.prix) ? `<p style="margin:0 0 8px"><strong>Installation ${sc.puissance || ''}</strong> : <span class="token">${Math.round(sc.prix).toLocaleString('fr-FR')} € TTC</span> <span class="note">(prix indicatif hors options)</span> </p>` : '';
       let financementDetailsHTML = '';
-      if (Number.isFinite(sc?.mensualite) && sc.mensualite > 0) { 
+      if (Number.isFinite(sc?.mensualite) && sc.mensualite > 0) { // Ajout vérification > 0
         const dureeHTML = Number.isFinite(sc?.dureeMois) && sc.dureeMois > 0 ? `<span class="token">Durée : ${sc.dureeMois} mois</span>` : '';
         const taegHTML = Number.isFinite(sc?.taeg) ? `<span class="token">TAEG fixe : ${sc.taeg}%</span>` : '';
-        const totalHTML = Number.isFinite(sc?.total) && sc.total > 0 ? `<p style="margin:6px 0 0"><strong>Prix total</strong> : <span class="token">${formatNum(sc.total, 2)} €</span> </p>` : '';
+        const totalHTML = Number.isFinite(sc?.total) && sc.total > 0 ? `<p style="margin:6px 0 0"><strong>Prix total</strong> : <span class="token">${Number(sc.total).toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2})} €</span> </p>` : '';
         financementDetailsHTML = `
           <p style="margin:10px 0 4px; font-weight:700">Option financement <span class="note">(facultatif)</span></p>
           <div class="tokens">
-            <span class="token">${formatNum(sc.mensualite, 2)} € / mois</span>
+            <span class="token">${(sc.mensualite).toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2})} € / mois</span>
             ${dureeHTML} ${taegHTML}
           </div>
           ${totalHTML}
           <p class="note" style="margin:10px 0 0">Financement proposé par notre partenaire, sous réserve d’acceptation.</p>
-          <div class="note note-alert">⚠️ Un crédit vous engage et doit être remboursé...</div>
+          <div class="note note-alert">⚠️Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</div>
           <p class="note" style="margin:8px 0 0">Estimation indicative. Visite technique nécessaire...</p>`;
       }
+      // Toujours afficher la carte, même sans détails de financement si le prix est connu
       if(prixHTML || financementDetailsHTML) {
         return `
           <div class="financial-card" style="grid-column: 1 / -1;">
@@ -1262,7 +1216,7 @@ document.addEventListener('DOMContentLoaded', attachPhoneMask);
             ${financementDetailsHTML}
           </div>`;
       }
-      return ''; 
+      return ''; // Ne rien afficher si ni prix ni financement ne sont valides
     }
 
     function generateGateHTML() {
