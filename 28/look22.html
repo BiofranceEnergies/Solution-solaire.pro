@@ -116,14 +116,15 @@
 
   .panel{display:flex;flex-direction:column;gap:12px;width:100%;}
   .pill{
-    display:flex;align-items:center;justify-content:center;min-height:46px;
-    background: linear-gradient(180deg, #fbbf24, #f59e0b);
-    color:#111827;font-weight:800;border-radius:12px;border:0;
-    box-shadow:0 4px 12px rgba(245,158,11,.35), inset 0 -2px 4px rgba(0,0,0,.15);
-    padding:14px 16px;
-    transition:transform .2s ease, box-shadow .2s ease;
-    margin-bottom:10px;
-  }
+  display:flex;align-items:center;justify-content:center;min-height:46px;
+  background: linear-gradient(180deg, #fbbf24, #f59e0b);
+  color:#111827;font-weight:800;border-radius:12px;border:0;
+  box-shadow:0 4px 12px rgba(245,158,11,.35), inset 0 -2px 4px rgba(0,0,0,.15);
+  padding:14px 16px;
+  transition:transform .2s ease, box-shadow .2s ease;
+  margin-bottom:10px;
+  text-align: center; /* <-- AJOUTER SEULEMENT CETTE LIGNE */
+}
   .pill:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(245,158,11,.32);}
   .row{display:flex;flex-direction:column;gap:10px;max-width:900px;margin-inline:auto;}
   .rect,.option{
@@ -688,7 +689,7 @@
 
     <div class="panel">
       <form onsubmit="return __handleSubmitEtape1(event)" novalidate>
-        <div class="pill">Coût de votre installation & économies en direct</div>
+        <div class="pill">Votre étude 100% en ligne :<br>Prix • Économies • Dimensionnement</div>
 
         <div class="row">
           <label class="rect">
