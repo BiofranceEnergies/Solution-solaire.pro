@@ -1191,13 +1191,13 @@ document.addEventListener('DOMContentLoaded', attachPhoneMask);
       } return '';
     }
 
- function generateFinancementCardHTML(sc) {
+function generateFinancementCardHTML(sc) {
       const prixHTML = Number.isFinite(sc?.prix) ? `<p style="margin:0 0 8px"><strong>Installation ${sc.puissance || ''}</strong> : <span class="token">${Math.round(sc.prix).toLocaleString('fr-FR')} € TTC</span> <span class="note">(prix indicatif hors options)</span> </p>` : '';
       let financementDetailsHTML = '';
       if (Number.isFinite(sc?.mensualite) && sc.mensualite > 0) { // Ajout vérification > 0
         const dureeHTML = Number.isFinite(sc?.dureeMois) && sc.dureeMois > 0 ? `<span class="token">Durée : ${sc.dureeMois} mois</span>` : '';
         const taegHTML = Number.isFinite(sc?.taeg) ? `<span class="token">TAEG fixe : ${sc.taeg}%</span>` : '';
-        const totalHTML = Number.isFinite(sc?.total) && sc.total > 0 ? `<p style="margin:6px 0 0"><strong>Prix total</strong> : <span class="token">${Number(sc.total).toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2})} €</span> </p>` : '';
+  	  const totalHTML = Number.isFinite(sc?.total) && sc.total > 0 ? `<p style="margin:6px 0 0"><strong>Prix total</strong> : <span class="token">${Number(sc.total).toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2})} €</span> </p>` : '';
         financementDetailsHTML = `
           <p style="margin:10px 0 4px; font-weight:700">Option financement <span class="note">(facultatif)</span></p>
           <div class="tokens">
@@ -1210,7 +1210,6 @@ document.addEventListener('DOMContentLoaded', attachPhoneMask);
           <p class="note" style="margin:8px 0 0">Estimation indicative. Visite technique nécessaire...</p>
           <p style="margin: 18px 0 4px; text-align: center; font-size: 16px; font-weight: 700; color: var(--accent); line-height: 1.5;">
             Cette estimation vous a été offerte par Solution Solaire Pro filiale de Biofrance energie.
-            <br>
             Vous pouvez contacter votre conseiller régional au 
             <a href="tel:0648893480" style="color: inherit; text-decoration: underline; font-weight: 800;">06 48 89 34 80</a>.
           </p>
