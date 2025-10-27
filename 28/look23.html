@@ -115,7 +115,8 @@
   .lead{margin:8px 0 0;color:rgba(255,255,255,.92);max-width:54ch;}
 
   .panel{display:flex;flex-direction:column;gap:12px;width:100%;}
-  .pill{
+/* Ligne ~116 */
+.pill{
   display:flex;align-items:center;justify-content:center;min-height:46px;
   background: linear-gradient(180deg, #fbbf24, #f59e0b);
   color:#111827;font-weight:800;border-radius:12px;border:0;
@@ -123,7 +124,8 @@
   padding:14px 16px;
   transition:transform .2s ease, box-shadow .2s ease;
   margin-bottom:10px;
-  text-align: center; /* <-- AJOUTER SEULEMENT CETTE LIGNE */
+  text-align: center;
+  font-size: 17px; /* <-- AJOUTEZ CETTE LIGNE */
 }
   .pill:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(245,158,11,.32);}
   .row{display:flex;flex-direction:column;gap:10px;max-width:900px;margin-inline:auto;}
