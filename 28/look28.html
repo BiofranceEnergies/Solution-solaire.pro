@@ -708,7 +708,14 @@
   }
 
   /* Supprime boutons, notes, etc. */
-  .gate-cta, .gate-note, .financial-banner .note { display: none !important; }
+ .gate-cta, .gate-note{ display:none !important; } /* on NE masque plus .financial-banner .note */
+.financial-banner .note{
+  display:block !important;
+  color:#111 !important;
+  font-size:12px !important;
+  margin-top:4px !important;
+}
+
 
   /* En-tête premium */
   .print-header {
