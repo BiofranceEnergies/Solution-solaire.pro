@@ -809,6 +809,38 @@ body.results-mode #recap .token  { white-space: normal; overflow-wrap: anywhere;
     width:100% !important;
   }
 }
+
+/* ===== Supprimer le séparateur central et tout clipping en mobile (après téléphone) ===== */
+@media (max-width: 860px){
+  /* 1) Désactive toute ligne/ornement pseudo-élément */
+  body.results-mode #recap .result-card::before,
+  body.results-mode #recap .result-card::after,
+  body.results-mode #recap .result-grid::before,
+  body.results-mode #recap .result-grid::after{
+    content: none !important; display: none !important;
+  }
+
+  /* 2) S'il était fait via un background sur la grille, on le supprime */
+  body.results-mode #recap .result-grid{
+    background: none !important;
+  }
+
+  /* 3) Empêche le rognage du texte dans les blocs */
+  body.results-mode #recap .result-card,
+  body.results-mode #recap .result-grid,
+  body.results-mode #recap .kpi,
+  body.results-mode #recap .financial-card,
+  body.results-mode #recap .financial-banner{
+    overflow: visible !important;
+  }
+
+  /* 4) On reste bien en 1 colonne */
+  body.results-mode #recap .result-grid{
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
   
 </style>
 </head>
