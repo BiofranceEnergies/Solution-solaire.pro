@@ -93,14 +93,34 @@
     position:relative; height:var(--hero-h-desktop); min-height:var(--hero-min);
     overflow:hidden; isolation:isolate;
   }
-  header.hero::before{
-    content:""; position:absolute; inset:0;
-    background:
+ /* +++ DÉBUT DU NOUVEAU BLOC +++ */
+header.hero::before {
+  content:""; 
+  position:absolute; 
+  inset:0;
+  /* Propriétés communes */
+  background-color: #0f172a; 
+  background-position: center 35%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index:-1;
+  
+  /* Image par DÉFAUT (mobile) */
+  background-image: 
+    linear-gradient(90deg, rgba(5,12,24,.82) 0%, rgba(7,16,30,.66) 34%, rgba(10,18,28,.42) 62%, rgba(12,20,28,.22) 100%),
+    url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/0c095a99ab10429d2883f52ed8cf465bad7efce3/fond%20solaire%20mobile.webp"); /* <-- Nouvelle image mobile */
+}
+
+/* Media Query pour écrans plus larges */
+@media (min-width: 768px) { 
+  header.hero::before {
+    /* Redéfinit SEULEMENT l'image pour desktop */
+    background-image: 
       linear-gradient(90deg, rgba(5,12,24,.82) 0%, rgba(7,16,30,.66) 34%, rgba(10,18,28,.42) 62%, rgba(12,20,28,.22) 100%),
-      url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp")
-      center 35%/cover no-repeat;
-    z-index:-1;
+      url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp"); /* <-- Image desktop originale */
   }
+}
+/* +++ FIN DU NOUVEAU BLOC +++ */
   .hero__inner{
     max-width:var(--maxw); margin:0 auto;
     padding:60px clamp(16px,4vw,40px);
