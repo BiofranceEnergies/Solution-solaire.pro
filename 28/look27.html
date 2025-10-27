@@ -1215,30 +1215,58 @@ function attachPdfHandler(){
 }
 
 // En-tête imprimable + window.print + nettoyage
+// En-tête premium + pied de page + impression, puis nettoyage
 function prepareAndPrint(){
   const recap = document.getElementById('recap');
   if(!recap){ window.print(); return; }
 
+  // Récupération d'infos utiles si disponibles
+  const cp = (window.simulationData && window.simulationData.cp) ? String(window.simulationData.cp) : '';
+  const dep = cp ? cp.slice(0,2) : '28'; // fallback 28 si non dispo
+  const sc  = (window.simulationData && window.simulationData.sc) ? window.simulationData.sc : {};
+  const titreLigne = `Estimation photovoltaïque – Eure-et-Loir (${dep})`;
+  const sousTitre  = cp ? `Code postal : ${cp} · Puissance : ${sc.puissance || '—'} · Production : ${(sc.prod || 0).toLocaleString('fr-FR')} kWh/an` 
+                        : `Puissance : ${sc.puissance || '—'} · Production : ${(sc.prod || 0).toLocaleString('fr-FR')} kWh/an`;
+
+  // En-tête imprimable (centré, barre accent)
   const header = document.createElement('div');
   header.className = 'print-header';
   header.innerHTML = `
-    <div style="display:flex;align-items:center;gap:12px;">
+    <div style="text-align:center;">
       <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/687b0f048a98e03f86e7852020887ff4f05eb913/logo%20SSP.webp"
-           alt="Solution Solaire Pro" style="height:36px;width:auto;">
-      <div style="font-weight:900;font-size:18px;line-height:1.2;color:#111">
-        Estimation photovoltaïque – Eure-et-Loir (28)
-        <div style="font-size:12px;font-weight:600;color:#374151">Édition du ${new Date().toLocaleDateString('fr-FR')}</div>
-      </div>
+           alt="Solution Solaire Pro" style="height:48px;width:auto;display:inline-block;margin-bottom:6px;">
+      <div style="font-weight:900;font-size:18px;line-height:1.2;color:#111">${titreLigne}</div>
+      <div style="font-size:12px;color:#374151;margin-top:2px;">${sousTitre}</div>
+      <div style="font-size:12px;color:#6b7280;margin-top:2px;">Édité le ${new Date().toLocaleDateString('fr-FR')}</div>
+      <div style="height:6px;margin:10px auto 0;width:100%;max-width:120px;border-radius:999px;
+                  background:linear-gradient(180deg,#f59e0b,#fbbf24);"></div>
     </div>
-    <hr style="border:0;border-top:1px solid #e5e7eb;margin:8px 0 0">
   `;
-  const card = recap.querySelector('.result-card');
-  if(card) card.insertAdjacentElement('afterbegin', header);
 
-  const cleanup = () => { header.remove(); window.removeEventListener('afterprint', cleanup); };
+  // Pied de page imprimable (signature sobre)
+  const footer = document.createElement('div');
+  footer.className = 'print-footer';
+  footer.innerHTML = `
+    Estimation fournie par <strong>Solution Solaire Pro</strong> – Biofrance Énergies ·
+    Contact : <a href="tel:0648893480" style="color:#111;text-decoration:none;font-weight:700;">06&nbsp;48&nbsp;89&nbsp;34&nbsp;80</a>
+  `;
+
+  // Insertion en tête de la carte + pied après la carte
+  const card = recap.querySelector('.result-card');
+  if(card){
+    card.insertAdjacentElement('afterbegin', header);
+    card.insertAdjacentElement('afterend', footer);
+  }
+
+  // Impression puis nettoyage
+  const cleanup = () => {
+    header.remove(); footer.remove();
+    window.removeEventListener('afterprint', cleanup);
+  };
   window.addEventListener('afterprint', cleanup);
   window.print();
 }
+
 
     // --- Fonctions pour générer le HTML des résultats ---
     function generateVisiblePartHTML(data) {
