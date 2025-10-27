@@ -732,66 +732,92 @@
   }
 }
 
-/* === MOBILE RESULTS FIX — scoped (≤860px) : n'impacte pas le desktop === */
+/* === HOTFIX MOBILE (≤860px) — résultats après téléphone uniquement === */
 @media (max-width: 860px){
 
-  body.results-mode{
-    overflow-x:hidden;
-  }
-
-  /* Conteneur résultats */
+  /* conteneur */
   body.results-mode #recap{
-    width:100% !important;
-    max-width:100% !important;
-    margin:12px auto !important;
-    padding:0 12px !important;
-    box-sizing:border-box !important;
+    padding: 0 12px !important;
+    margin: 12px auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
   }
 
-  /* Grille -> 1 colonne fluide */
+  /* carte + grille = 1 colonne, jamais 2, jamais de rognage */
+  body.results-mode #recap .result-card{
+    padding: 12px !important;
+    margin: 12px 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+  }
+
   body.results-mode #recap .result-grid{
-    display:grid !important;
-    grid-template-columns:1fr !important;
-    gap:12px !important;
-    background:none !important;
-    overflow:visible !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    background: none !important;
+    overflow: visible !important;
   }
 
-  /* Cartes & bannières : pas de rognage, pas de débordement */
-  body.results-mode #recap .result-card,
+  /* tous les blocs internes = largeur fluide */
+  body.results-mode #recap .kpi,
   body.results-mode #recap .financial-card,
-  body.results-mode #recap .financial-banner,
-  body.results-mode #recap .kpi{
-    width:auto !important;
-    max-width:100% !important;
-    box-sizing:border-box !important;
-    overflow:visible !important;
-    margin-left:0 !important;
-    margin-right:0 !important;
+  body.results-mode #recap .financial-banner{
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
   }
 
-  /* Pseudo-séparateurs off en mobile */
+  /* pas de pseudo-ornements qui coupent */
   body.results-mode #recap .result-card::before,
   body.results-mode #recap .result-card::after,
   body.results-mode #recap .result-grid::before,
   body.results-mode #recap .result-grid::after{
-    content:none !important;
-    display:none !important;
+    content: none !important;
+    display: none !important;
   }
 
-  /* Tokens/pastilles : retour à la ligne */
-  body.results-mode #recap .tokens{ flex-wrap:wrap !important; }
-  body.results-mode #recap .token{ white-space:normal !important; overflow-wrap:anywhere !important; }
+  /* empêcher toute chaîne longue de créer un débordement */
+  body.results-mode #recap *,
+  body.results-mode #recap .kpi .value,
+  body.results-mode #recap .note{
+    min-width: 0 !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+  }
 
-  /* Compactage très petits écrans */
+  /* les pastilles “token” doivent pouvoir revenir à la ligne */
+  body.results-mode #recap .tokens{ flex-wrap: wrap !important; }
+  body.results-mode #recap .token{
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    max-width: 100% !important;
+  }
+
+  /* CTA PDF et divers */
+  body.results-mode #recap .gate-cta{
+    width: 100% !important;
+    height: 54px !important;
+  }
+
+  /* sur tous petits écrans */
   @media (max-width: 480px){
-    body.results-mode #recap .result-card{ margin:12px auto !important; padding:12px !important; }
-    body.results-mode #recap .kpi{ margin:6px 0 !important; padding:10px !important; }
-    body.results-mode #recap .kpi .value{ font-size:15px !important; line-height:1.3 !important; }
+    body.results-mode #recap .kpi{ padding: 10px !important; margin: 6px 0 !important; }
+    body.results-mode #recap .kpi .value{ font-size: 15px !important; line-height: 1.3 !important; }
     body.results-mode #recap .financial-card,
-    body.results-mode #recap .financial-banner{ padding:12px !important; }
+    body.results-mode #recap .financial-banner{ padding: 12px !important; }
   }
 }
+
 
   
 </style>
