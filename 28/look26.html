@@ -1181,12 +1181,12 @@ function insertPdfCta(){
   wrapper.className = 'kpi';
   wrapper.style.cssText = 'grid-column:1/-1; text-align:center; padding-top:6px;';
   wrapper.innerHTML = `
-    <button id="btn-pdf" type="button" class="gate-cta" style="width:min(420px,100%);">
-      Télécharger mon estimation en PDF
-      <span class="arrow" aria-hidden="true">→</span>
-    </button>
-    <div class="note" style="margin-top:8px">PDF d’une page avec votre estimation et les mentions légales.</div>
-  `;
+  <button id="btn-pdf" type="button" class="gate-cta" style="width:min(420px,100%);">
+    Télécharger mon estimation en PDF
+    <span class="arrow" aria-hidden="true">→</span>
+  </button>
+`;
+
   card.appendChild(wrapper);
   attachPdfHandler();
 }
