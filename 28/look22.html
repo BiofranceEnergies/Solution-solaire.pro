@@ -134,23 +134,24 @@ header.hero::before {
   .title em{color:var(--accent);font-style:normal;text-shadow:0 2px 10px rgba(245,158,11,.3);}
   .lead{margin:8px 0 0;color:rgba(255,255,255,.92);max-width:54ch;}
 
-  /* On garde cette règle intacte */
+  /* ▼▼▼ [CORRECTION 1/3] : On remet la règle .panel originale ▼▼▼ */
   .panel{display:flex;flex-direction:column;gap:12px;width:100%;}
+  /* ▲▲▲ [FIN CORRECTION 1/3] ▲▲▲ */
 
-  /* ▼▼▼ [CORRECTION CSS] ▼▼▼ */
-  /* On modifie le .pill : on enlève la marge et on ajoute text-align */
+  /* ▼▼▼ [CORRECTION 2/3] : On remet la règle .pill originale + text-align:center ▼▼▼ */
   .pill{
-    display:flex;align-items:center;justify-content:center;min-height:46px;
+    display:flex;align-items:center;justify-content:center;min-height:46px; /* Gardé */
     background: linear-gradient(180deg, #fbbf24, #f59e0b);
     color:#111827;font-weight:800;border-radius:12px;border:0;
     box-shadow:0 4px 12px rgba(245,158,11,.35), inset 0 -2px 4px rgba(0,0,0,.15);
     padding:14px 16px;
     transition:transform .2s ease, box-shadow .2s ease;
-    text-align: center; /* <-- AJOUTÉ pour centrer le texte sur 2 lignes */
-    /* margin-bottom:10px; <-- SUPPRIMÉ (le 'gap' du .panel gère l'espace) */
+    margin-bottom:10px; /* Remis */
+    text-align: center; /* Ajouté */
   }
-  /* ▲▲▲ [FIN CORRECTION CSS] ▲▲▲ */
+  /* ▲▲▲ [FIN CORRECTION 2/3] ▲▲▲ */
 
+  .pill:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(245,158,11,.32);} /* Gardé */
   .row{display:flex;flex-direction:column;gap:10px;max-width:900px;margin-inline:auto;}
   .rect,.option{
     display:flex;align-items:center;padding:12px 14px;border-radius:12px;
@@ -286,12 +287,12 @@ header.hero::before {
   .faq__list{display:grid;gap:12px;}
   .faq details{background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:0 4px 14px rgba(15,23,42,.05);overflow:hidden;}
   .faq summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:18px 20px;font-weight:800;font-size:clamp(15px,1.9vw,17px);color:var(--ink);transition:color .2s ease;}
-->  .faq summary:hover, details[open] summary{color:var(--accent);}
+  .faq summary:hover, details[open] summary{color:var(--accent);}
   .faq summary::-webkit-details-marker{display:none;}
   .faq__chev{margin-left:auto;transition:transform .2s ease;flex:0 0 auto;opacity:.7;}
   details[open] .faq__chev{transform:rotate(180deg);opacity:1;}
   .faq__panel{padding:0 20px 18px 20px;color:var(--muted);font-size:clamp(14px,1.8vw,16px);line-height:1.55;border-top:1px solid var(--border);background:#fbfbfd;}
-s  .faq{padding-top:clamp(20px,4vw,40px);}
+  .faq{padding-top:clamp(20px,4vw,40px);}
   .faq h2{margin-bottom:clamp(10px,2vw,16px);}
   .faq__list{margin-top:6px;}
 
@@ -316,7 +317,7 @@ s  .faq{padding-top:clamp(20px,4vw,40px);}
     background:conic-gradient(from 0turn at 50% 50%, var(--accent) 0 25%, rgba(245,158,11,0) 25% 100%);
     -webkit-mask: radial-gradient(farthest-side,#0000 62%,#000 63%); mask: radial-gradient(farthest-side,#0000 62%,#000 63%);
     animation: spin360 .9s linear infinite; box-shadow:0 0 0 1px rgba(0,0,0,.04) inset, 0 0 12px rgba(245,158,11,.18);
-s  }
+  }
   #calc-overlay .spinner::after{
     content:""; position:absolute; inset:0; border-radius:50%;
     background:radial-gradient(circle 6px at 80% 50%, var(--accent), rgba(245,158,11,0) 60%);
@@ -325,13 +326,13 @@ s  }
   @keyframes spin360{ to { transform: rotate(360deg); } }
   #calc-overlay .desc{color:#374151;font-size:14px;margin:0;}
 
-s /* ============== MODE RÉSULTAT ============== */
+  /* ============== MODE RÉSULTAT ============== */
   body.results-mode header.hero{height:var(--hero-h-desktop);min-height:var(--hero-min);padding-bottom:0;}
   @media (max-width:860px){ body.results-mode header.hero{ height: var(--hero-h-mobile); } }
   body.results-mode header.hero::before{opacity:1 !important;}
   body.results-mode .panel{margin-bottom:0;}
   body.results-mode main > *{display:none !important;}
-s body.results-mode main > #recap, body.results-mode main > .legal{display:block !important;}
+  body.results-mode main > #recap, body.results-mode main > .legal{display:block !important;}
   body.results-mode main > .legal{margin-top:24px;}
   body.results-mode #recap{display:block !important;margin-top:12px;}
 
@@ -366,7 +367,7 @@ s body.results-mode main > #recap, body.results-mode main > .legal{display:block
   .financial-title{ font-size:18px; font-weight:900; margin:0 0 10px; color:var(--ink); }
   .tokens{ display:flex; flex-wrap:wrap; gap:8px; margin:8px 0 10px; }
   .token{ display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; border:1px solid var(--border); background:#f8fafc; font-weight:700; }
-s .note{ color:#64748b; font-size:13px; line-height:1.5; }
+  .note{ color:#64748b; font-size:13px; line-height:1.5; }
   .note-alert{ margin-top:10px; padding:10px 12px; background:#fff; border:0; border-radius:10px; }
 
   /* Pavés financiers pleine largeur dans la grille */
@@ -482,7 +483,7 @@ s .note{ color:#64748b; font-size:13px; line-height:1.5; }
 .gate-cta .arrow{
   display:inline-flex; align-items:center; justify-content:center;
   width:26px; height:26px; border-radius:999px;
-s background:rgba(255,255,255,.85);
+  background:rgba(255,255,255,.85);
   box-shadow:0 2px 8px rgba(0,0,0,.08) inset;
   font-weight:900; font-size:14px; color:#111827;
 }
@@ -536,7 +537,7 @@ s background:rgba(255,255,255,.85);
   /* RGPD inline (sans case) */
 .gate-hint{
   max-width:520px;
-s margin:8px auto 0;
+  margin:8px auto 0;
   font-size:13px;
   line-height:1.45;
   color:#334155;
@@ -570,7 +571,7 @@ s margin:8px auto 0;
 }
 
 .gate-card .gate-input:hover{
-s border-color:#cbd5e1 !important;       /* léger feedback au survol */
+  border-color:#cbd5e1 !important;       /* léger feedback au survol */
 }
 
 .gate-card .gate-input:focus{
@@ -613,7 +614,7 @@ s border-color:#cbd5e1 !important;       /* léger feedback au survol */
   border-color:#f59e0b;
   box-shadow:
     0 0 0 3px rgba(245,158,11,.18),
-s   inset 0 1px 2px rgba(0,0,0,.04);
+    inset 0 1px 2px rgba(0,0,0,.04);
   outline:0;
 }
 
@@ -633,7 +634,7 @@ s   inset 0 1px 2px rgba(0,0,0,.04);
   color: var(--ink);
   padding: 12px;
   z-index: 9999;
-s display: none;
+  display: none;
   box-shadow: 0 -6px 26px rgba(0, 0, 0, .12);
   font: 14px/1.5 system-ui, Segoe UI, Roboto;
   min-height: 56px;
@@ -643,7 +644,7 @@ s display: none;
   transition: opacity .18s ease, transform .18s ease;
 }
 .consent-inner {
-s max-width: 900px;
+  max-width: 900px;
   margin: 0 auto;
   display: flex;
   gap: 14px;
@@ -678,9 +679,18 @@ s max-width: 900px;
   border: none;
   font-size: 14px;
   background: linear-gradient(180deg, var(--accent), var(--accent-2));
-s color: #1b1202;
+  color: #1b1202;
 }
 /* FIN CSS BANDEAU COOKIE */
+
+/* ▼▼▼ [CORRECTION 3/3] : Suppression de la règle ajoutée précédemment ▼▼▼ */
+/*
+.panel .row,
+.panel .option {
+  margin-bottom: 12px;
+}
+*/
+/* ▲▲▲ [FIN CORRECTION 3/3] ▲▲▲ */
 
 </style>
 </head>
@@ -712,12 +722,9 @@ s color: #1b1202;
       <p class="lead">Estimez gratuitement le coût d’installation, la production et vos économies en moins d’une minute.</p>
     </div>
 
-    <div class="panel">
-      <form onsubmit="return __handleSubmitEtape1(event)" novalidate>
+    <div class="panel">       <form onsubmit="return __handleSubmitEtape1(event)" novalidate>
         
-                <div class="pill">Votre étude 100% en ligne :<br>Prix • Économies • Dimensionnement</div>
-                <div class="row">
-          <label class="rect">
+        <div class="pill">Votre étude 100% en ligne :<br>Prix • Économies • Dimensionnement</div>         <div class="row">           <label class="rect">
             <span class="sr-only">Votre code postal</span>
             <input
               id="codePostal"
@@ -731,22 +738,21 @@ s color: #1b1202;
             >
           </label>
 
-s         <label class="rect">
+          <label class="rect">
             <span class="sr-only">Votre facture électricité par an</span>
             <input
               id="facture"
               type="text"
               placeholder="Votre facture élec / an (ex : 1 800 €)"
-s             inputmode="decimal"
+              inputmode="decimal"
               autocomplete="off"
               required
             >
           </label>
         </div>
 
-        <label class="option">
-          <span class="sr-only">Consommation en kWh par an (facultatif)</span>
-s         <input
+        <label class="option">           <span class="sr-only">Consommation en kWh par an (facultatif)</span>
+          <input
             id="conso"
             type="text"
             placeholder="kWh/an – pour affiner le calcul (facultatif)"
@@ -755,8 +761,7 @@ s         <input
           >
         </label>
 
-        <button id="simuler" class="cta" type="submit">⚡ Calculer mon coût maintenant</button>
-      </form>
+        <button id="simuler" class="cta" type="submit">⚡ Calculer mon coût maintenant</button>       </form>
     </div>
   </div>
 </header>
@@ -781,7 +786,7 @@ s         <input
           <span class="steps-2025__num">02</span>
           <h3 class="steps-2025__heading">Économies estimées</h3>
           <p class="steps-2025__text">Vos économies estimées dès la 1<sup>re</sup> année.</p>
-s       </article>
+        </article>
         <article class="steps-2025__item">
           <span class="steps-2025__num">03</span>
           <h3 class="steps-2025__heading">Coût précis & financement</h3>
@@ -813,7 +818,7 @@ s       </article>
           <div class="why__top">
             <div class="why__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M4 7h2.9l5.2 6.2 3.2-3.4H20v2h-3.7l-3.2 3.4L6.9 9H4z"/></svg>
-s           </div>
+            </div>
             <h3 class="why__heading">Économies importantes</h3>
           </div>
           <p class="why__text">Baissez durablement votre facture d’électricité grâce à l’autoconsommation.</p>
@@ -822,7 +827,7 @@ s           </div>
         <article class="why__card">
           <div class="why__top">
             <div class="why__icon" aria-hidden="true">
-            	<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 3C6 3 3 9 3 13c0 4 3 8 9 8 6 0 9-4 9-8 0-6-3-10-9-10zm1.6 6.2c2.4 0 4.4 1.8 4.4 4.1 0 2.9-2.2 5.6-6 6.2-2.6.4-5.2-.9-5.2-3.3 0-3.6 3.8-7 6.8-7z"/></svg>
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 3C6 3 3 9 3 13c0 4 3 8 9 8 6 0 9-4 9-8 0-6-3-10-9-10zm1.6 6.2c2.4 0 4.4 1.8 4.4 4.1 0 2.9-2.2 5.6-6 6.2-2.6.4-5.2-.9-5.2-3.3 0-3.6 3.8-7 6.8-7z"/></svg>
             </div>
             <h3 class="why__heading">Énergie propre</h3>
           </div>
@@ -842,7 +847,7 @@ s           </div>
         <article class="why__card">
           <div class="why__top">
             <div class="why__icon" aria-hidden="true">
-            	<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2l8 3v6c0 5-3.5 9.7-8 11-4.5-1.3-8-6-8-11V5l8-3z"/></svg>
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2l8 3v6c0 5-3.5 9.7-8 11-4.5-1.3-8-6-8-11V5l8-3z"/></svg>
             </div>
             <h3 class="why__heading">Garantie et pérennité</h3>
           </div>
@@ -869,7 +874,7 @@ s           </div>
       </div>
       <div class="stat">
         <div class="stat__value">98%</div>
-s       <div class="stat__label">Clients satisfaits</div>
+        <div class="stat__label">Clients satisfaits</div>
       </div>
     </div>
   </section>
@@ -921,7 +926,7 @@ s       <div class="stat__label">Clients satisfaits</div>
             </div>
           </div>
           <div class="stars" aria-label="Note 5 sur 5">
-s           <svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg>
           </div>
           <p class="tcard__text">“Le coût est affiché noir sur blanc, avec une projection claire sur 15 ans.”</p>
         </article>
@@ -962,7 +967,7 @@ s           <svg viewBox="0 0 24 24" fill="currentColor" style="color:var(-
   <strong id="mentions-title">Mentions légales :</strong><br>
   Solution Solaire Pro, marque de Biofrance Énergies<br>
   SIRET : 422 231 928 00025<br>
-Read Addresse : 4 rue du Pont Saint Jean, 27530 Ézy-sur-Eure<br>
+  Adresse : 4 rue du Pont Saint Jean, 27530 Ézy-sur-Eure<br>
   Contact : solutionsolairepro@gmail.com<br>
   Hébergeur : GitHub Pages, 88 Colin P. Kelly Jr. Street, San Francisco CA 94107 USA<br>
   Données personnelles : Les informations saisies sont utilisées uniquement pour traiter votre demande. Aucun démarchage ni revente.<br>
@@ -1008,12 +1013,12 @@ document.addEventListener('DOMContentLoaded', attachPhoneMask);
         const data = await r.json();
         return (data || [])
           .filter(row => String(row.Departement||'') === String(departement))
-s         .map(row => ({ // Transformation en objet propre
+          .map(row => ({ // Transformation en objet propre
             prixKwh: parseFloat(String(row.PrixKwh||'').replace(',', '.').replace(/[^0-9.]/g,'') || 0.25), // Fallback prix kWh
             puissance: String(row.Puissance || ''), prod: parseFloat(row.Prod || 0), seuil: parseFloat(row.Seuil || 0),
             panels: parseInt(row.Panels || 0), prix: parseFloat(row.Prix || 0),
             remiseChantier: parseFloat(String(row.RemiseChantier||'').replace(',', '.').replace(/[^0-9.]/g,'') || 0),
-s           mensualite: parseFloat(row.Mensualite || 0), taeg: parseFloat(row.Taeg || 0),
+            mensualite: parseFloat(row.Mensualite || 0), taeg: parseFloat(row.Taeg || 0),
             total: parseFloat(row.Total || 0), dureeMois: parseInt(row.Mois || 0)
           }));
       }catch(e){ console.error('fetchScenarios error', e); alert("Impossible de charger les données de simulation. Veuillez réessayer."); return []; }
@@ -1086,7 +1091,7 @@ s           mensualite: parseFloat(row.Mensualite || 0), taeg: parseFloat(r
             ${generateVisiblePartHTML(simulationData)} 
           </div>
           <div class="lock-zone" id="lock-zone">
-s           <div class="result-grid lock-blur" id="lock-blur" style="margin-top:12px">
+            <div class="result-grid lock-blur" id="lock-blur" style="margin-top:12px">
               ${generateLockedPartHTML(simulationData)}
             </div>
             ${generateGateHTML()}
@@ -1139,7 +1144,7 @@ s           <div class="result-grid lock-blur" id="lock-blur" style="margin
           fd.append("timestamp", new Date().toISOString()); 
           fd.append("code_postal", simulationData.cp || '');
           fd.append("facture", simulationData.facture || 0);
-s         fd.append("conso", simulationData.conso || 0);
+          fd.append("conso", simulationData.conso || 0);
           fd.append("source_conso", simulationData.sourceConso || '');
           fd.append("prix_kwh", simulationData.prixKwh || 0);
           fd.append("puissance", sc.puissance || '');
@@ -1147,7 +1152,7 @@ s         fd.append("conso", simulationData.conso || 0);
           fd.append("prod", sc.prod || 0);
           fd.append("prix", sc.prix || 0);
           fd.append("remise", sc.remiseChantier || 0);
-s         fd.append("mensualite", sc.mensualite || 0);
+          fd.append("mensualite", sc.mensualite || 0);
           fd.append("taeg", sc.taeg || 0);
           fd.append("totalcredit", sc.total || 0);
           fd.append("mois", sc.dureeMois || 0);
@@ -1168,7 +1173,7 @@ s         fd.append("mensualite", sc.mensualite || 0);
           fetch(G_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: fd })
             .then(() => console.log("Données envoyées à GSheet."))
             .catch(err => console.error('Erreur lors de l\'envoi GSheet:', err));
-s           
+            
         } else { console.warn("Données de simulation non disponibles. Envoi GSheet annulé."); }
 
         // 3. Déverrouillage UI
@@ -1233,7 +1238,7 @@ s           
        // Helper pour formater les nombres
       const formatNum = (num, decimals = 0) => Number.isFinite(num) ? num.toLocaleString('fr-FR', {minimumFractionDigits: decimals, maximumFractionDigits: decimals}) : 'N/A';
       const prixHTML = Number.isFinite(sc?.prix) ? `<p style="margin:0 0 8px"><strong>Installation ${sc.puissance || ''}</strong> : <span class="token">${formatNum(sc.prix)} € TTC</span> <span class="note">(prix indicatif hors options)</span> </p>` : '';
-s     let financementDetailsHTML = '';
+      let financementDetailsHTML = '';
       if (Number.isFinite(sc?.mensualite) && sc.mensualite > 0) { 
         const dureeHTML = Number.isFinite(sc?.dureeMois) && sc.dureeMois > 0 ? `<span class="token">Durée : ${sc.dureeMois} mois</span>` : '';
         const taegHTML = Number.isFinite(sc?.taeg) ? `<span class="token">TAEG fixe : ${sc.taeg}%</span>` : '';
@@ -1263,7 +1268,7 @@ s     let financementDetailsHTML = '';
     function generateGateHTML() {
       // Le HTML du formulaire Gate est statique.
       return `
-s       <div class="gate-overlay" id="gate-overlay" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+        <div class="gate-overlay" id="gate-overlay" role="dialog" aria-modal="true" aria-labelledby="gate-title">
           <div class="gate-card">
             <h3 id="gate-title" class="gate-title">Vous avez vu vos panneaux et votre production…</h3>
             <p class="gate-sub"><strong>Et si on allait plus loin&nbsp;?</strong></p>
