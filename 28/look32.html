@@ -1295,8 +1295,48 @@ document.addEventListener('DOMContentLoaded', attachPhoneMask);
     // Fonctions utilitaires (overlay, validation)
     function showCalcOverlay(msg){ if (!overlay) return; if (msg) { const t = overlay.querySelector('#calc-title'); if (t) t.textContent = msg; } overlay.style.display = 'flex'; document.body.classList.add('no-scroll'); overlay.querySelector('.panel')?.focus(); if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; } }
     function hideCalcOverlay(){ if (!overlay) return; overlay.style.display = 'none'; document.body.classList.remove('no-scroll'); if (btn) { btn.disabled = false; btn.style.opacity = '1'; } }
-    function validateStep1(){ const cp = (inputCP?.value || '').trim(); const factureRaw = (inputFact?.value || ''); const num = parseFloat(factureRaw.replace(/\s/g,'').replace(',', '.').replace(/[^0-9.]/g,'')); const okCP = /^[0-9]{5}$/.test(cp); const okFact = Number.isFinite(num) && num > 0; if (!okCP) { alert('Veuillez entrer un code postal valide (5 chiffres).'); return false; } if (!okFact){ alert("Veuillez indiquer une facture annuelle valide."); return false; } return true; }
-    
+    function validateStep1(){
+  const cp = (inputCP?.value || '').trim();
+  const factureRaw = (inputFact?.value || '');
+  const num = parseFloat(
+    factureRaw.replace(/\s/g,'').replace(',', '.').replace(/[^0-9.]/g,'')
+  );
+
+  // --- Départements autorisés : ?dept=28 ou ?dept=27,28,78 (fallback 28)
+  const __params = new URLSearchParams(location.search);
+  const __ALLOWED_DEPTS = (__params.get('dept') || '28')
+    .split(',')
+    .map(s => s.trim())
+    .filter(Boolean);
+
+  // Vérification code postal
+  const okCP = /^\d{5}$/.test(cp) && __ALLOWED_DEPTS.some(dep => cp.startsWith(dep));
+
+  // Message d’aide
+  const map = { '28': 'Eure-et-Loir', '27': 'Eure', '78': 'Yvelines' };
+  const deptText = (__ALLOWED_DEPTS.length === 1)
+    ? `d’${map[__ALLOWED_DEPTS[0]] || ('épartement ' + __ALLOWED_DEPTS[0])} (${__ALLOWED_DEPTS[0]}xxx)`
+    : `des départements ${__ALLOWED_DEPTS.join(', ')} (xxxxx)`;
+  const invalidMsg = `Merci d’entrer un code postal ${deptText}.`;
+
+  // Gestion du message visuel
+  const help = document.getElementById('cp-help');
+  if (help) help.textContent = okCP ? '' : invalidMsg;
+  if (inputCP) {
+    inputCP.setCustomValidity(okCP ? '' : invalidMsg);
+    if (!okCP && inputCP.reportValidity) inputCP.reportValidity();
+  }
+
+  // Vérif facture
+  const okFact = Number.isFinite(num) && num > 0;
+  if (!okFact && factureRaw.trim() === '') {
+    alert("Veuillez indiquer une facture annuelle valide.");
+    inputFact?.focus();
+  }
+
+  return okCP && okFact;
+}
+
     // Récupération des scénarios depuis Google Sheet
     async function fetchScenarios(departement){
       try{
