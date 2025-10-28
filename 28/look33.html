@@ -1336,6 +1336,11 @@ document.addEventListener('DOMContentLoaded', attachPhoneMask);
 
   return okCP && okFact;
 }
+// Parse "puissance" (ex: "9 kWc" -> 9)
+function parseKw(val){
+  const m = String(val || '').match(/([\d.,]+)/);
+  return m ? parseFloat(m[1].replace(',', '.')) : NaN;
+}
 
     // Récupération des scénarios depuis Google Sheet
     async function fetchScenarios(departement){
@@ -1396,6 +1401,22 @@ document.addEventListener('DOMContentLoaded', attachPhoneMask);
       if (!sc) sc = scenarios.sort((a,b)=> (b.prod||0) - (a.prod||0))[0]; 
       if (!sc) { alert("Erreur: Aucun scénario applicable trouvé."); hideCalcOverlay(); return false; } 
 
+      // ==== Calcul des % de couverture aux extrêmes (≈3 kWc et ≈9 kWc) ====
+const scWithKw = (scenarios || [])
+  .map(s => ({ ...s, __kw: parseKw(s.puissance) }))
+  .filter(s => Number.isFinite(s.__kw))
+  .sort((a,b) => a.__kw - b.__kw);
+
+const minSc = scWithKw[0];                           // scénario le plus petit (≈3 kWc)
+const maxSc = scWithKw[scWithKw.length - 1];         // scénario le plus grand (≈9 kWc)
+
+const tauxAvecMin = (minSc && conso > 0) ? (minSc.prod / conso) * 100 : NaN;
+const tauxAvecMax = (maxSc && conso > 0) ? (maxSc.prod / conso) * 100 : NaN;
+
+// Règles terrain demandées
+const NEED_STUDY = Number.isFinite(tauxAvecMax) && tauxAvecMax <= 50; // même 9 kWc ≤ 50%
+const TOO_LOW    = Number.isFinite(tauxAvecMin) && tauxAvecMin >= 95; // 3 kWc ≥ 95%
+
       // Calculs financiers
       const autocons = Math.min(sc.prod || 0, conso || 0); 
       const gainAn   = autocons * (Number.isFinite(prixKwh) && prixKwh > 0 ? prixKwh : 0);
@@ -1405,12 +1426,26 @@ document.addEventListener('DOMContentLoaded', attachPhoneMask);
       const facteurCumul = (tauxHausse > 0) ? (Math.pow(1 + tauxHausse, dureeProjection) - 1) / tauxHausse : dureeProjection; // Gère taux = 0
       const gain15 = gainAn * facteurCumul;
 
-      // Stockage des données
-      simulationData = { 
-        cp, facture, conso: Math.round(conso), prixKwh, sc, 
-        gainAn: Math.round(gainAn), gainMois: Math.round(gainMois), gain15: Math.round(gain15), 
-        autocons: Math.round(autocons), sourceConso 
-      };
+     // Stockage des données
+simulationData = {
+  cp, 
+  facture, 
+  conso: Math.round(conso), 
+  prixKwh, 
+  sc,
+  gainAn: Math.round(gainAn), 
+  gainMois: Math.round(gainMois), 
+  gain15: Math.round(gain15),
+  autocons: Math.round(autocons), 
+  sourceConso,
+
+  // === Ajouts pour couverture extrême ===
+  tauxAvecMin: Number.isFinite(tauxAvecMin) ? Math.round(tauxAvecMin * 10) / 10 : null,
+  tauxAvecMax: Number.isFinite(tauxAvecMax) ? Math.round(tauxAvecMax * 10) / 10 : null,
+  needStudy: !!NEED_STUDY,
+  tooLow: !!TOO_LOW
+};
+
 
       // Rendu HTML
       const recapDiv = document.getElementById('recap');
@@ -1603,18 +1638,32 @@ function prepareAndPrint(){
         <div class="kpi kpi--highlight" style="grid-column:1/-1"> <div class="label">Dimensionnement proposé</div> <div class="value"> ${sc.puissance || 'N/A'} — ${sc.panels || 0} panneaux (500 W) • Production estimée <span style="color:#16a34a;font-weight:800">${(sc.prod || 0).toLocaleString('fr-FR')} kWh/an</span> </div> </div>`;
     }
 
-    function generateLockedPartHTML(data) {
-      const { sc = {}, gainAn = 0, gainMois = 0, gain15 = 0, autocons = 0, conso = 0 } = data;
-      const pctCouverture = (conso > 0) ? ((autocons / conso) * 100).toFixed(1) : 0;
-      const tauxHausse = 0.03; // Assurez-vous que cette variable est définie ou passée
-      return `
-        <div class="kpi" style="grid-column:1/-1"> <div class="value" style="font-size:18px;font-weight:700;color:#16a34a;margin-bottom:6px"> ${pctCouverture} % <span style="color:#0f172a;font-weight:600">de votre consommation est couverte par votre production</span> </div> <div style="color:#334155;font-size:13px;line-height:1.5;margin-top:2px"> Votre production est valorisée à 100&nbsp;% grâce à la batterie virtuelle... <em>Hypothèse standard...</em> </div> </div>
-        <div class="kpi"> <div class="label">Gain 1ʳᵉ année (ordre de grandeur)</div> <div class="value" style="color:#16a34a"> ${gainAn.toLocaleString('fr-FR')} € / an </div> </div>
-        <div class="kpi"> <div class="label">Économie moyenne mensuelle</div> <div class="value" style="color:#16a34a"> ${gainMois.toLocaleString('fr-FR')} € / mois </div> </div>
-        <div class="kpi" style="grid-column:1/-1"> <div class="label">Économie cumulée sur 15 ans</div> <div class="value" style="color:#16a34a"> ${gain15.toLocaleString('fr-FR')} € </div> <div class="note" style="margin-top:4px"> Hypothèses&nbsp;: prix du kWh +${(tauxHausse*100)}&nbsp;%/an... </div> </div>
-        ${generateRemiseBannerHTML(sc)}
-        ${generateFinancementCardHTML(sc)}`;
-    }
+   function generateLockedPartHTML(data) {
+  const { sc = {}, gainAn = 0, gainMois = 0, gain15 = 0, autocons = 0, conso = 0 } = data;
+  const pctCouverture = (conso > 0) ? ((autocons / conso) * 100).toFixed(1) : 0;
+  const tauxHausse = 0.03;
+
+  return `
+    ${generateCoverageAdvisoryHTML(data)}  <!-- <<< bandeau de conseil couverture -->
+
+    <div class="kpi" style="grid-column:1/-1">
+      <div class="value" style="font-size:18px;font-weight:700;color:#16a34a;margin-bottom:6px">
+        ${pctCouverture} % <span style="color:#0f172a;font-weight:600">de votre consommation est couverte par votre production</span>
+      </div>
+      <div style="color:#334155;font-size:13px;line-height:1.5;margin-top:2px">
+        Votre production est valorisée à 100&nbsp;% grâce à la batterie virtuelle...
+      </div>
+    </div>
+
+    <div class="kpi"><div class="label">Gain 1ʳᵉ année (ordre de grandeur)</div><div class="value" style="color:#16a34a">${gainAn.toLocaleString('fr-FR')} € / an</div></div>
+    <div class="kpi"><div class="label">Économie moyenne mensuelle</div><div class="value" style="color:#16a34a">${gainMois.toLocaleString('fr-FR')} € / mois</div></div>
+    <div class="kpi" style="grid-column:1/-1"><div class="label">Économie cumulée sur 15 ans</div><div class="value" style="color:#16a34a">${gain15.toLocaleString('fr-FR')} €</div><div class="note" style="margin-top:4px">Hypothèses : prix du kWh +${(tauxHausse*100)}%/an...</div></div>
+
+    ${generateRemiseBannerHTML(sc)}
+    ${generateFinancementCardHTML(sc)}
+  `;
+}
+
     
     function generateRemiseBannerHTML(sc) {
       if (Number.isFinite(sc?.remiseChantier) && sc.remiseChantier > 0) {
