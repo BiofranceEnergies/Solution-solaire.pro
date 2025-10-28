@@ -817,27 +817,20 @@
     body.results-mode #recap .financial-banner{ padding: 12px !important; }
   }
 }
-/* === Correction espacement avant le bloc "Vous avez vu vos panneaux..." === */
-#recap {
-  margin-bottom: 32px !important; /* resserre la fin du bloc résultats */
+#lock-blur{
+  margin-top: 6px !important;
 }
-
-/* Cible le bloc de transition "Vous avez vu vos panneaux..." */
-section.why,
-section.stats-bg,
-section.after-results {
-  margin-top: 24px !important;   /* rapproche-le du bloc précédent */
-  padding-top: 0 !important;     /* supprime tout espace interne excessif */
+.gate-overlay{
+  align-items: flex-start !important;
+  padding-top: 8px !important;
 }
-
-/* Optionnel : sur mobile, encore un peu plus serré */
+.gate-card{
+  margin-top: 0 !important;
+}
 @media (max-width: 860px){
-  section.why,
-  section.stats-bg,
-  section.after-results {
-    margin-top: 16px !important;
-  }
+  .gate-overlay{ padding-top: 12px !important; }
 }
+
 
 
   
