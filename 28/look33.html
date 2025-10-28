@@ -1618,13 +1618,11 @@ function prepareAndPrint(){
   }
 
   // Impression puis nettoyage
-  const cleanup = () => {
-    header.remove(); footer.remove();
-    window.removeEventListener('afterprint', cleanup);
-  };
-  window.addEventListener('afterprint', cleanup);
-  window.print();
-}
+ const cleanup = () => {
+  header.remove();
+  window.removeEventListener('afterprint', cleanup);
+};
+
 
 
     // --- Fonctions pour générer le HTML des résultats ---
@@ -1637,6 +1635,40 @@ function prepareAndPrint(){
         <div class="kpi"> <div class="label">Facture annuelle</div> <div class="value">${Number(facture).toLocaleString('fr-FR')} €</div> </div>
         <div class="kpi kpi--highlight" style="grid-column:1/-1"> <div class="label">Dimensionnement proposé</div> <div class="value"> ${sc.puissance || 'N/A'} — ${sc.panels || 0} panneaux (500 W) • Production estimée <span style="color:#16a34a;font-weight:800">${(sc.prod || 0).toLocaleString('fr-FR')} kWh/an</span> </div> </div>`;
     }
+function generateCoverageAdvisoryHTML(data){
+  const {
+    tauxAvecMin = null,
+    tauxAvecMax = null,
+    needStudy = false,
+    tooLow = false
+  } = data || {};
+
+  // Rien à afficher si aucun cas extrême
+  if (!needStudy && !tooLow) return '';
+
+  // Choix du message
+  const cfg = needStudy
+    ? {
+        title: "Étude sur place recommandée",
+        msg: `Même avec ~9 kWc, la couverture resterait ≤ ${tauxAvecMax ?? '—'} %. 
+              Une étude personnalisée est nécessaire pour un dimensionnement pertinent.`,
+        bg: "#fff7ed", border: "#fed7aa", color: "#92400e"
+      }
+    : {
+        title: "Consommation trop faible",
+        msg: `Avec ~3 kWc, la couverture est ≥ ${tauxAvecMin ?? '—'} %. 
+              Votre consommation semble trop faible pour une installation rentable.`,
+        bg: "#fef2f2", border: "#fecaca", color: "#991b1b"
+      };
+
+  return `
+    <div class="kpi" style="grid-column:1/-1; padding:12px; background:${cfg.bg};
+                            border:1px solid ${cfg.border}; border-radius:12px;">
+      <div style="font-weight:900; color:${cfg.color}">${cfg.title}</div>
+      <div class="note" style="margin-top:6px; color:#334155">${cfg.msg}</div>
+    </div>
+  `;
+}
 
    function generateLockedPartHTML(data) {
   const { sc = {}, gainAn = 0, gainMois = 0, gain15 = 0, autocons = 0, conso = 0 } = data;
