@@ -271,6 +271,13 @@
   .faq{padding-top:clamp(20px,4vw,40px);}
   .faq h2{margin-bottom:clamp(10px,2vw,16px);}
   .faq__list{margin-top:6px;}
+   /* Aide/erreur code postal */
+.help#cp-help{
+  margin: 4px 0 0 4px;
+  min-height: 1em;
+  font-size: 13px;
+  color: #b91c1c; /* rouge discret */
+}
 
   /* Mentions légales */
   .legal{background:#f7f9fc;color:var(--ink);padding:24px 16px;margin-top:clamp(40px,6vw,80px)}
@@ -659,8 +666,7 @@
 }
 /* FIN CSS BANDEAU COOKIE */
 /* === Impression PDF : ne garder que le récap + mentions === */
-/* === Impression PDF Premium : #recap uniquement, A4 propre, couleurs respectées === */
-/* === Impression PDF : tout sur une seule page A4 nette === */
+
 @media print {
   @page { size: A4; margin: 10mm 14mm; } /* marges réduites pour tenir sur 1 page */
 
