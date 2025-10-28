@@ -831,6 +831,26 @@
   .gate-overlay{ padding-top: 12px !important; }
 }
 
+/* === Correction alignement bloc "Vous avez vu vos panneaux..." === */
+.gate-overlay,
+.gate-card {
+  width: 100% !important;
+  max-width: var(--maxw, 1100px) !important; /* même largeur que le reste */
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* Sur mobile : même traitement mais fluide */
+@media (max-width: 860px){
+  .gate-overlay,
+  .gate-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 12px !important;
+  }
+}
 
 
   
