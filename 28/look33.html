@@ -1582,19 +1582,19 @@ function attachPdfHandler(){
 
 // En-tête imprimable + window.print + nettoyage
 // En-tête premium + pied de page + impression, puis nettoyage
+// En-tête imprimable + window.print + nettoyage
 function prepareAndPrint(){
   const recap = document.getElementById('recap');
   if(!recap){ window.print(); return; }
 
-  // Récupération d'infos utiles si disponibles
   const cp = (window.simulationData && window.simulationData.cp) ? String(window.simulationData.cp) : '';
-  const dep = cp ? cp.slice(0,2) : '28'; // fallback 28 si non dispo
+  const dep = cp ? cp.slice(0,2) : '28';
   const sc  = (window.simulationData && window.simulationData.sc) ? window.simulationData.sc : {};
   const titreLigne = `Estimation photovoltaïque – Eure-et-Loir (${dep})`;
-  const sousTitre  = cp ? `Code postal : ${cp} · Puissance : ${sc.puissance || '—'} · Production : ${(sc.prod || 0).toLocaleString('fr-FR')} kWh/an` 
-                        : `Puissance : ${sc.puissance || '—'} · Production : ${(sc.prod || 0).toLocaleString('fr-FR')} kWh/an`;
+  const sousTitre  = cp
+    ? `Code postal : ${cp} · Puissance : ${sc.puissance || '—'} · Production : ${(sc.prod || 0).toLocaleString('fr-FR')} kWh/an`
+    : `Puissance : ${sc.puissance || '—'} · Production : ${(sc.prod || 0).toLocaleString('fr-FR')} kWh/an`;
 
-  // En-tête imprimable (centré, barre accent)
   const header = document.createElement('div');
   header.className = 'print-header';
   header.innerHTML = `
@@ -1609,20 +1609,19 @@ function prepareAndPrint(){
     </div>
   `;
 
-
-  // Insertion en tête de la carte + pied après la carte
   const card = recap.querySelector('.result-card');
-  if(card){
+  if (card) {
     card.insertAdjacentElement('afterbegin', header);
-
   }
 
   // Impression puis nettoyage
- const cleanup = () => {
-  header.remove();
-  window.removeEventListener('afterprint', cleanup);
-};
-
+  const cleanup = () => {
+    header.remove();
+    window.removeEventListener('afterprint', cleanup);
+  };
+  window.addEventListener('afterprint', cleanup);
+  window.print();
+} // <-- bien fermer ici
 
 
     // --- Fonctions pour générer le HTML des résultats ---
