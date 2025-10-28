@@ -1101,24 +1101,108 @@
     </div>
   </section>
 
-  <section class="faq" aria-labelledby="faq-title">
-    <div class="faq__inner">
-      <header class="faq__head">
-        <h2 id="faq-title" class="faq__title">Questions fréquentes</h2>
-        <p class="faq__subtitle">Tout ce qu’il faut savoir avant de passer à l’énergie solaire</p>
-      </header>
-      <div class="faq__list faq">
-        <details> <summary> Comment est calculée mon estimation ? <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> </summary> <div class="faq__panel"> Elle s’appuie sur votre consommation annuelle (ou facture), un prix du kWh indicatif, l’ensoleillement local et un scénario technique standard. Les résultats restent des ordres de grandeur. </div> </details>
-        <details> <summary> Combien de panneaux pour mon cas ? <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> </summary> <div class="faq__panel"> Cela dépend de votre conso, de l’espace disponible, de l’orientation/inclinaison et des ombres. Le simulateur propose une fourchette dimensionnée. </div> </details>
-        <details> <summary> Quelles économies puis-je espérer ? <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> </summary> <div class="faq__panel"> Elles varient selon votre profil et votre taux d’autoconsommation. Nous affichons un ordre de grandeur la 1<sup>re</sup> année et une projection à 15 ans, sans promesse fixe. </div> </details>
-        <details> <summary> Revente d’électricité&nbsp;: est-ce intéressant ? <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> </summary> <div class="faq__panel"> Aujourd’hui, l’autoconsommation reste le levier principal. La revente à prix de marché est faible&nbsp;(~centimes/kWh). Nous dimensionnons d’abord pour consommer sur place. </div> </details>
-        <details> <summary> Quelles contraintes pour ma toiture ? <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> </summary> <div class="faq__panel"> Toiture saine et étanche, absence d’amiante, charge admissible OK. Orientation sud idéale, est/ouest acceptable. Les ombres proches sont à éviter. </div> </details>
-        <details> <summary> Combien de temps dure l’installation ? <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> </summary> <div class="faq__panel"> La pose standard prend 1 à 2 jours. Les démarches (Enedis, Consuel, administratif) suivent un calendrier séparé. </div> </details>
-        <details> <summary> Garanties et entretien ? <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> </summary> <div class="faq__panel"> Garanties fabricant 25–30 ans selon les modèles (puissance dégressive). Peu d’entretien&nbsp;: contrôle visuel et rinçage ponctuel si dépôts. </div> </details>
-        <details> <summary> Aides financières et financement ? <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> </summary> <div class="faq__panel"> Nous privilégions la transparence&nbsp;: coût posé noir sur blanc, sans artifices. Des mensualités sont possibles. Les aides évoluent&nbsp;: nous précisons ce qui est éligible lors de l’étude. </div> </details>
-      </div>
+ <section class="faq" aria-labelledby="faq-title">
+  <div class="faq__inner">
+    <header class="faq__head">
+      <h2 id="faq-title" class="faq__title">Questions fréquentes</h2>
+      <p class="faq__subtitle">Tout ce qu’il faut savoir avant de passer à l’énergie solaire</p>
+    </header>
+
+    <div class="faq__list faq">
+      <details>
+        <summary>
+          Comment est calculée mon estimation ?
+          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="faq__panel">
+          Elle s’appuie sur votre consommation annuelle (ou facture), le prix du kWh que vous saisissez, l’ensoleillement local et un scénario technique standard.
+          Le résultat est un ordre de grandeur, affiné lors de l’étude sur place.
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          Combien de panneaux pour mon cas ?
+          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="faq__panel">
+          Cela dépend de votre consommation, de l’espace disponible, de l’orientation/inclinaison et des ombres proches.
+          Le simulateur propose une fourchette cohérente ; la visite technique valide le dimensionnement.
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          Quelles économies puis-je espérer ?
+          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="faq__panel">
+          Elles dépendent du taux d’autoconsommation et de l’évolution du prix du kWh.
+          Nous affichons un ordre de grandeur la 1<sup>re</sup> année et une projection à 15 ans, sans promesse figée.
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          Revente d’électricité&nbsp;: est-ce intéressant ?
+          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="faq__panel">
+          Aujourd’hui, l’autoconsommation reste le levier principal.
+          La revente est possible mais moins rémunératrice ; nous dimensionnons d’abord pour consommer sur place (et valoriser le surplus intelligemment).
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          Quelles contraintes pour ma toiture ?
+          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="faq__panel">
+          Toiture saine et étanche, absence d’amiante, fixation possible et charge admissible OK.
+          Orientation sud idéale, est/ouest acceptable. Les ombres proches (cheminées, arbres) sont à limiter.
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          Combien de temps dure l’installation ?
+          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="faq__panel">
+          La pose standard prend 1 à 2 jours selon la configuration.
+          Les démarches réseau/administratives suivent un calendrier séparé et n’immobilisent pas votre logement.
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          Garanties et entretien ?
+          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="faq__panel">
+          Garanties fabricant longues (puissance dégressive sur 25–30 ans selon modèles).
+          Entretien limité : contrôle visuel et rinçage ponctuel si dépôts (pollen, poussière).
+        </div>
+      </details>
+
+      <details>
+        <summary>
+          Combien faut-il prévoir pour passer au solaire (usage d’habitation) ?
+          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="faq__panel">
+          Le budget dépend de la surface, de la toiture et de votre consommation.
+          Pour <strong>une maison à usage d’habitation</strong>, la plupart des foyers constatent un investissement compris
+          <strong>entre 7&nbsp;000&nbsp;€ et 12&nbsp;000&nbsp;€ TTC</strong>, installation complète et pose incluses.
+          Une <strong>étude personnalisée</strong> permet d’obtenir un montant exact selon votre situation.
+          Des <strong>mensualités</strong> sont possibles.
+        </div>
+      </details>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <div class="legal">
     <div class="legal__inner">
