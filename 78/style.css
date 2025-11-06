@@ -636,7 +636,7 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
-    overflow-x: hidden !important;
+    
   }
 
   /* carte + grille = 1 colonne, jamais 2, jamais de rognage */
