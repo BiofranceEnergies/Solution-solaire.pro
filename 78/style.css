@@ -313,9 +313,9 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 
 /* LA CARTE NOIRE (l'enfant) */
 .gate-card{
-  position: sticky; /* <-- LA SOLUTION ! La carte va suivre le scroll */
-  top: min(10vh, 80px); /* Se colle à 10% du haut de l'écran, ou 80px */
-  margin: 0 auto 24px auto; /* Centré horizontalement et marge en bas */
+  position: sticky;
+  top: 24px; /* <-- MODIFICATION ICI (c'était 10vh / 80px) */
+  margin: 0 auto 24px auto; /* Centré horizontalement */
 
   width: min(780px, 92vw); /* Largeur de la carte */
   background: #0b1220; 
