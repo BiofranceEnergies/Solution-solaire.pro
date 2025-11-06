@@ -42,8 +42,13 @@ document.addEventListener('click', (e)=>{ if(e.target.closest('summary')){ const
 document.addEventListener("DOMContentLoaded", ()=>{ const link=document.getElementById("mentions-legales-link"), popup=document.getElementById("mentions-popup"), close=document.getElementById("close-mentions"); if(link && popup && close){ link.addEventListener("click", e=>{e.preventDefault();popup.style.display="block";}); close.addEventListener("click", e=>{e.preventDefault();popup.style.display="none";}); } });
 
 // Script Masque Téléphone
-function attachPhoneMask() { const telInput = document.getElementById('gate-phone'); if (!telInput) return; telInput.setAttribute('inputmode','numeric'); telInput.setAttribute('maxlength','14'); const format = v => v.replace(/\D/g,'').substring(0,10).replace(/(\d{2})(?=\d)/g,'$1 ').trim(); telInput.addEventListener('input', () => { telInput.value = format(telInput.value); }); telInput.addEventListener('paste', (e) => { e.preventDefault(); const txt = (e.clipboardData || window.clipboardData).getData('text') || ''; telInput.value = format(txt); }); }
-document.addEventListener('DOMContentLoaded', attachPhoneMask);
+function attachPhoneMask() { 
+  // On doit l'appeler après que la carte est générée, donc on déplace l'écouteur
+  // document.addEventListener('DOMContentLoaded', ...);
+}
+// On attache le masque au moment où le formulaire est créé
+// document.addEventListener('DOMContentLoaded', attachPhoneMask);
+// Correction : attachPhoneMask est appelé DANS __handleSubmitEtape1
 
 (function(){
   let simulationData = {}; // Pour stocker les données entre étapes
@@ -151,7 +156,7 @@ document.addEventListener('DOMContentLoaded', attachPhoneMask);
         </div>
       </div>`;
 
-    attachPhoneMask(); 
+    attachPhoneMask(); // On appelle le masque APRÈS avoir créé le champ #gate-phone
     recapDiv.style.display = 'block';
     document.body.classList.add('results-mode');
     recapDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -267,7 +272,6 @@ function attachPdfHandler(){
 }
 
 // En-tête imprimable + window.print + nettoyage
-// En-tête premium + pied de page + impression, puis nettoyage
 function prepareAndPrint(){
   const recap = document.getElementById('recap');
   if(!recap){ window.print(); return; }
@@ -276,7 +280,7 @@ function prepareAndPrint(){
   const cp = (window.simulationData && window.simulationData.cp) ? String(window.simulationData.cp) : '';
   const dep = cp ? cp.slice(0,2) : '28'; // fallback 28 si non dispo
   const sc  = (window.simulationData && window.simulationData.sc) ? window.simulationData.sc : {};
-  const titreLigne = `Estimation photovoltaïque – Eure-et-Loir (${dep})`;
+  const titreLigne = `Estimation photovoltaïque – Yvelines (${dep})`; // Texte corrigé
   const sousTitre  = cp ? `Code postal : ${cp} · Puissance : ${sc.puissance || '—'} · Production : ${(sc.prod || 0).toLocaleString('fr-FR')} kWh/an` 
                        : `Puissance : ${sc.puissance || '—'} · Production : ${(sc.prod || 0).toLocaleString('fr-FR')} kWh/an`;
 
@@ -300,13 +304,11 @@ function prepareAndPrint(){
   const card = recap.querySelector('.result-card');
   if(card){
     card.insertAdjacentElement('afterbegin', header);
-
   }
 
   // Impression puis nettoyage
   const cleanup = () => {
     header.remove(); 
-    // footer.remove(); // 'footer' n'est pas défini ici, on le supprime pour éviter une erreur
     window.removeEventListener('afterprint', cleanup);
   };
   window.addEventListener('afterprint', cleanup);
@@ -391,7 +393,7 @@ function generateFinancementCardHTML(sc) {
   }
   
   // ===================================================================
-  // MODIFICATION : J'INJECTE LE TEXTE DE L'OVERLAY ADOUCISSEUR ICI
+  // MODIFICATION : TEXTE DE L'OVERLAY ADOUCISSEUR
   // ===================================================================
   function generateGateHTML() {
     // Le HTML du formulaire Gate (version Adoucisseur)
