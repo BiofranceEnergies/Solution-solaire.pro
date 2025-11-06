@@ -302,22 +302,24 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 
 /* LE FOND FLOU (le parent) */
 .gate-overlay{
-  position: absolute; /* <--- C'est correct, on laisse comme ça */
+  position: absolute; 
   inset: 0; 
   z-index: 10;
-  display: flex; /* <--- Ceci centre la carte, mais peut être changé */
-  align-items: center; 
-  justify-content: center; 
-  /* ... le reste du code ... */
+  display: block; /* DOIT être 'block' */
+  background: rgba(255, 255, 255, 0.72); 
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  /* J'ai supprimé 'overflow-y: hidden;' */
+  padding: 0; 
 }
 
 /* LA CARTE NOIRE (l'enfant) */
 .gate-card{
-  position: sticky;
-  top: 0px; /* <-- MODIFICATION ICI (c'était 10vh / 80px) */
-  margin: 0 auto 24px auto; /* Centré horizontalement */
+  position: sticky; 
+  top: 16px; /* <-- Maintenant, cette ligne va VRAIMENT fonctionner */
+  margin: 0 auto 24px auto; 
 
-  width: min(780px, 92vw); /* Largeur de la carte */
+  width: min(780px, 92vw); 
   background: #0b1220; 
   color: #fff;
   border: 1px solid rgba(255,255,255,.18);
