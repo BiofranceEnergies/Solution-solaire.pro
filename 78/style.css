@@ -809,3 +809,22 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
     body.results-mode #recap .financial-banner{ padding: 12px !important; }
   }
 }
+/* Ajustements spécifiques pour l'image du camion dans le footer */
+.new-footer__logo[src*="camion%20SSP"] { /* Cible l'image du camion */
+    max-height: 100px; /* Limite la hauteur du camion */
+    width: auto;       /* Laisse la largeur s'ajuster proportionnellement */
+    filter: drop-shadow(0 4px 12px rgba(255,193,7,.4)); /* Ombre jaune */
+    transform: translateY(12px); /* Décale légèrement vers le bas pour l'alignement */
+    margin-top: -12px; /* Compense le décalage pour ne pas ajouter d'espace */
+}
+
+@media (max-width: 768px) {
+    .new-footer__image-wrapper {
+        margin-bottom: 0px; /* Réduit l'espace sous le camion sur mobile */
+    }
+    .new-footer__logo[src*="camion%20SSP"] {
+        max-height: 80px; /* Plus petit sur mobile */
+        transform: translateY(8px);
+        margin-top: -8px;
+    }
+}
