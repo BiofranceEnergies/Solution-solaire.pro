@@ -551,6 +551,122 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   background: linear-gradient(180deg, var(--accent), var(--accent-2));
   color: #1b1202;
 }
+
+/* =================================================================== */
+/* NOUVEAU PIED DE PAGE (Fond noir, image gauche, texte droite) */
+/* =================================================================== */
+.new-footer {
+    background-color: #0d1a2f; /* Fond noir très foncé / bleu nuit */
+    color: #f8fafc; /* Texte très clair */
+    padding: clamp(30px, 6vw, 60px) 16px; /* Espacement interne */
+    margin-top: clamp(60px, 10vw, 100px); /* Marge au-dessus du footer */
+}
+
+.new-footer__inner {
+    max-width: 1200px; /* Largeur maximale du contenu */
+    margin: 0 auto; /* Centrage */
+    display: flex;
+    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne sur mobile */
+    align-items: flex-start; /* Alignement en haut des éléments */
+    gap: clamp(20px, 4vw, 40px); /* Espacement entre l'image et le texte */
+}
+
+.new-footer__image-wrapper {
+    flex: 0 0 auto; /* Ne grandit pas, ne rétrécit pas */
+    width: clamp(120px, 18vw, 200px); /* Largeur de l'image, flexible */
+    max-width: 100%; /* Empêche de dépasser sur mobile */
+    text-align: center; /* Centrer l'image si elle est plus petite que son conteneur */
+}
+
+.new-footer__logo {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); /* Petite ombre pour faire ressortir */
+}
+
+.new-footer__content {
+    flex: 1 1 500px; /* Le contenu prend le reste de l'espace, minimum 500px */
+    text-align: right; /* Texte aligné à droite */
+}
+
+.new-footer__text {
+    font-size: clamp(14px, 1.8vw, 16px);
+    line-height: 1.6;
+    margin-bottom: 25px; /* Espace après le paragraphe */
+    color: #cbd5e1; /* Couleur du texte principal */
+    max-width: 60ch; /* Limite la largeur pour une meilleure lisibilité */
+    margin-left: auto; /* Aligne le texte à droite dans son conteneur */
+}
+
+.new-footer__nav {
+    margin-bottom: 20px;
+}
+
+.new-footer__link {
+    color: #93c5fd; /* Couleur des liens (bleu clair) */
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 20px; /* Espacement entre les liens */
+    font-size: clamp(13px, 1.6vw, 15px);
+    transition: color 0.2s ease;
+}
+
+.new-footer__link:hover {
+    color: #f8fafc; /* Couleur au survol */
+    text-decoration: underline;
+}
+
+/* Premier lien sans marge à gauche (pour la clarté) */
+.new-footer__nav .new-footer__link:first-child {
+    margin-left: 0;
+}
+
+
+.new-footer__copy {
+    font-size: 13px;
+    color: #64748b; /* Texte copyright plus discret */
+    margin-top: 15px; /* Espace après la navigation */
+}
+
+/* RESPONSIVE pour mobile */
+@media (max-width: 768px) {
+    .new-footer__inner {
+        flex-direction: column; /* Les éléments s'empilent verticalement */
+        align-items: center; /* Tout est centré */
+        text-align: center;
+    }
+    .new-footer__image-wrapper {
+        margin-bottom: 25px; /* Espace après le logo sur mobile */
+        width: clamp(100px, 30vw, 160px); /* Ajuste la taille du logo sur mobile */
+    }
+    .new-footer__content {
+        text-align: center; /* Tout le contenu est centré sur mobile */
+    }
+    .new-footer__text {
+        margin-left: auto;
+        margin-right: auto; /* Centrer le texte principal sur mobile */
+        max-width: 80%; /* Un peu plus large sur mobile pour ne pas être trop serré */
+    }
+    .new-footer__nav {
+        display: flex; /* Les liens s'alignent mieux */
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px; /* Espacement entre les liens */
+        margin-top: 15px;
+    }
+    .new-footer__nav .new-footer__link {
+        margin: 0; /* Supprime les marges gauche/droite spécifiques */
+    }
+}
+
+/* Pour les écrans encore plus petits, éviter que les liens ne se touchent */
+@media (max-width: 480px) {
+    .new-footer__nav {
+        flex-direction: column; /* Les liens s'empilent s'il y en a trop */
+    }
+}
+
 /* FIN CSS BANDEAU COOKIE */
 /* === Impression PDF : ne garder que le récap + mentions === */
 /* === Impression PDF Premium : #recap uniquement, A4 propre, couleurs respectées === */
