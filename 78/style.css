@@ -53,7 +53,6 @@ header.hero::before{
 .lead{margin:8px 0 0;color:rgba(255,255,255,.92);max-width:54ch;}
 
 .panel{display:flex;flex-direction:column;gap:12px;width:100%;}
-/* Ligne ~116 */
 .pill{
   display:flex;align-items:center;justify-content:center;min-height:46px;
   background: linear-gradient(180deg, #fbbf24, #f59e0b);
@@ -63,7 +62,7 @@ header.hero::before{
   transition:transform .2s ease, box-shadow .2s ease;
   margin-bottom:10px;
   text-align: center;
-  font-size: 20px; /* <-- AJOUTEZ CETTE LIGNE */
+  font-size: 20px;
 }
 .pill:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(245,158,11,.32);}
 .row{display:flex;flex-direction:column;gap:10px;max-width:900px;margin-inline:auto;}
@@ -76,7 +75,6 @@ header.hero .panel input::placeholder{
   color:#ffffff;background:rgba(0,0,0,.25);padding:4px 6px;border-radius:6px;
   text-shadow:0 0 4px rgba(0,0,0,.5);font-size:15px;
 }
-/* Confort sur fond photo */
 input { backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
 
 .cta{
@@ -288,6 +286,10 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 .result-grid .financial-banner,
 .result-grid .financial-card{ grid-column: 1 / -1; }
 
+/* =================================================================== */
+/* ON REMET LE CODE DE L'OVERLAY D'ORIGINE (BLANC, ORANGE, NON-FIXE) */
+/* =================================================================== */
+
 /* ===== Overlay de déblocage (Lovable/CSS 2025) ===== */
 .lock-zone{ position:relative; }
 .lock-zone .lock-blur{
@@ -295,39 +297,20 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   transition:filter .2s ease, opacity .2s ease;
 }
 
-/* LE FOND FLOU (le parent) */
 .gate-overlay{
-  position: fixed; /* <-- FIXÉ À L'ÉCRAN */
-  inset: 0; 
-  z-index: 10;
-  display: flex; /* <-- POUR CENTRER SON ENFANT */
-  align-items: center; 
-  justify-content: center; 
-  background: rgba(255, 255, 255, 0.72); /* Le fond verre dépoli */
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  overflow-y: auto; 
-  padding: 20px; 
+  position:absolute; inset:0; z-index:10;
+  display:flex; align-items:center; justify-content:center;
+  padding:20px; background:rgba(255,255,255,.92); backdrop-filter:blur(1px);
 }
-
-/* LA CARTE NOIRE (l'enfant) */
 .gate-card{
-  /* ON A ENLEVÉ position: sticky/fixed, top, et margin */
-  width: min(780px, 92vw); /* Juste une largeur */
-  background: #0b1220; 
-  color: #fff;
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: 16px;
-  box-shadow: 0 16px 48px rgba(0,0,0,.28);
-  padding: clamp(18px,3vw,28px); 
-  text-align: center;
-  flex-shrink: 0; /* Empêche la carte de rétrécir */
+  width:min(780px,92vw); background:#fff; border:1px solid var(--border); border-radius:16px;
+  box-shadow:0 12px 32px rgba(0,0,0,.12); padding:clamp(18px,3vw,28px); text-align:center;
 }
 
-.gate-title{ margin:0 0 6px; font-weight:900; font-size:clamp(20px,2.6vw,26px); color:#fff; }
-.gate-sub{ color:#cbd5e1; margin:6px 0 10px; }
-.gate-sub strong{ color:#fff; }
-.gate-deadline{ color:#f59e0b; font-weight:800; }
+.gate-title{ margin:0 0 6px; font-weight:900; font-size:clamp(20px,2.6vw,26px); color:var(--ink); }
+.gate-sub{ color:#334155; margin:6px 0 10px; }
+.gate-sub strong{ color:var(--ink); }
+.gate-deadline{ color:#b45309; font-weight:800; }
 
 /* Grille formulaire gate */
 .gate-form{
@@ -340,33 +323,33 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 }
 .gate-form .full{ grid-column:1 / -1; }
 
-/* Champs (Style Adoucisseur) */
+/* Champs Lovable 2025 — légères bordures et halo focus */
 .gate-input{
   height:52px; width:100%;
   border-radius:12px;
-  border:1px solid rgba(255,255,255,.22);
-  background: rgba(255,255,255,.06);
-  color:#fff;
+  border:1.5px solid #e5e7eb;     /* contour doux gris clair */
   padding:0 14px;
-  font:inherit;
+  font:inherit; background:#fff; color:#111827;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.04);
   transition:border-color .2s ease, box-shadow .2s ease;
 }
+
 .gate-input::placeholder{
-  color:#cbd5e1;
-  opacity:.85;
+  color:#9ca3af;
 }
+
 .gate-input:focus{
-  border-color: #93c5fd;
-  box-shadow:0 0 0 3px rgba(59,130,246,.38);
+  border-color:#f59e0b;          /* orange accent au focus */
+  box-shadow:0 0 0 3px rgba(245,158,11,.15);
   outline:none;
 }
 
 
-/* CTA (Style Adoucisseur) */
+/* CTA — Lovable CSS 2025 */
 .gate-cta{
-  --cta-from:#0b4fbf;
-  --cta-to:#0a2e70;
-  --cta-ring:#93c5fd;
+  --cta-from:#f59e0b;     /* orangé principal */
+  --cta-to:#fbbf24;       /* orangé clair */
+  --cta-ring:#fed7aa;     /* anneau focus doux */
 
   position:relative;
   display:inline-flex;
@@ -374,16 +357,14 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 
   width:min(520px,100%); height:58px;
   padding:0 22px;
-  border:1px solid rgba(255,255,255,.28);
-  border-radius:14px; cursor:pointer;
+  border:0; border-radius:14px; cursor:pointer;
 
   background:linear-gradient(180deg,var(--cta-from),var(--cta-to));
-  color: #fff;
-  font-weight:900; font-size:16px; letter-spacing:.2px;
+  color:#111827; font-weight:900; font-size:16px; letter-spacing:.2px;
 
   box-shadow:
-    0 12px 30px rgba(11,79,191,.35),
-    inset 0 2px 4px rgba(255,255,255,.08);
+    0 12px 30px rgba(245,158,11,.35),
+    inset 0 -2px 0 rgba(0,0,0,.08);
   transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
   z-index:0;
 }
@@ -391,25 +372,25 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   content:"";
   position:absolute; inset:-10px -14px;
   border-radius:18px;
-  background:radial-gradient(60% 60% at 50% 30%, rgba(11,79,191,.35), transparent 70%);
+  background:radial-gradient(60% 60% at 50% 30%, rgba(245,158,11,.35), transparent 70%);
   filter:blur(18px); opacity:.55;
   z-index:-1; pointer-events:none;
 }
 .gate-cta:hover{
   transform:translateY(-1px);
-  box-shadow:0 16px 36px rgba(11,79,191,.42), inset 0 2px 4px rgba(255,255,255,.08);
+  box-shadow:0 16px 36px rgba(245,158,11,.42), inset 0 -2px 0 rgba(0,0,0,.08);
 }
 .gate-cta:active{
   transform:translateY(0);
   filter:saturate(.98);
-  box-shadow:0 10px 24px rgba(11,79,191,.32), inset 0 -1px 0 rgba(0,0,0,.10);
+  box-shadow:0 10px 24px rgba(245,158,11,.32), inset 0 -1px 0 rgba(0,0,0,.10);
 }
 .gate-cta:focus-visible{
   outline:0;
   box-shadow:
     0 0 0 3px var(--cta-ring),
-    0 16px 36px rgba(11,79,191,.42),
-    inset 0 2px 4px rgba(255,255,255,.08);
+    0 16px 36px rgba(245,158,11,.42),
+    inset 0 -2px 0 rgba(0,0,0,.08);
 }
 .gate-cta[disabled]{
   opacity:.65; cursor:not-allowed; transform:none;
@@ -426,26 +407,31 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   .gate-cta{ height:56px; }
 }
 
-.gate-note{ margin-top:14px; font-size:12px; color:#cbd5e1; }
+.gate-note{ margin-top:14px; font-size:12px; color:#64748b; }
 
-/* Champs (anti-blur) */
+/* Champs nets dans la card (anti-blur) — version Lovable 2025 */
 .gate-card .gate-input{
   -webkit-backdrop-filter:none !important;
   backdrop-filter:none !important;
+  background:#fff !important;
+  color:#111827;
+  border:1.5px solid #e5e7eb;
+  border-radius:12px;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.04);
+  transition:border-color .2s ease, box-shadow .2s ease;
 }
 .gate-card .gate-input::placeholder{
+  color:#9ca3af;
   text-shadow:none;
   opacity:1;
-  color:#cbd5e1;
 }
 .gate-card .gate-input:focus{
-  border-color: #93c5fd;
-  box-shadow:0 0 0 3px rgba(59,130,246,.38);
+  border-color:#f59e0b;
+  box-shadow:0 0 0 3px rgba(245,158,11,.15);
   outline:none;
 }
 
-
-/* Badges confiance (Style Adoucisseur) */
+/* Badges confiance */
 .gate-badges{
   display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
   margin:12px auto 16px; max-width:720px;
@@ -453,21 +439,20 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 .badge{
   display:inline-flex; align-items:center; gap:8px;
   padding:10px 14px; border-radius:999px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.22);
-  box-shadow:0 6px 16px rgba(0,0,0,.1);
-  font-weight:700; color:#fff;
+  background:#fff; border:1px solid var(--border);
+  box-shadow:0 6px 16px rgba(15,23,42,.06);
+  font-weight:700; color:#111827;
 }
 .badge span{ opacity:.85; font-weight:700; }
 .badge b{ font-weight:800; }
 
-/* RGPD inline (Style Adoucisseur) */
+/* RGPD inline (sans case) */
 .gate-hint{
   max-width:520px;
   margin:8px auto 0;
   font-size:13px;
   line-height:1.45;
-  color:#cbd5e1;
+  color:#334155;
   text-align:center;
 }
 #rgpd-info{ font-weight:600; }
@@ -484,17 +469,64 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   font-weight:600;
 }
 
-/* =================================================================== */
-/* FIN DE LA MODIFICATION DE L'OVERLAY */
-/* =================================================================== */
-
-
 /* Patch visibilité inputs (force la bordure + focus) */
-/* (Ces règles sont maintenant gérées par les styles ci-dessus) */
+.gate-card .gate-input{
+  border:2px solid #d1d5db !important;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.04) !important;
+  background:#fff !important;
+  color:#111827 !important;
+}
+.gate-card .gate-input::placeholder{
+  color:#9ca3af !important;
+  opacity:1 !important;
+}
+.gate-card .gate-input:hover{
+  border-color:#cbd5e1 !important;
+}
+.gate-card .gate-input:focus{
+  border-color:#f59e0b !important;
+  box-shadow:0 0 0 3px rgba(245,158,11,.18) !important;
+  outline:0 !important;
+}
 
+/* Patch final — champs Lovable 2025 : neutre au repos, orangé au focus */
+.gate-card .gate-input{
+  border:2px solid #d1d5db !important;
+  background:#fff !important;
+  color:#111827 !important;
+  transition:border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+.gate-card .gate-input:hover{
+  border-color:#cbd5e1 !important;
+}
+.gate-card .gate-input:focus{
+  border-color:#f59e0b !important;
+  box-shadow:0 0 0 3px rgba(245,158,11,.18) !important;
+  outline:0 !important;
+}
 
 /* ===== Patch UI (champs + espacement) ===== */
-/* (Ces règles sont maintenant gérées par les styles ci-dessus) */
+:where(.gate-card) .gate-input{
+  border:2px solid #d1d5db;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.04);
+}
+:where(.gate-card) .gate-input:hover{
+  border-color:#cbd5e1;
+}
+:where(.gate-card) .gate-input:focus{
+  border-color:#f59e0b;
+  box-shadow:
+    0 0 0 3px rgba(245,158,11,.18),
+    inset 0 1px 2px rgba(0,0,0,.04);
+  outline:0;
+}
+.gate-card .gate-note{
+  margin-top:14px;
+}
+
+/* =================================================================== */
+/* FIN DE L'OVERLAY D'ORIGINE */
+/* =================================================================== */
 
 
 /* DEBUT CSS BANDEAU COOKIE */
@@ -715,6 +747,11 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
     body.results-mode #recap .financial-banner{ padding: 12px !important; }
   }
 }
+
+/* =================================================================== */
+/* SUPPRESSION DES ANCIENS PATCHS QUI CASSAIENT LE CENTRAGE */
+/* =================================================================== */
+/*
 #lock-blur{
   margin-top: 6px !important;
 }
@@ -748,3 +785,4 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
     padding-right: 12px !important;
   }
 }
+*/
