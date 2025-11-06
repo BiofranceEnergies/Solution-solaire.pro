@@ -305,10 +305,10 @@ details[open] .faq__chev{transform:rotate(180deg);opacity:1;}
         max-width: 80%; 
     }
     .new-footer__meta {
-        flex-direction: column;
+        flex-direction: column-reverse; /* Met le copyright en bas */
         align-items: center;
-        border-top: none;
-        padding-top: 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 16px;
         margin-top: 16px;
     }
 }
@@ -316,6 +316,10 @@ details[open] .faq__chev{transform:rotate(180deg);opacity:1;}
 /* FIN DU NOUVEAU PIED DE PAGE */
 /* =================================================================== */
 
+
+/* Mentions légales (POPUP) - Ancien .legal supprimé */
+#mentions-popup{display:none;position:fixed;left:50%;bottom:64px;transform:translateX(-50%);width:360px;max-width:95vw;background:#fff;color:var(--ink);border:1px solid var(--border);border-radius:14px;padding:18px 20px 14px;box-shadow:0 10px 36px rgba(2,6,23,.15);z-index:9999;font-size:13px;line-height:1.7}
+#close-mentions{position:absolute;top:6px;right:12px;background:none;border:0;color:var(--ink);font-size:20px;font-weight:800;cursor:pointer}
 
 /* === Overlay calcul (étape 1) === */
 body.no-scroll{overflow:hidden;}
@@ -341,8 +345,7 @@ body.results-mode header.hero{height:var(--hero-h-desktop);min-height:var(--hero
 body.results-mode header.hero::before{opacity:1 !important;}
 body.results-mode .panel{margin-bottom:0;}
 body.results-mode main > *{display:none !important;}
-body.results-mode main > #recap, body.results-mode main > .legal{display:block !important;}
-body.results-mode main > .legal{margin-top:24px;}
+body.results-mode main > #recap, body.results-mode .new-footer {display:block !important;} /* On affiche le #recap ET le new-footer */
 body.results-mode #recap{display:block !important;margin-top:12px;}
 
 /* ===== Résultats – style 2025 ===== */
@@ -383,7 +386,6 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 .result-grid .financial-banner,
 .result-grid .financial-card{ grid-column: 1 / -1; }
 
-
 /* =================================================================== */
 /* MODIFICATION : OVERLAY STYLE ADOUCISSEUR (NOIR, BLEU, STICKY) */
 /* =================================================================== */
@@ -406,7 +408,7 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   background: rgba(255, 255, 255, 0.72); /* Le fond verre dépoli */
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  /* overflow-y: hidden; <-- C'EST CETTE LIGNE QUI CASSAIT TOUT */
+  /* overflow-y: hidden; <-- On enlève cette ligne */
   padding: 0; 
 }
 
@@ -646,10 +648,8 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 }
 /* FIN CSS BANDEAU COOKIE */
 /* === Impression PDF : ne garder que le récap + mentions === */
-/* === Impression PDF Premium : #recap uniquement, A4 propre, couleurs respectées === */
-/* === Impression PDF : tout sur une seule page A4 nette === */
 @media print {
-  @page { size: A4; margin: 10mm 14mm; } /* marges réduites pour tenir sur 1 page */
+  @page { size: A4; margin: 10mm 14mm; } 
 
   html, body {
     background: #fff !important;
@@ -695,14 +695,13 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   }
 
   /* Supprime boutons, notes, etc. */
- .gate-cta, .gate-note{ display:none !important; } /* on NE masque plus .financial-banner .note */
+ .gate-cta, .gate-note{ display:none !important; } 
 .financial-banner .note{
   display:block !important;
   color:#111 !important;
   font-size:12px !important;
   margin-top:4px !important;
 }
-
 
   /* En-tête premium */
   .print-header {
@@ -807,8 +806,5 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 
 /* =================================================================== */
 /* SUPPRESSION DES ANCIENS PATCHS QUI CASSAIENT LE CENTRAGE */
+/* =Toutes les anciennes règles en double ont été supprimées d'ici */
 /* =================================================================== */
-/*
-  (J'ai supprimé tout l'ancien code qui était ici,
-  y compris les #recap .gate-overlay et #recap .gate-card)
-*/
