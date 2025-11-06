@@ -305,7 +305,8 @@ function prepareAndPrint(){
 
   // Impression puis nettoyage
   const cleanup = () => {
-    header.remove(); footer.remove();
+    header.remove(); 
+    // footer.remove(); // 'footer' n'est pas défini ici, on le supprime pour éviter une erreur
     window.removeEventListener('afterprint', cleanup);
   };
   window.addEventListener('afterprint', cleanup);
@@ -392,7 +393,7 @@ function generateFinancementCardHTML(sc) {
   // ===================================================================
   // MODIFICATION : J'INJECTE LE TEXTE DE L'OVERLAY ADOUCISSEUR ICI
   // ===================================================================
-function generateGateHTML() {
+  function generateGateHTML() {
     // Le HTML du formulaire Gate (version Adoucisseur)
     return `
       <div class="gate-overlay" id="gate-overlay" role="dialog" aria-modal="true" aria-labelledby="gate-title">
@@ -422,6 +423,7 @@ function generateGateHTML() {
         </div>
       </div>`;
   }
+
 })(); // Fin IIFE principale
 
 // Logique du bandeau cookie
