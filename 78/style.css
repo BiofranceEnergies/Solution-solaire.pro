@@ -213,7 +213,7 @@ details[open] .faq__chev{transform:rotate(180deg);opacity:1;}
 /* =================================================================== */
 .new-footer {
     background-color: var(--ink); /* <-- FOND NOIR */
-    color: #f8fafc; 
+    color: #000000; 
     padding: clamp(30px, 6vw, 60px) 16px;
     margin-top:clamp(40px,6vw,80px); /* Ajoute de l'espace au-dessus */
 }
