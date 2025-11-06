@@ -299,24 +299,32 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   transition:filter .2s ease, opacity .2s ease;
 }
 
+/* Remplacez l'ancien .gate-overlay par ceci */
 .gate-overlay{
-  position:absolute; inset:0; z-index:10;
-  display:flex; 
-  align-items: flex-start; /* MODIFICATION: Aligne la carte en haut */
-  justify-content:center;
-  padding: clamp(24px, 12vh, 140px) 20px 20px 20px; /* MODIFICATION: Marge en haut */
-  background: rgba(255, 255, 255, 0.72); /* FOND TRANSLUCIDE (pas opaque) */
-  backdrop-filter: blur(6px); /* FLOU PLUS FORT */
+  position: absolute; 
+  inset: 0; 
+  z-index: 10;
+  display: block; /* Important: pas de flex ici */
+  background: rgba(255, 255, 255, 0.72); /* Le fond verre dépoli */
+  backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  overflow-y: auto; /* Permet de scroller si besoin */
-}
+  overflow-y: auto; /* Permet de scroller sur petits écrans */
+  padding: 20px 0; /* Un peu d'air */
+  
+/* Remplacez l'ancien .gate-card par ceci */
 .gate-card{
-  width:min(780px,92vw); 
-  background: #0b1220; /* FOND SOMBRE */
-  color: #fff; /* TEXTE BLANC */
-  border:1px solid rgba(255,255,255,.18); /* BORDURE CLAIRE */
-  border-radius:16px;
-  box-shadow:0 12px 32px rgba(0,0,0,.12); padding:clamp(18px,3vw,28px); text-align:center;
+  position: sticky; /* <- LA SOLUTION EST LÀ */
+  top: min(15vh, 120px); /* <- Distance du haut de l'écran */
+  margin: 0 auto 24px auto; /* Centré horizontalement + marge en bas */
+
+  width: min(780px, 92vw); /* Largeur de la carte */
+  background: #0b1220; 
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 16px;
+  box-shadow: 0 16px 48px rgba(0,0,0,.28);
+  padding: clamp(18px,3vw,28px); 
+  text-align: center;
 }
 
 .gate-title{ margin:0 0 6px; font-weight:900; font-size:clamp(20px,2.6vw,26px); color:#fff; } /* Couleur texte blanc */
