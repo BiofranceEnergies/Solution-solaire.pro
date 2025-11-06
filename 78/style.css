@@ -286,8 +286,9 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 .result-grid .financial-banner,
 .result-grid .financial-card{ grid-column: 1 / -1; }
 
+
 /* =================================================================== */
-/* MODIFICATION : OVERLAY STYLE ADOUCISSEUR (NOIR, BLEU, STICKY) */
+/* MODIFICATION : OVERLAY STYLE ADOUCISSEUR (NOIR, BLEU, FLOTTANT) */
 /* =================================================================== */
 
 /* ===== Overlay de déblocage (Style Adoucisseur) ===== */
@@ -301,24 +302,23 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 
 /* LE FOND FLOU (le parent) */
 .gate-overlay{
-  position: absolute; /* <-- ABSOLUTE, PAS 'fixed' */
+  position: fixed; /* <-- FIXÉ À L'ÉCRAN */
   inset: 0; 
   z-index: 10;
-  display: block; /* <-- BLOCK, PAS 'flex' */
+  display: flex; /* <-- POUR CENTRER SON ENFANT */
+  align-items: center; 
+  justify-content: center; 
   background: rgba(255, 255, 255, 0.72); /* Le fond verre dépoli */
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  overflow-y: hidden; 
-  padding: 0; 
+  overflow-y: auto; 
+  padding: 20px; 
 }
 
 /* LA CARTE NOIRE (l'enfant) */
 .gate-card{
-  position: sticky; /* <-- LA VOILÀ LA SOLUTION ! */
-  top: min(10vh, 80px); /* Se colle à 10% du haut de l'écran */
-  margin: 0 auto 24px auto; /* Centré horizontalement */
-
-  width: min(780px, 92vw); /* Largeur de la carte */
+  /* ON N'A PAS DE position, top, ou margin ici */
+  width: min(780px, 92vw); /* Juste une largeur */
   background: #0b1220; 
   color: #fff;
   border: 1px solid rgba(255,255,255,.18);
@@ -487,7 +487,6 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   font-size:14px;
   font-weight:600;
 }
-
 /* =================================================================== */
 /* FIN DE LA MODIFICATION DE L'OVERLAY */
 /* =================================================================== */
