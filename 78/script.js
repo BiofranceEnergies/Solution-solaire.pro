@@ -41,14 +41,64 @@ function gtag_report_simulation() {
 document.addEventListener('click', (e)=>{ if(e.target.closest('summary')){ const d = e.target.closest('details'); if(!d) return; const group = d.parentElement; group.querySelectorAll('details[open]').forEach(x => { if(x!==d) x.removeAttribute('open'); }); } });
 document.addEventListener("DOMContentLoaded", ()=>{ const link=document.getElementById("mentions-legales-link"), popup=document.getElementById("mentions-popup"), close=document.getElementById("close-mentions"); if(link && popup && close){ link.addEventListener("click", e=>{e.preventDefault();popup.style.display="block";}); close.addEventListener("click", e=>{e.preventDefault();popup.style.display="none";}); } });
 
-// Script Masque Téléphone
+// ===================================================================
+// CORRECTION : SCRIPT MASQUE TÉLÉPHONE (LA FONCTION ÉTAIT VIDE)
+// ===================================================================
 function attachPhoneMask() { 
-  // On doit l'appeler après que la carte est générée, donc on déplace l'écouteur
-  // document.addEventListener('DOMContentLoaded', ...);
+  const telInput = document.getElementById('gate-phone'); 
+  if (!telInput) {
+    console.warn("attachPhoneMask: Champ #gate-phone non trouvé !");
+    return; 
+  }
+  
+  telInput.setAttribute('inputmode','numeric'); 
+  telInput.setAttribute('maxlength','14'); // 00 00 00 00 00 (10 chiffres + 4 espaces)
+  
+  const format = (v) => {
+    // 1. Enlève tout sauf les chiffres
+    let digits = v.replace(/\D/g,'');
+    // 2. Garde les 10 premiers chiffres
+    digits = digits.substring(0,10);
+    // 3. Ajoute les espaces (sauf après le dernier groupe)
+    return digits.replace(/(\d{2})(?=\d)/g,'$1 ').trim();
+  };
+  
+  // Applique le formatage à chaque touche
+  telInput.addEventListener('input', (e) => { 
+    // Gère le curseur pour ne pas qu'il saute à la fin
+    const oldVal = e.target.value;
+    const oldCursor = e.target.selectionStart;
+    const digitsBeforeCursor = oldVal.substring(0, oldCursor).replace(/\D/g, '');
+    
+    e.target.value = format(oldVal);
+    
+    // Recalcule la nouvelle position du curseur
+    let newCursor = 0;
+    let digitsCounted = 0;
+    while (newCursor < e.target.value.length && digitsCounted < digitsBeforeCursor.length) {
+      if (/\d/.test(e.target.value[newCursor])) {
+        digitsCounted++;
+      }
+      newCursor++;
+    }
+    // Si le dernier caractère tapé était un espace (autogénéré), on avance d'un
+    if (oldVal.length < e.target.value.length && e.target.value[newCursor - 1] === ' ') {
+      newCursor++;
+    }
+    
+    e.target.setSelectionRange(newCursor, newCursor);
+  }); 
+  
+  // Gère le copier-coller
+  telInput.addEventListener('paste', (e) => { 
+    e.preventDefault(); 
+    const txt = (e.clipboardData || window.clipboardData).getData('text') || ''; 
+    telInput.value = format(txt); 
+  }); 
 }
-// On attache le masque au moment où le formulaire est créé
-// document.addEventListener('DOMContentLoaded', attachPhoneMask);
-// Correction : attachPhoneMask est appelé DANS __handleSubmitEtape1
+// ===================================================================
+// FIN DE LA CORRECTION
+// ===================================================================
 
 (function(){
   let simulationData = {}; // Pour stocker les données entre étapes
@@ -309,6 +359,7 @@ function prepareAndPrint(){
   // Impression puis nettoyage
   const cleanup = () => {
     header.remove(); 
+    // footer.remove(); // 'footer' n'est pas défini ici, on le supprime pour éviter une erreur
     window.removeEventListener('afterprint', cleanup);
   };
   window.addEventListener('afterprint', cleanup);
@@ -347,7 +398,7 @@ function prepareAndPrint(){
           <div style="font-weight:700; color:#7c2d12; margin-bottom:4px">Offre spéciale « Groupage chantiers »</div>
           <div style="font-size:22px; font-weight:900; color:#7c2d12;"> ${Math.round(sc.remiseChantier).toLocaleString('fr-FR')} € de remise immédiate </div>
           <div class="note" style="margin-top:6px; color:#334155">(à déduire du prix TTC indiqué ci-dessous)</div>
-          <div class="note" style="margin-top:4px; color:#334155"><strong>Valable jusqu’au 31 décembre 2025</strong></div>
+          <div class="note" style="margin-top:4px; color:#334155"><strong>Valable jusqu’au 31 octobre 2025</strong></div>
         </div>`;
     } return '';
   }
