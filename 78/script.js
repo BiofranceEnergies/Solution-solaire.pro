@@ -392,7 +392,7 @@ function generateFinancementCardHTML(sc) {
   // ===================================================================
   // MODIFICATION : J'INJECTE LE TEXTE DE L'OVERLAY ADOUCISSEUR ICI
   // ===================================================================
- function generateGateHTML() {
+function generateGateHTML() {
     // Le HTML du formulaire Gate (version Adoucisseur)
     return `
       <div class="gate-overlay" id="gate-overlay" role="dialog" aria-modal="true" aria-labelledby="gate-title">
