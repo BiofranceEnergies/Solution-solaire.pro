@@ -212,12 +212,11 @@ details[open] .faq__chev{transform:rotate(180deg);opacity:1;}
 /* NOUVEAU PIED DE PAGE (Fond noir, image gauche, texte droite) */
 /* =================================================================== */
 .new-footer {
-    background-color: var(--ink); /* <-- FOND NOIR */
-    color: #000000; 
-    padding: clamp(30px, 6vw, 60px) 16px;
-    margin-top:clamp(40px,6vw,80px); /* Ajoute de l'espace au-dessus */
+  background-color: #000000; /* <-- FOND NOIR PUR */
+  color: #f8fafc; /* <-- TEXTE BLANC */
+  padding: clamp(30px, 6vw, 60px) 16px;
+  margin-top:clamp(40px,6vw,80px); 
 }
-
 .new-footer__inner {
     max-width: 1200px; 
     margin: 0 auto; 
