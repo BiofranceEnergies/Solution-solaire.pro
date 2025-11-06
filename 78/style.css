@@ -301,8 +301,14 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 
 .gate-overlay{
   position:absolute; inset:0; z-index:10;
-  display:flex; align-items:center; justify-content:center;
-  padding:20px; background:rgba(255,255,255,.92); backdrop-filter:blur(1px);
+  display:flex; 
+  align-items: flex-start; /* MODIFICATION: Aligne la carte en haut */
+  justify-content:center;
+  padding: clamp(24px, 12vh, 140px) 20px 20px 20px; /* MODIFICATION: Marge en haut */
+  background: rgba(255, 255, 255, 0.72); /* FOND TRANSLUCIDE (pas opaque) */
+  backdrop-filter: blur(6px); /* FLOU PLUS FORT */
+  -webkit-backdrop-filter: blur(6px);
+  overflow-y: auto; /* Permet de scroller si besoin */
 }
 .gate-card{
   width:min(780px,92vw); 
