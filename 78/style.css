@@ -299,26 +299,26 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   transition:filter .2s ease, opacity .2s ease;
 }
 
-/* Remplacez l'ancien .gate-overlay par ceci */
+/* Remplacez le bloc .gate-overlay par ceci */
 .gate-overlay{
-  position: fixed; /* <-- LA SOLUTION EST LÀ (fixé à l'écran) */
+  position: absolute; /* <-- IMPORTANT: 'absolute', PAS 'fixed' */
   inset: 0; 
   z-index: 10;
-  display: flex; /* <-- Pour centrer la carte */
-  align-items: center; /* <-- Centrage vertical */
-  justify-content: center; /* <-- Centrage horizontal */
+  display: block; /* <-- IMPORTANT: 'block', PAS 'flex' */
   background: rgba(255, 255, 255, 0.72); /* Le fond verre dépoli */
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  overflow-y: auto; /* Permet de scroller si la carte est trop haute (mobile) */
-  padding: 20px; /* Un peu d'air */
+  overflow-y: auto; 
+  padding: 0 12px; /* Padding horizontal pour mobile */
 }
   
-/* Remplacez l'ancien .gate-card par ceci */
+/* Remplacez le bloc .gate-card par ceci */
 .gate-card{
-  /* On a ENLEVÉ position: sticky, top, et margin */
+  position: sticky; /* <-- LA VRAIE SOLUTION */
+  top: min(10vh, 80px); /* Distance du haut */
+  margin: 0 auto 24px auto; /* Centré horizontalement */
 
-  width: min(780px, 92vw); /* Largeur de la carte */
+  width: min(780px, 100%); /* Largeur de la carte */
   background: #0b1220; 
   color: #fff;
   border: 1px solid rgba(255,255,255,.18);
@@ -326,7 +326,7 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   box-shadow: 0 16px 48px rgba(0,0,0,.28);
   padding: clamp(18px,3vw,28px); 
   text-align: center;
-  flex-shrink: 0; /* Empêche la carte de rétrécir */
+  flex-shrink: 0; 
 }
 
 .gate-title{ margin:0 0 6px; font-weight:900; font-size:clamp(20px,2.6vw,26px); color:#fff; } /* Couleur texte blanc */
