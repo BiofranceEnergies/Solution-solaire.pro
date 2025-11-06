@@ -287,11 +287,13 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 .result-grid .financial-card{ grid-column: 1 / -1; }
 
 /* =================================================================== */
-/* MODIFICATION : OVERLAY STYLE ADOUCISSEUR (NOIR, BLEU, FLOTTANT) */
+/* MODIFICATION : OVERLAY STYLE ADOUCISSEUR (NOIR, BLEU, STICKY) */
 /* =================================================================== */
 
 /* ===== Overlay de déblocage (Style Adoucisseur) ===== */
-.lock-zone{ position:relative; }
+.lock-zone{ 
+  position:relative; /* Le parent est relatif */
+}
 .lock-zone .lock-blur{
   filter: blur(4px); opacity:.85; pointer-events:none; user-select:none;
   transition:filter .2s ease, opacity .2s ease;
@@ -299,22 +301,24 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 
 /* LE FOND FLOU (le parent) */
 .gate-overlay{
-  position: fixed; /* <-- FIXÉ À L'ÉCRAN */
+  position: absolute; /* <-- ABSOLUTE, PAS 'fixed' */
   inset: 0; 
   z-index: 10;
-  display: flex; /* <-- POUR CENTRER SON ENFANT */
-  align-items: center; 
-  justify-content: center; 
+  display: block; /* <-- BLOCK, PAS 'flex' */
   background: rgba(255, 255, 255, 0.72); /* Le fond verre dépoli */
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  overflow-y: auto; 
-  padding: 20px; 
+  overflow-y: hidden; 
+  padding: 0; 
 }
 
 /* LA CARTE NOIRE (l'enfant) */
 .gate-card{
-  width: min(780px, 92vw); /* Juste une largeur */
+  position: sticky; /* <-- LA VOILÀ LA SOLUTION ! */
+  top: min(10vh, 80px); /* Se colle à 10% du haut de l'écran */
+  margin: 0 auto 24px auto; /* Centré horizontalement */
+
+  width: min(780px, 92vw); /* Largeur de la carte */
   background: #0b1220; 
   color: #fff;
   border: 1px solid rgba(255,255,255,.18);
