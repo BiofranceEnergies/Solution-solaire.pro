@@ -302,22 +302,20 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 
 /* LE FOND FLOU (le parent) */
 .gate-overlay{
-  position: absolute; /* <-- ABSOLUTE, PAS 'fixed' */
+  position: absolute; /* <--- C'est correct, on laisse comme ça */
   inset: 0; 
   z-index: 10;
-  display: block; /* <-- BLOCK, PAS 'flex' */
-  background: rgba(255, 255, 255, 0.72); /* Le fond verre dépoli */
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  overflow-y: hidden; 
-  padding: 0; 
+  display: flex; /* <--- Ceci centre la carte, mais peut être changé */
+  align-items: center; 
+  justify-content: center; 
+  /* ... le reste du code ... */
 }
 
 /* LA CARTE NOIRE (l'enfant) */
 .gate-card{
-  position: sticky; /* <-- LA VRAIE SOLUTION ! */
-  top: min(10vh, 80px); /* Se colle à 10% du haut de l'écran */
-  margin: 0 auto 24px auto; /* Centré horizontalement */
+  position: sticky; /* <-- LA SOLUTION ! La carte va suivre le scroll */
+  top: min(10vh, 80px); /* Se colle à 10% du haut de l'écran, ou 80px */
+  margin: 0 auto 24px auto; /* Centré horizontalement et marge en bas */
 
   width: min(780px, 92vw); /* Largeur de la carte */
   background: #0b1220; 
