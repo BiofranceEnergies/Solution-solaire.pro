@@ -388,24 +388,37 @@ function generateFinancementCardHTML(sc) {
     }
     return ''; // Ne rien afficher si ni prix ni financement ne sont valides
   }
+  
+  // ===================================================================
+  // MODIFICATION : J'INJECTE LE TEXTE DE L'OVERLAY ADOUCISSEUR ICI
+  // ===================================================================
   function generateGateHTML() {
-    // Le HTML du formulaire Gate est statique.
+    // Le HTML du formulaire Gate (version Adoucisseur)
     return `
       <div class="gate-overlay" id="gate-overlay" role="dialog" aria-modal="true" aria-labelledby="gate-title">
         <div class="gate-card">
-          <h3 id="gate-title" class="gate-title">Vous avez vu vos panneaux et votre production…</h3>
-          <p class="gate-sub"><strong>Et si on allait plus loin&nbsp;?</strong></p>
-          <p class="gate-sub">Découvrez le coût précis, vos économies et votre mensualité fixe.<br> Profitez de <strong>la remise immédiate</strong> <span class="gate-deadline">(jusqu’au 31/10/2025)</span>.</p>
-          <div class="gate-badges" aria-hidden="true"> <div class="badge"><span>🔒</span><b>Données protégées</b></div> <div class="badge"><span>⚡</span><b>Étude affichée immédiatement à l’écran</b></div> </div>
+          <h3 id="gate-title" class="gate-title">Passez du calcul à la solution.</h3>
+          <p class="gate-sub">
+            Visualisez votre installation complète, son coût réel et le financement adapté à votre foyer. — avec remise immédiate (jusqu’au 31/12/2025).
+          </p>
+          <div class="gate-badges" aria-hidden="true">
+            <div class="badge"><span>🔒</span><b>Données protégées</b></div>
+            <div class="badge"><span>⚡</span><b>Affichage immédiat</b></div>
+          </div>
           <form id="gate-form" class="gate-form" novalidate>
             <label style="width:100%"> <span class="sr-only">Votre email (facultatif)</span> <input id="gate-email" class="gate-input" type="email" placeholder="Votre email (facultatif)" autocomplete="email" /> </label>
             <label style="width:100%"> <span class="sr-only">Téléphone (obligatoire)</span> <input id="gate-phone" class="gate-input" type="tel" placeholder="Téléphone (obligatoire)" autocomplete="tel" required /> </label>
-            <p class="gate-hint full" id="rgpd-info"> En validant, vous acceptez d’être contacté uniquement par <strong>SMS</strong> pour votre étude photovoltaïque.</p>
-            <div class="gate-hint full" aria-hidden="true"> Un SMS de confirmation vous sera envoyé. Libre à vous d’échanger ensuite.</div>
-            <div class="gate-proof full"> ✅ Votre projet s’autofinance grâce à vos économies. Vérifiez-le par vous-même&nbsp;!</div>
-            <button class="gate-cta full" type="submit" aria-label="Voir mon étude complète et mes économies"> Voir mon étude complète et mes économies <span class="arrow" aria-hidden="true">→</span> </button>
+            
+            <p class="gate-hint full" id="rgpd-info">
+              En validant, vous acceptez d’être contacté uniquement par <strong>SMS</strong> pour votre étude.
+            </p>
+            
+            <button class="gate-cta full" type="submit" aria-label="Afficher mes résultats détaillés">
+              Afficher mes résultats détaillés
+              <span class="arrow" aria-hidden="true">→</span>
+            </button>
           </form>
-          <div class="gate-note">Vos données ne seront jamais revendues ni utilisées à d’autres fins.</div>
+          <div class="gate-note">Un SMS de confirmation vous sera envoyé.</div>
         </div>
       </div>`;
   }
