@@ -18,7 +18,6 @@ gtag('set', 'url_passthrough', true);
 gtag('js', new Date());
 gtag('config', 'AW-11242044118');
 
-// --- Conversion Functions ---
 function gtag_report_conversion() {
   try { gtag('event','conversion',{ send_to:'AW-11242044118/MslOCKGZzo0bENb1z_Ap' }); } catch(e){}
   return true;
@@ -38,15 +37,14 @@ function gtag_report_simulation() {
   } catch(e){}
 }
 
-// --- Script pour ouvrir/fermer FAQ et Popup Mentions ---
+// Script pour ouvrir/fermer FAQ et Popup Mentions
 document.addEventListener('click', (e)=>{ if(e.target.closest('summary')){ const d = e.target.closest('details'); if(!d) return; const group = d.parentElement; group.querySelectorAll('details[open]').forEach(x => { if(x!==d) x.removeAttribute('open'); }); } });
 document.addEventListener("DOMContentLoaded", ()=>{ const link=document.getElementById("mentions-legales-link"), popup=document.getElementById("mentions-popup"), close=document.getElementById("close-mentions"); if(link && popup && close){ link.addEventListener("click", e=>{e.preventDefault();popup.style.display="block";}); close.addEventListener("click", e=>{e.preventDefault();popup.style.display="none";}); } });
 
-// --- Script Masque Téléphone ---
+// Script Masque Téléphone
 function attachPhoneMask() { const telInput = document.getElementById('gate-phone'); if (!telInput) return; telInput.setAttribute('inputmode','numeric'); telInput.setAttribute('maxlength','14'); const format = v => v.replace(/\D/g,'').substring(0,10).replace(/(\d{2})(?=\d)/g,'$1 ').trim(); telInput.addEventListener('input', () => { telInput.value = format(telInput.value); }); telInput.addEventListener('paste', (e) => { e.preventDefault(); const txt = (e.clipboardData || window.clipboardData).getData('text') || ''; telInput.value = format(txt); }); }
 document.addEventListener('DOMContentLoaded', attachPhoneMask);
 
-// --- Logique principale du simulateur ---
 (function(){
   let simulationData = {}; // Pour stocker les données entre étapes
   const overlay    = document.getElementById('calc-overlay');
@@ -414,8 +412,8 @@ function generateFinancementCardHTML(sc) {
 
 })(); // Fin IIFE principale
 
-// --- Logique du bandeau cookie ---
+// Logique du bandeau cookie
 (function(){ const KEY='consent_v2', banner=document.getElementById('consent-banner'), btnAccept=document.getElementById('consent-accept'), btnReject=document.getElementById('consent-reject'); if (!banner || !btnAccept || !btnReject) return; function updateConsent(state){ gtag('consent','update',{ analytics_storage: state.analytics ? 'granted' : 'denied', ad_storage: state.ads ? 'granted' : 'denied', ad_user_data: state.adUserData ? 'granted' : 'denied', ad_personalization: state.adPersonal ? 'granted' : 'denied' }); } function save(s){ try{ localStorage.setItem(KEY, JSON.stringify(s)); }catch(e){} } function load(){ try{ return JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){ return null; } } const saved=load(); if(saved){ updateConsent(saved); banner.style.display='none'; } else{ banner.style.display='block'; requestAnimationFrame(()=>{ banner.style.opacity='1'; banner.style.transform='translateY(0)'; }); } btnAccept.addEventListener('click', ()=>{ const s={analytics:true,ads:true,adUserData:true,adPersonal:true}; updateConsent(s); save(s); banner.style.display='none'; }); btnReject.addEventListener('click', ()=>{ const s={analytics:false,ads:false,adUserData:false,adPersonal:false}; updateConsent(s); save(s); banner.style.display='none'; }); })();
 
-// --- Trace UTM/GCLID ---
-(function(){ const p = new URLSearchParams(location.search); const track = { utm_source:(p.get('utm_source')||''), utm_medium:(p.get('utm_medium')||''), utm_campaign:(p.get('utm_campaign')||''), utm_adgroup:(p.get('utm_adgroup')||''), utm_term:(p.get('utm_term')||''), utm_matchtype:(p.get('utm_matchtype')||''), utm_device:(p.get('utm_device')||''), gclid:(p.get('gclid')||''), gbraid:(p.get('gbraid')||''), wbraid:(p.get('wbraid')||'') }; const isAds = track.gclid || track.gbraid || track.wbraid || (track.utm_source.toLowerCase()==='google' && track.utm_medium.toLowerCase()==='cpc'); if(isAds){ try{ localStorage.setItem('ads_tracking_v1', JSON.stringify({ t: Date.now(), ...track })); }catch(e){} } window.__getAdsTrack = function(){ try{ const raw = localStorage.getItem('ads_tracking_v1'); if(!raw) return track; const obj = JSON.parse(raw); /* Données expirent après 7 jours */ if(Date.now()-(obj.t||0) > 7*24*60*60*1000) { localStorage.removeItem('ads_tracking_v1'); return track; } /* Retourne les données sauvegardées */ return obj; }catch(e){ return track; } }; })();
+// Trace UTM/GCLID
+(function(){ const p = new URLSearchParams(location.search); const track = { utm_source:(p.get('utm_source')||''), utm_medium:(p.get('utm_medium')||''), utm_campaign:(p.get('utm_campaign')||''), utm_adgroup:(p.get('utm_adgroup')||''), utm_term:(p.get('utm_term')||''), utm_matchtype:(p.get('utm_matchtype')||''), utm_device:(p.get('utm_device')||''), gclid:(p.get('gclid')||''), gbraid:(p.get('gbraid')||''), wbraid:(p.get('wbraid')||'') }; const isAds = track.gclid || track.gbraid || track.wbraid || (track.utm_source.toLowerCase()==='google' && track.utm_medium.toLowerCase()==='cpc'); if(isAds){ try{ localStorage.setItem('ads_tracking_v1', JSON.stringify({ t: Date.now(), ...track })); }catch(e){} } window.__getAdsTrack = function(){ try{ const raw = localStorage.getItem('ads_
