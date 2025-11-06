@@ -226,18 +226,25 @@ details[open] .faq__chev{transform:rotate(180deg);opacity:1;}
     gap: clamp(20px, 4vw, 40px); 
 }
 
+/* Conteneur de l'image (wrapper) */
 .new-footer__image-wrapper {
-    flex: 0 0 auto; 
-    width: clamp(120px, 18vw, 200px); 
-    max-width: 100%; 
-    text-align: center; 
+    flex: 0 0 auto;
+    /* AUGMENTATION DE LA LARGEUR MAXIMALE (AVANT 280px) */
+    width: clamp(200px, 25vw, 340px); 
+    max-width: 100%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
 }
 
+/* L'image elle-même */
 .new-footer__logo {
-    width: 100%;
+    max-height: 180px; /* <-- AUGMENTATION (AVANT 150px) */
+    width: auto;       
     height: auto;
     display: block;
-    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); 
+    filter: drop-shadow(0 4px 16px rgba(245, 158, 11, 0.5)); 
+    margin: 0;
 }
 
 .new-footer__content {
