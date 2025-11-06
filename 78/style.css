@@ -287,7 +287,7 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 .result-grid .financial-card{ grid-column: 1 / -1; }
 
 /* =================================================================== */
-/* ON REMET LE CODE DE L'OVERLAY D'ORIGINE (BLANC, ORANGE, NON-FIXE) */
+/* MODIFICATION : OVERLAY STYLE ADOUCISSEUR (NOIR, BLEU, FLOTTANT) */
 /* =================================================================== */
 
 /* ===== Overlay de déblocage (Style Adoucisseur) ===== */
@@ -485,7 +485,7 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 }
 
 /* =================================================================== */
-/* FIN DE L'OVERLAY D'ORIGINE */
+/* FIN DE LA MODIFICATION DE L'OVERLAY */
 /* =================================================================== */
 
 
