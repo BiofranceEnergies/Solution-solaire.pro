@@ -208,17 +208,114 @@ details[open] .faq__chev{transform:rotate(180deg);opacity:1;}
 .faq h2{margin-bottom:clamp(10px,2vw,16px);}
 .faq__list{margin-top:6px;}
 
-/* Mentions légales */
-.legal{background:#f7f9fc;color:var(--ink);padding:24px 16px;margin-top:clamp(40px,6vw,80px)}
-.legal__inner{max-width:var(--maxw);margin:0 auto;text-align:center}
-.legal__link{
-  color:#6b7280 !important; font-weight:400 !important; text-decoration:none !important; cursor:pointer;
+/* =================================================================== */
+/* NOUVEAU PIED DE PAGE (Fond noir, image gauche, texte droite) */
+/* =================================================================== */
+.new-footer {
+    background-color: var(--ink); /* <-- FOND NOIR */
+    color: #f8fafc; 
+    padding: clamp(30px, 6vw, 60px) 16px;
+    margin-top:clamp(40px,6vw,80px); /* Ajoute de l'espace au-dessus */
 }
-.legal__link:hover{ color:#374151 !important; text-decoration:underline !important; }
-.legal__link:visited{ color:#6b7280 !important; }
-.legal .sep{border:0;border-top:1px solid var(--border);margin:16px auto 0;max-width:var(--maxw)}
-#mentions-popup{display:none;position:fixed;left:50%;bottom:64px;transform:translateX(-50%);width:360px;max-width:95vw;background:#fff;color:var(--ink);border:1px solid var(--border);border-radius:14px;padding:18px 20px 14px;box-shadow:0 10px 36px rgba(2,6,23,.15);z-index:9999;font-size:13px;line-height:1.7}
-#close-mentions{position:absolute;top:6px;right:12px;background:none;border:0;color:var(--ink);font-size:20px;font-weight:800;cursor:pointer}
+
+.new-footer__inner {
+    max-width: 1200px; 
+    margin: 0 auto; 
+    display: flex;
+    flex-wrap: wrap; 
+    align-items: flex-start; 
+    gap: clamp(20px, 4vw, 40px); 
+}
+
+.new-footer__image-wrapper {
+    flex: 0 0 auto; 
+    width: clamp(120px, 18vw, 200px); 
+    max-width: 100%; 
+    text-align: center; 
+}
+
+.new-footer__logo {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); 
+}
+
+.new-footer__content {
+    flex: 1 1 500px; 
+    text-align: right; 
+}
+
+.new-footer__text {
+    font-size: clamp(14px, 1.8vw, 16px);
+    line-height: 1.6;
+    margin-bottom: 20px; /* Espace avant le copyright */
+    color: #cbd5e1; 
+    max-width: 60ch; 
+    margin-left: auto; 
+}
+
+.new-footer__meta {
+    margin-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Fine séparation */
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; 
+    gap: 12px;
+}
+
+.new-footer__copy {
+    font-size: 13px;
+    color: #64748b; 
+    margin: 0;
+}
+
+/* Style pour le lien "Mentions légales" DANS le footer noir */
+.new-footer__legal-link {
+    font-size: 13px;
+    color: #9ca3af; /* Gris clair */
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+.new-footer__legal-link:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* RESPONSIVE pour mobile */
+@media (max-width: 768px) {
+    .new-footer__inner {
+        flex-direction: column; 
+        align-items: center; 
+        text-align: center;
+    }
+    .new-footer__image-wrapper {
+        margin-bottom: 25px; 
+        width: clamp(100px, 30vw, 160px); 
+    }
+    .new-footer__content {
+        text-align: center; 
+    }
+    .new-footer__text {
+        margin-left: auto;
+        margin-right: auto; 
+        max-width: 80%; 
+    }
+    .new-footer__meta {
+        flex-direction: column;
+        align-items: center;
+        border-top: none;
+        padding-top: 0;
+        margin-top: 16px;
+    }
+}
+/* =================================================================== */
+/* FIN DU NOUVEAU PIED DE PAGE */
+/* =================================================================== */
+
 
 /* === Overlay calcul (étape 1) === */
 body.no-scroll{overflow:hidden;}
@@ -285,6 +382,7 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 /* Pavés financiers pleine largeur dans la grille */
 .result-grid .financial-banner,
 .result-grid .financial-card{ grid-column: 1 / -1; }
+
 
 /* =================================================================== */
 /* MODIFICATION : OVERLAY STYLE ADOUCISSEUR (NOIR, BLEU, STICKY) */
@@ -488,11 +586,6 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   font-weight:600;
 }
 
-/* =================================================================== */
-/* FIN DE LA MODIFICATION DE L'OVERLAY */
-/* =================================================================== */
-
-
 /* DEBUT CSS BANDEAU COOKIE */
 #consent-banner {
   position: fixed;
@@ -551,122 +644,6 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   background: linear-gradient(180deg, var(--accent), var(--accent-2));
   color: #1b1202;
 }
-
-/* =================================================================== */
-/* NOUVEAU PIED DE PAGE (Fond noir, image gauche, texte droite) */
-/* =================================================================== */
-.new-footer {
-    background-color: #0d1a2f; /* Fond noir très foncé / bleu nuit */
-    color: #f8fafc; /* Texte très clair */
-    padding: clamp(30px, 6vw, 60px) 16px; /* Espacement interne */
-    margin-top: clamp(60px, 10vw, 100px); /* Marge au-dessus du footer */
-}
-
-.new-footer__inner {
-    max-width: 1200px; /* Largeur maximale du contenu */
-    margin: 0 auto; /* Centrage */
-    display: flex;
-    flex-wrap: wrap; /* Permet aux éléments de passer à la ligne sur mobile */
-    align-items: flex-start; /* Alignement en haut des éléments */
-    gap: clamp(20px, 4vw, 40px); /* Espacement entre l'image et le texte */
-}
-
-.new-footer__image-wrapper {
-    flex: 0 0 auto; /* Ne grandit pas, ne rétrécit pas */
-    width: clamp(120px, 18vw, 200px); /* Largeur de l'image, flexible */
-    max-width: 100%; /* Empêche de dépasser sur mobile */
-    text-align: center; /* Centrer l'image si elle est plus petite que son conteneur */
-}
-
-.new-footer__logo {
-    width: 100%;
-    height: auto;
-    display: block;
-    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.2)); /* Petite ombre pour faire ressortir */
-}
-
-.new-footer__content {
-    flex: 1 1 500px; /* Le contenu prend le reste de l'espace, minimum 500px */
-    text-align: right; /* Texte aligné à droite */
-}
-
-.new-footer__text {
-    font-size: clamp(14px, 1.8vw, 16px);
-    line-height: 1.6;
-    margin-bottom: 25px; /* Espace après le paragraphe */
-    color: #cbd5e1; /* Couleur du texte principal */
-    max-width: 60ch; /* Limite la largeur pour une meilleure lisibilité */
-    margin-left: auto; /* Aligne le texte à droite dans son conteneur */
-}
-
-.new-footer__nav {
-    margin-bottom: 20px;
-}
-
-.new-footer__link {
-    color: #93c5fd; /* Couleur des liens (bleu clair) */
-    text-decoration: none;
-    font-weight: 600;
-    margin-left: 20px; /* Espacement entre les liens */
-    font-size: clamp(13px, 1.6vw, 15px);
-    transition: color 0.2s ease;
-}
-
-.new-footer__link:hover {
-    color: #f8fafc; /* Couleur au survol */
-    text-decoration: underline;
-}
-
-/* Premier lien sans marge à gauche (pour la clarté) */
-.new-footer__nav .new-footer__link:first-child {
-    margin-left: 0;
-}
-
-
-.new-footer__copy {
-    font-size: 13px;
-    color: #64748b; /* Texte copyright plus discret */
-    margin-top: 15px; /* Espace après la navigation */
-}
-
-/* RESPONSIVE pour mobile */
-@media (max-width: 768px) {
-    .new-footer__inner {
-        flex-direction: column; /* Les éléments s'empilent verticalement */
-        align-items: center; /* Tout est centré */
-        text-align: center;
-    }
-    .new-footer__image-wrapper {
-        margin-bottom: 25px; /* Espace après le logo sur mobile */
-        width: clamp(100px, 30vw, 160px); /* Ajuste la taille du logo sur mobile */
-    }
-    .new-footer__content {
-        text-align: center; /* Tout le contenu est centré sur mobile */
-    }
-    .new-footer__text {
-        margin-left: auto;
-        margin-right: auto; /* Centrer le texte principal sur mobile */
-        max-width: 80%; /* Un peu plus large sur mobile pour ne pas être trop serré */
-    }
-    .new-footer__nav {
-        display: flex; /* Les liens s'alignent mieux */
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px; /* Espacement entre les liens */
-        margin-top: 15px;
-    }
-    .new-footer__nav .new-footer__link {
-        margin: 0; /* Supprime les marges gauche/droite spécifiques */
-    }
-}
-
-/* Pour les écrans encore plus petits, éviter que les liens ne se touchent */
-@media (max-width: 480px) {
-    .new-footer__nav {
-        flex-direction: column; /* Les liens s'empilent s'il y en a trop */
-    }
-}
-
 /* FIN CSS BANDEAU COOKIE */
 /* === Impression PDF : ne garder que le récap + mentions === */
 /* === Impression PDF Premium : #recap uniquement, A4 propre, couleurs respectées === */
@@ -685,7 +662,7 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 
   /* Ne garder que le récap */
   header.hero, #consent-banner, .steps-2025, .why, .stats-bg,
-  .testi, .faq, .gate-overlay, .certifs { display: none !important; }
+  .testi, .faq, .gate-overlay, .certifs, .new-footer { display: none !important; }
   main > *:not(#recap) { display: none !important; }
 
   /* Mise en page compacte */
@@ -752,7 +729,7 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
-    
+    /* overflow-x: hidden !important; <-- LA LIGNE FAUTIVE EST BIEN SUPPRIMÉE */
   }
 
   /* carte + grille = 1 colonne, jamais 2, jamais de rognage */
@@ -832,37 +809,6 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 /* SUPPRESSION DES ANCIENS PATCHS QUI CASSAIENT LE CENTRAGE */
 /* =================================================================== */
 /*
-#lock-blur{
-  margin-top: 6px !important;
-}
-.gate-overlay{
-  align-items: flex-start !important;
-  padding-top: 8px !important;
-}
-.gate-card{
-  margin-top: 0 !important;
-}
-@media (max-width: 860px){
-  .gate-overlay{ padding-top: 12px !important; }
-}
-
-#recap .gate-overlay{
-  padding: 0 !important;
-  align-items: stretch !important;
-  justify-content: stretch !important;
-}
-
-#recap .gate-card{
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-  border-radius: 12px !important;
-}
-
-@media (max-width: 860px){
-  #recap .gate-card{
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-  }
-}
+  (J'ai supprimé tout l'ancien code qui était ici,
+  y compris les #recap .gate-overlay et #recap .gate-card)
 */
