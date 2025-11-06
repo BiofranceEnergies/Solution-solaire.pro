@@ -828,3 +828,37 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
         margin-top: -8px;
     }
 }
+/* =================================================================== */
+/* AJUSTEMENT IMAGE CAMION (FOOTER NOIR) — VERSION AMÉLIORÉE */
+/* =================================================================== */
+
+/* Conteneur de l'image (pour centrer l'image) */
+.new-footer__image-wrapper {
+    flex: 0 0 auto;
+    width: clamp(160px, 20vw, 250px); /* Augmente la largeur du conteneur */
+    max-width: 100%;
+    text-align: center; /* Centrer l'image à l'intérieur de ce conteneur */
+    display: flex; /* Utilise flexbox pour un meilleur contrôle */
+    justify-content: center; /* Centre horizontalement l'enfant */
+    align-items: center; /* Centre verticalement l'enfant (si besoin) */
+    margin-bottom: 0px; /* Réinitialise les marges si des valeurs précédentes étaient là */
+}
+
+/* Cible spécifiquement l'image du camion */
+.new-footer__logo[src*="camion%20SSP"] { /* Utilisez "camion%20SSP" pour capturer les deux versions si l'URL exacte change */
+    max-height: 150px; /* Hauteur plus grande pour le camion */
+    width: auto;       /* La largeur s'adapte automatiquement */
+    filter: drop-shadow(0 4px 16px rgba(245, 158, 11, 0.5)); /* Ombre plus prononcée */
+    margin: 0; /* Assure qu'il n'y a pas de marges externes inattendues */
+}
+
+/* Ajustements de la position sur mobile */
+@media (max-width: 768px) {
+    .new-footer__image-wrapper {
+        width: 100%; /* Prend toute la largeur sur mobile */
+        margin-bottom: 20px; /* Met un peu d'espace sous le camion */
+    }
+    .new-footer__logo[src*="camion%20SSP"] {
+        max-height: 110px; /* Taille sur mobile */
+    }
+}
