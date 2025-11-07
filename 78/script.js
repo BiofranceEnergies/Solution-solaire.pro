@@ -458,6 +458,7 @@ function generateFinancementCardHTML(sc) {
           <div class="gate-badges" aria-hidden="true">
             <div class="badge"><span>🔒</span><b>Données protégées</b></div>
             <div class="badge"><span>⚡</span><b>Affichage immédiat</b></div>
+            <div class="badge"><span>🔐 GARANTI 100% SANS DÉMARCHAGE TÉLÉPHONIQUE.</b></div>
           </div>
           <form id="gate-form" class="gate-form" novalidate>
             <label style="width:100%"> <span class="sr-only">Votre email (facultatif)</span> <input id="gate-email" class="gate-input" type="email" placeholder="Votre email (facultatif)" autocomplete="email" /> </label>
