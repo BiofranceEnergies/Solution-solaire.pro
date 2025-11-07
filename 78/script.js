@@ -446,37 +446,42 @@ function generateFinancementCardHTML(sc) {
   // ===================================================================
   // MODIFICATION : TEXTE DE L'OVERLAY ADOUCISSEUR
   // ===================================================================
-  function generateGateHTML() {
-    // Le HTML du formulaire Gate (version Adoucisseur)
-    return `
-      <div class="gate-overlay" id="gate-overlay" role="dialog" aria-modal="true" aria-labelledby="gate-title">
-        <div class="gate-card">
-          <h3 id="gate-title" class="gate-title">Passez du calcul à la solution.</h3>
-          <p class="gate-sub">
-            Visualisez votre installation complète, son coût réel et le financement adapté à votre foyer. — avec remise immédiate (jusqu’au 31/12/2025).
-          </p>
-          <div class="gate-badges" aria-hidden="true">
-            <div class="badge"><span>🔒</span><b>Données protégées</b></div>
-            <div class="badge"><span>⚡</span><b>Affichage immédiat</b></div>
-          </div>
-          <form id="gate-form" class="gate-form" novalidate>
-            <label style="width:100%"> <span class="sr-only">Votre email (facultatif)</span> <input id="gate-email" class="gate-input" type="email" placeholder="Votre email (facultatif)" autocomplete="email" /> </label>
-            <label style="width:100%"> <span class="sr-only">Téléphone (obligatoire)</span> <input id="gate-phone" class="gate-input" type="tel" placeholder="Téléphone (obligatoire)" autocomplete="tel" required /> </label>
-            
-            <p class="gate-hint full" id="rgpd-info">
-              En validant, vous acceptez d’être contacté uniquement par <strong>SMS</strong> pour votre étude.
-            </p>
-            
-            <button class="gate-cta full" type="submit" aria-label="Afficher mes résultats détaillés">
-              Afficher mes résultats détaillés
-              <span class="arrow" aria-hidden="true">→</span>
-            </button>
-          </form>
-          <div class="gate-note">Un SMS de confirmation vous sera envoyé.</div>
-        </div>
-      </div>`;
-  }
+  // ===================================================================
+  // MODIFICATION : TEXTE DE L'OVERLAY ADOUCISSEUR
+  // ===================================================================
+  function generateGateHTML() {
+    // Le HTML du formulaire Gate (version Adoucisseur)
+    return `
+      <div class="gate-overlay" id="gate-overlay" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+        <div class="gate-card">
+          <h3 id="gate-title" class="gate-title" style="color:#f59e0b">DÉBLOQUEZ Votre PRIX Final & ÉCONOMIES DÉTAILLÉES</h3>
+          <p class="gate-sub">
+            Recevez le PDF de votre étude complète et confirmez la faisabilité technique de votre installation solaire.
+          </p>
+          <div class="gate-badges" aria-hidden="true">
+            <div class="badge"><span>🔒</span><b>Données protégées</b></div>
+            <div class="badge"><span>⚡</span><b>Devis immédiat</b></div>
+          </div>
+          <form id="gate-form" class="gate-form" novalidate>
+            <label style="width:100%"> <span class="sr-only">Votre email (facultatif)</span> <input id="gate-email" class="gate-input" type="email" placeholder="Votre email (pour l'envoi du Devis PDF)" autocomplete="email" /> </label>
+            
+              <label style="width:100%"> <span class="sr-only">Téléphone (obligatoire)</span> <input id="gate-phone" class="gate-input" type="tel" placeholder="Téléphone (obligatoire pour l'envoi sécurisé du Devis)" autocomplete="tel" required /> </label>
+            
+            <p class="gate-hint full" id="rgpd-info">
+              En validant, vous recevrez l'étude par email. 
+              </p>
+            
+            <button class="gate-cta full" type="submit" aria-label="Afficher mes résultats détaillés">
+              OUI, J'AFFICHE Mon PRIX FINAL
+              <span class="arrow" aria-hidden="true">→</span>
+            </button>
 
+                        <div class="gate-note" style="margin-top: -6px;">
+                <strong style="color: #fff8e1;">🔐 GARANTI 100% SANS DÉMARCHAGE TÉLÉPHONIQUE.</strong>
+            </div>
+        </div>
+      </div>`;
+  }
 })(); // Fin IIFE principale
 
 // Logique du bandeau cookie
