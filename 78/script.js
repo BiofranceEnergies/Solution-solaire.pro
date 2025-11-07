@@ -443,14 +443,15 @@ function generateFinancementCardHTML(sc) {
     return ''; // Ne rien afficher si ni prix ni financement ne sont valides
   }
   
-  // ===================================================================
-  // MODIFICATION : TEXTE DE L'OVERLAY ADOUCISSEUR (NETTOYÉ)
+ // ===================================================================
+  // MODIFICATION : TEXTE DE L'OVERLAY ADOUCISSEUR (NETTOYÉ À L'EXTRÊME)
   // ===================================================================
   function generateGateHTML() {
     // Le HTML du formulaire Gate
     return `
       <div class="gate-overlay" id="gate-overlay" role="dialog" aria-modal="true" aria-labelledby="gate-title">
         <div class="gate-card">
+            
           <h3 id="gate-title" class="gate-title">DÉBLOQUEZ Votre PRIX Final & ÉCONOMIES DÉTAILLÉES</h3>
           <p class="gate-sub">
             Recevez le PDF de votre étude complète et confirmez la faisabilité technique de votre installation solaire.
@@ -460,22 +461,22 @@ function generateFinancementCardHTML(sc) {
             <div class="badge"><span>⚡</span><b>Devis immédiat</b></div>
           </div>
           <form id="gate-form" class="gate-form" novalidate>
-            <label style="width:100%"> <span class="sr-only">Votre email (facultatif)</span> <input id="gate-email" class="gate-input" type="email" placeholder="Votre email (pour l'envoi du Devis PDF)" autocomplete="email" /> </label>
+            <label> <span class="sr-only">Votre email (facultatif)</span> <input id="gate-email" class="gate-input" type="email" placeholder="Votre email (pour l'envoi du Devis PDF)" autocomplete="email" /> </label>
             
-              <label style="width:100%"> <span class="sr-only">Téléphone (obligatoire)</span> <input id="gate-phone" class="gate-input" type="tel" placeholder="Téléphone (obligatoire pour l'envoi sécurisé du Devis)" autocomplete="tel" required /> </label>
+              <label> <span class="sr-only">Téléphone (obligatoire)</span> <input id="gate-phone" class="gate-input" type="tel" placeholder="Téléphone (obligatoire pour l'envoi sécurisé du Devis)" autocomplete="tel" required /> </label>
             
-            <p class="gate-hint full" id="rgpd-info">
+            <p class="gate-hint" id="rgpd-info">
               En validant, vous recevrez l'étude par email. 
             </p>
             
-            <button class="gate-cta full" type="submit" aria-label="Afficher mes résultats détaillés">
+            <button class="gate-cta" type="submit" aria-label="Afficher mes résultats détaillés">
               OUI, J'AFFICHE Mon PRIX FINAL
               <span class="arrow" aria-hidden="true">→</span>
             </button>
 
-                        <div class="gate-note" style="margin-top: -6px;">
-                <strong style="color: #fff8e1;">🔐 GARANTI 100% SANS DÉMARCHAGE TÉLÉPHONIQUE.</strong>
-            </div>
+                        <p class="gate-note">
+                🔐 GARANTI 100% SANS DÉMARCHAGE TÉLÉPHONIQUE.
+            </p>
         </div>
       </div>`;
   }
