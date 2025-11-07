@@ -444,17 +444,14 @@ function generateFinancementCardHTML(sc) {
   }
   
   // ===================================================================
-  // MODIFICATION : TEXTE DE L'OVERLAY ADOUCISSEUR
-  // ===================================================================
-  // ===================================================================
-  // MODIFICATION : TEXTE DE L'OVERLAY ADOUCISSEUR
+  // MODIFICATION : TEXTE DE L'OVERLAY ADOUCISSEUR (NETTOYÉ)
   // ===================================================================
   function generateGateHTML() {
-    // Le HTML du formulaire Gate (version Adoucisseur)
+    // Le HTML du formulaire Gate
     return `
       <div class="gate-overlay" id="gate-overlay" role="dialog" aria-modal="true" aria-labelledby="gate-title">
         <div class="gate-card">
-          <h3 id="gate-title" class="gate-title" style="color:#f59e0b">DÉBLOQUEZ Votre PRIX Final & ÉCONOMIES DÉTAILLÉES</h3>
+          <h3 id="gate-title" class="gate-title">DÉBLOQUEZ Votre PRIX Final & ÉCONOMIES DÉTAILLÉES</h3>
           <p class="gate-sub">
             Recevez le PDF de votre étude complète et confirmez la faisabilité technique de votre installation solaire.
           </p>
@@ -469,7 +466,7 @@ function generateFinancementCardHTML(sc) {
             
             <p class="gate-hint full" id="rgpd-info">
               En validant, vous recevrez l'étude par email. 
-              </p>
+            </p>
             
             <button class="gate-cta full" type="submit" aria-label="Afficher mes résultats détaillés">
               OUI, J'AFFICHE Mon PRIX FINAL
