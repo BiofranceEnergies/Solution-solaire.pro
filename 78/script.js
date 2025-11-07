@@ -451,7 +451,7 @@ function generateFinancementCardHTML(sc) {
     return `
       <div class="gate-overlay" id="gate-overlay" role="dialog" aria-modal="true" aria-labelledby="gate-title">
         <div class="gate-card">
-          <h3 id="gate-title" class="gate-title">Passez du calcul à la solution.</h3>
+          <h3 id="gate-title" class="gate-title">DÉBLOQUEZ Votre PRIX FINAL & ÉCONOMIES DÉTAILLÉES</h3>
           <p class="gate-sub">
             Visualisez votre installation complète, son coût réel et le financement adapté à votre foyer. — avec remise immédiate (jusqu’au 31/12/2025).
           </p>
