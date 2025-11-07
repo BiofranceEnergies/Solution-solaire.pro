@@ -453,7 +453,7 @@ function generateFinancementCardHTML(sc) {
         <div class="gate-card">
           <h3 id="gate-title" class="gate-title">DÉBLOQUEZ Votre PRIX FINAL & ÉCONOMIES DÉTAILLÉES</h3>
           <p class="gate-sub">
-            Visualisez votre installation complète, son coût réel et le financement adapté à votre foyer. — avec remise immédiate (jusqu’au 31/12/2025).
+            Téléchargez le PDF de votre étude complète et confirmez la faisabilité technique de votre installation solaire. — avec remise immédiate (jusqu’au 31/12/2025).
           </p>
           <div class="gate-badges" aria-hidden="true">
             <div class="badge"><span>🔒</span><b>Données protégées</b></div>
