@@ -1,3 +1,6 @@
+// =============================
+// GTAG + CONSENT MODE
+// =============================
 window.dataLayer = window.dataLayer || [];
 function gtag(){ dataLayer.push(arguments); }
 
@@ -22,10 +25,10 @@ function gtag_report_conversion() {
   try { gtag('event','conversion',{ send_to:'AW-11242044118/MslOCKGZzo0bENb1z_Ap' }); } catch(e){}
   return true;
 }
- 
-// Flag pour ne déclencher la simulation qu'une fois
+
+// Flag pour ne déclencher la conversion "simulation" qu'une fois
 window.__simConvSent = false;
- 
+
 function gtag_report_simulation() {
   if (window.__simConvSent) return; // Ne pas renvoyer
   try {
@@ -37,166 +40,246 @@ function gtag_report_simulation() {
   } catch(e){}
 }
 
-// Script pour ouvrir/fermer FAQ et Popup Mentions
-document.addEventListener('click', (e)=>{ if(e.target.closest('summary')){ const d = e.target.closest('details'); if(!d) return; const group = d.parentElement; group.querySelectorAll('details[open]').forEach(x => { if(x!==d) x.removeAttribute('open'); }); } });
-document.addEventListener("DOMContentLoaded", ()=>{ const link=document.getElementById("mentions-legales-link"), popup=document.getElementById("mentions-popup"), close=document.getElementById("close-mentions"); if(link && popup && close){ link.addEventListener("click", e=>{e.preventDefault();popup.style.display="block";}); close.addEventListener("click", e=>{e.preventDefault();popup.style.display="none";}); } });
+// =============================
+// UI FAQ + Mentions légales (popup)
+// =============================
+document.addEventListener('click', (e)=>{
+  if(e.target.closest('summary')){
+    const d = e.target.closest('details');
+    if(!d) return;
+    const group = d.parentElement;
+    group.querySelectorAll('details[open]').forEach(x => { if(x!==d) x.removeAttribute('open'); });
+  }
+});
+
+document.addEventListener("DOMContentLoaded", ()=>{
+  const link=document.getElementById("mentions-legales-link"),
+        popup=document.getElementById("mentions-popup"),
+        close=document.getElementById("close-mentions");
+  if(link && popup && close){
+    link.addEventListener("click", e=>{e.preventDefault();popup.style.display="block";});
+    close.addEventListener("click", e=>{e.preventDefault();popup.style.display="none";});
+  }
+});
 
 // ===================================================================
-// CORRECTION : SCRIPT MASQUE TÉLÉPHONE (LA FONCTION ÉTAIT VIDE)
+// MASQUE TÉLÉPHONE (FR) — #gate-phone
 // ===================================================================
-function attachPhoneMask() { 
-  const telInput = document.getElementById('gate-phone'); 
+function attachPhoneMask() {
+  const telInput = document.getElementById('gate-phone');
   if (!telInput) {
     console.warn("attachPhoneMask: Champ #gate-phone non trouvé !");
-    return; 
+    return;
   }
-  
-  telInput.setAttribute('inputmode','numeric'); 
-  telInput.setAttribute('maxlength','14'); // 00 00 00 00 00 (10 chiffres + 4 espaces)
-  
+
+  telInput.setAttribute('inputmode','numeric');
+  telInput.setAttribute('maxlength','14'); // 00 00 00 00 00
+
   const format = (v) => {
-    // 1. Enlève tout sauf les chiffres
-    let digits = v.replace(/\D/g,'');
-    // 2. Garde les 10 premiers chiffres
-    digits = digits.substring(0,10);
-    // 3. Ajoute les espaces (sauf après le dernier groupe)
+    let digits = v.replace(/\D/g,'').substring(0,10);
     return digits.replace(/(\d{2})(?=\d)/g,'$1 ').trim();
   };
-  
-  // Applique le formatage à chaque touche
-  telInput.addEventListener('input', (e) => { 
-    // Gère le curseur pour ne pas qu'il saute à la fin
+
+  telInput.addEventListener('input', (e) => {
     const oldVal = e.target.value;
     const oldCursor = e.target.selectionStart;
     const digitsBeforeCursor = oldVal.substring(0, oldCursor).replace(/\D/g, '');
-    
-    e.target.value = format(oldVal);
-    
-    // Recalcule la nouvelle position du curseur
-    let newCursor = 0;
-    let digitsCounted = 0;
-    while (newCursor < e.target.value.length && digitsCounted < digitsBeforeCursor.length) {
-      if (/\d/.test(e.target.value[newCursor])) {
-        digitsCounted++;
-      }
-      newCursor++;
-    }
-    // Si le dernier caractère tapé était un espace (autogénéré), on avance d'un
-    if (oldVal.length < e.target.value.length && e.target.value[newCursor - 1] === ' ') {
-      newCursor++;
-    }
-    
-    e.target.setSelectionRange(newCursor, newCursor);
-  }); 
-  
-  // Gère le copier-coller
-  telInput.addEventListener('paste', (e) => { 
-    e.preventDefault(); 
-    const txt = (e.clipboardData || window.clipboardData).getData('text') || ''; 
-    telInput.value = format(txt); 
-  }); 
-}
-// ===================================================================
-// FIN DE LA CORRECTION
-// ===================================================================
 
+    e.target.value = format(oldVal);
+
+    let newCursor = 0, digitsCounted = 0;
+    while (newCursor < e.target.value.length && digitsCounted < digitsBeforeCursor.length) {
+      if (/\d/.test(e.target.value[newCursor])) digitsCounted++;
+      newCursor++;
+    }
+    if (oldVal.length < e.target.value.length && e.target.value[newCursor - 1] === ' ') newCursor++;
+    e.target.setSelectionRange(newCursor, newCursor);
+  });
+
+  telInput.addEventListener('paste', (e) => {
+    e.preventDefault();
+    const txt = (e.clipboardData || window.clipboardData).getData('text') || '';
+    telInput.value = format(txt);
+  });
+}
+
+// =============================
+// IIFE PRINCIPALE
+// =============================
 (function(){
-  let simulationData = {}; // Pour stocker les données entre étapes
+  let simulationData = {}; // stockage inter-étapes
   const overlay    = document.getElementById('calc-overlay');
   const btn        = document.getElementById('simuler');
   const inputCP    = document.getElementById('codePostal');
   const inputFact  = document.getElementById('facture');
-  const G_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec'; // URL unique Apps Script
 
-  // Fonctions utilitaires (overlay, validation)
-  function showCalcOverlay(msg){ if (!overlay) return; if (msg) { const t = overlay.querySelector('#calc-title'); if (t) t.textContent = msg; } overlay.style.display = 'flex'; document.body.classList.add('no-scroll'); overlay.querySelector('.panel')?.focus(); if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; } }
-  function hideCalcOverlay(){ if (!overlay) return; overlay.style.display = 'none'; document.body.classList.remove('no-scroll'); if (btn) { btn.disabled = false; btn.style.opacity = '1'; } }
-  function validateStep1(){ const cp = (inputCP?.value || '').trim(); const factureRaw = (inputFact?.value || ''); const num = parseFloat(factureRaw.replace(/\s/g,'').replace(',', '.').replace(/[^0-9.]/g,'')); const okCP = /^[0-9]{5}$/.test(cp); const okFact = Number.isFinite(num) && num > 0; if (!okCP) { alert('Veuillez entrer un code postal valide (5 chiffres).'); return false; } if (!okFact){ alert("Veuillez indiquer une facture annuelle valide."); return false; } return true; }
-  
-  // Récupération des scénarios depuis Google Sheet
+  // URL unique Apps Script
+  const G_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec';
+
+  // -----------------------------
+  // Session ID (lien simulation ↔ lead)
+  // -----------------------------
+  const SESSION_KEY = 'sim_session_id_v1';
+  function getSessionId(){
+    try{
+      const ex = localStorage.getItem(SESSION_KEY);
+      if (ex) return ex;
+      const id = 'S' + Date.now().toString(36) + Math.random().toString(36).slice(2,8);
+      localStorage.setItem(SESSION_KEY, id);
+      return id;
+    } catch(e){
+      return 'S' + Date.now().toString(36) + Math.random().toString(36).slice(2,8);
+    }
+  }
+  const SESSION_ID = getSessionId();
+
+  // -----------------------------
+  // Utilitaire d'envoi vers Sheet
+  // -----------------------------
+  function postToSheet(payload){
+    const fd = new FormData();
+    Object.entries(payload).forEach(([k,v]) => fd.append(k, v ?? ''));
+
+    // Ajouter tracking UTM/GCLID si présent
+    if (typeof window.__getAdsTrack === 'function') {
+      const ads = window.__getAdsTrack();
+      Object.keys(ads).forEach(key => fd.append(key, ads[key] || ''));
+    }
+
+    // En prod : 'no-cors' (réponse opaque). Pour debugger, retirer mode: 'no-cors'
+    return fetch(G_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: fd })
+      .catch(err => console.error('POST Sheets error:', err));
+  }
+
+  // -----------------------------
+  // Overlay + validations
+  // -----------------------------
+  function showCalcOverlay(msg){
+    if (!overlay) return;
+    if (msg) {
+      const t = overlay.querySelector('#calc-title');
+      if (t) t.textContent = msg;
+    }
+    overlay.style.display = 'flex';
+    document.body.classList.add('no-scroll');
+    overlay.querySelector('.panel')?.focus();
+    if (btn) { btn.disabled = true; btn.style.opacity = '0.7'; }
+  }
+
+  function hideCalcOverlay(){
+    if (!overlay) return;
+    overlay.style.display = 'none';
+    document.body.classList.remove('no-scroll');
+    if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+  }
+
+  function validateStep1(){
+    const cp = (inputCP?.value || '').trim();
+    const factureRaw = (inputFact?.value || '');
+    const num = parseFloat(factureRaw.replace(/\s/g,'').replace(',', '.').replace(/[^0-9.]/g,''));
+    const okCP = /^[0-9]{5}$/.test(cp);
+    const okFact = Number.isFinite(num) && num > 0;
+    if (!okCP) { alert('Veuillez entrer un code postal valide (5 chiffres).'); return false; }
+    if (!okFact){ alert("Veuillez indiquer une facture annuelle valide."); return false; }
+    return true;
+  }
+
+  // -----------------------------
+  // Lecture des scénarios (GET JSON)
+  // -----------------------------
   async function fetchScenarios(departement){
     try{
-      const r = await fetch(G_SCRIPT_URL); // Utilisation de l'URL définie
+      const r = await fetch(G_SCRIPT_URL);
       if (!r.ok) throw new Error(`HTTP error! status: ${r.status}`);
       const data = await r.json();
       return (data || [])
         .filter(row => String(row.Departement||'') === String(departement))
-        .map(row => ({ // Transformation en objet propre
-          prixKwh: parseFloat(String(row.PrixKwh||'').replace(',', '.').replace(/[^0-9.]/g,'') || 0.25), // Fallback prix kWh
-          puissance: String(row.Puissance || ''), prod: parseFloat(row.Prod || 0), seuil: parseFloat(row.Seuil || 0),
-          panels: parseInt(row.Panels || 0), prix: parseFloat(row.Prix || 0),
+        .map(row => ({
+          prixKwh: parseFloat(String(row.PrixKwh||'').replace(',', '.').replace(/[^0-9.]/g,'') || 0.25),
+          puissance: String(row.Puissance || ''),
+          prod: parseFloat(row.Prod || 0),
+          seuil: parseFloat(row.Seuil || 0),
+          panels: parseInt(row.Panels || 0),
+          prix: parseFloat(row.Prix || 0),
           remiseChantier: parseFloat(String(row.RemiseChantier||'').replace(',', '.').replace(/[^0-9.]/g,'') || 0),
-          mensualite: parseFloat(row.Mensualite || 0), taeg: parseFloat(row.Taeg || 0),
-          total: parseFloat(row.Total || 0), dureeMois: parseInt(row.Mois || 0)
+          mensualite: parseFloat(row.Mensualite || 0),
+          taeg: parseFloat(row.Taeg || 0),
+          total: parseFloat(row.Total || 0),
+          dureeMois: parseInt(row.Mois || 0)
         }));
-    }catch(e){ console.error('fetchScenarios error', e); alert("Impossible de charger les données de simulation. Veuillez réessayer."); return []; }
+    }catch(e){
+      console.error('fetchScenarios error', e);
+      alert("Impossible de charger les données de simulation. Veuillez réessayer.");
+      return [];
+    }
   }
 
-  // Gestion de la soumission du premier formulaire (Étape 1)
+  // -----------------------------
+  // Soumission ÉTAPE 1 (simulation)
+  // -----------------------------
   window.__handleSubmitEtape1 = async function(ev){
     ev.preventDefault();
     showCalcOverlay('Calcul en cours…');
     if (!validateStep1()){ hideCalcOverlay(); return false; }
-    
-    const departement = (inputCP.value.trim()).substring(0,2); 
+
+    const departement = (inputCP.value.trim()).substring(0,2);
     const scenarios = await fetchScenarios(departement);
-    if (!scenarios.length){ hideCalcOverlay(); /* Message d'erreur déjà dans fetchScenarios */ return false; }
-    
-    console.log('Scénarios chargés:', scenarios.length, scenarios);
+    if (!scenarios.length){ hideCalcOverlay(); return false; }
 
     // Calculs
     const cp = inputCP.value.trim();
     const facture = parseFloat((inputFact.value || '').replace(/\s/g,'').replace(',', '.').replace(/[^0-9.]/g,''));
     const inputConsoElem = document.getElementById('conso');
-    let conso, prixKwh, sourceConso = "facture"; 
+    let conso, prixKwh, sourceConso = "facture";
+
     if (inputConsoElem && inputConsoElem.value.trim()) {
       const consoVal = parseFloat((inputConsoElem.value || '').replace(/\s/g,'').replace(',', '.').replace(/[^0-9.]/g,''));
       if (Number.isFinite(consoVal) && consoVal > 0) {
         conso = consoVal;
-        prixKwh = (conso > 0) ? facture / conso : (scenarios[0]?.prixKwh || 0.25); // Eviter division par zéro
+        prixKwh = (conso > 0) ? facture / conso : (scenarios[0]?.prixKwh || 0.25);
         sourceConso = "kwh";
-      } else { 
+      } else {
         alert("Consommation kWh invalide, calcul basé sur la facture uniquement.");
-        prixKwh = scenarios[0]?.prixKwh || 0.25; 
-        conso = (prixKwh > 0) ? facture / prixKwh : 0; // Eviter division par zéro
+        prixKwh = scenarios[0]?.prixKwh || 0.25;
+        conso = (prixKwh > 0) ? facture / prixKwh : 0;
       }
     } else {
-      prixKwh = scenarios[0]?.prixKwh || 0.25; 
-      conso = (prixKwh > 0) ? facture / prixKwh : 0; // Eviter division par zéro
+      prixKwh = scenarios[0]?.prixKwh || 0.25;
+      conso = (prixKwh > 0) ? facture / prixKwh : 0;
     }
-    
-    // Choix du scénario pertinent
-    const minProd = Math.min(...scenarios.map(s => s.prod || Infinity), Infinity); // Ajout Infinity pour cas vide
-    if (conso < minProd) { alert("Consommation trop faible : installation non conseillée."); hideCalcOverlay(); return false; }
-    let sc = scenarios.filter(s => (s.prod||0) <= conso).sort((a,b)=> (b.prod||0) - (a.prod||0))[0];
-    if (!sc) sc = scenarios.sort((a,b)=> (b.prod||0) - (a.prod||0))[0]; 
-    if (!sc) { alert("Erreur: Aucun scénario applicable trouvé."); hideCalcOverlay(); return false; } 
 
-    // Calculs financiers
-    const autocons = Math.min(sc.prod || 0, conso || 0); 
+    const minProd = Math.min(...scenarios.map(s => s.prod || Infinity), Infinity);
+    if (conso < minProd) { alert("Consommation trop faible : installation non conseillée."); hideCalcOverlay(); return false; }
+
+    let sc = scenarios.filter(s => (s.prod||0) <= conso).sort((a,b)=> (b.prod||0) - (a.prod||0))[0];
+    if (!sc) sc = scenarios.sort((a,b)=> (b.prod||0) - (a.prod||0))[0];
+    if (!sc) { alert("Erreur: Aucun scénario applicable trouvé."); hideCalcOverlay(); return false; }
+
+    const autocons = Math.min(sc.prod || 0, conso || 0);
     const gainAn   = autocons * (Number.isFinite(prixKwh) && prixKwh > 0 ? prixKwh : 0);
     const gainMois = gainAn / 12;
-    const tauxHausse = 0.03; 
+    const tauxHausse = 0.03;
     const dureeProjection = 15;
-    const facteurCumul = (tauxHausse > 0) ? (Math.pow(1 + tauxHausse, dureeProjection) - 1) / tauxHausse : dureeProjection; // Gère taux = 0
+    const facteurCumul = (tauxHausse > 0) ? (Math.pow(1 + tauxHausse, dureeProjection) - 1) / tauxHausse : dureeProjection;
     const gain15 = gainAn * facteurCumul;
 
-    // Stockage des données
-    simulationData = { 
-      cp, facture, conso: Math.round(conso), prixKwh, sc, 
-      gainAn: Math.round(gainAn), gainMois: Math.round(gainMois), gain15: Math.round(gain15), 
-      autocons: Math.round(autocons), sourceConso 
+    simulationData = {
+      cp, facture, conso: Math.round(conso), prixKwh, sc,
+      gainAn: Math.round(gainAn), gainMois: Math.round(gainMois),
+      gain15: Math.round(gain15), autocons: Math.round(autocons), sourceConso
     };
+    // Expose global pour prepareAndPrint()
+    window.simulationData = simulationData;
 
     // Rendu HTML
     const recapDiv = document.getElementById('recap');
     if (!recapDiv){ console.warn('#recap manquant'); hideCalcOverlay(); return false; }
-    
+
     recapDiv.innerHTML = `
       <div class="result-card" role="region" aria-label="Votre estimation personnalisée">
         <h2>Votre estimation personnalisée</h2>
         <div class="result-grid" style="margin-top:12px">
-          ${generateVisiblePartHTML(simulationData)} 
+          ${generateVisiblePartHTML(simulationData)}
         </div>
         <div class="lock-zone" id="lock-zone">
           <div class="result-grid lock-blur" id="lock-blur" style="margin-top:12px">
@@ -206,24 +289,60 @@ function attachPhoneMask() {
         </div>
       </div>`;
 
-    attachPhoneMask(); // On appelle le masque APRÈS avoir créé le champ #gate-phone
+    attachPhoneMask();
     recapDiv.style.display = 'block';
     document.body.classList.add('results-mode');
     recapDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-    // Déclenchement Conversion Simulation
+    // Conversion Google Ads "Simulation"
     if (typeof gtag_report_simulation === 'function') { gtag_report_simulation(); }
 
-    // Initialiser Formulaire Gate
+    // Initialiser le formulaire Gate (Étape 2)
     initGateForm();
 
-    hideCalcOverlay();
-    return false; 
-  }; // Fin __handleSubmitEtape1
+    // >>> ENVOI D’UNE LIGNE "SIMULATION" (sans téléphone / sans email)
+    try{
+      const scSel = simulationData.sc || {};
+      await postToSheet({
+        event:        'simulation',
+        unlock:       '0',
+        session_id:   SESSION_ID,
+        timestamp:    new Date().toISOString(),
+        code_postal:  simulationData.cp || '',
+        facture:      simulationData.facture || 0,
+        conso:        simulationData.conso || 0,
+        source_conso: simulationData.sourceConso || '',
+        prix_kwh:     simulationData.prixKwh || 0,
+        puissance:    scSel.puissance || '',
+        panneaux:     scSel.panels || 0,
+        prod:         scSel.prod || 0,
+        prix:         scSel.prix || 0,
+        remise:       scSel.remiseChantier || 0,
+        mensualite:   scSel.mensualite || 0,
+        taeg:         scSel.taeg || 0,
+        totalcredit:  scSel.total || 0,
+        mois:         scSel.dureeMois || 0,
+        eco1:         simulationData.gainAn || 0,
+        ecomensuelle: simulationData.gainMois || 0,
+        eco15:        simulationData.gain15 || 0,
+        email:        '',
+        telephone:    '',
+        emailUser:    '',
+        tel:          ''
+      });
+    } catch(e){
+      console.warn('Enregistrement simulation (sans tel) échoué:', e);
+    }
 
-  // Initialisation et gestion du formulaire Gate (Étape 2)
+    hideCalcOverlay();
+    return false;
+  }; // fin __handleSubmitEtape1
+
+  // -----------------------------
+  // Étape 2 : Gate (téléphone/email)
+  // -----------------------------
   function initGateForm(){
-    const form  = document.getElementById('gate-form');
+    const form   = document.getElementById('gate-form');
     const blurDiv = document.getElementById('lock-blur');
     const gateDiv = document.getElementById('gate-overlay');
     if(!form || !blurDiv || !gateDiv) { console.error("Éléments Gate manquants."); return; }
@@ -234,22 +353,27 @@ function attachPhoneMask() {
       const emailInput = document.getElementById('gate-email');
       const phone = String(phoneInput?.value || '').trim();
       const email = String(emailInput?.value || '').trim();
-      const digits = phone.replace(/\D/g,''); 
+      const digits = phone.replace(/\D/g,'');
 
       // Validation
       if(digits.length < 10){ alert('Merci d’indiquer un numéro de téléphone valide (10 chiffres).'); phoneInput?.focus(); return; }
       if(email && !/^\S+@\S+\.\S+$/.test(email)) { alert('Merci d\'indiquer un email valide.'); emailInput?.focus(); return; }
 
-
-      // 1. Déclenchement Conversion Lead
+      // 1. Conversion Google Ads "Lead"
       if (typeof gtag_report_conversion === 'function') { gtag_report_conversion(); }
 
-      // 2. Envoi Google Sheet
+      // 2. Envoi Google Sheets (LEAD)
       if (simulationData && simulationData.sc) {
+        const sc = simulationData.sc;
         const fd = new FormData();
-        const sc = simulationData.sc; 
-        
-        fd.append("timestamp", new Date().toISOString()); 
+
+        // Marqueurs d'évènement + liaison
+        fd.append("event", "lead");
+        fd.append("unlock", "1");
+        fd.append("session_id", SESSION_ID);
+
+        // Données simulation
+        fd.append("timestamp", new Date().toISOString());
         fd.append("code_postal", simulationData.cp || '');
         fd.append("facture", simulationData.facture || 0);
         fd.append("conso", simulationData.conso || 0);
@@ -267,107 +391,102 @@ function attachPhoneMask() {
         fd.append("eco1", simulationData.gainAn || 0);
         fd.append("ecomensuelle", simulationData.gainMois || 0);
         fd.append("eco15", simulationData.gain15 || 0);
-        fd.append("email", email); 
-        fd.append("telephone", digits); 
-        fd.append("emailUser", email); 
-        fd.append("tel", digits);    
-        fd.append("unlock", "1");    
-        
+
+        // Coordonnées
+        fd.append("email", email);
+        fd.append("telephone", digits);
+        fd.append("emailUser", email);
+        fd.append("tel", digits);
+
+        // Tracking UTM/GCLID
         if (typeof window.__getAdsTrack === 'function') {
           const ads = window.__getAdsTrack();
           Object.keys(ads).forEach(key => fd.append(key, ads[key] || ''));
         }
 
         fetch(G_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: fd })
-          .then(() => console.log("Données envoyées à GSheet."))
-          .catch(err => console.error('Erreur lors de l\'envoi GSheet:', err));
-          
-      } else { console.warn("Données de simulation non disponibles. Envoi GSheet annulé."); }
+          .then(() => console.log("Données LEAD envoyées à GSheet."))
+          .catch(err => console.error('Erreur lors de l\'envoi GSheet (lead):', err));
+      } else {
+        console.warn("Données de simulation non disponibles. Envoi GSheet (lead) annulé.");
+      }
 
-      // 3. Déverrouillage UI
+      // 3. Déverrouillage UI + bouton PDF
       blurDiv.classList.remove('lock-blur');
-      gateDiv.remove(); 
-      insertPdfCta();  // le bouton PDF apparaît maintenant, uniquement après le téléphone
-
-      
-    }); // Fin listener submit
-  } // Fin initGateForm
-  // Injecte le bouton PDF en bas des résultats APRÈS déverrouillage
-function insertPdfCta(){
-  if (document.getElementById('btn-pdf')) return; // déjà présent
-  const card = document.querySelector('#recap .result-card');
-  if (!card) return;
-
-  const wrapper = document.createElement('div');
-  wrapper.className = 'kpi';
-  wrapper.style.cssText = 'grid-column:1/-1; text-align:center; padding-top:6px;';
-  wrapper.innerHTML = `
-  <button id="btn-pdf" type="button" class="gate-cta" style="width:min(420px,100%);">
-    Télécharger mon estimation en PDF
-    <span class="arrow" aria-hidden="true">→</span>
-  </button>
-`;
-
-  card.appendChild(wrapper);
-  attachPdfHandler();
-}
-
-function attachPdfHandler(){
-  const btn = document.getElementById('btn-pdf');
-  if(!btn) return;
-  btn.addEventListener('click', () => {
-    try{ prepareAndPrint(); }
-    catch(e){ console.error('Erreur impression PDF', e); alert("Impossible de préparer le PDF. Réessayez."); }
-  });
-}
-
-// En-tête imprimable + window.print + nettoyage
-function prepareAndPrint(){
-  const recap = document.getElementById('recap');
-  if(!recap){ window.print(); return; }
-
-  // Récupération d'infos utiles si disponibles
-  const cp = (window.simulationData && window.simulationData.cp) ? String(window.simulationData.cp) : '';
-  const dep = cp ? cp.slice(0,2) : '28'; // fallback 28 si non dispo
-  const sc  = (window.simulationData && window.simulationData.sc) ? window.simulationData.sc : {};
-  const titreLigne = `Estimation photovoltaïque – Yvelines (${dep})`; // Texte corrigé
-  const sousTitre  = cp ? `Code postal : ${cp} · Puissance : ${sc.puissance || '—'} · Production : ${(sc.prod || 0).toLocaleString('fr-FR')} kWh/an` 
-                       : `Puissance : ${sc.puissance || '—'} · Production : ${(sc.prod || 0).toLocaleString('fr-FR')} kWh/an`;
-
-  // En-tête imprimable (centré, barre accent)
-  const header = document.createElement('div');
-  header.className = 'print-header';
-  header.innerHTML = `
-    <div style="text-align:center;">
-      <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/687b0f048a98e03f86e7852020887ff4f05eb913/logo%20SSP.webp"
-           alt="Solution Solaire Pro" style="height:48px;width:auto;display:inline-block;margin-bottom:6px;">
-      <div style="font-weight:900;font-size:18px;line-height:1.2;color:#111">${titreLigne}</div>
-      <div style="font-size:12px;color:#374151;margin-top:2px;">${sousTitre}</div>
-      <div style="font-size:12px;color:#6b7280;margin-top:2px;">Édité le ${new Date().toLocaleDateString('fr-FR')}</div>
-      <div style="height:6px;margin:10px auto 0;width:100%;max-width:120px;border-radius:999px;
-                   background:linear-gradient(180deg,#f59e0b,#fbbf24);"></div>
-    </div>
-  `;
-
-
-  // Insertion en tête de la carte + pied après la carte
-  const card = recap.querySelector('.result-card');
-  if(card){
-    card.insertAdjacentElement('afterbegin', header);
+      gateDiv.remove();
+      insertPdfCta();
+    });
   }
 
-  // Impression puis nettoyage
-  const cleanup = () => {
-    header.remove(); 
-    // footer.remove(); // 'footer' n'est pas défini ici, on le supprime pour éviter une erreur
-    window.removeEventListener('afterprint', cleanup);
-  };
-  window.addEventListener('afterprint', cleanup);
-  window.print();
-}
+  // -----------------------------
+  // PDF (impression)
+  // -----------------------------
+  function insertPdfCta(){
+    if (document.getElementById('btn-pdf')) return;
+    const card = document.querySelector('#recap .result-card');
+    if (!card) return;
 
+    const wrapper = document.createElement('div');
+    wrapper.className = 'kpi';
+    wrapper.style.cssText = 'grid-column:1/-1; text-align:center; padding-top:6px;';
+    wrapper.innerHTML = `
+      <button id="btn-pdf" type="button" class="gate-cta" style="width:min(420px,100%);">
+        Télécharger mon estimation en PDF
+        <span class="arrow" aria-hidden="true">→</span>
+      </button>
+    `;
+    card.appendChild(wrapper);
+    attachPdfHandler();
+  }
 
-  // --- Fonctions pour générer le HTML des résultats ---
+  function attachPdfHandler(){
+    const btn = document.getElementById('btn-pdf');
+    if(!btn) return;
+    btn.addEventListener('click', () => {
+      try{ prepareAndPrint(); }
+      catch(e){ console.error('Erreur impression PDF', e); alert("Impossible de préparer le PDF. Réessayez."); }
+    });
+  }
+
+  function prepareAndPrint(){
+    const recap = document.getElementById('recap');
+    if(!recap){ window.print(); return; }
+
+    const cp = (window.simulationData && window.simulationData.cp) ? String(window.simulationData.cp) : '';
+    const dep = cp ? cp.slice(0,2) : '28';
+    const sc  = (window.simulationData && window.simulationData.sc) ? window.simulationData.sc : {};
+    const titreLigne = `Estimation photovoltaïque – Yvelines (${dep})`;
+    const sousTitre  = cp ? `Code postal : ${cp} · Puissance : ${sc.puissance || '—'} · Production : ${(sc.prod || 0).toLocaleString('fr-FR')} kWh/an`
+                          : `Puissance : ${sc.puissance || '—'} · Production : ${(sc.prod || 0).toLocaleString('fr-FR')} kWh/an`;
+
+    const header = document.createElement('div');
+    header.className = 'print-header';
+    header.innerHTML = `
+      <div style="text-align:center;">
+        <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/687b0f048a98e03f86e7852020887ff4f05eb913/logo%20SSP.webp"
+             alt="Solution Solaire Pro" style="height:48px;width:auto;display:inline-block;margin-bottom:6px;">
+        <div style="font-weight:900;font-size:18px;line-height:1.2;color:#111">${titreLigne}</div>
+        <div style="font-size:12px;color:#374151;margin-top:2px;">${sousTitre}</div>
+        <div style="font-size:12px;color:#6b7280;margin-top:2px;">Édité le ${new Date().toLocaleDateString('fr-FR')}</div>
+        <div style="height:6px;margin:10px auto 0;width:100%;max-width:120px;border-radius:999px;
+                     background:linear-gradient(180deg,#f59e0b,#fbbf24);"></div>
+      </div>
+    `;
+
+    const card = recap.querySelector('.result-card');
+    if(card){ card.insertAdjacentElement('afterbegin', header); }
+
+    const cleanup = () => {
+      header.remove();
+      window.removeEventListener('afterprint', cleanup);
+    };
+    window.addEventListener('afterprint', cleanup);
+    window.print();
+  }
+
+  // -----------------------------
+  // Génération HTML des résultats
+  // -----------------------------
   function generateVisiblePartHTML(data) {
     const { cp = 'N/A', conso = 0, prixKwh = 0, facture = 0, sc = {} } = data;
     return `
@@ -381,16 +500,30 @@ function prepareAndPrint(){
   function generateLockedPartHTML(data) {
     const { sc = {}, gainAn = 0, gainMois = 0, gain15 = 0, autocons = 0, conso = 0 } = data;
     const pctCouverture = (conso > 0) ? ((autocons / conso) * 100).toFixed(1) : 0;
-    const tauxHausse = 0.03; // Assurez-vous que cette variable est définie ou passée
+    const tauxHausse = 0.03;
     return `
-      <div class="kpi" style="grid-column:1/-1"> <div class="value" style="font-size:18px;font-weight:700;color:#16a34a;margin-bottom:6px"> ${pctCouverture} % <span style="color:#0f172a;font-weight:600">de votre consommation est couverte par votre production</span> </div> <div style="color:#334155;font-size:13px;line-height:1.5;margin-top:2px"> Votre production est valorisée à 100&nbsp;% grâce à la batterie virtuelle... <em>Hypothèse standard...</em> </div> </div>
+      <div class="kpi" style="grid-column:1/-1">
+        <div class="value" style="font-size:18px;font-weight:700;color:#16a34a;margin-bottom:6px">
+          ${pctCouverture} % <span style="color:#0f172a;font-weight:600">de votre consommation est couverte par votre production</span>
+        </div>
+        <div style="color:#334155;font-size:13px;line-height:1.5;margin-top:2px">
+          Votre production est valorisée à 100&nbsp;% grâce à la batterie virtuelle...
+          <em>Hypothèse standard...</em>
+        </div>
+      </div>
       <div class="kpi"> <div class="label">Gain 1ʳᵉ année (ordre de grandeur)</div> <div class="value" style="color:#16a34a"> ${gainAn.toLocaleString('fr-FR')} € / an </div> </div>
       <div class="kpi"> <div class="label">Économie moyenne mensuelle</div> <div class="value" style="color:#16a34a"> ${gainMois.toLocaleString('fr-FR')} € / mois </div> </div>
-      <div class="kpi" style="grid-column:1/-1"> <div class="label">Économie cumulée sur 15 ans</div> <div class="value" style="color:#16a34a"> ${gain15.toLocaleString('fr-FR')} € </div> <div class="note" style="margin-top:4px"> Hypothèses&nbsp;: prix du kWh +${(tauxHausse*100)}&nbsp;%/an... </div> </div>
+      <div class="kpi" style="grid-column:1/-1">
+        <div class="label">Économie cumulée sur 15 ans</div>
+        <div class="value" style="color:#16a34a"> ${gain15.toLocaleString('fr-FR')} € </div>
+        <div class="note" style="margin-top:4px">
+          Hypothèses&nbsp;: prix du kWh +${(tauxHausse*100)}&nbsp;%/an...
+        </div>
+      </div>
       ${generateRemiseBannerHTML(sc)}
       ${generateFinancementCardHTML(sc)}`;
   }
-  
+
   function generateRemiseBannerHTML(sc) {
     if (Number.isFinite(sc?.remiseChantier) && sc.remiseChantier > 0) {
       return `
@@ -400,16 +533,23 @@ function prepareAndPrint(){
           <div class="note" style="margin-top:6px; color:#334155">(à déduire du prix TTC indiqué ci-dessous)</div>
           <div class="note" style="margin-top:4px; color:#334155"><strong>Valable jusqu’au 31 décembre 2025</strong></div>
         </div>`;
-    } return '';
+    }
+    return '';
   }
 
-function generateFinancementCardHTML(sc) {
-    const prixHTML = Number.isFinite(sc?.prix) ? `<p style="margin:0 0 8px"><strong>Installation ${sc.puissance || ''}</strong> : <span class="token">${Math.round(sc.prix).toLocaleString('fr-FR')} € TTC</span> <span class="note">(prix indicatif hors options)</span> </p>` : '';
+  function generateFinancementCardHTML(sc) {
+    const prixHTML = Number.isFinite(sc?.prix)
+      ? `<p style="margin:0 0 8px"><strong>Installation ${sc.puissance || ''}</strong> : <span class="token">${Math.round(sc.prix).toLocaleString('fr-FR')} € TTC</span> <span class="note">(prix indicatif hors options)</span></p>`
+      : '';
+
     let financementDetailsHTML = '';
-    if (Number.isFinite(sc?.mensualite) && sc.mensualite > 0) { // Ajout vérification > 0
+    if (Number.isFinite(sc?.mensualite) && sc.mensualite > 0) {
       const dureeHTML = Number.isFinite(sc?.dureeMois) && sc.dureeMois > 0 ? `<span class="token">Durée : ${sc.dureeMois} mois</span>` : '';
-      const taegHTML = Number.isFinite(sc?.taeg) ? `<span class="token">TAEG fixe : ${sc.taeg}%</span>` : '';
-      const totalHTML = Number.isFinite(sc?.total) && sc.total > 0 ? `<p style="margin:6px 0 0"><strong>Prix total</strong> : <span class="token">${Number(sc.total).toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2})} €</span> </p>` : '';
+      const taegHTML  = Number.isFinite(sc?.taeg) ? `<span class="token">TAEG fixe : ${sc.taeg}%</span>` : '';
+      const totalHTML = Number.isFinite(sc?.total) && sc.total > 0
+        ? `<p style="margin:6px 0 0"><strong>Prix total</strong> : <span class="token">${Number(sc.total).toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2})} €</span></p>`
+        : '';
+
       financementDetailsHTML = `
         <p style="margin:10px 0 4px; font-weight:700">Option financement <span class="note">(facultatif)</span></p>
         <div class="tokens">
@@ -421,18 +561,15 @@ function generateFinancementCardHTML(sc) {
         <div class="note note-alert">⚠️Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</div>
         <p class="note" style="margin:8px 0 0">Estimation indicative. Visite technique nécessaire...</p>
         <p style="margin: 18px 0 4px; text-align: center; font-size: 16px; font-weight: 700; color: var(--accent); line-height: 1.5;">
-          <span style="white-space: nowrap;">Cette estimation vous a été offerte par Solution Solaire Pro filiale de Biofrance energies.</span>
-          <br>
-          <span style="white-space: nowrap;">Vous pouvez contacter votre conseiller régional</span>
-          <br>
+          <span style="white-space: nowrap;">Cette estimation vous a été offerte par Solution Solaire Pro filiale de Biofrance energies.</span><br>
+          <span style="white-space: nowrap;">Vous pouvez contacter votre conseiller régional</span><br>
           <span style="white-space: nowrap;">
             au <a href="tel:0648893480" style="color: inherit; text-decoration: underline; font-weight: 800;">06 48 89 34 80</a>.
           </span>
-        </p>
-`;
+        </p>`;
     }
-    // Toujours afficher la carte, même sans détails de financement si le prix est connu
-    if(prixHTML || financementDetailsHTML) {
+
+    if (prixHTML || financementDetailsHTML) {
       return `
         <div class="financial-card" style="grid-column: 1 / -1;">
           <h3 class="financial-title">Coût et financement</h3>
@@ -440,37 +577,34 @@ function generateFinancementCardHTML(sc) {
           ${financementDetailsHTML}
         </div>`;
     }
-    return ''; // Ne rien afficher si ni prix ni financement ne sont valides
+    return '';
   }
-  
- // ===================================================================
-  // MODIFICATION : TEXTE DE L'OVERLAY ADOUCISSEUR (NETTOYÉ À L'EXTRÊME)
-  // ===================================================================
- function generateGateHTML() {
-    // Le HTML du formulaire Gate (version Adoucisseur)
+
+  function generateGateHTML() {
     return `
       <div class="gate-overlay" id="gate-overlay" role="dialog" aria-modal="true" aria-labelledby="gate-title">
         <div class="gate-card">
           <h3 id="gate-title" class="gate-title">DÉBLOQUEZ Votre PRIX FINAL & ÉCONOMIES DÉTAILLÉES</h3>
           <p class="gate-sub">
-            Téléchargez le PDF de votre étude complète et confirmez la faisabilité technique de votre installation solaire. — avec remise immédiate (jusqu’au 31/12/2025).
+            Téléchargez le PDF de votre étude complète et confirmez la faisabilité technique de votre installation solaire — avec remise immédiate (jusqu’au 31/12/2025).
           </p>
           <div class="gate-badges" aria-hidden="true">
             <div class="badge"><span>🔒</span><b>Données protégées</b></div>
             <div class="badge"><span>⚡</span><b>Affichage immédiat</b></div>
-            <div class="badge"><span>🔐 GARANTI 100% SANS DÉMARCHAGE TÉLÉPHONIQUE.</b></div>
+            <div class="badge"><span>🔐</span><b>100% sans démarchage</b></div>
           </div>
           <form id="gate-form" class="gate-form" novalidate>
-            <label style="width:100%"> <span class="sr-only">Votre email (facultatif)</span> <input id="gate-email" class="gate-input" type="email" placeholder="Votre email (facultatif)" autocomplete="email" /> </label>
-            <label style="width:100%"> <span class="sr-only">Téléphone (obligatoire)</span> <input id="gate-phone" class="gate-input" type="tel" placeholder="Téléphone (obligatoire)" autocomplete="tel" required /> </label>
-            
+            <label style="width:100%"><span class="sr-only">Votre email (facultatif)</span>
+              <input id="gate-email" class="gate-input" type="email" placeholder="Votre email (facultatif)" autocomplete="email" />
+            </label>
+            <label style="width:100%"><span class="sr-only">Téléphone (obligatoire)</span>
+              <input id="gate-phone" class="gate-input" type="tel" placeholder="Téléphone (obligatoire)" autocomplete="tel" required />
+            </label>
             <p class="gate-hint full" id="rgpd-info">
               En validant, vous acceptez d’être contacté uniquement par <strong>SMS</strong> pour votre étude.
             </p>
-            
             <button class="gate-cta full" type="submit" aria-label="Afficher mes résultats détaillés">
-              Afficher mes résultats détaillés
-              <span class="arrow" aria-hidden="true">→</span>
+              Afficher mes résultats détaillés <span class="arrow" aria-hidden="true">→</span>
             </button>
           </form>
           <div class="gate-note">Un SMS de confirmation vous sera envoyé.</div>
@@ -479,8 +613,87 @@ function generateFinancementCardHTML(sc) {
   }
 })(); // Fin IIFE principale
 
-// Logique du bandeau cookie
-(function(){ const KEY='consent_v2', banner=document.getElementById('consent-banner'), btnAccept=document.getElementById('consent-accept'), btnReject=document.getElementById('consent-reject'); if (!banner || !btnAccept || !btnReject) return; function updateConsent(state){ gtag('consent','update',{ analytics_storage: state.analytics ? 'granted' : 'denied', ad_storage: state.ads ? 'granted' : 'denied', ad_user_data: state.adUserData ? 'granted' : 'denied', ad_personalization: state.adPersonal ? 'granted' : 'denied' }); } function save(s){ try{ localStorage.setItem(KEY, JSON.stringify(s)); }catch(e){} } function load(){ try{ return JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){ return null; } } const saved=load(); if(saved){ updateConsent(saved); banner.style.display='none'; } else{ banner.style.display='block'; requestAnimationFrame(()=>{ banner.style.opacity='1'; banner.style.transform='translateY(0)'; }); } btnAccept.addEventListener('click', ()=>{ const s={analytics:true,ads:true,adUserData:true,adPersonal:true}; updateConsent(s); save(s); banner.style.display='none'; }); btnReject.addEventListener('click', ()=>{ const s={analytics:false,ads:false,adUserData:false,adPersonal:false}; updateConsent(s); save(s); banner.style.display='none'; }); })();
+// =============================
+// Bandeau cookies — Consent Mode
+// =============================
+(function(){
+  const KEY='consent_v2',
+        banner=document.getElementById('consent-banner'),
+        btnAccept=document.getElementById('consent-accept'),
+        btnReject=document.getElementById('consent-reject');
 
-// Trace UTM/GCLID
-(function(){ const p = new URLSearchParams(location.search); const track = { utm_source:(p.get('utm_source')||''), utm_medium:(p.get('utm_medium')||''), utm_campaign:(p.get('utm_campaign')||''), utm_adgroup:(p.get('utm_adgroup')||''), utm_term:(p.get('utm_term')||''), utm_matchtype:(p.get('utm_matchtype')||''), utm_device:(p.get('utm_device')||''), gclid:(p.get('gclid')||''), gbraid:(p.get('gbraid')||''), wbraid:(p.get('wbraid')||'') }; const isAds = track.gclid || track.gbraid || track.wbraid || (track.utm_source.toLowerCase()==='google' && track.utm_medium.toLowerCase()==='cpc'); if(isAds){ try{ localStorage.setItem('ads_tracking_v1', JSON.stringify({ t: Date.now(), ...track })); }catch(e){} } window.__getAdsTrack = function(){ try{ const raw = localStorage.getItem('ads_tracking_v1'); if(!raw) return track; const obj = JSON.parse(raw); /* Données expirent après 7 jours */ if(Date.now()-(obj.t||0) > 7*24*60*60*1000) { localStorage.removeItem('ads_tracking_v1'); return track; } /* Retourne les données sauvegardées */ return obj; }catch(e){ return track; } }; })();
+  if (!banner || !btnAccept || !btnReject) return;
+
+  function updateConsent(state){
+    gtag('consent','update',{
+      analytics_storage: state.analytics ? 'granted' : 'denied',
+      ad_storage:       state.ads ? 'granted' : 'denied',
+      ad_user_data:     state.adUserData ? 'granted' : 'denied',
+      ad_personalization: state.adPersonal ? 'granted' : 'denied'
+    });
+  }
+
+  function save(s){ try{ localStorage.setItem(KEY, JSON.stringify(s)); }catch(e){} }
+  function load(){ try{ return JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){ return null; } }
+
+  const saved=load();
+  if(saved){
+    updateConsent(saved);
+    banner.style.display='none';
+  } else {
+    banner.style.display='block';
+    requestAnimationFrame(()=>{
+      banner.style.opacity='1';
+      banner.style.transform='translateY(0)';
+    });
+  }
+
+  btnAccept.addEventListener('click', ()=>{
+    const s={analytics:true,ads:true,adUserData:true,adPersonal:true};
+    updateConsent(s); save(s); banner.style.display='none';
+  });
+
+  btnReject.addEventListener('click', ()=>{
+    const s={analytics:false,ads:false,adUserData:false,adPersonal:false};
+    updateConsent(s); save(s); banner.style.display='none';
+  });
+})();
+
+// =============================
+// Trace UTM / GCLID (localStorage)
+// =============================
+(function(){
+  const p = new URLSearchParams(location.search);
+  const track = {
+    utm_source:(p.get('utm_source')||''),
+    utm_medium:(p.get('utm_medium')||''),
+    utm_campaign:(p.get('utm_campaign')||''),
+    utm_adgroup:(p.get('utm_adgroup')||''),
+    utm_term:(p.get('utm_term')||''),
+    utm_matchtype:(p.get('utm_matchtype')||''),
+    utm_device:(p.get('utm_device')||''),
+    gclid:(p.get('gclid')||''),
+    gbraid:(p.get('gbraid')||''),
+    wbraid:(p.get('wbraid')||'')
+  };
+  const isAds = track.gclid || track.gbraid || track.wbraid ||
+    (track.utm_source.toLowerCase()==='google' && track.utm_medium.toLowerCase()==='cpc');
+
+  if(isAds){
+    try{ localStorage.setItem('ads_tracking_v1', JSON.stringify({ t: Date.now(), ...track })); }catch(e){}
+  }
+
+  window.__getAdsTrack = function(){
+    try{
+      const raw = localStorage.getItem('ads_tracking_v1');
+      if(!raw) return track;
+      const obj = JSON.parse(raw);
+      // Expiration 7 jours
+      if(Date.now()-(obj.t||0) > 7*24*60*60*1000) {
+        localStorage.removeItem('ads_tracking_v1');
+        return track;
+      }
+      return obj;
+    }catch(e){ return track; }
+  };
+})();
