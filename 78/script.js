@@ -28,15 +28,14 @@ function gtag_report_conversion() {
 
 // Flag pour ne déclencher la conversion "simulation" qu'une fois
 window.__simConvSent = false;
-
 function gtag_report_simulation() {
-  if (window.__simConvSent) return; // Ne pas renvoyer
+  if (window.__simConvSent) return;
   try {
     gtag('event','conversion',{
       send_to:'AW-11242044118/TM3qCM3e1Z8bENbiz_Ap',
       value:1.0,currency:'EUR'
     });
-    window.__simConvSent = true; // Marquer comme envoyé
+    window.__simConvSent = true;
   } catch(e){}
 }
 
@@ -71,7 +70,6 @@ function attachPhoneMask() {
     console.warn("attachPhoneMask: Champ #gate-phone non trouvé !");
     return;
   }
-
   telInput.setAttribute('inputmode','numeric');
   telInput.setAttribute('maxlength','14'); // 00 00 00 00 00
 
@@ -84,9 +82,7 @@ function attachPhoneMask() {
     const oldVal = e.target.value;
     const oldCursor = e.target.selectionStart;
     const digitsBeforeCursor = oldVal.substring(0, oldCursor).replace(/\D/g, '');
-
     e.target.value = format(oldVal);
-
     let newCursor = 0, digitsCounted = 0;
     while (newCursor < e.target.value.length && digitsCounted < digitsBeforeCursor.length) {
       if (/\d/.test(e.target.value[newCursor])) digitsCounted++;
@@ -113,8 +109,76 @@ function attachPhoneMask() {
   const inputCP    = document.getElementById('codePostal');
   const inputFact  = document.getElementById('facture');
 
-  // URL unique Apps Script (GET JSON + POST lignes)
+  // URL Apps Script (POST uniquement : simulation / lead)
   const G_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec';
+
+  // ============================
+  // SCÉNARIOS — JSON statique (GitHub) + cache 24h
+  // ============================
+  const SC_STATIC_URL = 'https://raw.githubusercontent.com/BiofranceEnergies/Solution-solaire.pro/main/scenarios/scenarios.json';
+  const SC_TTL_MS     = 24 * 60 * 60 * 1000; // 24h
+  const SC_CACHE_KEY  = 'scenarios_all_v1';
+
+  function parseNum(x, fallback = 0){
+    if (x === null || x === undefined) return fallback;
+    const s = String(x)
+      .replace(/\u00A0/g,' ')
+      .replace(/[\s€]/g,'')
+      .replace(',', '.');
+    const n = parseFloat(s);
+    return Number.isFinite(n) ? n : fallback;
+  }
+
+  function normalizeRow(row){
+    return {
+      departement: String(row.Departement || '').trim(),
+      prixKwh: parseNum(row.PrixKwh, 0.25),
+      puissance: String(row.Puissance || '').trim(),
+      prod: parseNum(row.Prod, 0),
+      seuil: parseNum(row.Seuil, 0),
+      panels: parseInt(parseNum(row.Panels, 0), 10),
+      prix: parseNum(row.Prix, 0),
+      remiseChantier: parseNum(row.RemiseChantier, 0),
+      mensualite: parseNum(row.Mensualite, 0),
+      dureeMois: parseInt(parseNum(row.Mois, 0), 10),
+      taeg: parseNum(row.Taeg, 0),
+      total: parseNum(row.Total, 0)
+    };
+  }
+
+  function readAllScenariosFromCache(){
+    try{
+      const raw = localStorage.getItem(SC_CACHE_KEY);
+      if(!raw) return null;
+      const { t, data } = JSON.parse(raw);
+      if (!t || !Array.isArray(data)) return null;
+      if (Date.now() - t > SC_TTL_MS) return null;
+      return data; // normalisés
+    }catch{ return null; }
+  }
+  function writeAllScenariosToCache(rows){
+    try{ localStorage.setItem(SC_CACHE_KEY, JSON.stringify({ t: Date.now(), data: rows })); }catch{}
+  }
+
+  async function fetchScenarios(departement){
+    const cachedAll = readAllScenariosFromCache();
+    if (cachedAll){
+      const subset = cachedAll.filter(r => String(r.departement) === String(departement));
+      if (subset.length) return subset;
+    }
+    const r = await fetch(SC_STATIC_URL, { cache: 'no-store' });
+    if (!r.ok) {
+      console.error('fetchScenarios: échec JSON statique', r.status);
+      alert("Impossible de charger les scénarios. Réessayez dans un instant.");
+      return [];
+    }
+    const raw = await r.json();
+    const all = (raw || []).map(normalizeRow);
+    writeAllScenariosToCache(all);
+    const subset = all.filter(x => String(x.departement) === String(departement));
+    if (!subset.length) console.warn(`Aucun scénario trouvé pour le département ${departement}`);
+    return subset;
+  }
 
   // -----------------------------
   // Session ID (lien simulation ↔ lead)
@@ -145,26 +209,19 @@ function attachPhoneMask() {
 
   // -----------------------------
   // Envoi non bloquant vers Sheets
-  // - sendBeacon si dispo (x-www-form-urlencoded)
-  // - sinon fetch POST sans await (no-cors)
   // -----------------------------
   function postToSheet(payload){
     const merged = { ...payload, ...getAdsTrack() };
-
     const params = new URLSearchParams();
     for (const [k,v] of Object.entries(merged)) params.append(k, v ?? '');
-
     const bodyString = params.toString();
 
-    // Try Beacon (non bloquant, background-friendly)
     if (navigator.sendBeacon) {
       try {
         const ok = navigator.sendBeacon(G_SCRIPT_URL, new Blob([bodyString], {type:'application/x-www-form-urlencoded'}));
-        if (ok) return; // expédié
+        if (ok) return;
       } catch(e){}
     }
-
-    // Fallback non bloquant: fetch sans await
     fetch(G_SCRIPT_URL, {
       method: 'POST',
       headers: {'Content-Type':'application/x-www-form-urlencoded'},
@@ -204,42 +261,6 @@ function attachPhoneMask() {
     if (!okCP) { alert('Veuillez entrer un code postal valide (5 chiffres).'); return false; }
     if (!okFact){ alert("Veuillez indiquer une facture annuelle valide."); return false; }
     return true;
-  }
-
-  // -----------------------------
-  // Cache scénarios par département
-  // -----------------------------
-  const scenariosCache = new Map(); // clé: '78' → tableau
-
-  // Lecture des scénarios (GET JSON)
-  async function fetchScenarios(departement){
-    if (scenariosCache.has(departement)) return scenariosCache.get(departement);
-    try{
-      const r = await fetch(G_SCRIPT_URL);
-      if (!r.ok) throw new Error(`HTTP ${r.status}`);
-      const data = await r.json();
-      const rows = (data || [])
-        .filter(row => String(row.Departement||'') === String(departement))
-        .map(row => ({
-          prixKwh: parseFloat(String(row.PrixKwh||'').replace(',', '.').replace(/[^0-9.]/g,'') || 0.25),
-          puissance: String(row.Puissance || ''),
-          prod: parseFloat(row.Prod || 0),
-          seuil: parseFloat(row.Seuil || 0),
-          panels: parseInt(row.Panels || 0),
-          prix: parseFloat(row.Prix || 0),
-          remiseChantier: parseFloat(String(row.RemiseChantier||'').replace(',', '.').replace(/[^0-9.]/g,'') || 0),
-          mensualite: parseFloat(row.Mensualite || 0),
-          taeg: parseFloat(row.Taeg || 0),
-          total: parseFloat(row.Total || 0),
-          dureeMois: parseInt(row.Mois || 0)
-        }));
-      scenariosCache.set(departement, rows);
-      return rows;
-    }catch(e){
-      console.error('fetchScenarios error', e);
-      alert("Impossible de charger les données de simulation. Veuillez réessayer.");
-      return [];
-    }
   }
 
   // -----------------------------
@@ -296,10 +317,9 @@ function attachPhoneMask() {
       gainAn: Math.round(gainAn), gainMois: Math.round(gainMois),
       gain15: Math.round(gain15), autocons: Math.round(autocons), sourceConso
     };
-    // Expose global pour prepareAndPrint()
-    window.simulationData = simulationData;
+    window.simulationData = simulationData; // pour le PDF
 
-    // Rendu HTML (avant tout envoi réseau pour fluidité)
+    // Rendu HTML
     const recapDiv = document.getElementById('recap');
     if (!recapDiv){ console.warn('#recap manquant'); hideCalcOverlay(); return false; }
 
@@ -325,10 +345,10 @@ function attachPhoneMask() {
     // Conversion Google Ads "Simulation"
     if (typeof gtag_report_simulation === 'function') { gtag_report_simulation(); }
 
-    // Initialiser le formulaire Gate (Étape 2)
+    // Init Gate (téléphone)
     initGateForm();
 
-    // ENVOI NON BLOQUANT : ligne "simulation" (sans téléphone/email)
+    // Envoi non bloquant : ligne "simulation" (sans téléphone/email)
     const scSel = simulationData.sc || {};
     postToSheet({
       event:        'simulation',
@@ -379,17 +399,15 @@ function attachPhoneMask() {
       const email = String(emailInput?.value || '').trim();
       const digits = phone.replace(/\D/g,'');
 
-      // Validation
       if(digits.length < 10){ alert('Merci d’indiquer un numéro de téléphone valide (10 chiffres).'); phoneInput?.focus(); return; }
       if(email && !/^\S+@\S+\.\S+$/.test(email)) { alert('Merci d\'indiquer un email valide.'); emailInput?.focus(); return; }
 
-      // 1) Conversion Google Ads "Lead"
+      // Conversion Google Ads "Lead"
       if (typeof gtag_report_conversion === 'function') { gtag_report_conversion(); }
 
-      // 2) Envoi non bloquant Google Sheets (LEAD)
+      // Envoi non bloquant Google Sheets (LEAD)
       if (simulationData && simulationData.sc) {
         const sc = simulationData.sc;
-
         const payload = {
           event:        'lead',
           unlock:       '1',
@@ -417,13 +435,12 @@ function attachPhoneMask() {
           emailUser:    email,
           tel:          digits
         };
-
         postToSheet(payload);
       } else {
         console.warn("Données de simulation non disponibles. Envoi GSheet (lead) annulé.");
       }
 
-      // 3) Déverrouillage UI + bouton PDF
+      // Déverrouillage UI + bouton PDF
       blurDiv.classList.remove('lock-blur');
       gateDiv.remove();
       insertPdfCta();
@@ -484,7 +501,6 @@ function attachPhoneMask() {
                      background:linear-gradient(180deg,#f59e0b,#fbbf24);"></div>
       </div>
     `;
-
     const card = recap.querySelector('.result-card');
     if(card){ card.insertAdjacentElement('afterbegin', header); }
 
