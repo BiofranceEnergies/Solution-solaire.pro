@@ -1,6 +1,6 @@
-// =============================
-// GTAG + CONSENT MODE
-// =============================
+/* =============================
+   GTAG + CONSENT MODE
+============================= */
 window.dataLayer = window.dataLayer || [];
 function gtag(){ dataLayer.push(arguments); }
 
@@ -40,9 +40,9 @@ function gtag_report_simulation() {
   } catch(e){}
 }
 
-// =============================
-// UI FAQ + Mentions légales (popup)
-// =============================
+/* =============================
+   UI FAQ + Mentions légales (popup)
+============================= */
 document.addEventListener('click', (e)=>{
   if(e.target.closest('summary')){
     const d = e.target.closest('details');
@@ -62,9 +62,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
   }
 });
 
-// ===================================================================
-// MASQUE TÉLÉPHONE (FR) — #gate-phone
-// ===================================================================
+/* =============================
+   MASQUE TÉLÉPHONE (FR) — #gate-phone
+============================= */
 function attachPhoneMask() {
   const telInput = document.getElementById('gate-phone');
   if (!telInput) {
@@ -103,9 +103,9 @@ function attachPhoneMask() {
   });
 }
 
-// =============================
-// IIFE PRINCIPALE
-// =============================
+/* =============================
+   IIFE PRINCIPALE
+============================= */
 (function(){
   let simulationData = {}; // stockage inter-étapes
   const overlay    = document.getElementById('calc-overlay');
@@ -113,7 +113,7 @@ function attachPhoneMask() {
   const inputCP    = document.getElementById('codePostal');
   const inputFact  = document.getElementById('facture');
 
-  // URL unique Apps Script
+  // URL unique Apps Script (GET JSON + POST lignes)
   const G_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwhlyD_FMMm2g9JIQAm2Se2xehUqIM2MzWMl1YGl_gP1DJKM_-jZFj_YStDMhWi-0F8XA/exec';
 
   // -----------------------------
@@ -134,21 +134,43 @@ function attachPhoneMask() {
   const SESSION_ID = getSessionId();
 
   // -----------------------------
-  // Utilitaire d'envoi vers Sheet
+  // UTM/GCLID → objet
+  // -----------------------------
+  function getAdsTrack(){
+    if (typeof window.__getAdsTrack === 'function') {
+      try{ return window.__getAdsTrack() || {}; } catch(e){ return {}; }
+    }
+    return {};
+  }
+
+  // -----------------------------
+  // Envoi non bloquant vers Sheets
+  // - sendBeacon si dispo (x-www-form-urlencoded)
+  // - sinon fetch POST sans await (no-cors)
   // -----------------------------
   function postToSheet(payload){
-    const fd = new FormData();
-    Object.entries(payload).forEach(([k,v]) => fd.append(k, v ?? ''));
+    const merged = { ...payload, ...getAdsTrack() };
 
-    // Ajouter tracking UTM/GCLID si présent
-    if (typeof window.__getAdsTrack === 'function') {
-      const ads = window.__getAdsTrack();
-      Object.keys(ads).forEach(key => fd.append(key, ads[key] || ''));
+    const params = new URLSearchParams();
+    for (const [k,v] of Object.entries(merged)) params.append(k, v ?? '');
+
+    const bodyString = params.toString();
+
+    // Try Beacon (non bloquant, background-friendly)
+    if (navigator.sendBeacon) {
+      try {
+        const ok = navigator.sendBeacon(G_SCRIPT_URL, new Blob([bodyString], {type:'application/x-www-form-urlencoded'}));
+        if (ok) return; // expédié
+      } catch(e){}
     }
 
-    // En prod : 'no-cors' (réponse opaque). Pour debugger, retirer mode: 'no-cors'
-    return fetch(G_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: fd })
-      .catch(err => console.error('POST Sheets error:', err));
+    // Fallback non bloquant: fetch sans await
+    fetch(G_SCRIPT_URL, {
+      method: 'POST',
+      headers: {'Content-Type':'application/x-www-form-urlencoded'},
+      body: bodyString,
+      mode: 'no-cors'
+    }).catch(()=>{});
   }
 
   // -----------------------------
@@ -185,14 +207,18 @@ function attachPhoneMask() {
   }
 
   // -----------------------------
-  // Lecture des scénarios (GET JSON)
+  // Cache scénarios par département
   // -----------------------------
+  const scenariosCache = new Map(); // clé: '78' → tableau
+
+  // Lecture des scénarios (GET JSON)
   async function fetchScenarios(departement){
+    if (scenariosCache.has(departement)) return scenariosCache.get(departement);
     try{
       const r = await fetch(G_SCRIPT_URL);
-      if (!r.ok) throw new Error(`HTTP error! status: ${r.status}`);
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
       const data = await r.json();
-      return (data || [])
+      const rows = (data || [])
         .filter(row => String(row.Departement||'') === String(departement))
         .map(row => ({
           prixKwh: parseFloat(String(row.PrixKwh||'').replace(',', '.').replace(/[^0-9.]/g,'') || 0.25),
@@ -207,6 +233,8 @@ function attachPhoneMask() {
           total: parseFloat(row.Total || 0),
           dureeMois: parseInt(row.Mois || 0)
         }));
+      scenariosCache.set(departement, rows);
+      return rows;
     }catch(e){
       console.error('fetchScenarios error', e);
       alert("Impossible de charger les données de simulation. Veuillez réessayer.");
@@ -271,7 +299,7 @@ function attachPhoneMask() {
     // Expose global pour prepareAndPrint()
     window.simulationData = simulationData;
 
-    // Rendu HTML
+    // Rendu HTML (avant tout envoi réseau pour fluidité)
     const recapDiv = document.getElementById('recap');
     if (!recapDiv){ console.warn('#recap manquant'); hideCalcOverlay(); return false; }
 
@@ -300,39 +328,35 @@ function attachPhoneMask() {
     // Initialiser le formulaire Gate (Étape 2)
     initGateForm();
 
-    // >>> ENVOI D’UNE LIGNE "SIMULATION" (sans téléphone / sans email)
-    try{
-      const scSel = simulationData.sc || {};
-      await postToSheet({
-        event:        'simulation',
-        unlock:       '0',
-        session_id:   SESSION_ID,
-        timestamp:    new Date().toISOString(),
-        code_postal:  simulationData.cp || '',
-        facture:      simulationData.facture || 0,
-        conso:        simulationData.conso || 0,
-        source_conso: simulationData.sourceConso || '',
-        prix_kwh:     simulationData.prixKwh || 0,
-        puissance:    scSel.puissance || '',
-        panneaux:     scSel.panels || 0,
-        prod:         scSel.prod || 0,
-        prix:         scSel.prix || 0,
-        remise:       scSel.remiseChantier || 0,
-        mensualite:   scSel.mensualite || 0,
-        taeg:         scSel.taeg || 0,
-        totalcredit:  scSel.total || 0,
-        mois:         scSel.dureeMois || 0,
-        eco1:         simulationData.gainAn || 0,
-        ecomensuelle: simulationData.gainMois || 0,
-        eco15:        simulationData.gain15 || 0,
-        email:        '',
-        telephone:    '',
-        emailUser:    '',
-        tel:          ''
-      });
-    } catch(e){
-      console.warn('Enregistrement simulation (sans tel) échoué:', e);
-    }
+    // ENVOI NON BLOQUANT : ligne "simulation" (sans téléphone/email)
+    const scSel = simulationData.sc || {};
+    postToSheet({
+      event:        'simulation',
+      unlock:       '0',
+      session_id:   SESSION_ID,
+      timestamp:    new Date().toISOString(),
+      code_postal:  simulationData.cp || '',
+      facture:      simulationData.facture || 0,
+      conso:        simulationData.conso || 0,
+      source_conso: simulationData.sourceConso || '',
+      prix_kwh:     simulationData.prixKwh || 0,
+      puissance:    scSel.puissance || '',
+      panneaux:     scSel.panels || 0,
+      prod:         scSel.prod || 0,
+      prix:         scSel.prix || 0,
+      remise:       scSel.remiseChantier || 0,
+      mensualite:   scSel.mensualite || 0,
+      taeg:         scSel.taeg || 0,
+      totalcredit:  scSel.total || 0,
+      mois:         scSel.dureeMois || 0,
+      eco1:         simulationData.gainAn || 0,
+      ecomensuelle: simulationData.gainMois || 0,
+      eco15:        simulationData.gain15 || 0,
+      email:        '',
+      telephone:    '',
+      emailUser:    '',
+      tel:          ''
+    });
 
     hideCalcOverlay();
     return false;
@@ -359,59 +383,47 @@ function attachPhoneMask() {
       if(digits.length < 10){ alert('Merci d’indiquer un numéro de téléphone valide (10 chiffres).'); phoneInput?.focus(); return; }
       if(email && !/^\S+@\S+\.\S+$/.test(email)) { alert('Merci d\'indiquer un email valide.'); emailInput?.focus(); return; }
 
-      // 1. Conversion Google Ads "Lead"
+      // 1) Conversion Google Ads "Lead"
       if (typeof gtag_report_conversion === 'function') { gtag_report_conversion(); }
 
-      // 2. Envoi Google Sheets (LEAD)
+      // 2) Envoi non bloquant Google Sheets (LEAD)
       if (simulationData && simulationData.sc) {
         const sc = simulationData.sc;
-        const fd = new FormData();
 
-        // Marqueurs d'évènement + liaison
-        fd.append("event", "lead");
-        fd.append("unlock", "1");
-        fd.append("session_id", SESSION_ID);
+        const payload = {
+          event:        'lead',
+          unlock:       '1',
+          session_id:   SESSION_ID,
+          timestamp:    new Date().toISOString(),
+          code_postal:  simulationData.cp || '',
+          facture:      simulationData.facture || 0,
+          conso:        simulationData.conso || 0,
+          source_conso: simulationData.sourceConso || '',
+          prix_kwh:     simulationData.prixKwh || 0,
+          puissance:    sc.puissance || '',
+          panneaux:     sc.panels || 0,
+          prod:         sc.prod || 0,
+          prix:         sc.prix || 0,
+          remise:       sc.remiseChantier || 0,
+          mensualite:   sc.mensualite || 0,
+          taeg:         sc.taeg || 0,
+          totalcredit:  sc.total || 0,
+          mois:         sc.dureeMois || 0,
+          eco1:         simulationData.gainAn || 0,
+          ecomensuelle: simulationData.gainMois || 0,
+          eco15:        simulationData.gain15 || 0,
+          email:        email,
+          telephone:    digits,
+          emailUser:    email,
+          tel:          digits
+        };
 
-        // Données simulation
-        fd.append("timestamp", new Date().toISOString());
-        fd.append("code_postal", simulationData.cp || '');
-        fd.append("facture", simulationData.facture || 0);
-        fd.append("conso", simulationData.conso || 0);
-        fd.append("source_conso", simulationData.sourceConso || '');
-        fd.append("prix_kwh", simulationData.prixKwh || 0);
-        fd.append("puissance", sc.puissance || '');
-        fd.append("panneaux", sc.panels || 0);
-        fd.append("prod", sc.prod || 0);
-        fd.append("prix", sc.prix || 0);
-        fd.append("remise", sc.remiseChantier || 0);
-        fd.append("mensualite", sc.mensualite || 0);
-        fd.append("taeg", sc.taeg || 0);
-        fd.append("totalcredit", sc.total || 0);
-        fd.append("mois", sc.dureeMois || 0);
-        fd.append("eco1", simulationData.gainAn || 0);
-        fd.append("ecomensuelle", simulationData.gainMois || 0);
-        fd.append("eco15", simulationData.gain15 || 0);
-
-        // Coordonnées
-        fd.append("email", email);
-        fd.append("telephone", digits);
-        fd.append("emailUser", email);
-        fd.append("tel", digits);
-
-        // Tracking UTM/GCLID
-        if (typeof window.__getAdsTrack === 'function') {
-          const ads = window.__getAdsTrack();
-          Object.keys(ads).forEach(key => fd.append(key, ads[key] || ''));
-        }
-
-        fetch(G_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: fd })
-          .then(() => console.log("Données LEAD envoyées à GSheet."))
-          .catch(err => console.error('Erreur lors de l\'envoi GSheet (lead):', err));
+        postToSheet(payload);
       } else {
         console.warn("Données de simulation non disponibles. Envoi GSheet (lead) annulé.");
       }
 
-      // 3. Déverrouillage UI + bouton PDF
+      // 3) Déverrouillage UI + bouton PDF
       blurDiv.classList.remove('lock-blur');
       gateDiv.remove();
       insertPdfCta();
@@ -494,7 +506,12 @@ function attachPhoneMask() {
       <div class="kpi"> <div class="label">Conso annuelle estimée</div> <div class="value" style="color:#0f172a">${conso.toLocaleString('fr-FR')} kWh</div> </div>
       <div class="kpi"> <div class="label">Prix du kWh utilisé</div> <div class="value">${Number(prixKwh).toFixed(3)} €</div> </div>
       <div class="kpi"> <div class="label">Facture annuelle</div> <div class="value">${Number(facture).toLocaleString('fr-FR')} €</div> </div>
-      <div class="kpi kpi--highlight" style="grid-column:1/-1"> <div class="label">Dimensionnement proposé</div> <div class="value"> ${sc.puissance || 'N/A'} — ${sc.panels || 0} panneaux (500 W) • Production estimée <span style="color:#16a34a;font-weight:800">${(sc.prod || 0).toLocaleString('fr-FR')} kWh/an</span> </div> </div>`;
+      <div class="kpi kpi--highlight" style="grid-column:1/-1">
+        <div class="label">Dimensionnement proposé</div>
+        <div class="value">${sc.puissance || 'N/A'} — ${sc.panels || 0} panneaux (500 W) • Production estimée
+          <span style="color:#16a34a;font-weight:800">${(sc.prod || 0).toLocaleString('fr-FR')} kWh/an</span>
+        </div>
+      </div>`;
   }
 
   function generateLockedPartHTML(data) {
@@ -516,9 +533,7 @@ function attachPhoneMask() {
       <div class="kpi" style="grid-column:1/-1">
         <div class="label">Économie cumulée sur 15 ans</div>
         <div class="value" style="color:#16a34a"> ${gain15.toLocaleString('fr-FR')} € </div>
-        <div class="note" style="margin-top:4px">
-          Hypothèses&nbsp;: prix du kWh +${(tauxHausse*100)}&nbsp;%/an...
-        </div>
+        <div class="note" style="margin-top:4px">Hypothèses&nbsp;: prix du kWh +${(tauxHausse*100)}&nbsp;%/an...</div>
       </div>
       ${generateRemiseBannerHTML(sc)}
       ${generateFinancementCardHTML(sc)}`;
@@ -613,9 +628,9 @@ function attachPhoneMask() {
   }
 })(); // Fin IIFE principale
 
-// =============================
-// Bandeau cookies — Consent Mode
-// =============================
+/* =============================
+   Bandeau cookies — Consent Mode
+============================= */
 (function(){
   const KEY='consent_v2',
         banner=document.getElementById('consent-banner'),
@@ -659,9 +674,9 @@ function attachPhoneMask() {
   });
 })();
 
-// =============================
-// Trace UTM / GCLID (localStorage)
-// =============================
+/* =============================
+   Trace UTM / GCLID (localStorage)
+============================= */
 (function(){
   const p = new URLSearchParams(location.search);
   const track = {
