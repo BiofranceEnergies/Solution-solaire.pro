@@ -446,41 +446,5 @@
 
 <script src="script.js" defer></script>
 
-<!-- AJOUT : Consent update + fonction de conversion lead -->
-<script>
-  // Boutons consentement
-  (function(){
-    var a=document.getElementById('consent-accept');
-    var r=document.getElementById('consent-reject');
-    if(a){ a.addEventListener('click', function(){
-      gtag('consent','update', {
-        ad_storage:'granted',
-        ad_user_data:'granted',
-        ad_personalization:'granted',
-        analytics_storage:'granted'
-      });
-      document.getElementById('consent-banner')?.remove();
-    });}
-    if(r){ r.addEventListener('click', function(){
-      gtag('consent','update', {
-        ad_storage:'denied',
-        ad_user_data:'denied',
-        ad_personalization:'denied',
-        analytics_storage:'denied'
-      });
-      document.getElementById('consent-banner')?.remove();
-    });}
-  })();
-
-  // Conversion LEAD (à appeler quand le lead est effectivement créé)
-  window.trackLeadConversion = function(){
-    gtag('event', 'conversion', {
-      'send_to': 'AW-11242044118/DO1tCKLg97sbENb1z_Ap',
-      'value': 1.0,
-      'currency': 'EUR'
-    });
-  };
-</script>
-
 </body>
 </html>
