@@ -17,34 +17,44 @@
 
 <link rel="stylesheet" href="style.css">
 
-<!-- Consent Mode v2 (refus par défaut) -->
+<!-- =============================
+     CONSENT MODE v2 + PARAMÈTRES
+     (doivent précéder tout config)
+============================== -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){ dataLayer.push(arguments); }
-  gtag('consent', 'default', {
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-    analytics_storage: 'denied',
-    wait_for_update: 500
-  });
-  gtag('set', 'ads_data_redaction', true);
-  gtag('set', 'url_passthrough', true);
-</script>
 
-<!-- Google tag (gtag.js) -->
+  /* Consent par défaut : refusé */
+  gtag('consent','default',{
+    ad_storage:'denied',
+    ad_user_data:'denied',
+    ad_personalization:'denied',
+    analytics_storage:'denied',
+    wait_for_update:500
+  });
+
+  /* Recommandations Google */
+  gtag('set','ads_data_redaction',true);
+  gtag('set','url_passthrough',true);
+</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-11242044118"></script>
 <script>
   gtag('js', new Date());
-  gtag('config', 'AW-11242044118');
+  gtag('config','AW-11242044118');
 </script>
 </head>
 
 <body>
 
-<div id="consent-banner" role="dialog" aria-live="polite" aria-label="Préférences de confidentialité">
+<!-- =============================
+     BANDEAU CONSENTEMENT
+============================== -->
+<div id="consent-banner" role="dialog" aria-live="polite" aria-label="Préférences de confidentialité" style="display:none">
   <div class="consent-inner">
-    <div class="consent-text">Nous utilisons des technologies pour la mesure et la publicité. Vous pouvez refuser.</div>
+    <div class="consent-text">
+      Nous utilisons des technologies pour la mesure et la publicité. Vous pouvez refuser.
+    </div>
     <div class="consent-buttons">
       <button id="consent-reject" type="button">Tout refuser</button>
       <button id="consent-accept" type="button">Tout accepter</button>
@@ -449,37 +459,7 @@
 </div>
 
 <script src="script.js" defer></script>
-  <!-- ✅ Script de mise à jour du consentement -->
-<script>
-(function(){
-  var a=document.getElementById('consent-accept');
-  var r=document.getElementById('consent-reject');
-  function hide(){ var b=document.getElementById('consent-banner'); if(b) b.remove(); }
-  if(a){ a.addEventListener('click', function(){
-    gtag('consent','update',{
-      ad_storage:'granted', ad_user_data:'granted',
-      ad_personalization:'granted', analytics_storage:'granted'
-    }); hide();
-  });}
-  if(r){ r.addEventListener('click', function(){
-    gtag('consent','update',{
-      ad_storage:'denied', ad_user_data:'denied',
-      ad_personalization:'denied', analytics_storage:'denied'
-    }); hide();
-  });}
-})();
-</script>
 
-<!-- ✅ Script de conversion lead -->
-<script>
-window.trackLeadConversion = function(){
-  gtag('event','conversion',{
-    send_to: 'AW-11242044118/DO1tCKLg97sbENb1z_Ap',
-    value: 1.0,
-    currency: 'EUR'
-  });
-};
-</script>
 
 </body>
 </html>
