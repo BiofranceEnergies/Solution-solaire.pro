@@ -446,6 +446,37 @@
 </div>
 
 <script src="script.js" defer></script>
+  <!-- ✅ Script de mise à jour du consentement -->
+<script>
+(function(){
+  var a=document.getElementById('consent-accept');
+  var r=document.getElementById('consent-reject');
+  function hide(){ var b=document.getElementById('consent-banner'); if(b) b.remove(); }
+  if(a){ a.addEventListener('click', function(){
+    gtag('consent','update',{
+      ad_storage:'granted', ad_user_data:'granted',
+      ad_personalization:'granted', analytics_storage:'granted'
+    }); hide();
+  });}
+  if(r){ r.addEventListener('click', function(){
+    gtag('consent','update',{
+      ad_storage:'denied', ad_user_data:'denied',
+      ad_personalization:'denied', analytics_storage:'denied'
+    }); hide();
+  });}
+})();
+</script>
+
+<!-- ✅ Script de conversion lead -->
+<script>
+window.trackLeadConversion = function(){
+  gtag('event','conversion',{
+    send_to: 'AW-11242044118/DO1tCKLg97sbENb1z_Ap',
+    value: 1.0,
+    currency: 'EUR'
+  });
+};
+</script>
 
 </body>
 </html>
