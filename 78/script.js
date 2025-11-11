@@ -17,12 +17,17 @@ gtag('consent', 'default', {
 gtag('set', 'ads_data_redaction', true);
 gtag('set', 'url_passthrough', true);
 
-/* Init */
-gtag('js', new Date());
-gtag('config', 'AW-11242044118');
+/* ✅ Init gtag déjà faite dans le <head> (pas besoin ici) */
 
+/* Conversion LEAD (label corrigé) */
 function gtag_report_conversion() {
-  try { gtag('event','conversion',{ send_to:'AW-11242044118/MslOCKGZzo0bENb1z_Ap' }); } catch(e){}
+  try {
+    gtag('event','conversion',{
+      send_to:'AW-11242044118/DO1tCKLg97sbENb1z_Ap',
+      value:1.0,
+      currency:'EUR'
+    });
+  } catch(e){}
   return true;
 }
 
