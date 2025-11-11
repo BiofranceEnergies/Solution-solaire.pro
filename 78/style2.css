@@ -815,15 +815,13 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   }
 }
 /* ====== Styles bloc repères de prix ====== */
-#repere-prix { background:#f8fafc; padding:40px 16px; }
-.prix-bloc__inner { max-width: var(--maxw, 1200px); margin:0 auto; }
-.prix-bloc__title {
-  margin: 0 0 12px;
-  text-align: center;
-  color: #0f172a;
-  font-weight: 800;
-  font-size: clamp(26px, 3vw, 36px);
+#repere-prix {
+  background: #fff;
+  border-top: 4px solid #f97316; /* orange principal */
+  border-bottom: 4px solid #f97316;
+  padding: 50px 16px;
 }
+
 
 .prix-bloc__subtitle { margin:0 0 22px; text-align:center; color:#64748b; font-size:14px; }
 
