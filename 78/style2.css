@@ -815,13 +815,13 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   }
 }
 #repere-prix {
-  background: #fff;
-  border-top: 4px solid #f97316;
-  border-bottom: 4px solid #f97316;
-  padding: 80px 20px; /* ← on passe de ~50 à 80px */
+  background:#fff;
+  border-top:4px solid #f97316;
+  border-bottom:4px solid #f97316;
+  padding:80px 20px;
 }
 
-/* Titre plus fort */
+/* Titre */
 .prix-bloc__title{
   margin:0 0 18px;
   text-align:center;
@@ -830,16 +830,20 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   font-size:clamp(26px,3vw,36px);
 }
 
-/* Grille contenue et respirante */
-.prix-bloc__inner{max-width:1100px;margin:0 auto;}
+/* Conteneur + grille */
+.prix-bloc__inner{
+  max-width:1280px;           /* élargi pour 5 cartes */
+  margin:0 auto;
+}
 .prix-grid{
-  display:grid; gap:18px;
-  grid-template-columns:repeat(5,minmax(0,1fr));
+  display:grid;
+  gap:16px;
+  grid-template-columns:repeat(5, minmax(250px,1fr)); /* largeur mini par carte */
   padding:12px 8px;
   border-radius:18px;
 }
-@media (max-width:1100px){ .prix-grid{grid-template-columns:repeat(3,minmax(0,1fr));} }
-@media (max-width:720px){ .prix-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+@media (max-width:1100px){ .prix-grid{grid-template-columns:repeat(3, minmax(250px,1fr));} }
+@media (max-width:720px){ .prix-grid{grid-template-columns:repeat(2, minmax(220px,1fr));} }
 @media (max-width:420px){ .prix-grid{grid-template-columns:1fr;} }
 
 /* Cartes premium : fond blanc + liseré orange */
@@ -851,7 +855,11 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   padding:18px 18px 16px;
   min-height:228px;
   box-shadow:0 6px 18px rgba(15,23,42,.06);
-  display:flex; flex-direction:column; justify-content:space-between;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:all .25s ease;
+  cursor:default;
 }
 
 /* Carte mise en avant */
@@ -866,33 +874,26 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   font-size:12px; padding:4px 8px; border-radius:999px;
 }
 
-/* Typo interne : hiérarchie nette */
-.prix-card__power{
-  margin:0 0 6px;
-  font-size:20px; font-weight:800; color:#0f172a;
-}
-.prix-card__meta{
-  margin:0; color:#475569; font-size:13.5px;
-}
-.prix-card__sep{display:none;} /* plus de trait lourd */
+/* Typo interne */
+.prix-card__power{ margin:0 0 6px; font-size:20px; font-weight:800; color:#0f172a; }
+.prix-card__meta{  margin:0; color:#475569; font-size:13.5px; }
+.prix-card__sep{ display:none; }
 
 /* Prix : élément principal */
 .prix-card__price{
   margin:14px 0 4px;
-  font-size:24px; font-weight:900; color:#0f172a;
+  font-size:24px;
+  font-weight:900;
+  color:#0f172a;
+  white-space:nowrap;          /* évite le retour à la ligne */
 }
-.prix-card__inc{
-  margin:0; font-size:12px; color:#334155; opacity:.9;
-}
-/* Effet hover premium sur les cartes de prix */
-.prix-card {
-  transition: all 0.25s ease;
-  cursor: default;
+.prix-card__inc{ margin:0; font-size:12px; color:#334155; opacity:.9; }
+
+/* Hover */
+.prix-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 10px 24px rgba(249,115,22,.15);
+  border-color:#f97316;
 }
 
-.prix-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 24px rgba(249, 115, 22, 0.15);
-  border-color: #f97316;
-}
 
