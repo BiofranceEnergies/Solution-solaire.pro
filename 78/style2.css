@@ -870,3 +870,11 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 .prix-card__inc   { margin:0; font-size:12px; color:#1f2937; opacity:.9; }
 
 .prix-note { margin:18px 0 0; text-align:center; color:#64748b; font-size:12px; }
+
+#repere-prix {
+  background: #fff;
+  border-top: 4px solid #f97316; /* orange principal */
+  border-bottom: 4px solid #f97316;
+  padding: 50px 16px;
+}
+
