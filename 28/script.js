@@ -1,25 +1,7 @@
 /* =============================
    GTAG + CONSENT MODE
 ============================= */
-window.dataLayer = window.dataLayer || [];
-function gtag(){ dataLayer.push(arguments); }
 
-/* Consent par défaut : refus */
-gtag('consent', 'default', {
-  ad_storage: 'denied',
-  analytics_storage: 'denied',
-  ad_user_data: 'denied',
-  ad_personalization: 'denied',
-  wait_for_update: 500
-});
-
-/* Recos Google */
-gtag('set', 'ads_data_redaction', true);
-gtag('set', 'url_passthrough', true);
-
-/* Init */
-gtag('js', new Date());
-gtag('config', 'AW-11242044118');
 
 function gtag_report_conversion() {
   try { gtag('event','conversion',{ send_to:'AW-11242044118/MslOCKGZzo0bENb1z_Ap' }); } catch(e){}
