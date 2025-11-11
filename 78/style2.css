@@ -814,12 +814,11 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
     body.results-mode #recap .financial-banner{ padding: 12px !important; }
   }
 }
-/* Section : cadre plus net */
 #repere-prix {
-  background:#fff;
-  border-top:4px solid #f97316;
-  border-bottom:4px solid #f97316;
-  padding:52px 16px;
+  background: #fff;
+  border-top: 4px solid #f97316;
+  border-bottom: 4px solid #f97316;
+  padding: 80px 20px; /* ← on passe de ~50 à 80px */
 }
 
 /* Titre plus fort */
