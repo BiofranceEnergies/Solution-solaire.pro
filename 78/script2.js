@@ -679,35 +679,22 @@ function generateFinancementCardHTML(sc) {
   return '';
 }
 
-function generateGateHTML() {
-  return `
-<div class="gate-overlay" id="gate-overlay" role="region" aria-label="Vérification de faisabilité par SMS">
-  <div class="gate-card gate--compact">
-    <p id="gate-title" class="gate-msg">
-      Un expert RGE vérifie <strong>par SMS</strong> la faisabilité chez vous, <strong>sans engagement</strong>.
-    </p>
+<div id="gate-sticky" class="gate-sticky" role="region" aria-label="Vérification de faisabilité">
+  <p class="gate-msg">
+    <strong>🔎 Vérifiez la faisabilité de votre projet solaire</strong> — réponse par SMS, sans engagement.
+  </p>
 
-    <form id="gate-form" class="gate-form" novalidate>
-      <label class="sr-only" for="gate-phone">Téléphone (obligatoire)</label>
-      <input id="gate-phone" class="gate-input" type="tel" inputmode="numeric"
-             placeholder="06 12 34 56 78" autocomplete="tel" required />
+  <form id="gate-form" class="gate-form" novalidate>
+    <label class="sr-only" for="gate-phone">Téléphone</label>
+    <input id="gate-phone" class="gate-input" type="tel" placeholder="06 12 34 56 78" autocomplete="tel" required>
 
-      <!-- On conserve l’email (facultatif) car ton JS sait déjà le gérer ; on peut le masquer en CSS si besoin -->
-      <label class="sr-only" for="gate-email">Votre email (facultatif)</label>
-      <input id="gate-email" class="gate-input" type="email" placeholder="Votre email (facultatif)" autocomplete="email" />
+    <label class="sr-only" for="gate-email">Email (facultatif)</label>
+    <input id="gate-email" class="gate-input gate-input--optional" type="email" placeholder="Votre email (facultatif)" autocomplete="email">
 
-      <button class="gate-cta" id="gate-cta" type="submit" aria-label="Vérifier ma faisabilité">
-        Vérifier ma faisabilité
-      </button>
+    <button class="gate-cta" type="submit">Vérifier ma faisabilité</button>
 
-    <button type="button" class="gate-dismiss" id="gate-dismiss" aria-label="Réduire le bandeau (vous pourrez le rouvrir plus tard)">
-  ↓ Réduire
-</button>
+    <button type="button" class="gate-dismiss" id="gate-dismiss"
+            aria-label="Réduire le bandeau (vous pourrez le rouvrir plus tard)">↓ Réduire</button>
+  </form>
+</div>
 
-
-    </form>
-
-    <p class="gate-hint">Contact <strong>uniquement par SMS</strong> pour valider la faisabilité.</p>
-  </div>
-</div>`;
-}
