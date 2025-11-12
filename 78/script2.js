@@ -393,6 +393,8 @@ window.__handleSubmitEtape1 = async function(ev){
 
   // Init Gate (téléphone)
   initGateForm();
+  initGateDismiss();
+
 
   // Envoi non bloquant : ligne "simulation" (sans téléphone/email)
   const scSel = simulationData.sc || {};
