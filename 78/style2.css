@@ -1017,4 +1017,124 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   pointer-events: auto !important;
 }
 
+/* ============================
+   BANDEAU SMS COMPACT (gate-overlay)
+   ============================ */
+
+/* Neutralise l’ancien overlay (flou, blocage plein écran) */
+.gate-overlay {
+  position: fixed !important;
+  inset: auto 0 0 0 !important;   /* collé en bas */
+  z-index: 9999 !important;
+  display: block !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  padding: 0 !important;
+  pointer-events: none;           /* clique uniquement sur le contenu interne */
+}
+
+/* Conteneur interne (la « barre ») */
+.gate-overlay .gate-card.gate--compact {
+  pointer-events: auto;
+  max-width: var(--maxw, 1200px);
+  margin: 0 auto 10px;            /* petit espace du bas */
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.94); /* #0f172a quasi plein */
+  box-shadow: 0 8px 28px rgba(0,0,0,.35);
+  display: grid;
+  align-items: center;
+  gap: 10px 12px;
+  grid-template-columns: 1fr auto auto auto; /* msg | tel | CTA | dismiss */
+}
+
+/* Message court */
+.gate-overlay .gate-msg {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.25;
+  color: #e5eefc;
+}
+.gate-overlay .gate-msg strong { color: #ffffff; }
+
+/* Forme compacte */
+.gate-overlay .gate-form {
+  display: contents; /* place les champs dans la grille parent */
+}
+
+/* Champ téléphone */
+.gate-overlay .gate-input {
+  height: 40px;
+  min-width: 220px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  outline: none;
+}
+.gate-overlay .gate-input::placeholder { color: rgba(255,255,255,.75); }
+.gate-overlay .gate-input:focus {
+  border-color: rgba(255,255,255,.35);
+  background: rgba(255,255,255,.12);
+}
+
+/* Email facultatif : masqué pour l’instant (on garde l’ID pour le JS) */
+#g ate-email { display: none !important; }
+
+/* Bouton CTA */
+.gate-overlay .gate-cta {
+  height: 40px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(180deg, #f59e0b, #f59e0b 40%, #fbbf24);
+  color: #0b1020;
+  white-space: nowrap;
+}
+
+/* Lien « Plus tard » */
+.gate-overlay .gate-dismiss {
+  height: 40px;
+  padding: 0 10px;
+  border: 0;
+  background: transparent;
+  color: #cbd5e1;
+  text-decoration: underline;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Aide RGPD (compacte) */
+.gate-overlay .gate-hint {
+  grid-column: 1 / -1;
+  margin: -2px 0 0;
+  font-size: 12px;
+  color: #93a2b8;
+}
+
+/* Accessibilité visuelle sur focus clavier */
+.gate-overlay .gate-input:focus,
+.gate-overlay .gate-cta:focus,
+.gate-overlay .gate-dismiss:focus {
+  outline: 2px solid #fbbf24;
+  outline-offset: 2px;
+}
+
+/* --------- Responsive --------- */
+@media (max-width: 860px) {
+  .gate-overlay .gate-card.gate--compact {
+    grid-template-columns: 1fr;  /* empile */
+    gap: 8px;
+    margin: 0 8px 8px;
+    padding: 10px;
+  }
+  .gate-overlay .gate-input { width: 100%; min-width: 0; }
+  .gate-overlay .gate-cta,
+  .gate-overlay .gate-dismiss { width: 100%; }
+  .gate-overlay .gate-dismiss { text-align: center; }
+}
 
