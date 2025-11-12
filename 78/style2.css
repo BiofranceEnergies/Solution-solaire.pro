@@ -979,4 +979,23 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   margin-bottom: 18px;  /* espace juste avant les blocs prix */
   opacity: 0.85;
 }
+/* =====================
+   Bloc note prix
+   ===================== */
+.prix-note {
+  text-align: center;        /* centre le texte */
+  margin: 16px auto 0;       /* espace au-dessus + centrage du bloc */
+  max-width: 1100px;         /* largeur cohérente avec la grille */
+  color: #334155;
+  font-size: 15px;
+  line-height: 1.45;
+  opacity: .95;
+}
+
+@media (max-width: 640px) {
+  .prix-note {
+    font-size: 14px;
+    margin-top: 12px;
+  }
+}
 
