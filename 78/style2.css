@@ -1238,11 +1238,9 @@ body.results-mode{ padding-bottom: calc(60px + env(safe-area-inset-bottom,0)); }
   background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
 }
-/* === Bandeau vérification faisabilité – v2 compact === */
+/* === Bandeau vérification faisabilité – 1 ligne centrée === */
 .gate-sticky{
-  position: fixed;
-  left: 0; right: 0; bottom: 0;
-  z-index: 1000;
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 1000;
   background: rgba(15,23,42,.92);
   -webkit-backdrop-filter: saturate(120%) blur(6px);
   backdrop-filter: saturate(120%) blur(6px);
@@ -1250,32 +1248,32 @@ body.results-mode{ padding-bottom: calc(60px + env(safe-area-inset-bottom,0)); }
   padding: 10px 12px calc(10px + env(safe-area-inset-bottom,0));
 }
 
-/* Conteneur centré et grille compacte */
+/* conteneur centré */
 .gate-sticky .gate-inner{
   max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr minmax(190px,260px) auto auto; /* msg | tel | CTA | réduire */
-  gap: 10px;
+  grid-template-columns: 1fr minmax(220px,280px) auto; /* msg | tel | CTA */
+  gap: 12px;
   align-items: center;
 }
 
-/* Message court et lisible */
+/* message */
 .gate-sticky .gate-msg{
   margin: 0;
   font-size: 13px;
   line-height: 1.3;
   color: #e7eefb;
 }
-.gate-sticky .gate-msg strong{ color:#ffffff; }
+.gate-sticky .gate-msg strong{ color:#fff; }
 
-/* Le formulaire s’insère dans la grille parent */
+/* le formulaire « se fond » dans la grille parent */
 .gate-sticky .gate-form{ display: contents; }
 
-/* Champ téléphone */
+/* champ téléphone */
 .gate-sticky .gate-input{
   height: 38px;
-  min-width: 200px;
+  min-width: 220px;
   padding: 0 10px;
   border-radius: 10px;
   border: 1px solid rgba(255,255,255,.18);
@@ -1289,13 +1287,13 @@ body.results-mode{ padding-bottom: calc(60px + env(safe-area-inset-bottom,0)); }
   background: rgba(255,255,255,.10);
 }
 
-/* Email (facultatif) : visible desktop, masqué mobile plus bas */
-.gate-input--optional{}
+/* on masque l’email (gardé pour compat JS) */
+#gate-email, .gate-input--optional{ display:none !important; }
 
-/* CTA accent fort */
+/* CTA */
 .gate-sticky .gate-cta{
   height: 38px;
-  padding: 0 14px;
+  padding: 0 16px;
   border: 0;
   border-radius: 10px;
   background: linear-gradient(180deg,#f59e0b,#f59e0b 40%, #fbbf24);
@@ -1311,21 +1309,17 @@ body.results-mode{ padding-bottom: calc(60px + env(safe-area-inset-bottom,0)); }
   box-shadow: 0 12px 26px rgba(245,158,11,.3);
 }
 
-
-/* Focus clavier (a11y) */
+/* focus clavier */
 .gate-sticky .gate-input:focus,
-.gate-sticky .gate-cta:focus,
-.gate-sticky .gate-dismiss:focus{
+.gate-sticky .gate-cta:focus{
   outline: 2px solid #fbbf24;
   outline-offset: 2px;
 }
 
-/* Évite que le bandeau masque le contenu en bas de page en mode résultats */
-body.results-mode{
-  padding-bottom: calc(58px + env(safe-area-inset-bottom,0));
-}
+/* éviter le chevauchement avec le contenu en mode résultats */
+body.results-mode{ padding-bottom: calc(58px + env(safe-area-inset-bottom,0)); }
 
-/* --------- Responsive --------- */
+/* responsive : empile proprement */
 @media (max-width: 860px){
   .gate-sticky .gate-inner{
     grid-template-columns: 1fr;
@@ -1333,11 +1327,6 @@ body.results-mode{
     padding: 0 4px;
   }
   .gate-sticky .gate-input{ min-width: 0; width: 100%; }
-  .gate-sticky .gate-cta,
-  .gate-sticky .gate-dismiss{ width: 100%; }
-  /* Cache l’email sur mobile pour gagner de la place */
-  .gate-input--optional{ display: none !important; }
-  .gate-sticky .gate-msg{ font-size: 12.5px; }
+  .gate-sticky .gate-cta{ width: 100%; }
+  .gate-sticky .gate-msg{ font-size: 12.5px; text-align: center; }
 }
-
-
