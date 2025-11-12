@@ -700,9 +700,10 @@ function generateGateHTML() {
         Vérifier ma faisabilité
       </button>
 
-      <button type="button" class="gate-dismiss" id="gate-dismiss" aria-label="Masquer ce bandeau (vous pourrez le rouvrir plus tard)">
-  Pas maintenant
+    <button type="button" class="gate-dismiss" id="gate-dismiss" aria-label="Réduire le bandeau (vous pourrez le rouvrir plus tard)">
+  ↓ Réduire
 </button>
+
 
     </form>
 
