@@ -719,21 +719,24 @@ function generateGateHTML() {
 function generateGateHTML() {
   return `
 <div id="gate-sticky" class="gate-sticky" role="region" aria-label="Vérification de faisabilité">
-  <p class="gate-msg">
-    <strong>🔎 Vérifiez la faisabilité de votre projet solaire</strong> — réponse par SMS, sans engagement.
-  </p>
+  <div class="gate-inner">
+    <p class="gate-msg">
+      🔎 <strong>Vérifiez la faisabilité de votre projet solaire</strong> — réponse par SMS, sans engagement.
+    </p>
 
-  <form id="gate-form" class="gate-form" novalidate>
-    <label class="sr-only" for="gate-phone">Téléphone</label>
-    <input id="gate-phone" class="gate-input" type="tel" placeholder="06 12 34 56 78" autocomplete="tel" required>
+    <form id="gate-form" class="gate-form" novalidate>
+      <label class="sr-only" for="gate-phone">Téléphone</label>
+      <input id="gate-phone" class="gate-input" type="tel" placeholder="06 12 34 56 78" autocomplete="tel" required>
 
-    <label class="sr-only" for="gate-email">Email (facultatif)</label>
-    <input id="gate-email" class="gate-input gate-input--optional" type="email" placeholder="Votre email (facultatif)" autocomplete="email">
+      <!-- on garde l’email mais totalement masqué -->
+      <input id="gate-email" class="gate-input gate-input--optional" type="email" placeholder="Votre email (facultatif)" autocomplete="email" style="display:none">
 
-    <button class="gate-cta" type="submit">Vérifier ma faisabilité</button>
-  </form>
+      <button class="gate-cta" type="submit">Vérifier ma faisabilité</button>
+    </form>
+  </div>
 </div>`;
 }
+
 
 
 
