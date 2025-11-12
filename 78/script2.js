@@ -700,9 +700,10 @@ function generateGateHTML() {
         Vérifier ma faisabilité
       </button>
 
-      <button type="button" class="gate-dismiss" id="gate-dismiss" aria-label="Masquer ce bandeau">
-        Plus tard
-      </button>
+      <button type="button" class="gate-dismiss" id="gate-dismiss" aria-label="Masquer ce bandeau (vous pourrez le rouvrir plus tard)">
+  Pas maintenant
+</button>
+
     </form>
 
     <p class="gate-hint">Contact <strong>uniquement par SMS</strong> pour valider la faisabilité.</p>
