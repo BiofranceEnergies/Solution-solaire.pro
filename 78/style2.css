@@ -969,4 +969,11 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   }
 }
 
+.prix-intro {
+  text-align: center;
+  color: #475569;
+  font-size: 14px;
+  margin-bottom: 12px;
+  opacity: 0.85;
+}
 
