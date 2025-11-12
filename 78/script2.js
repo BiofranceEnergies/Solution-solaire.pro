@@ -738,3 +738,32 @@ function generateGateHTML() {
 </div>`;
 }
 
+/* =============================
+   Gestion réduction / affichage bandeau faisabilité
+============================= */
+function initGateDismiss(){
+  const bar = document.getElementById('gate-sticky');
+  const btn = document.getElementById('gate-dismiss');
+  if(!bar || !btn) return;
+
+  // Réduire au clic
+  btn.addEventListener('click', ()=>{
+    bar.classList.add('is-collapsed');
+    try{ localStorage.setItem('gate_collapsed','1'); }catch(e){}
+  });
+
+  // Ré-afficher si on reclique la barre quand elle est réduite
+  bar.addEventListener('click', (e)=>{
+    if(!bar.classList.contains('is-collapsed')) return;
+    bar.classList.remove('is-collapsed');
+    try{ localStorage.removeItem('gate_collapsed'); }catch(e){}
+  });
+
+  // Restaure l’état réduit si l’utilisateur l’avait déjà minimisé
+  try{
+    if(localStorage.getItem('gate_collapsed') === '1'){
+      bar.classList.add('is-collapsed');
+    }
+  }catch(e){}
+}
+
