@@ -1223,4 +1223,19 @@ body.results-mode{ padding-bottom: calc(60px + env(safe-area-inset-bottom,0)); }
   .gate-overlay .gate-dismiss{ width: 100%; }
   .gate-overlay .gate-dismiss{ text-align:center; }
 }
+.gate-dismiss {
+  background: none;
+  border: none;
+  color: #cbd5e1;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.gate-dismiss:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
 
