@@ -976,4 +976,12 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   margin-bottom: 12px;
   opacity: 0.85;
 }
+.prix-intro {
+  text-align: center;
+  color: #475569;
+  font-size: 14px;
+  margin-top: -6px;     /* rapproche légèrement du titre */
+  margin-bottom: 18px;  /* espace juste avant les blocs prix */
+  opacity: 0.85;
+}
 
