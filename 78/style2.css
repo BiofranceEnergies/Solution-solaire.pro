@@ -898,12 +898,7 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
   cursor:default;
 }
 
-/* Carte mise en avant */
-.prix-card--best{
-  border-color:#f97316;
-  box-shadow:0 10px 28px rgba(249,115,22,.22);
-  transform:translateY(-2px);
-}
+
 .prix-card__badge{
   position:absolute; top:10px; right:10px;
   background:#f97316; color:#fff; font-weight:700;
