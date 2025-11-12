@@ -681,32 +681,31 @@ function generateFinancementCardHTML(sc) {
 
 function generateGateHTML() {
   return `
-    <div class="gate-overlay" id="gate-overlay" role="dialog" aria-modal="true" aria-labelledby="gate-title">
-      <div class="gate-card">
-        <h3 id="gate-title" class="gate-title">DÉBLOQUEZ Votre PRIX FINAL & ÉCONOMIES DÉTAILLÉES</h3>
-        <p class="gate-sub">
-          Téléchargez le PDF de votre étude complète et confirmez la faisabilité technique de votre installation solaire — avec remise immédiate (jusqu’au 31/12/2025).
-        </p>
-        <div class="gate-badges" aria-hidden="true">
-          <div class="badge"><span>🔒</span><b>Données protégées</b></div>
-          <div class="badge"><span>⚡</span><b>Affichage immédiat</b></div>
-          <div class="badge"><span>🔐</span><b>100% sans démarchage</b></div>
-        </div>
-        <form id="gate-form" class="gate-form" novalidate>
-          <label style="width:100%"><span class="sr-only">Votre email (facultatif)</span>
-            <input id="gate-email" class="gate-input" type="email" placeholder="Votre email (facultatif)" autocomplete="email" />
-          </label>
-          <label style="width:100%"><span class="sr-only">Téléphone (obligatoire)</span>
-            <input id="gate-phone" class="gate-input" type="tel" placeholder="Téléphone (obligatoire)" autocomplete="tel" required />
-          </label>
-          <p class="gate-hint full" id="rgpd-info">
-            En validant, vous acceptez d’être contacté uniquement par <strong>SMS</strong> pour votre étude.
-          </p>
-          <button class="gate-cta full" type="submit" aria-label="Afficher mes résultats détaillés">
-            Afficher mes résultats détaillés <span class="arrow" aria-hidden="true">→</span>
-          </button>
-        </form>
-        <div class="gate-note">Un SMS de confirmation vous sera envoyé.</div>
-      </div>
-    </div>`;
+<div class="gate-overlay" id="gate-overlay" role="region" aria-label="Vérification de faisabilité par SMS">
+  <div class="gate-card gate--compact">
+    <p id="gate-title" class="gate-msg">
+      Un expert RGE vérifie <strong>par SMS</strong> la faisabilité chez vous, <strong>sans engagement</strong>.
+    </p>
+
+    <form id="gate-form" class="gate-form" novalidate>
+      <label class="sr-only" for="gate-phone">Téléphone (obligatoire)</label>
+      <input id="gate-phone" class="gate-input" type="tel" inputmode="numeric"
+             placeholder="06 12 34 56 78" autocomplete="tel" required />
+
+      <!-- On conserve l’email (facultatif) car ton JS sait déjà le gérer ; on peut le masquer en CSS si besoin -->
+      <label class="sr-only" for="gate-email">Votre email (facultatif)</label>
+      <input id="gate-email" class="gate-input" type="email" placeholder="Votre email (facultatif)" autocomplete="email" />
+
+      <button class="gate-cta" id="gate-cta" type="submit" aria-label="Vérifier ma faisabilité">
+        Vérifier ma faisabilité
+      </button>
+
+      <button type="button" class="gate-dismiss" id="gate-dismiss" aria-label="Masquer ce bandeau">
+        Plus tard
+      </button>
+    </form>
+
+    <p class="gate-hint">Contact <strong>uniquement par SMS</strong> pour valider la faisabilité.</p>
+  </div>
+</div>`;
 }
