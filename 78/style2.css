@@ -1238,45 +1238,121 @@ body.results-mode{ padding-bottom: calc(60px + env(safe-area-inset-bottom,0)); }
   background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
 }
-/* === Bandeau compact – option A === */
+/* === Bandeau vérification faisabilité – v2 compact === */
 .gate-sticky{
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 1000;
-  background: rgba(15,23,42,.88);
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 1000;
+  background: rgba(15,23,42,.92);
   -webkit-backdrop-filter: saturate(120%) blur(6px);
   backdrop-filter: saturate(120%) blur(6px);
   border-top: 1px solid rgba(255,255,255,.12);
-  padding: 10px 14px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom,0));
 }
-.gate-msg{
-  margin: 0 0 6px; text-align: center;
-  font-size: 13px; line-height: 1.35; color: #e2e8f0;
-}
-.gate-form{
-  display: flex; gap: 8px; align-items: center;
-  max-width: 950px; margin: 0 auto;
-}
-.gate-input{
-  flex: 1; min-width: 0; height: 38px;
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.06); color: #fff;
-  border-radius: 10px; padding: 0 10px;
-}
-.gate-input::placeholder{ color:#cbd5e1; }
-.gate-cta{
-  height: 38px; padding: 0 14px; border-radius: 10px; border: 0;
-  background: linear-gradient(180deg,#f59e0b,#f97316);
-  color: #0f172a; font-weight: 800; white-space: nowrap;
-}
-.gate-dismiss{
-  height: 38px; padding: 0 10px; border: 0; background: none;
-  color: #cbd5e1; cursor: pointer; border-radius: 8px;
-}
-.gate-dismiss:hover{ background: rgba(255,255,255,.08); color:#fff; }
 
-/* Mobile : bandeau encore plus fin et email masqué */
-@media (max-width: 640px){
-  .gate-form{ gap: 6px; }
-  .gate-input--optional{ display: none; }
-  .gate-msg{ font-size: 12px; }
+/* Conteneur centré et grille compacte */
+.gate-sticky .gate-inner{
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr minmax(190px,260px) auto auto; /* msg | tel | CTA | réduire */
+  gap: 10px;
+  align-items: center;
+}
+
+/* Message court et lisible */
+.gate-sticky .gate-msg{
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.3;
+  color: #e7eefb;
+}
+.gate-sticky .gate-msg strong{ color:#ffffff; }
+
+/* Le formulaire s’insère dans la grille parent */
+.gate-sticky .gate-form{ display: contents; }
+
+/* Champ téléphone */
+.gate-sticky .gate-input{
+  height: 38px;
+  min-width: 200px;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+  color: #fff;
+  outline: none;
+}
+.gate-sticky .gate-input::placeholder{ color:#cbd5e1; }
+.gate-sticky .gate-input:focus{
+  border-color: rgba(255,255,255,.32);
+  background: rgba(255,255,255,.10);
+}
+
+/* Email (facultatif) : visible desktop, masqué mobile plus bas */
+.gate-input--optional{}
+
+/* CTA accent fort */
+.gate-sticky .gate-cta{
+  height: 38px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(180deg,#f59e0b,#f59e0b 40%, #fbbf24);
+  color: #0b1020;
+  font-weight: 900;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(245,158,11,.25);
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+.gate-sticky .gate-cta:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(245,158,11,.3);
+}
+
+/* Bouton “Réduire” discret */
+.gate-sticky .gate-dismiss{
+  height: 38px;
+  padding: 0 10px;
+  border: 0;
+  background: transparent;
+  color: #cbd5e1;
+  text-decoration: underline;
+  white-space: nowrap;
+  cursor: pointer;
+  border-radius: 8px;
+}
+.gate-sticky .gate-dismiss:hover{
+  color:#ffffff;
+  background: rgba(255,255,255,.08);
+}
+
+/* Focus clavier (a11y) */
+.gate-sticky .gate-input:focus,
+.gate-sticky .gate-cta:focus,
+.gate-sticky .gate-dismiss:focus{
+  outline: 2px solid #fbbf24;
+  outline-offset: 2px;
+}
+
+/* Évite que le bandeau masque le contenu en bas de page en mode résultats */
+body.results-mode{
+  padding-bottom: calc(58px + env(safe-area-inset-bottom,0));
+}
+
+/* --------- Responsive --------- */
+@media (max-width: 860px){
+  .gate-sticky .gate-inner{
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 0 4px;
+  }
+  .gate-sticky .gate-input{ min-width: 0; width: 100%; }
+  .gate-sticky .gate-cta,
+  .gate-sticky .gate-dismiss{ width: 100%; }
+  /* Cache l’email sur mobile pour gagner de la place */
+  .gate-input--optional{ display: none !important; }
+  .gate-sticky .gate-msg{ font-size: 12.5px; }
 }
 
