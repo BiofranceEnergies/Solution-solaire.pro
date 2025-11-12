@@ -393,7 +393,7 @@ window.__handleSubmitEtape1 = async function(ev){
 
   // Init Gate (téléphone)
   initGateForm();
-  initGateDismiss();
+  
 
 
   // Envoi non bloquant : ligne "simulation" (sans téléphone/email)
@@ -719,53 +719,22 @@ function generateGateHTML() {
 function generateGateHTML() {
   return `
 <div id="gate-sticky" class="gate-sticky" role="region" aria-label="Vérification de faisabilité">
-  <div class="gate-inner">
-    <p class="gate-msg">
-      <strong>🔎 Vérifiez la faisabilité de votre projet solaire</strong> — réponse par SMS, sans engagement.
-    </p>
+  <p class="gate-msg">
+    <strong>🔎 Vérifiez la faisabilité de votre projet solaire</strong> — réponse par SMS, sans engagement.
+  </p>
 
-    <form id="gate-form" class="gate-form" novalidate>
-      <label class="sr-only" for="gate-phone">Téléphone</label>
-      <input id="gate-phone" class="gate-input" type="tel" placeholder="06 12 34 56 78" autocomplete="tel" required>
+  <form id="gate-form" class="gate-form" novalidate>
+    <label class="sr-only" for="gate-phone">Téléphone</label>
+    <input id="gate-phone" class="gate-input" type="tel" placeholder="06 12 34 56 78" autocomplete="tel" required>
 
-      <label class="sr-only" for="gate-email">Email (facultatif)</label>
-      <input id="gate-email" class="gate-input gate-input--optional" type="email" placeholder="Votre email (facultatif)" autocomplete="email">
+    <label class="sr-only" for="gate-email">Email (facultatif)</label>
+    <input id="gate-email" class="gate-input gate-input--optional" type="email" placeholder="Votre email (facultatif)" autocomplete="email">
 
-      <button class="gate-cta" type="submit">Vérifier ma faisabilité</button>
-
-      <button type="button" class="gate-dismiss" id="gate-dismiss"
-              aria-label="Réduire le bandeau (vous pourrez le rouvrir plus tard)">Réduire</button>
-    </form>
-  </div>
+    <button class="gate-cta" type="submit">Vérifier ma faisabilité</button>
+  </form>
 </div>`;
 }
 
-/* =============================
-   Gestion réduction / affichage bandeau faisabilité
-============================= */
-function initGateDismiss(){
-  const bar = document.getElementById('gate-sticky');
-  const btn = document.getElementById('gate-dismiss');
-  if(!bar || !btn) return;
 
-  // Réduire au clic
-  btn.addEventListener('click', ()=>{
-    bar.classList.add('is-collapsed');
-    try{ localStorage.setItem('gate_collapsed','1'); }catch(e){}
-  });
 
-  // Ré-afficher si on reclique la barre quand elle est réduite
-  bar.addEventListener('click', (e)=>{
-    if(!bar.classList.contains('is-collapsed')) return;
-    bar.classList.remove('is-collapsed');
-    try{ localStorage.removeItem('gate_collapsed'); }catch(e){}
-  });
-
-  // Restaure l’état réduit si l’utilisateur l’avait déjà minimisé
-  try{
-    if(localStorage.getItem('gate_collapsed') === '1'){
-      bar.classList.add('is-collapsed');
-    }
-  }catch(e){}
-}
 
