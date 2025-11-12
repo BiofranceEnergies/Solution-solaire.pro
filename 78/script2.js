@@ -434,7 +434,8 @@ window.__handleSubmitEtape1 = async function(ev){
 function initGateForm(){
   const form   = document.getElementById('gate-form');
   const blurDiv = document.getElementById('lock-blur');
-  const gateDiv = document.getElementById('gate-overlay');
+  const gateDiv = document.getElementById('gate-overlay') || document.getElementById('gate-sticky');
+
   if(!form || !blurDiv || !gateDiv) { console.error("Éléments Gate manquants."); return; }
 
   form.addEventListener('submit', (e)=>{
@@ -709,5 +710,28 @@ function generateGateHTML() {
 
     <p class="gate-hint">Contact <strong>uniquement par SMS</strong> pour valider la faisabilité.</p>
   </div>
+</div>`;
+}
+
+
+function generateGateHTML() {
+  return `
+<div id="gate-sticky" class="gate-sticky" role="region" aria-label="Vérification de faisabilité">
+  <p class="gate-msg">
+    <strong>🔎 Vérifiez la faisabilité de votre projet solaire</strong> — réponse par SMS, sans engagement.
+  </p>
+
+  <form id="gate-form" class="gate-form" novalidate>
+    <label class="sr-only" for="gate-phone">Téléphone</label>
+    <input id="gate-phone" class="gate-input" type="tel" placeholder="06 12 34 56 78" autocomplete="tel" required>
+
+    <label class="sr-only" for="gate-email">Email (facultatif)</label>
+    <input id="gate-email" class="gate-input gate-input--optional" type="email" placeholder="Votre email (facultatif)" autocomplete="email">
+
+    <button class="gate-cta" type="submit">Vérifier ma faisabilité</button>
+
+    <button type="button" class="gate-dismiss" id="gate-dismiss"
+            aria-label="Réduire le bandeau (vous pourrez le rouvrir plus tard)">↓ Réduire</button>
+  </form>
 </div>`;
 }
