@@ -662,13 +662,7 @@ function generateFinancementCardHTML(sc) {
       <p class="note" style="margin:10px 0 0">Financement proposé par notre partenaire, sous réserve d’acceptation.</p>
       <div class="note note-alert">⚠️Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</div>
       <p class="note" style="margin:8px 0 0">Estimation indicative. Visite technique nécessaire...</p>
-      <p style="margin: 18px 0 4px; text-align: center; font-size: 16px; font-weight: 700; color: var(--accent); line-height: 1.5;">
-        <span style="white-space: nowrap;">Cette estimation vous a été offerte par Solution Solaire Pro filiale de Biofrance energies.</span><br>
-        <span style="white-space: nowrap;">Vous pouvez contacter votre conseiller régional</span><br>
-        <span style="white-space: nowrap;">
-          au <a href="tel:0648893480" style="color: inherit; text-decoration: underline; font-weight: 800;">06 48 89 34 80</a>.
-        </span>
-      </p>`;
+     `;
   }
 
   if (prixHTML || financementDetailsHTML) {
