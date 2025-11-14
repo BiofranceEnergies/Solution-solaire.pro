@@ -1344,3 +1344,9 @@ body.results-mode{
 body.results-mode .new-footer {
   display: none !important;
 }
+/* Sécurité : espace sous les résultats pour ne pas passer sous le bandeau SMS */
+@media (max-width: 860px){
+  body.results-mode #recap{
+    padding-bottom: 140px !important;  /* tu peux réduire/augmenter si besoin */
+  }
+}
