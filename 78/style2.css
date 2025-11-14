@@ -1330,3 +1330,7 @@ body.results-mode{ padding-bottom: calc(58px + env(safe-area-inset-bottom,0)); }
   .gate-sticky .gate-cta{ width: 100%; }
   .gate-sticky .gate-msg{ font-size: 12.5px; text-align: center; }
 }
+/* Cacher le footer en mode résultats */
+body.results-mode .new-footer {
+  display: none !important;
+}
