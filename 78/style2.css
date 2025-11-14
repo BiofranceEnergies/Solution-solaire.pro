@@ -1208,7 +1208,7 @@ body.results-mode #recap{display:block !important;margin-top:12px;}
 }
 
 /* Empêche que la barre masque le contenu cliquable tout en bas */
-body.results-mode{ padding-bottom: calc(60px + env(safe-area-inset-bottom,0)); }
+
 
 /* Responsive : empile sur mobile, garde l’email masqué */
 @media (max-width: 860px){
@@ -1317,7 +1317,17 @@ body.results-mode{ padding-bottom: calc(60px + env(safe-area-inset-bottom,0)); }
 }
 
 /* éviter le chevauchement avec le contenu en mode résultats */
-body.results-mode{ padding-bottom: calc(58px + env(safe-area-inset-bottom,0)); }
+/* Espace sous les résultats pour ne pas passer sous le bandeau SMS */
+body.results-mode{
+  padding-bottom: calc(70px + env(safe-area-inset-bottom,0));
+}
+
+@media (max-width: 860px){
+  body.results-mode{
+    padding-bottom: calc(150px + env(safe-area-inset-bottom,0));
+  }
+}
+
 
 /* responsive : empile proprement */
 @media (max-width: 860px){
