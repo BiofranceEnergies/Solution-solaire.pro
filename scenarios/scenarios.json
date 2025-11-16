@@ -1,9 +1,9 @@
 [
-  {"Departement":"78","PrixKwh":"0,24","Puissance":"3 kWc","Prod":3334,"Seuil":4000,"Panels":6,"Prix":6900,"RemiseChantier":700,"Mensualite":57.51,"Mois":180,"Taeg":5.96,"Total":10350.93},
-  {"Departement":"78","PrixKwh":"0,24","Puissance":"4,5 kWc","Prod":5151,"Seuil":6000,"Panels":9,"Prix":8900,"RemiseChantier":800,"Mensualite":74.18,"Mois":180,"Taeg":5.96,"Total":13351.77},
-  {"Departement":"78","PrixKwh":"0,24","Puissance":"6 kWc","Prod":6838,"Seuil":8000,"Panels":12,"Prix":12900,"RemiseChantier":900,"Mensualite":107.52,"Mois":180,"Taeg":5.96,"Total":19353.10},
-  {"Departement":"78","PrixKwh":"0,24","Puissance":"7,5 kWc","Prod":8535,"Seuil":10000,"Panels":15,"Prix":14900,"RemiseChantier":1000,"Mensualite":124.19,"Mois":180,"Taeg":5.96,"Total":22353.62},
-  {"Departement":"78","PrixKwh":"0,24","Puissance":"9 kWc","Prod":10302,"Seuil":12000,"Panels":18,"Prix":16900,"RemiseChantier":1100,"Mensualite":140.86,"Mois":180,"Taeg":5.96,"Total":25354.32},
+  {"Departement":"78","PrixKwh":"0,24","Puissance":"3 kWc","Prod":3334,"Seuil":4000,"Panels":6,"Prix":5900,"RemiseChantier":300,"Mensualite":49.18,"Mois":180,"Taeg":5.96,"Total":8850.15},
+  {"Departement":"78","PrixKwh":"0,24","Puissance":"4,5 kWc","Prod":5151,"Seuil":6000,"Panels":9,"Prix":7900,"RemiseChantier":300,"Mensualite":65.85,"Mois":180,"Taeg":5.96,"Total":11850.98},
+  {"Departement":"78","PrixKwh":"0,24","Puissance":"6 kWc","Prod":6838,"Seuil":8000,"Panels":12,"Prix":8900,"RemiseChantier":300,"Mensualite":74.18,"Mois":180,"Taeg":5.96,"Total":13351.77},
+  {"Departement":"78","PrixKwh":"0,24","Puissance":"7,5 kWc","Prod":8535,"Seuil":10000,"Panels":15,"Prix":9900,"RemiseChantier":300,"Mensualite":82.42,"Mois":180,"Taeg":5.96,"Total":14851.47},
+  {"Departement":"78","PrixKwh":"0,24","Puissance":"9 kWc","Prod":10302,"Seuil":12000,"Panels":18,"Prix":10900,"RemiseChantier":300,"Mensualite":90.95,"Mois":180,"Taeg":5.96,"Total":16352.36},
 
   {"Departement":"28","PrixKwh":"0,24","Puissance":"3 kWc","Prod":3334,"Seuil":4000,"Panels":6,"Prix":6900,"RemiseChantier":700,"Mensualite":57.51,"Mois":180,"Taeg":5.96,"Total":10350.93},
   {"Departement":"28","PrixKwh":"0,24","Puissance":"4,5 kWc","Prod":5151,"Seuil":6000,"Panels":9,"Prix":8900,"RemiseChantier":800,"Mensualite":74.18,"Mois":180,"Taeg":5.96,"Total":13351.77},
