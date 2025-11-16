@@ -357,11 +357,12 @@ body.results-mode main > *{display:none !important;}
 /* Affiche le #recap ET le new-footer en mode résultat */
 body.results-mode main > #recap, body.results-mode .new-footer {display:block !important;}
 
-body.results-mode #recap {
+body.results-mode #recap{
   display: block !important;
   margin-top: 12px;
-  margin-bottom: 80px; /* <-- Ajout de l'espace souhaité */
+  padding-bottom: 100px; /* espace entre la dernière phrase et le bandeau */
 }
+
 
 
 /* ===== Résultats – style 2025 ===== */
