@@ -356,7 +356,13 @@ body.results-mode .panel{margin-bottom:0;}
 body.results-mode main > *{display:none !important;}
 /* Affiche le #recap ET le new-footer en mode résultat */
 body.results-mode main > #recap, body.results-mode .new-footer {display:block !important;}
-body.results-mode #recap{display:block !important;margin-top:12px;}
+
+body.results-mode #recap {
+  display: block !important;
+  margin-top: 12px;
+  margin-bottom: 80px; /* <-- Ajout de l'espace souhaité */
+}
+
 
 /* ===== Résultats – style 2025 ===== */
 .result-card{
