@@ -168,7 +168,8 @@ function attachPhoneMask() {
    SCÉNARIOS (cache 24h)
 ============================= */
 const SC_STATIC_URL = 'https://raw.githubusercontent.com/BiofranceEnergies/Solution-solaire.pro/main/scenarios/scenarios.json';
-const SC_TTL_MS = 24 * 60 * 60 * 1000; // 24h
+const SC_TTL_MS = 0; // désactivation du cache localStorage
+
 const SC_CACHE_KEY = 'scenarios_all_v1';
 
 function normalizeRow(row) {
