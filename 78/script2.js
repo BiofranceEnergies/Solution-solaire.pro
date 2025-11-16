@@ -640,40 +640,90 @@ function generateRemiseBannerHTML(sc) {
 }
 
 function generateFinancementCardHTML(sc) {
+  // Récupère l'économie mensuelle à partir des données de simulation
+  let economieMensuelle = null;
+  if (window.simulationData && Number.isFinite(window.simulationData.gainMois)) {
+    economieMensuelle = window.simulationData.gainMois;
+  }
+
+  // Bloc "prix de l'installation"
   const prixHTML = Number.isFinite(sc?.prix)
-    ? `<p style="margin:0 0 8px"><strong>Installation ${sc.puissance || ''}</strong> : <span class="token">${Math.round(sc.prix).toLocaleString('fr-FR')} € TTC</span> <span class="note">(prix indicatif hors options)</span></p>`
+    ? `<p style="margin:0 0 8px">
+         <strong>Installation ${sc.puissance || ''}</strong> :
+         <span class="token">${Math.round(sc.prix).toLocaleString('fr-FR')} € TTC</span>
+         <span class="note">(prix indicatif hors options)</span>
+       </p>`
     : '';
 
   let financementDetailsHTML = '';
+
   if (Number.isFinite(sc?.mensualite) && sc.mensualite > 0) {
-    const dureeHTML = Number.isFinite(sc?.dureeMois) && sc.dureeMois > 0 ? `<span class="token">Durée : ${sc.dureeMois} mois</span>` : '';
-    const taegHTML  = Number.isFinite(sc?.taeg) ? `<span class="token">TAEG fixe : ${sc.taeg}%</span>` : '';
-    const totalHTML = Number.isFinite(sc?.total) && sc.total > 0
-      ? `<p style="margin:6px 0 0"><strong>Prix total</strong> : <span class="token">${Number(sc.total).toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2})} €</span></p>`
+    const dureeHTML = Number.isFinite(sc?.dureeMois) && sc.dureeMois > 0
+      ? `<span class="token">Durée : ${sc.dureeMois} mois</span>`
       : '';
 
+    const taegHTML  = Number.isFinite(sc?.taeg)
+      ? `<span class="token">TAEG fixe : ${sc.taeg}%</span>`
+      : '';
+
+    const totalHTML = Number.isFinite(sc?.total) && sc.total > 0
+      ? `<p style="margin:6px 0 0">
+           <strong>Prix total</strong> :
+           <span class="token">
+             ${Number(sc.total).toLocaleString('fr-FR', { minimumFractionDigits:2, maximumFractionDigits:2 })} €
+           </span>
+         </p>`
+      : '';
+
+    // Phrase d'autofinancement (optionnelle)
+    let phraseAutofinancement = '';
+    if (
+      Number.isFinite(economieMensuelle) &&
+      Number.isFinite(sc.mensualite) &&
+      sc.mensualite > 0 &&
+      economieMensuelle >= sc.mensualite
+    ) {
+      phraseAutofinancement = `
+        <p class="note"
+           style="margin:14px 0 0; font-weight:600; text-align:center; color:#0f172a;">
+          💡 Votre économie mensuelle (${economieMensuelle.toLocaleString('fr-FR', {
+            minimumFractionDigits:0,
+            maximumFractionDigits:0
+          })} €)
+          est supérieure à la mensualité (${sc.mensualite.toLocaleString('fr-FR', {
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+          })} €).
+          Le projet s’autofinance.
+        </p>
+      `;
+    }
+
+    // Bloc financement complet
     financementDetailsHTML = `
-      <p style="margin:10px 0 4px; font-weight:700">Option financement <span class="note">(facultatif)</span></p>
+      <p style="margin:10px 0 4px; font-weight:700">
+        Option financement <span class="note">(facultatif)</span>
+      </p>
       <div class="tokens">
-        <span class="token">${(sc.mensualite).toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2})} € / mois</span>
-        ${dureeHTML} ${taegHTML}
+        <span class="token">
+          ${sc.mensualite.toLocaleString('fr-FR', { minimumFractionDigits:2, maximumFractionDigits:2 })} € / mois
+        </span>
+        ${dureeHTML}
+        ${taegHTML}
       </div>
       ${totalHTML}
-<p class="note" style="margin:10px 0 0">Financement proposé...</p>
-<div class="note note-alert">⚠️ Un crédit...</div>
-<p class="note" style="margin:8px 0 0">Estimation indicative. Visite technique nécessaire...</p>
-
-${(Number.isFinite(economieMensuelle) && economieMensuelle >= sc.mensualite) ? `
-`
-  <p class="note" style="margin:14px 0 0; font-weight:600; text-align:center; color:#0f172a;">
-    💡 Votre économie mensuelle (${economieMensuelle.toLocaleString('fr-FR', {minimumFractionDigits:0, maximumFractionDigits:0})} €)
-    est supérieure à la mensualité (${sc.mensualite.toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2})} €).
-    Le projet s’autofinance.
-  </p>
-` : ''}
-
-
-
+      <p class="note" style="margin:10px 0 0">
+        Financement proposé par notre partenaire, sous réserve d’acceptation.
+      </p>
+      <div class="note note-alert">
+        ⚠️ Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.
+      </div>
+      <p class="note" style="margin:8px 0 0">
+        Estimation indicative. Visite technique nécessaire...
+      </p>
+      ${phraseAutofinancement}
+    `;
+  }
 
   if (prixHTML || financementDetailsHTML) {
     return `
@@ -681,10 +731,12 @@ ${(Number.isFinite(economieMensuelle) && economieMensuelle >= sc.mensualite) ? `
         <h3 class="financial-title">Coût et financement</h3>
         ${prixHTML}
         ${financementDetailsHTML}
-      </div>`;
+      </div>
+    `;
   }
   return '';
 }
+
 
 function generateGateHTML() {
   return `
