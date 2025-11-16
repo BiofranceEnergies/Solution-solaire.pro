@@ -659,11 +659,21 @@ function generateFinancementCardHTML(sc) {
         ${dureeHTML} ${taegHTML}
       </div>
       ${totalHTML}
-      <p class="note" style="margin:10px 0 0">Financement proposé par notre partenaire, sous réserve d’acceptation.</p>
-      <div class="note note-alert">⚠️Un crédit vous engage et doit être remboursé. Vérifiez vos capacités de remboursement avant de vous engager.</div>
-      <p class="note" style="margin:8px 0 0">Estimation indicative. Visite technique nécessaire...</p>
-     `;
-  }
+<p class="note" style="margin:10px 0 0">Financement proposé...</p>
+<div class="note note-alert">⚠️ Un crédit...</div>
+<p class="note" style="margin:8px 0 0">Estimation indicative. Visite technique nécessaire...</p>
+
+${(Number.isFinite(economieMensuelle) && economieMensuelle >= sc.mensualite) ? `
+`
+  <p class="note" style="margin:14px 0 0; font-weight:600; text-align:center; color:#0f172a;">
+    💡 Votre économie mensuelle (${economieMensuelle.toLocaleString('fr-FR', {minimumFractionDigits:0, maximumFractionDigits:0})} €)
+    est supérieure à la mensualité (${sc.mensualite.toLocaleString('fr-FR', {minimumFractionDigits:2, maximumFractionDigits:2})} €).
+    Le projet s’autofinance.
+  </p>
+` : ''}
+
+
+
 
   if (prixHTML || financementDetailsHTML) {
     return `
