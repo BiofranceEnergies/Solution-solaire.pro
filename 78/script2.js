@@ -741,19 +741,39 @@ function generateFinancementCardHTML(sc) {
     ) {
       phraseAutofinancement = `
         <p class="note"
-           style="margin:14px 0 0; font-weight:650; text-align:center; color:#0f172a; font-size:15px;">
-          💡 Votre économie mensuelle (${economieMensuelle.toLocaleString('fr-FR', {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-          })} €)
-          est supérieure à la mensualité (${sc.mensualite.toLocaleString('fr-FR', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          })} €).
-          Le projet s’autofinance.
+           style="
+             margin:18px 0 0;
+             padding:10px 18px;
+             font-weight:600;
+             font-size:15px;
+             line-height:1.5;
+             text-align:center;
+             color:#0f172a;
+             background:linear-gradient(
+               135deg,
+               rgba(252, 211, 77, 0.16),
+               rgba(251, 191, 36, 0.04)
+             );
+             border-radius:999px;
+             box-shadow:0 18px 45px rgba(15, 23, 42, 0.10);
+           ">
+          <span style="font-size:18px;margin-right:4px;">💡</span>
+          Votre économie mensuelle
+          (<strong>${economieMensuelle.toLocaleString('fr-FR', {
+            minimumFractionDigits:0,
+            maximumFractionDigits:0
+          })} €</strong>)
+          est supérieure à la mensualité
+          (<strong>${sc.mensualite.toLocaleString('fr-FR', {
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+          })} €</strong>).
+          <br>
+          <span style="font-weight:700;">Le projet s’autofinance.</span>
         </p>
       `;
     }
+
 
     // Bloc financement complet
     financementDetailsHTML = `
