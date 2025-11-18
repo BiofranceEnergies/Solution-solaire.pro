@@ -67,25 +67,22 @@ body{
   font-size: clamp(28px, 4.2vw, 52px);
 }
 
-/* --- DÉBUT MODIFICATION TITRE H1 --- */
-/* Ligne 1 : on supprime le nowrap pour laisser le <br> forcer la ligne suivante */
+/* --- DÉBUT MODIFICATION TITRE H1 (CORRECTION) --- */
 .h1-line1 {
-  white-space: normal;
+  white-space: normal; /* Autorise le saut de ligne sur petit écran si le texte est très long */
 }
 
-/* Ligne 2 : ajout de cette classe pour cibler toute la seconde ligne si nécessaire */
 .h1-line2 {
   display: inline;
 }
 
-/* L'accentuation orange */
 .h1-accent {
   color: var(--accent);
   font-weight: 700;
   font-style: normal;
   white-space: nowrap; /* Empêche la partie orange de se couper */
 }
-/* --- FIN MODIFICATION TITRE H1 --- */
+/* --- FIN MODIFICATION TITRE H1 (CORRECTION) --- */
 
 
 .lead {
@@ -122,9 +119,10 @@ body{
     font-size: clamp(26px, 6vw, 38px);
     line-height: 1.15;
   }
-  
-  /* L'ancienne règle ici était redondante ou fautive, on la retire pour laisser le <br> faire son travail. */
-  /* .h1-accent { white-space: normal; } */
+
+  .h1-accent {
+    white-space: normal; /* autorise la coupure si l'écran est trop étroit (pour la partie accent) */
+  }
 }
 
 
@@ -1616,13 +1614,19 @@ header.hero .hero__inner{
   }
 }
 /* Ligne 1 du H1 : on la bloque sur une seule ligne sur desktop */
-/* L'ancienne règle suivante a été supprimée ou modifiée dans la section HERO principale. */
-/* .h1-line1 { white-space: nowrap; } */
+.h1-line1 {
+  white-space: nowrap;
+}
 
 /* Accent H1 en orange */
-/* L'ancienne règle suivante a été supprimée ou modifiée dans la section HERO principale. */
-/* .h1-accent { color: var(--accent); font-weight: inherit; } */
+.h1-accent {
+  color: var(--accent);
+  font-weight: inherit;
+}
 
 /* Sur mobile, on autorise à couper si l'écran est trop étroit */
-/* L'ancienne règle suivante a été supprimée. */
-/* @media (max-width: 900px){ .h1-line1 { white-space: normal; } } */
+@media (max-width: 900px){
+  .h1-line1 {
+    white-space: normal;
+  }
+}
