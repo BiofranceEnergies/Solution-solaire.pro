@@ -1355,3 +1355,125 @@ body.results-mode .new-footer {
     padding-bottom: 140px !important;  /* tu peux réduire/augmenter si besoin */
   }
 }
+/* =============================
+   Lazy Form Reveal – Modal formulaire
+============================= */
+
+.reveal-cta {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 600;
+  padding-inline: 1.5rem;
+  min-height: 52px;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(15, 23, 42, 0.65); /* fond sombre */
+  backdrop-filter: blur(10px);         /* flou d’arrière-plan */
+  -webkit-backdrop-filter: blur(10px);
+  transition: opacity 0.25s ease;
+}
+
+.modal.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 460px;
+  background: rgba(15, 23, 42, 0.96);
+  border-radius: 18px;
+  padding: 20px 20px 22px;
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  position: relative;
+  color: #e5e7eb;
+}
+
+.modal-content h3 {
+  margin: 0 0 14px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #f9fafb;
+  text-align: left;
+}
+
+.modal-content .row {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.modal-content label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.82rem;
+  color: #cbd5f5;
+}
+
+.modal-content input {
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  background: rgba(15, 23, 42, 0.9);
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  color: #f9fafb;
+}
+
+.modal-content input::placeholder {
+  color: #64748b;
+}
+
+.modal-content .cta {
+  margin-top: 12px;
+  width: 100%;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  font-size: 18px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: rgba(30, 64, 175, 0.95);
+  border-color: rgba(191, 219, 254, 0.9);
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    padding: 18px 16px 20px;
+  }
+  .modal-content .row {
+    grid-template-columns: 1fr;
+  }
+}
