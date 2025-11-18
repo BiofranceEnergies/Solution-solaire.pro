@@ -32,13 +32,23 @@ header.hero{
   overflow:hidden; isolation:isolate;
 }
 header.hero::before{
-  content:""; position:absolute; inset:0;
+  content:""; 
+  position:absolute; 
+  inset:0;
   background:
-    linear-gradient(90deg, rgba(5,12,24,.82) 0%, rgba(7,16,30,.66) 34%, rgba(10,18,28,.42) 62%, rgba(12,20,28,.22) 100%),
+    /* Overlay un peu plus fin et plus progressif */
+    linear-gradient(
+      90deg,
+      rgba(5,12,24,0.78) 0%,
+      rgba(7,16,30,0.55) 32%,
+      rgba(10,18,28,0.32) 60%,
+      rgba(12,20,28,0.12) 100%
+    ),
     url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp")
-    center 35%/cover no-repeat;
+      center 35% / cover no-repeat;
   z-index:-1;
 }
+
 .hero__inner{
   max-width:var(--maxw); margin:0 auto;
   padding:60px clamp(16px,4vw,40px);
@@ -1519,9 +1529,12 @@ body.modal-open {
   max-width: none;
 }
 
-.hero .title .title-line {
-  display: block;
+.hero .title {
+  font-size: 36px;
+  line-height: 1.18;
+  font-weight: 800;
 }
+
 
 /* Sur desktop : chaque ligne reste sur une seule ligne */
 @media (min-width: 1024px) {
