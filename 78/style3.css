@@ -1553,10 +1553,22 @@ header.hero .hero__inner{
     line-height: 1.2;
   }
 }
+/* Ligne 1 du H1 : on la bloque sur une seule ligne sur desktop */
+.h1-line1 {
+  white-space: nowrap;
+}
+
 /* Accent H1 en orange */
 .h1-accent {
   color: var(--accent);
   font-weight: inherit;
+}
+
+/* Sur mobile, on autorise à couper si l'écran est trop étroit */
+@media (max-width: 900px){
+  .h1-line1 {
+    white-space: normal;
+  }
 }
 
 
