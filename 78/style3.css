@@ -27,10 +27,14 @@ body{
 }
 
 /* ================== HERO ================== */
-header.hero{
-  position:relative; height:var(--hero-h-desktop); min-height:var(--hero-min);
-  overflow:hidden; isolation:isolate;
+header.hero {
+  position:relative;
+  min-height:var(--hero-min);
+  padding-bottom:40px; /* on laisse de l’air */
+  overflow:hidden;
+  isolation:isolate;
 }
+
 header.hero::before{
   content:""; 
   position:absolute; 
