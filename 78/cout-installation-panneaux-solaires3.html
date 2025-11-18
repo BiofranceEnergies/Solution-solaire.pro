@@ -80,67 +80,39 @@
   estimation en 10 s<br>
   <em>dans les Yvelines (78)</em>
 </h1>
-
-
-
-
      <p class="lead">Obtenez une <strong>estimation claire du coût de votre installation solaire</strong>, avec la production et les économies attendues dans les Yvelines, en moins d’une minute.</p>
 
     </div>
 
-    <div class="panel">
-      <form onsubmit="return __handleSubmitEtape1(event)" novalidate>
-        <p style="text-align:center;font-weight:700;margin:0 0 10px;color:#fff;max-width:420px;margin-inline:auto;">
-          ⚡ Simulation rapide, fiable et sans engagement. Entrez votre code postal et votre facture : votre estimation s’affiche immédiatement.
-        </p>
+  <div class="panel">
+  <button id="reveal-form" class="cta reveal-cta">🔍 Faire une estimation maintenant</button>
+</div>
 
-        <div class="pill">Votre simulation instantanée :<br>Prix • Économies • Dimensionnement</div>
-
-        <div class="row">
-          <label class="rect">
-            <span class="sr-only">Code postal</span>
-            <input
-              id="codePostal"
-              type="text"
-              placeholder="Votre code postal (ex : 78000)"
-              inputmode="numeric"
-              maxlength="5"
-              pattern="[0-9]{5}"
-              autocomplete="postal-code"
-              required
-            >
-          </label>
-
-          <label class="rect">
-            <span class="sr-only">Votre facture électricité par an</span>
-            <input
-              id="facture"
-              type="text"
-              placeholder="Facture annuelle (€) — ex : 1 800"
-              inputmode="decimal"
-              autocomplete="off"
-              required
-            >
-          </label>
-        </div>
-
-        <label class="option">
-          <span class="sr-only">Consommation en kWh par an (facultatif)</span>
-          <input
-            id="conso"
-            type="text"
-            placeholder="kWh/an — pour affiner l’estimation (facultatif)"
-            inputmode="decimal"
-            autocomplete="off"
-          >
+<!-- Modal flottant (formulaire masqué au départ) -->
+<div id="form-modal" class="modal hidden" aria-hidden="true">
+  <div class="modal-content">
+    <button class="modal-close" aria-label="Fermer">×</button>
+    <form onsubmit="return __handleSubmitEtape1(event)" novalidate>
+      <h3>Votre estimation solaire</h3>
+      <div class="row">
+        <label>
+          <span>Code postal</span>
+          <input id="codePostal" type="text" placeholder="78000" inputmode="numeric" maxlength="5" pattern="[0-9]{5}" autocomplete="postal-code" required>
         </label>
+        <label>
+          <span>Facture annuelle (€)</span>
+          <input id="facture" type="text" placeholder="1800" inputmode="decimal" required>
+        </label>
+      </div>
+      <label>
+        <span>Conso annuelle (kWh) — facultatif</span>
+        <input id="conso" type="text" placeholder="4000" inputmode="decimal">
+      </label>
+      <button id="simuler" class="cta" type="submit">⚡ Lancer ma simulation</button>
+    </form>
+  </div>
+</div>
 
-        <button id="simuler" class="cta" type="submit">⚡ Lancer ma simulation</button>
-        <p style="text-align:center;font-size:13px;opacity:.9;margin:8px 0 0;color:#fff;">
-          Estimation instantanée. Aucun appel automatique, aucun engagement.
-        </p>
-      </form>
-    </div>
   </div>
 </header>
 
