@@ -27,41 +27,93 @@ body{
 }
 
 /* ================== HERO ================== */
-header.hero {
-  position:relative;
-  min-height:var(--hero-min);
-  padding-bottom:40px; /* on laisse de l’air */
-  overflow:hidden;
-  isolation:isolate;
+/* ============================
+   HERO VERSION STABLE – OPTION A
+   ============================ */
+
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 40px;
+  background: rgba(0,0,0,0.45);
 }
 
-header.hero::before{
-  content:""; 
-  position:absolute; 
-  inset:0;
-  background:
-    /* Overlay un peu plus fin et plus progressif */
-    linear-gradient(
-      90deg,
-      rgba(5,12,24,0.78) 0%,
-      rgba(7,16,30,0.55) 32%,
-      rgba(10,18,28,0.32) 60%,
-      rgba(12,20,28,0.12) 100%
-    ),
-    url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp")
-      center 35% / cover no-repeat;
-  z-index:-1;
+.hero__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
-.hero__inner{
-  max-width:var(--maxw); margin:0 auto;
-  padding:60px clamp(16px,4vw,40px);
-  display:grid; grid-template-columns:1.1fr 0.9fr; gap:clamp(20px,4vw,42px);
-  height:100%; align-items:center; color:#fff;
+.hero-main {
+  width: 100%;
+  max-width: 760px; /* largeur optimale pour que le H1 ne casse pas */
+  line-height: 1.28;
+  margin-top: 20px;
 }
-@media (max-width:860px){
-  .hero__inner{grid-template-columns:1fr;text-align:center;align-items:flex-end;padding-bottom:80px;}
+
+.title {
+  margin: 0 0 10px;
+  color: #fff;
+  font-weight: 900;
+  line-height: 1.1;
+  font-size: clamp(28px, 4.2vw, 52px);
 }
+
+.h1-accent {
+  color: var(--accent);
+  font-weight: 700;
+  font-style: normal;
+  white-space: nowrap; /* évite le passage en 3 lignes */
+}
+
+.lead {
+  margin-top: 16px;
+  font-size: 17px;
+  line-height: 1.45;
+  color: rgba(255,255,255,0.9);
+}
+
+.incitation {
+  margin-top: 14px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.panel--center-cta {
+  margin-top: 24px;
+}
+
+/* MOBILE – stabilité totale */
+@media (max-width: 768px) {
+
+  .hero {
+    padding-top: 28px;
+  }
+
+  .hero-main {
+    max-width: 100%;
+    margin-top: 10px;
+  }
+
+  .title {
+    font-size: clamp(26px, 6vw, 38px);
+    line-height: 1.15;
+  }
+
+  .h1-accent {
+    white-space: normal; /* laisse respirer si écran étroit */
+  }
+}
+
 
 .lead{margin:8px 0 0;color:rgba(255,255,255,.92);max-width:54ch;}
 
