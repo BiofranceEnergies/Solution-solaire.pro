@@ -1608,7 +1608,7 @@ header.hero .hero__inner{
   margin-top:8px;
   text-align:center;
   font-size:13px;
-  color:rgba(255,255,255,0.75);
+  color:#ffffff;
 }
 /* Mobile : taille titre adaptée */
 @media (max-width: 600px){
