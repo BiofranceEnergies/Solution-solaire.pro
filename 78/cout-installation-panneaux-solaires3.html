@@ -73,48 +73,63 @@
     <img class="certifs__img" src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/687b0f048a98e03f86e7852020887ff4f05eb913/icone%20qualipv.webp" alt="Certification QualiPV 2025">
   </div>
 
+ <header class="hero">
+
+  <div class="certifs" aria-label="Labels et certifications">
+    <img class="certifs__img" src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/687b0f048a98e03f86e7852020887ff4f05eb913/icone%20RGE.webp" alt="Label RGE – Reconnu Garant de l’Environnement">
+    <img class="certifs__img certifs__img--main" src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/687b0f048a98e03f86e7852020887ff4f05eb913/logo%20SSP.webp" alt="Solution Solaire Pro">
+    <img class="certifs__img" src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/687b0f048a98e03f86e7852020887ff4f05eb913/icone%20qualipv.webp" alt="Certification QualiPV 2025">
+  </div>
+
   <div class="hero__inner">
-    <div>
-  <h1 class="title">
-  Coût installation solaire<br>
-  estimation en 10 s<br>
-  <em>dans les Yvelines (78)</em>
-</h1>
-     <p class="lead">Obtenez une <strong>estimation claire du coût de votre installation solaire</strong>, avec la production et les économies attendues dans les Yvelines, en moins d’une minute.</p>
+    <div class="hero-main">
+      <h1 class="title">
+        Coût installation solaire<br>
+        estimation en 10 s<br>
+        <em>dans les Yvelines (78)</em>
+      </h1>
 
-    </div>
+      <p class="lead">
+        Obtenez une <strong>estimation claire du coût de votre installation solaire</strong>,
+        avec la production et les économies attendues dans les Yvelines, en moins d’une minute.
+      </p>
 
-  <div class="panel">
-  <button id="reveal-form" class="cta reveal-cta">🔍 Faire une estimation maintenant</button>
-</div>
-
-<!-- Modal flottant (formulaire masqué au départ) -->
-<div id="form-modal" class="modal hidden" aria-hidden="true">
-  <div class="modal-content">
-    <button class="modal-close" aria-label="Fermer">×</button>
-    <form onsubmit="return __handleSubmitEtape1(event)" novalidate>
-      <h3>Votre estimation solaire</h3>
-      <div class="row">
-        <label>
-          <span>Code postal</span>
-          <input id="codePostal" type="text" placeholder="78000" inputmode="numeric" maxlength="5" pattern="[0-9]{5}" autocomplete="postal-code" required>
-        </label>
-        <label>
-          <span>Facture annuelle (€)</span>
-          <input id="facture" type="text" placeholder="1800" inputmode="decimal" required>
-        </label>
+      <!-- CTA centré sous le texte -->
+      <div class="panel panel--center-cta">
+        <button id="reveal-form" class="cta reveal-cta">
+          🔍 Faire une estimation maintenant
+        </button>
       </div>
-      <label>
-        <span>Conso annuelle (kWh) — facultatif</span>
-        <input id="conso" type="text" placeholder="4000" inputmode="decimal">
-      </label>
-      <button id="simuler" class="cta" type="submit">⚡ Lancer ma simulation</button>
-    </form>
+    </div>
   </div>
-</div>
 
+  <!-- Modal flottant (formulaire masqué au départ) -->
+  <div id="form-modal" class="modal hidden" aria-hidden="true">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Fermer">×</button>
+      <form onsubmit="return __handleSubmitEtape1(event)" novalidate>
+        <h3>Votre estimation solaire</h3>
+        <div class="row">
+          <label>
+            <span>Code postal</span>
+            <input id="codePostal" type="text" placeholder="78000" inputmode="numeric" maxlength="5" pattern="[0-9]{5}" autocomplete="postal-code" required>
+          </label>
+          <label>
+            <span>Facture annuelle (€)</span>
+            <input id="facture" type="text" placeholder="1800" inputmode="decimal" required>
+          </label>
+        </div>
+        <label>
+          <span>Conso annuelle (kWh) — facultatif</span>
+          <input id="conso" type="text" placeholder="4000" inputmode="decimal">
+        </label>
+        <button id="simuler" class="cta" type="submit">⚡ Lancer ma simulation</button>
+      </form>
+    </div>
   </div>
+
 </header>
+
 
 
 <!-- ====== REPÈRES DE PRIX (à coller juste après </header>) ====== -->
