@@ -282,6 +282,14 @@ const inputCP = document.getElementById('codePostal');
 const inputFact = document.getElementById('facture');
 
 function showCalcOverlay(msg) {
+  // Si le formulaire est dans un modal, on le ferme au moment du calcul
+  const modal = document.getElementById('form-modal');
+  if (modal) {
+    modal.classList.add('hidden');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+  }
+
   if (!overlay) return;
   if (msg) {
     const t = overlay.querySelector('#calc-title');
@@ -290,8 +298,12 @@ function showCalcOverlay(msg) {
   overlay.style.display = 'flex';
   document.body.classList.add('no-scroll');
   overlay.querySelector('.panel')?.focus();
-  if (btnSim) { btnSim.disabled = true; btnSim.style.opacity = '0.7'; }
+  if (btnSim) {
+    btnSim.disabled = true;
+    btnSim.style.opacity = '0.7';
+  }
 }
+
 function hideCalcOverlay() {
   if (!overlay) return;
   overlay.style.display = 'none';
@@ -839,3 +851,55 @@ function generateGateHTML() {
   </div>
 </div>`;
 }
+/* =============================
+   Lazy Form Reveal (modal formulaire)
+============================= */
+document.addEventListener('DOMContentLoaded', () => {
+  const modal     = document.getElementById('form-modal');
+  const openBtn   = document.getElementById('reveal-form');
+  const closeBtn  = modal ? modal.querySelector('.modal-close') : null;
+  const firstInput = modal ? modal.querySelector('#codePostal') : null;
+
+  if (!modal || !openBtn) return;
+
+  function openModal() {
+    modal.classList.remove('hidden');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    if (firstInput) firstInput.focus();
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('modal-open');
+  }
+
+  // Ouverture via le bouton "Faire une estimation maintenant"
+  openBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    openModal();
+  });
+
+  // Fermeture via bouton croix
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeModal();
+    });
+  }
+
+  // Fermeture en cliquant sur le fond flouté
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  // Fermeture via Échap
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+      closeModal();
+    }
+  });
+});
