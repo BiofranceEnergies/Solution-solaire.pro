@@ -1495,31 +1495,35 @@ body.modal-open {
 
 /* CTA centré sous le texte */
 .panel.panel--center-cta {
-  margin-top: 24px;
+  margin-top: 30px;        /* un peu plus d'air avant le bouton */
   margin-inline: auto;
   display: flex;
   justify-content: center;
 }
 
-/* Phrase d’incitation */
-.incitation {
-  font-size: 20px;
-  font-weight: 700;
-  margin-top: 4px;      /* petit resserrage au-dessus */
-  margin-bottom: 26px;  /* un peu d’air avant le bouton */
-  color: #f59e0b;       /* orange du site */
-}
-
-
-/* Titre hero : taille adaptée */
+/* Titre hero : 2 lignes + vrai espace dessous */
 .hero .title {
   font-size: 40px;
   line-height: 1.15;
   font-weight: 800;
   max-width: none;
-  margin-bottom: 22px; /* espace sous le titre */
+  margin-bottom: 26px;     /* plus d'espace sous le H1 */
 }
 
+/* Paragraphe sous le titre */
+.hero .lead {
+  margin-top: 0;
+  margin-bottom: 18px;     /* plus d'espace avant la phrase orange */
+}
+
+/* Phrase d’incitation orange */
+.incitation {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 26px;
+  color: #f59e0b;
+}
 
 /* Ajustement mobile */
 @media (max-width: 600px) {
@@ -1527,10 +1531,5 @@ body.modal-open {
     font-size: 30px;
     line-height: 1.2;
   }
-}
-
-.hero .lead {
-  margin-top: 0;         /* on colle au titre */
-  margin-bottom: 14px;   /* espace avant la phrase orange */
 }
 
