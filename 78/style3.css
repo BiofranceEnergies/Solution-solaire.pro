@@ -169,11 +169,12 @@ input { backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
 
 /* Logos certifications (héros) */
 .certifs{position:absolute;top:14px;left:14px;display:flex;align-items:center;gap:10px;z-index:5;}
-.certifs__img{height:30px;width:auto;display:block;filter:drop-shadow(0 1px 3px rgba(0,0,0,.25));}
-.certifs__img--main{height:60px;margin:0 3px;}
-.certifs__img[src*="qualipv"]{height:38px;}
-.certifs__img[src*="RGE.webp"]{height:28px;}
-@media (max-width:860px){.certifs{top:10px;left:10px;gap:6px;}.certifs__img{height:24px;}.certifs__img--main{height:42px;}.certifs__img[src*="qualipv"]{height:30px;}.certifs__img[src*="RGE.webp"]{height:22px;}}
+.certifs__img{height:32px;width:auto;display:block;filter:drop-shadow(0 1px 3px rgba(0,0,0,.25));}
+.certifs__img--main{height:36px;margin:0 3px;} /* ton logo rond légèrement plus petit */
+.certifs__img[src*="qualipv"]{height:32px;}     /* aligné comme RGE */
+.certifs__img[src*="RGE.webp"]{height:32px;}    /* même hauteur */
+@media (max-width:860px){.certifs{top:10px;left:10px;gap:6px;}.certifs__img{height:26px;}.certifs__img--main{height:30px;}.certifs__img[src*="qualipv"]{height:26px;}.certifs__img[src*="RGE.webp"]{height:26px;}}
+
 
 
 /* ================== SECTION 3 ÉTAPES ================== */
