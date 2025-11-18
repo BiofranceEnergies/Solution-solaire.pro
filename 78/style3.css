@@ -1562,3 +1562,8 @@ body.modal-open {
 .incitation {
   margin-bottom: 34px; /* au lieu de 26px */
 }
+/* === Placement vertical du bloc texte dans le hero === */
+header.hero .hero__inner{
+  align-items: flex-start;   /* au lieu de center */
+  padding-top: 140px !important;  /* tu ajustes 120 / 160 selon ton goût */
+}
