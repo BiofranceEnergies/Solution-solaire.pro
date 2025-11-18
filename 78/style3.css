@@ -1520,13 +1520,13 @@ header.hero .hero__inner{
   font-size: 40px;
   line-height: 1.15;
   font-weight: 800;
-  margin-bottom: 40px;     /* espace sous le H1 */
+  margin-bottom: 44px;     /* espace sous le H1 */
 }
 
 /* Paragraphe blanc */
 .hero .lead{
   margin-top: 0;
-  margin-bottom: 26px;     /* espace avant la phrase orange */
+  margin-bottom: 32px;     /* espace avant la phrase orange */
 }
 
 /* Phrase orange */
@@ -1534,7 +1534,7 @@ header.hero .hero__inner{
   font-size: 20px;
   font-weight: 700;
   margin-top: 0;
-  margin-bottom: 34px;     /* espace avant le bouton */
+  margin-bottom: 38px;     /* espace avant le bouton */
   color: #f59e0b;
 }
 
