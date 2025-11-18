@@ -1510,23 +1510,27 @@ header.hero .hero__inner{
 }
 
 /* Bloc texte */
+/* Bloc texte — version stable */
 .hero-main{
-  max-width: 720px;
+  max-width: 1000px;   /* au lieu de 720px */
+  width: 100%;
   line-height: 1.35;
 }
 
-/* Titre + espaces */
+/* H1 stable */
 .hero .title{
   font-size: 40px;
   line-height: 1.15;
   font-weight: 800;
-  margin-bottom: 44px;     /* espace sous le H1 */
+  margin-bottom: 44px;
+  white-space: normal;     /* cohérent et naturel */
+  word-break: keep-all;    /* empêche la ligne 3 */
 }
 
 /* Paragraphe blanc */
 .hero .lead{
   margin-top: 0;
-  margin-bottom: 32px;     /* espace avant la phrase orange */
+  margin-bottom: 32px;
 }
 
 /* Phrase orange */
@@ -1534,7 +1538,7 @@ header.hero .hero__inner{
   font-size: 20px;
   font-weight: 700;
   margin-top: 0;
-  margin-bottom: 38px;     /* espace avant le bouton */
+  margin-bottom: 38px;
   color: #f59e0b;
 }
 
