@@ -1499,4 +1499,16 @@ body.modal-open {
   margin-bottom: 22px;
   color: #f59e0b; /* orange */
 }
+.title-line-1,
+.title-line-2 {
+  display: block;
+}
+
+/* Desktop : on force chaque ligne sur une seule ligne */
+@media (min-width: 960px) {
+  .title-line-1,
+  .title-line-2 {
+    white-space: nowrap;
+  }
+}
 
