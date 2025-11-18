@@ -1,6 +1,6 @@
 :root{
   /* Layout */
-  --hero-h-desktop: 95vh;
+  --hero-h-desktop: 95vh; 
   --hero-h-mobile: 100svh; 
   --hero-min: 700px;
   --maxw: 1100px;
