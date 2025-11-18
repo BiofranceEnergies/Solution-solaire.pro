@@ -1499,17 +1499,18 @@ body.modal-open {
   margin-bottom: 22px;
   color: #f59e0b; /* orange */
 }
-.title-line-1,
-.title-line-2 {
-  display: block;
+.hero .title {
+  font-size: 44px;
+  line-height: 1.15;
+  max-width: none; /* pour ne pas re-casser le titre ailleurs */
 }
 
-/* Desktop : on force chaque ligne sur une seule ligne */
-@media (min-width: 960px) {
-  .title-line-1,
-  .title-line-2 {
-    white-space: nowrap;
+@media (max-width: 600px) {
+  .hero .title {
+    font-size: 32px;
+    line-height: 1.2;
   }
 }
+
 
 
