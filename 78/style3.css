@@ -39,7 +39,14 @@ body{
   flex-direction: column;
   justify-content: flex-start;
   padding-top: 40px;
-  background: rgba(0,0,0,0.45);
+
+  /* VOTRE CODE DE FOND (Image + Dégradé) */
+  background:
+    linear-gradient(90deg, rgba(5,12,24,.82) 0%, rgba(7,16,30,.66) 34%, rgba(10,18,28,.42) 62%, rgba(12,20,28,.22) 100%),
+    url("https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/1ea92369de57361354807811188559129b45985c/foto%20fond.webp")
+    center 35%/cover no-repeat;
+  /* z-index: -1; <-- Attention, si vous mettez z-index -1 ici, le fond risque de passer SOUS le body et disparaître. 
+     Mieux vaut ne pas mettre de z-index négatif sur le conteneur principal .hero */
 }
 
 .hero__inner {
