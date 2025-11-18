@@ -1519,13 +1519,14 @@ header.hero .hero__inner{
 
 /* H1 stable */
 .hero .title{
-  font-size: 40px;
+  font-size: 36px;      /* au lieu de 40px */
   line-height: 1.15;
   font-weight: 800;
   margin-bottom: 44px;
-  white-space: normal;     /* cohérent et naturel */
-  word-break: keep-all;    /* empêche la ligne 3 */
+  white-space: normal;
+  word-break: keep-all;
 }
+
 
 /* Paragraphe blanc */
 .hero .lead{
