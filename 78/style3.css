@@ -1553,3 +1553,7 @@ header.hero .hero__inner{
     line-height: 1.2;
   }
 }
+.title .accent {
+  color: var(--accent);
+  font-weight: 900;
+}
