@@ -1477,3 +1477,13 @@ body.modal-open {
     grid-template-columns: 1fr;
   }
 }
+.hero-main {
+  max-width: 560px;
+}
+
+.panel.panel--center-cta {
+  margin-top: 24px;
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+}
