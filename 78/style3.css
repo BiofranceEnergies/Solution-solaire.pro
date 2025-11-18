@@ -1497,19 +1497,19 @@ body.modal-open {
   line-height: 1.35;
 }
 
-/* Titre hero : taille + espace sous le titre */
+/* Titre hero : espace sous le titre */
 .hero .title {
   font-size: 40px;
   line-height: 1.15;
   font-weight: 800;
   max-width: none;
-  margin-bottom: 26px;   /* espace sous le titre */
+  margin-bottom: 28px;   /* espace entre H1 et le paragraphe */
 }
 
-/* Paragraphe sous le titre */
+/* Paragraphe descriptif : espace avant la phrase orange */
 .hero .lead {
   margin-top: 0;
-  margin-bottom: 18px;   /* espace avant la phrase orange */
+  margin-bottom: 18px;   /* espace entre le texte blanc et la phrase orange */
 }
 
 /* Phrase d’incitation orange */
@@ -1517,13 +1517,13 @@ body.modal-open {
   font-size: 20px;
   font-weight: 700;
   margin-top: 0;
-  margin-bottom: 30px;   /* air avant le bouton */
+  margin-bottom: 26px;   /* espace entre la phrase orange et le bouton */
   color: #f59e0b;
 }
 
 /* CTA centré sous le texte */
 .panel.panel--center-cta {
-  margin-top: 0;         /* plus de double marge inutile */
+  margin-top: 0;
   margin-inline: auto;
   display: flex;
   justify-content: center;
@@ -1536,5 +1536,4 @@ body.modal-open {
     line-height: 1.2;
   }
 }
-
 
