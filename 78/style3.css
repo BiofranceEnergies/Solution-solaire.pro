@@ -1487,70 +1487,42 @@ body.modal-open {
     grid-template-columns: 1fr;
   }
 }
+/* Bloc texte hero */
 .hero-main {
-  max-width: 560px;
+  max-width: 720px;
+  line-height: 1.35;
 }
 
+/* CTA centré sous le texte */
 .panel.panel--center-cta {
   margin-top: 24px;
   margin-inline: auto;
   display: flex;
   justify-content: center;
 }
-.hero-main {
-  max-width: 720px; /* Élargi pour aérer le texte */
-  line-height: 1.35; /* Plus lisible */
-}
 
+/* Phrase d’incitation */
 .incitation {
   font-size: 20px;
   font-weight: 700;
   margin-top: 14px;
   margin-bottom: 22px;
-  color: #f59e0b; /* orange */
-}
-.hero .title {
-  font-size: 44px;
-  line-height: 1.15;
-  max-width: none; /* pour ne pas re-casser le titre ailleurs */
+  color: #f59e0b; /* orange du site */
 }
 
-@media (max-width: 600px) {
-  .hero .title {
-    font-size: 32px;
-    line-height: 1.2;
-  }
-}
-
-/* Titre hero : taille raisonnable + 2 lignes fixes sur desktop */
+/* Titre hero : taille adaptée */
 .hero .title {
   font-size: 40px;
   line-height: 1.15;
+  font-weight: 800;
   max-width: none;
 }
 
-.hero .title {
-  font-size: 36px;
-  line-height: 1.18;
-  font-weight: 800;
-}
-
-
-/* Sur desktop : chaque ligne reste sur une seule ligne */
-@media (min-width: 1024px) {
-  .hero .title .title-line {
-    white-space: nowrap;
-  }
-}
-
-/* Sur mobile : on laisse le texte se casser naturellement */
+/* Ajustement mobile */
 @media (max-width: 600px) {
   .hero .title {
     font-size: 30px;
     line-height: 1.2;
-  }
-  .hero .title .title-line {
-    white-space: normal;
   }
 }
 
