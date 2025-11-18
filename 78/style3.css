@@ -1546,3 +1546,19 @@ body.modal-open {
     padding-top: 90px;  /* un peu moins sur mobile */
 }
 
+/* ===== Aération verticale dans le hero ===== */
+
+/* Espace sous le titre */
+.hero .title {
+  margin-bottom: 36px; /* au lieu de 28px */
+}
+
+/* Espace entre le paragraphe blanc et la phrase orange */
+.hero .lead {
+  margin-bottom: 26px; /* au lieu de 18px */
+}
+
+/* Espace entre la phrase orange et le bouton */
+.incitation {
+  margin-bottom: 34px; /* au lieu de 26px */
+}
