@@ -1536,4 +1536,13 @@ body.modal-open {
     line-height: 1.2;
   }
 }
+/* === Ajustement vertical du texte dans le hero === */
+.hero__inner{
+  padding-top: 120px;   /* avant : 60px, on descend tout le bloc */
+}
+
+@media (max-width: 860px){
+  .hero__inner{
+    padding-top: 90px;  /* un peu moins sur mobile */
+}
 
