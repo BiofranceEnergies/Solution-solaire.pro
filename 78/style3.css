@@ -1553,11 +1553,11 @@ header.hero .hero__inner{
     line-height: 1.2;
   }
 }
+/* Accent H1 en orange */
 .h1-accent {
   color: var(--accent);
   font-weight: inherit;
-  white-space: nowrap;
-  text-shadow: 0 0 10px rgba(245,158,11,0.35);
 }
+
 
 
