@@ -1490,7 +1490,7 @@ body.modal-open {
 /* Descendre le bloc texte dans le hero */
 header.hero .hero__inner{
   align-items: flex-start;          /* au lieu de center */
-  padding-top: 180px !important;    /* 180px = très visible, à ajuster */
+  padding-top: 100px !important;    /* 180px = très visible, à ajuster */
 }
 
 /* Mobile : un peu moins bas */
