@@ -1487,3 +1487,16 @@ body.modal-open {
   display: flex;
   justify-content: center;
 }
+.hero-main {
+  max-width: 720px; /* Élargi pour aérer le texte */
+  line-height: 1.35; /* Plus lisible */
+}
+
+.incitation {
+  font-size: 16px;
+  color: var(--ink); /* même couleur que le texte principal */
+  margin-top: 8px;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+
