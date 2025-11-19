@@ -1388,7 +1388,9 @@ body.results-mode #recap{
   cursor: pointer;
   box-shadow: 0 8px 18px rgba(245,158,11,.25);
   transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+  animation: gatePulse 4s ease-in-out infinite;
 }
+
 .gate-sticky .gate-cta:hover{
   transform: translateY(-1px);
   box-shadow: 0 12px 26px rgba(245,158,11,.3);
@@ -1640,19 +1642,15 @@ header.hero .hero__inner{
   100% { box-shadow: 0 0 12px rgba(255,170,0,0.25); }
 }
 
-/* Animation subtile du bouton faisabilité */
-.gate-sticky .gate-cta {
-  animation: cta-softpulse 3.8s ease-in-out infinite;
+@keyframes gatePulse{
+  0%,92%,100%{
+    transform:scale(1);
+    box-shadow:0 8px 18px rgba(245,158,11,.25);
+  }
+  96%{
+    transform:scale(1.02);
+    box-shadow:0 12px 28px rgba(245,158,11,.35);
+  }
 }
 
-@keyframes cta-softpulse {
-  0%, 88%, 100% {
-    transform: scale(1);
-    box-shadow: 0 8px 18px rgba(245,158,11,.25);
-  }
-  92% {
-    transform: scale(1.015);
-    box-shadow: 0 12px 28px rgba(245,158,11,.35);
-  }
-}
 
