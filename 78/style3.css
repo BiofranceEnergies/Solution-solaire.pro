@@ -1651,7 +1651,7 @@ header.hero .hero__inner{
     box-shadow: 0 8px 18px rgba(245,158,11,.25);
   }
   92% {
-    transform: scale(1.02); /* +2% : visible mais propre */
+    transform: scale(1.015);
     box-shadow: 0 12px 28px rgba(245,158,11,.35);
   }
 }
