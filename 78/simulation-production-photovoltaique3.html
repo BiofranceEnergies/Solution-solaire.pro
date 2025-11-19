@@ -4,23 +4,23 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-<title>Simulation production photovoltaïque | Yvelines (78)</title>
+<title>Coût installation panneaux solaires | Yvelines (78)</title>
 
-<meta name="description" content="Simulation de production photovoltaïque dans les Yvelines (78). Estimez votre production solaire, le coût et vos économies en 1 minute. Simulation gratuite.">
+<meta name="description" content="Découvrez le coût d'une installation de panneaux solaires dans les Yvelines (78). Estimation claire du prix, de la production et des économies en 1 minute.">
 
-<link rel="canonical" href="https://www.solution-solaire.pro/78/simulation-production-photovoltaique.html">
+
+<link rel="canonical" href="https://www.solution-solaire.pro/78/cout-installation-panneaux-solaires3.html">
+
 
 <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
 <link rel="dns-prefetch" href="//raw.githubusercontent.com">
 <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
 <link rel="dns-prefetch" href="//www.googletagmanager.com">
 
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style3.css?v=toutneuf">
 
-<!-- =============================
-     CONSENT MODE v2 + PARAMÈTRES
-     (doivent précéder tout config)
-============================== -->
+
+
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){ dataLayer.push(arguments); }
@@ -47,9 +47,6 @@
 
 <body>
 
-<!-- =============================
-     BANDEAU CONSENTEMENT
-============================== -->
 <div id="consent-banner" role="dialog" aria-live="polite" aria-label="Préférences de confidentialité" style="display:none">
   <div class="consent-inner">
     <div class="consent-text">
@@ -64,79 +61,132 @@
 
 <header class="hero">
 
-    <div class="certifs" aria-label="Labels et certifications">
-      <img class="certifs__img" src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/687b0f048a98e03f86e7852020887ff4f05eb913/icone%20RGE.webp" alt="Label RGE – Reconnu Garant de l’Environnement">
-      <img class="certifs__img certifs__img--main" src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/687b0f048a98e03f86e7852020887ff4f05eb913/logo%20SSP.webp" alt="Solution Solaire Pro">
-      <img class="certifs__img" src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/687b0f048a98e03f86e7852020887ff4f05eb913/icone%20qualipv.webp" alt="Certification QualiPV 2025">
-    </div>
+  <div class="certifs" aria-label="Labels et certifications">
+    <img class="certifs__img" src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/687b0f048a98e03f86e7852020887ff4f05eb913/icone%20RGE.webp" alt="Label RGE – Reconnu Garant de l’Environnement">
+    <img class="certifs__img certifs__img--main" src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/687b0f048a98e03f86e7852020887ff4f05eb913/logo%20SSP.webp" alt="Solution Solaire Pro">
+    <img class="certifs__img" src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/687b0f048a98e03f86e7852020887ff4f05eb913/icone%20qualipv.webp" alt="Certification QualiPV 2025">
+  </div>
 
   <div class="hero__inner">
-    <div>
-   <h1 class="title">
-    Simulation production<br>photovoltaïque dans<br><em>les Yvelines (78)</em>
-   </h1>
+  <div class="hero-main">
 
-    <p class="lead">Lancez votre <strong>simulation de production photovoltaïque</strong> pour estimer la production, le coût et vos économies dans les Yvelines.</p>
+        
+<h1 class="title hero-main">
+  <span class="h1-line1">Coût installation solaire —</span><br>
+  <span class="h1-line2"><span class="h1-accent">estimation en 10&nbsp;s</span> dans les Yvelines (78)</span>
+</h1>
 
-    </div>
 
-    <div class="panel">
+  <p class="lead">
+    Obtenez une <strong>estimation claire du coût de votre installation solaire</strong><br>
+    avec la production et les économies attendues dans les Yvelines, en moins d’une minute.
+  </p>
+
+  <p class="incitation">
+    Voyez si votre projet peut s’autofinancer. Résultats 100% en ligne !
+  </p>
+
+  <div class="panel panel--center-cta">
+    <button id="reveal-form" class="cta reveal-cta">
+      🔍 Faire une estimation maintenant
+    </button>
+      <p class="cta-subtext">Simulation gratuite, anonyme et sans engagement.</p>
+  </div>
+</div>
+
+
+  </div>
+
+  <div id="form-modal" class="modal hidden" aria-hidden="true">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Fermer">×</button>
       <form onsubmit="return __handleSubmitEtape1(event)" novalidate>
-
-         <p style="text-align:center;font-weight:700;margin:0 0 10px;color:#fff;max-width:420px;margin-inline:auto;">
-      ⚡ Un simulateur rapide, fiable et sans engagement.
-      Entrez votre code postal et votre facture&nbsp;: le résultat s’affiche immédiatement.
-    </p>
-        <div class="pill">Votre simulation 100% en ligne :<br>Production • Prix • Économies</div>
-
+        <h3>Votre estimation solaire</h3>
         <div class="row">
-          <label class="rect">
-            <span class="sr-only">Votre code postal</span>
-            <input
-              id="codePostal"
-              type="text"
-              placeholder="Votre code postal (ex : 78000)"
-              inputmode="numeric"
-              maxlength="5"
-              pattern="[0-9]{5}"
-              autocomplete="postal-code"
-              required
-            >
+          <label>
+            <span>Code postal</span>
+            <input id="codePostal" type="text" placeholder="78000" inputmode="numeric" maxlength="5" pattern="[0-9]{5}" autocomplete="postal-code" required>
           </label>
-
-          <label class="rect">
-            <span class="sr-only">Votre facture électricité par an</span>
-            <input
-              id="facture"
-              type="text"
-              placeholder="Votre facture élec / an (ex : 1 800 €)"
-              inputmode="decimal"
-              autocomplete="off"
-              required
-            >
+          <label>
+            <span>Facture annuelle d’électricité (€)</span>
+            <input id="facture" type="text" placeholder="1800" inputmode="decimal" required>
           </label>
         </div>
-
-        <label class="option">
-          <span class="sr-only">Consommation en kWh par an (facultatif)</span>
-          <input
-            id="conso"
-            type="text"
-            placeholder="kWh/an – pour affiner le calcul (facultatif)"
-            inputmode="decimal"
-            autocomplete="off"
-          >
+        <label>
+          <span>Conso annuelle (kWh) — facultatif</span>
+          <input id="conso" type="text" placeholder="4000" inputmode="decimal">
         </label>
-
         <button id="simuler" class="cta" type="submit">⚡ Lancer ma simulation</button>
-        <p style="text-align:center;font-size:13px;opacity:.9;margin:8px 0 0;color:#fff;">
-  Estimation instantanée. Aucun appel automatique, aucun engagement.
-</p>
-
       </form>
     </div>
   </div>
+
 </header>
+
+
+
+<section id="repere-prix" class="prix-bloc">
+  <div class="prix-bloc__inner">
+
+    <h2 class="prix-bloc__title">
+      Nos tarifs d’installation solaire&nbsp;
+    </h2>
+    <p class="prix-intro">
+      Installations clés en main – matériel et pose inclus, prix garantis en 2025.
+    </p>
+
+    <div class="prix-grid">
+      <article class="prix-card">
+        <h3 class="prix-card__power">3 kWc</h3>
+        <p class="prix-card__meta">6 panneaux de 500 W</p>
+        <hr class="prix-card__sep">
+        <p class="prix-card__price">≈ <span class="prix-val">5 900 €</span> TTC</p>
+        <p class="prix-card__inc">Matériel + pose inclus</p>
+      </article>
+
+      <article class="prix-card">
+        <h3 class="prix-card__power">4,5 kWc</h3>
+        <p class="prix-card__meta">9 panneaux de 500 W</p>
+        <hr class="prix-card__sep">
+        <p class="prix-card__price">≈ <span class="prix-val">7 900 €</span> TTC</p>
+        <p class="prix-card__inc">Matériel + pose inclus</p>
+      </article>
+
+      <article class="prix-card">
+        <h3 class="prix-card__power">6 kWc</h3>
+        <p class="prix-card__meta">12 panneaux de 500 W</p>
+        <hr class="prix-card__sep">
+        <p class="prix-card__price">≈ <span class="prix-val">8 900 €</span> TTC</p>
+        <p class="prix-card__inc">Matériel + pose inclus</p>
+      </article>
+
+      <article class="prix-card">
+        <h3 class="prix-card__power">7,5 kWc</h3>
+        <p class="prix-card__meta">15 panneaux de 500 W</p>
+        <hr class="prix-card__sep">
+        <p class="prix-card__price">≈ <span class="prix-val">9 900 €</span> TTC</p>
+        <p class="prix-card__inc">Matériel + pose inclus</p>
+      </article>
+
+      <article class="prix-card">
+        <h3 class="prix-card__power">9 kWc</h3>
+        <p class="prix-card__meta">18 panneaux de 500 W</p>
+        <hr class="prix-card__sep">
+        <p class="prix-card__price">≈ <span class="prix-val">10 900 €</span> TTC</p>
+        <p class="prix-card__inc">Matériel + pose inclus</p>
+      </article>
+    </div>
+
+    <p class="prix-note">
+  <strong>Tarifs réels d'installation.</strong><br>
+  Découvrez si le projet est adapté, rentable, et autofinancé&nbsp;:
+  <strong>simulez en 10&nbsp;secondes.</strong>
+</p>
+
+
+
+  </div>
+</section>
 
 
 <main>
@@ -145,29 +195,30 @@
 
   <section class="steps-2025">
     <div class="steps-2025__inner">
-      <h2 class="steps-2025__title">Simulation de production photovoltaïque : simple et rapide</h2>
+      <h2 class="steps-2025__title">Votre étude solaire : simple, rapide et transparente</h2>
+
       <p class="steps-2025__subtitle">Un processus simple et transparent en 3 étapes</p>
       <div class="steps-2025__grid">
         <article class="steps-2025__item">
           <span class="steps-2025__num">01</span>
-          <h3 class="steps-2025__heading">Simulation en ligne</h3>
-          <p class="steps-2025__text">Votre simulation personnalisée selon votre consommation.</p>
+          <h3 class="steps-2025__heading">Étude personnalisée</h3>
+          <p class="steps-2025__text">Votre étude personnalisée selon votre consommation.</p>
         </article>
         <article class="steps-2025__item">
           <span class="steps-2025__num">02</span>
-          <h3 class="steps-2025__heading">Production & Économies</h3>
-          <p class="steps-2025__text">Votre production estimée et vos économies dès la 1<sup>re</sup> année.</p>
+          <h3 class="steps-2025__heading">Économies estimées</h3>
+          <p class="steps-2025__text">Vos économies estimées dès la 1<sup>re</sup> année.</p>
         </article>
         <article class="steps-2025__item">
           <span class="steps-2025__num">03</span>
-          <h3 class="steps-2025__heading">Coût & Financement</h3>
-          <p class="steps-2025__text">Le coût précis de l’installation et son financement.</p>
+          <h3 class="steps-2025__heading">Estimation & financement</h3>
+          <p class="steps-2025__text">Estimation précise de l’installation et son financement.</p>
         </article>
       </div>
       <div class="steps-2025__note">
         <p>Rien de superflu. Juste les chiffres qui comptent.</p>
-        <div class="steps-2025__check">
-          <svg viewBox="0 0 24 24" width="60" height="60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <div class="steps-2025__check" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="60" height="60" xmlns="http://www.w3.org/2000/svg">
             <circle cx="12" cy="12" r="11" fill="#22c55e"/>
             <path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -179,7 +230,7 @@
   <section class="why" aria-labelledby="why-title">
     <div class="why__inner">
       <header class="why__head">
-        <h2 id="why-title" class="why__title">Pourquoi simuler votre production solaire&nbsp;?</h2>
+        <h2 id="why-title" class="why__title">Pourquoi passer à l’énergie solaire&nbsp;?</h2>
         <p class="why__subtitle">Les bénéfices concrets d’une installation photovoltaïque chez vous</p>
       </header>
       <div class="why__grid">
@@ -248,198 +299,188 @@
   <section class="testi" aria-labelledby="testi-title">
     <div class="testi__inner">
       <header class="testi__head">
-        <h2 id="testi-title" class="testi__title">Ils ont lancé leur simulation de production</h2>
+        <h2 id="testi-title" class="testi__title">Ils ont utilisé notre simulateur</h2>
         <p class="testi__meta" aria-label="Note moyenne">
           ★★★★☆ &nbsp; <strong>4,7 / 5</strong> — extraits d’avis clients récents (12 derniers mois)
         </p>
       </header>
-     <div class="testi__grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));max-width:950px;margin:0 auto;">
-      <article class="tcard" aria-label="Avis client">
-        <div class="tcard__top">
-          <div class="avatar" aria-hidden="true">AL</div>
-          <div>
-            <div class="tcard__name">Agnès L.</div>
-            <div class="tcard__loc">Montfort-l’Amaury (78) · 05/2025</div>
+      <div class="testi__grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));max-width:950px;margin:0 auto;">
+        <article class="tcard" aria-label="Avis client">
+          <div class="tcard__top">
+            <div class="avatar" aria-hidden="true">AL</div>
+            <div>
+              <div class="tcard__name">Agnès L.</div>
+              <div class="tcard__loc">Montfort-l’Amaury (78) · 05/2025</div>
+            </div>
           </div>
-        </div>
-        <div class="stars" aria-label="Note 5 sur 5">
-          <svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg>
-        </div>
-        <p class="tcard__text">“Simulation très claire ; j’ai compris immédiatement la production et l’économie attendue pour ma maison.”</p>
-      </article>
-      <article class="tcard" aria-label="Avis client">
-        <div class="tcard__top">
-          <div class="avatar" aria-hidden="true">PD</div>
-          <div>
-            <div class="tcard__name">Pierre D.</div>
-            <div class="tcard__loc">Houdan (78) · 06/2025</div>
+          <div class="stars" aria-label="Note 5 sur 5">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg>
           </div>
-        </div>
-        <div class="stars" aria-label="Note 4 sur 5">
-          <svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:#d1d5db"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg>
-        </div>
-        <p class="tcard__text">“Présentation simple et concrète. Bon appui pour décider du dimensionnement avec l’installateur local.”</p>
-      </article>
-      <article class="tcard" aria-label="Avis client">
-        <div class="tcard__top">
-          <div class="avatar" aria-hidden="true">SM</div>
-          <div>
-            <div class="tcard__name">Sonia M.</div>
-            <div class="tcard__loc">Les Essarts-le-Roi (78) · 04/2025</div>
+          <p class="tcard__text">“Simulation très claire ; j’ai compris immédiatement la production et l’économie attendue pour ma maison.”</p>
+        </article>
+        <article class="tcard" aria-label="Avis client">
+          <div class="tcard__top">
+            <div class="avatar" aria-hidden="true">PD</div>
+            <div>
+              <div class="tcard__name">Pierre D.</div>
+              <div class="tcard__loc">Houdan (78) · 06/2025</div>
+            </div>
           </div>
-        </div>
-        <div class="stars" aria-label="Note 5 sur 5">
-          <svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg>
-        </div>
-        <p class="tcard__text">“Le coût et la production sont affichés clairement, avec une projection à 15 ans facile à comprendre.”</p>
-      </article>
-    </div>
+          <div class="stars" aria-label="Note 4 sur 5">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:#d1d5db"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg>
+          </div>
+          <p class="tcard__text">“Présentation simple et concrète. Bon appui pour décider du dimensionnement avec l’installateur local.”</p>
+        </article>
+        <article class="tcard" aria-label="Avis client">
+          <div class="tcard__top">
+            <div class="avatar" aria-hidden="true">SM</div>
+            <div>
+              <div class="tcard__name">Sonia M.</div>
+              <div class="tcard__loc">Les Essarts-le-Roi (78) · 04/2025</div>
+            </div>
+          </div>
+          <div class="stars" aria-label="Note 5 sur 5">
+            <svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent)"><path d="M12 17.3l-6.18 3.73 1.64-7.03L2 9.24l7.19-.62L12 2l2.81 6.62 7.19.62-5.46 4.76 1.64 7.03z"/></svg>
+          </div>
+          <p class="tcard__text">“Le coût et la production sont affichés clairement, avec une projection à 15 ans facile à comprendre.”</p>
+        </article>
+      </div>
     </div>
   </section>
 
-<section class="faq" aria-labelledby="faq-title">
-  <div class="faq__inner">
-    <header class="faq__head">
-      <h2 id="faq-title" class="faq__title">Questions fréquentes</h2>
-      <p class="faq__subtitle">Tout ce qu’il faut savoir avant de passer à l’énergie solaire</p>
-    </header>
-    <div class="faq__list faq">
-      <details>
-        <summary>
-          Comment est calculée mon estimation ?
-          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </summary>
-        <div class="faq__panel">
-          Elle s’appuie sur votre consommation annuelle (ou facture), le prix du kWh que vous saisissez, l’ensoleillement local et un scénario technique standard.
-          Le résultat donne un ordre de grandeur fiable, affiné ensuite lors de l’étude personnalisée.
-        </div>
-      </details>
-      <details>
-        <summary>
-          Combien de panneaux pour mon cas ?
-          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </summary>
-        <div class="faq__panel">
-          Cela dépend de votre consommation, de la surface disponible, de l’orientation/inclinaison et des ombres proches.
-          En moyenne, une maison consommant ~4&nbsp;000&nbsp;kWh/an nécessite environ <strong>10 à 12 panneaux de 500&nbsp;Wc</strong>.
-        </div>
-      </details>
-      <details>
-        <summary>
-          Quelles économies puis-je espérer ?
-          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </summary>
-        <div class="faq__panel">
-          Une installation bien dimensionnée permet de réduire votre facture d’électricité de <strong>jusqu’à&nbsp;75&nbsp;%</strong>.
-          Ce résultat s’obtient grâce à l’<strong>autoconsommation</strong> (vous consommez directement ce que vous produisez)
-          et à la <strong>batterie virtuelle</strong>, qui vous permet de profiter de <strong>100&nbsp;% de votre production</strong>
-          même lorsque vos panneaux ne produisent pas.
-        </div>
-      </details>
-      <details>
-        <summary>
-          En combien de temps s’amortit une installation photovoltaïque ?
-          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </summary>
-        <div class="faq__panel">
-          L’amortissement moyen se situe entre <strong>6 et 9&nbsp;ans</strong> selon votre région, votre consommation et le prix du kWh.
-          Au-delà, les économies couvrent l’investissement et l’installation continue de produire pendant <strong>plus de 15&nbsp;ans de rentabilité nette</strong>.
-        </div>
-      </details>
-      <details>
-        <summary>
-          Revente d’électricité&nbsp;: est-ce intéressant ?
-          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </summary>
-        <div class="faq__panel">
-          Aujourd’hui, la revente à EDF n’est plus prioritaire (tarif d’achat ~<strong>0,04&nbsp;€/kWh</strong>).
-          L’<strong>autoconsommation avec batterie virtuelle</strong> est nettement plus rentable car elle maxime l’usage de votre production.
-        </div>
-      </details>
-      <details>
-        <summary>
-          Quelles contraintes pour ma toiture ?
-          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </summary>
-        <div class="faq__panel">
-          Toiture saine et étanche, sans amiante, et structure apte à supporter la charge.
-          Orientation sud idéale, est/ouest performant également.
-          Les zones d’ombres (arbres, cheminées) doivent être limitées.
-        </div>
-      </details>
-      <details>
-        <summary>
-          Combien de temps dure l’installation ?
-          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </summary>
-        <div class="faq__panel">
-          La pose s’effectue en général en <strong>1 à 2&nbsp;jours</strong> selon la configuration.
-          Les démarches de raccordement et validations administratives suivent ensuite sous <strong>2 à 3&nbsp;semaines</strong>.
-        </div>
-      </details>
-      <details>
-        <summary>
-          Garanties et durée de vie des panneaux ?
-          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </summary>
-        <div class="faq__panel">
-          Les panneaux sont garantis jusqu’à <strong>30&nbsp;ans</strong> (garantie de puissance dégressive) et <strong>produisent efficacement jusqu’à 30&nbsp;ans</strong>.
-          L’entretien est minimal&nbsp;: un <strong>rinçage 1 à 2 fois par an</strong> suffit pour conserver un bon rendement.
-        </div>
-      </details>
-      <details>
-        <summary>
-          Combien faut-il prévoir pour passer au solaire (usage d’habitation) ?
-          <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </summary>
-        <div class="faq__panel">
-          Le budget dépend de la surface, de la toiture et de votre consommation.
-          Pour <strong>une maison à usage d’habitation</strong>, la plupart des foyers constatent un investissement compris
-          <strong>entre 7&nbsp;000&nbsp;€ et 12&nbsp;000&nbsp;€ TTC</strong>, installation complète et pose incluses.
-          Une <strong>étude personnalisée gratuite</strong> permet d’obtenir un montant précis selon votre situation.
-          Des <strong>mensualités</strong> sont possibles.
-        </div>
-      </details>
+  <section class="faq" aria-labelledby="faq-title">
+    <div class="faq__inner">
+      <header class="faq__head">
+        <h2 id="faq-title" class="faq__title">Questions fréquentes</h2>
+        <p class="faq__subtitle">Tout ce qu’il faut savoir avant de passer à l’énergie solaire</p>
+      </header>
+      <div class="faq__list faq">
+        <details>
+          <summary>
+            Comment est calculée mon estimation ?
+            <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <div class="faq__panel">
+            Elle s’appuie sur votre consommation annuelle (ou facture), le prix du kWh que vous saisissez, l’ensoleillement local et un scénario technique standard.
+            Le résultat donne un ordre de grandeur fiable, affiné ensuite lors de l’étude personnalisée.
+          </div>
+        </details>
+        <details>
+          <summary>
+            Combien de panneaux pour mon cas ?
+            <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <div class="faq__panel">
+            Cela dépend de votre consommation, de la surface disponible, de l’orientation/inclinaison et des ombres proches.
+            En moyenne, une maison consommant ~4&nbsp;000&nbsp;kWh/an nécessite environ <strong>10 à 12 panneaux de 500&nbsp;Wc</strong>.
+          </div>
+        </details>
+        <details>
+          <summary>
+            Quelles économies puis-je espérer ?
+            <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <div class="faq__panel">
+            Une installation bien dimensionnée permet de réduire votre facture d’électricité de <strong>jusqu’à&nbsp;75&nbsp;%</strong>.
+            Ce résultat s’obtient grâce à l’<strong>autoconsommation</strong> et à la <strong>batterie virtuelle</strong>.
+          </div>
+        </details>
+        <details>
+          <summary>
+            En combien de temps s’amortit une installation photovoltaïque ?
+            <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <div class="faq__panel">
+            L’amortissement moyen se situe entre <strong>6 et 9&nbsp;ans</strong> selon votre région, votre consommation et le prix du kWh.
+          </div>
+        </details>
+        <details>
+          <summary>
+            Revente d’électricité&nbsp;: est-ce intéressant ?
+            <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <div class="faq__panel">
+            Aujourd’hui, la revente à EDF (~<strong>0,04&nbsp;€/kWh</strong>) n’est plus prioritaire ; l’<strong>autoconsommation avec batterie virtuelle</strong> maximise la valeur.
+          </div>
+        </details>
+        <details>
+          <summary>
+            Quelles contraintes pour ma toiture ?
+            <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <div class="faq__panel">
+            Toiture saine/étanche, pas d’amiante, orientation sud idéale (est/ouest performant), ombres limitées.
+          </div>
+        </details>
+        <details>
+          <summary>
+            Combien de temps dure l’installation ?
+            <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <div class="faq__panel">
+            La pose se fait en général en <strong>1 à 2&nbsp;jours</strong>. Démarches et validations sous <strong>2 à 3&nbsp;semaines</strong>.
+          </div>
+        </details>
+        <details>
+          <summary>
+            Garanties et durée de vie des panneaux ?
+            <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <div class="faq__panel">
+            Panneaux garantis jusqu’à <strong>30&nbsp;ans</strong> (puissance). Entretien léger (rinçage 1–2 fois/an).
+          </div>
+        </details>
+        <details>
+          <summary>
+            Budget pour une maison d’habitation ?
+            <svg class="faq__chev" width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <div class="faq__panel">
+            La plupart des foyers constatent un investissement <strong>7&nbsp;000&nbsp;€ à 12&nbsp;000&nbsp;€ TTC</strong> (pose incluse), à affiner par étude.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="new-footer">
+  <div class="new-footer__inner">
+    <div class="new-footer__image-wrapper">
+      <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/2b87893ce04e47218b904975783e0a21ceef6b11/camion%20SSP2.webp" alt="Camion Solution Solaire Pro" class="new-footer__logo">
+    </div>
+    <div class="new-footer__content">
+      <p class="new-footer__text">
+        Biofrance Energies est votre partenaire de confiance pour l'installation d'équipements écologiques en France. Nous nous engageons à vous offrir des solutions durables , la production d'énergie solaire.
+      </p>
+      <div class="new-footer__meta">
+        <p class="new-footer__copy">
+          &copy; 2024 Solution Solaire pro - Biofrance Energies. Tous droits réservés.
+        </p>
+        <span id="mentions-legales-link" class="new-footer__legal-link">Mentions légales</span>
+      </div>
     </div>
   </div>
-</section>
-
-</main> <footer class="new-footer">
-    <div class="new-footer__inner">
-        <div class="new-footer__image-wrapper">
-            <img src="https://raw.githubusercontent.com/BiofranceEnergies/biofrance-images/2b87893ce04e47218b904975783e0a21ceef6b11/camion%20SSP2.webp" alt="Camion Solution Solaire Pro" class="new-footer__logo">
-        </div>
-        <div class="new-footer__content">
-            <p class="new-footer__text">
-                Biofrance Energies est votre partenaire de confiance pour l'installation d'équipements écologiques en France. Nous nous engageons à vous offrir des solutions durables , la production d'énergie solaire.
-            </p>
-            <div class="new-footer__meta">
-                <p class="new-footer__copy">
-                    &copy; 2024 Solution Solaire Pro - Biofrance Energies. Tous droits réservés.
-                </p>
-                <span id="mentions-legales-link" class="new-footer__legal-link">Mentions légales</span>
-            </div>
-        </div>
-    </div>
 </footer>
+
 <div id="mentions-popup" role="dialog" aria-modal="true" aria-labelledby="mentions-title">
   <button id="close-mentions" type="button" aria-label="Fermer">&times;</button>
   <strong id="mentions-title">Mentions légales :</strong><br>
@@ -453,10 +494,14 @@
 </div>
 
 <div id="calc-overlay" role="alertdialog" aria-modal="true" aria-labelledby="calc-title" aria-describedby="calc-desc">
-  <div class="panel" tabindex="-1"> <div class="spinner" aria-hidden="true"></div> <h3 id="calc-title" class="title">Calcul en cours…</h3> <p id="calc-desc" class="desc"> ⚡ Nous préparons votre estimation…<br> <small>(calcul en cours)</small> </p> </div>
+  <div class="panel" tabindex="-1">
+    <div class="spinner" aria-hidden="true"></div>
+    <h3 id="calc-title" class="title">Calcul en cours…</h3>
+    <p id="calc-desc" class="desc"> ⚡ Nous préparons votre estimation…<br> <small>(calcul en cours)</small> </p>
+  </div>
 </div>
 
-<script src="script.js" defer></script>
- 
+<script src="script3.js" defer></script>
+
 </body>
 </html>
