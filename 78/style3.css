@@ -1642,16 +1642,17 @@ header.hero .hero__inner{
 
 /* Animation subtile du bouton faisabilité */
 .gate-sticky .gate-cta {
-  animation: cta-softpulse 4.5s ease-in-out infinite;
+  animation: cta-softpulse 3.8s ease-in-out infinite;
 }
 
 @keyframes cta-softpulse {
-  0%, 92%, 100% {
+  0%, 88%, 100% {
     transform: scale(1);
     box-shadow: 0 8px 18px rgba(245,158,11,.25);
   }
-  96% {
-    transform: scale(1.012); /* +1.2% seulement */
-    box-shadow: 0 10px 22px rgba(245,158,11,.32);
+  92% {
+    transform: scale(1.02); /* +2% : visible mais propre */
+    box-shadow: 0 12px 28px rgba(245,158,11,.35);
   }
 }
+
